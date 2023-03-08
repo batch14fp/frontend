@@ -4,6 +4,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { CustomSkeletonModule } from './components/skeleton/skeleton.module';
 import { CommonModule } from '@angular/common';
 import { LoadingModule } from './components/loading/loading.module';
+import {InputTextModule} from 'primeng/inputtext';
+import {PasswordModule} from 'primeng/password';
 
 
 
@@ -12,10 +14,10 @@ import { LoadingModule } from './components/loading/loading.module';
 
   ],
   imports: [
-    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule
+    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule
   ],
   exports:[
-    CustomButtonModule, CustomSkeletonModule, LoadingModule
+    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule
   ]
 })
 export class ShareModule { }

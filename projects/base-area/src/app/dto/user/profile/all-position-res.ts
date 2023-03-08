@@ -1,4 +1,4 @@
-export interface AllPositionResDto{
+export interface AllPositionRes{
 	positionId: string,
 	positionName: string,
 }

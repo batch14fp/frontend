@@ -1,0 +1,21 @@
+<div class="grid col-12 flex flex-row md:flex-column h-screen">
+    <div class="col-6 bg-blue-600 h-full"></div>
+    <div class="col-9 h-full ">
+        <div class="flex md:flex-column h-full ">
+                <div>
+                    <h1>Login</h1>
+                </div>
+                <form class="mt-5">
+                    <div class="mb-3 flex flex-column">
+                        <label for="emailInput" class=" col-form-label">Email Address</label>
+                        <input type="text" class="w-full" pInputText id="emailInput" placeholder="email"
+                            name="emailInput">
+                    </div>
+                    <div class="mb-3 flex flex-column">
+                        <label for="emailInput" class="col-form-label">Password</label>
+                        <p-password class="w-full" id="passwordInput" [toggleMask]="true"></p-password>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>

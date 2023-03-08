@@ -1,4 +1,4 @@
-export interface AllIndustryResDto{
+export interface AllIndustryRes{
 	industryId: string,
 	industryName: string,
 }
