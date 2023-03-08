@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from "@angular/core";
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector:'app-login',
@@ -6,5 +7,7 @@ import { Component, OnDestroy } from "@angular/core";
 })
 
 export class LoginComponent{
+  constructor(private title: Title){}
+
 
 }
