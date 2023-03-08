@@ -1,4 +1,4 @@
-export interface LoginResDto{
+export interface LoginRes{
     roleCode:string,
 	token:string,
 	fullname:string,

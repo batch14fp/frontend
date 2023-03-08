@@ -1,4 +1,4 @@
-export interface ProfileReqUpdateDto{
+export interface ProfileReqUpdate{
     userId: string,
     fullname: string,
     phoneNumber: string,

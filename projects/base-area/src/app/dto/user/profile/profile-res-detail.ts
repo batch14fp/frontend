@@ -1,4 +1,4 @@
-export interface ProfileResDetailDto{
+export interface ProfileResDetail{
 	userId: string,
 	fullname: string,
 	email : string,
