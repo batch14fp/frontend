@@ -1,4 +1,4 @@
-export interface AllBookmarkPostResDto {
+export interface AllBookmarkPostRes{
     userId: string,
     fullname: string,
     timeAgo: string,

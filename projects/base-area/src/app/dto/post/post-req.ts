@@ -1,4 +1,4 @@
-export interface PostReqDto{
+export interface PostReq{
   postTitle: string,
   postContent: string,
   postTypeId: string,

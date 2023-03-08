@@ -1,4 +1,4 @@
-export interface AllPostByCategoryIdResDto {
+export interface AllPostByCategoryIdRes {
     userId: string,
     fullname: string,
     timeAgo: string,

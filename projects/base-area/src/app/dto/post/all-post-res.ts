@@ -1,4 +1,4 @@
-export interface AllPostByTypeIdResDto {
+export interface AllPostRes {
     userId: string,
     fullname: string,
     timeAgo: string,
@@ -6,9 +6,9 @@ export interface AllPostByTypeIdResDto {
     content: string,
     typeCode: string,
     typeName: string,
+    imgPostId: string,
     categoryCode: string,
     categoryName: string,
-    imgPostId: string,
     countPostLike: number,
     countPostComment: number,
     isLike: boolean,
@@ -16,6 +16,6 @@ export interface AllPostByTypeIdResDto {
     titlePoling: string,
     pollingOptionId: string,
     pollingOption: [{
-        content: string
+        content: string,
     }]
 }

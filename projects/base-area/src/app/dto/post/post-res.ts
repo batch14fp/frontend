@@ -1,4 +1,4 @@
-export interface PostResDto{
+export interface PostRes{
 	userId: string,
 	fullname: string,
 	timeAgo:string,

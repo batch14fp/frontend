@@ -1,4 +1,4 @@
-export interface AllLikePostResDto {
+export interface AllLikePostRes {
     userId: string,
     fullname: string,
     timeAgo: string,
