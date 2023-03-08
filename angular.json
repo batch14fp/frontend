@@ -307,10 +307,16 @@
             "tsConfig": "projects/base-area/tsconfig.app.json",
             "assets": [
               "projects/base-area/src/favicon.ico",
-              "projects/base-area/src/assets"
+              "projects/base-area/src/assets",
+              "projects/base-area/src/assets/**",
+              "projects/base-area/src/assets/animation"
             ],
             "styles": [
-              "projects/base-area/src/styles.css"
+              "projects/base-area/src/styles.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": []
           },
