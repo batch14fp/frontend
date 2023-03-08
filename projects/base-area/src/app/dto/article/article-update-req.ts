@@ -1,4 +1,4 @@
-export interface ArticleUpdateReqDto{
+export interface ArticleUpdateReq{
 	title: string,
 	contentArticle: string,
 	imageArticle:string,

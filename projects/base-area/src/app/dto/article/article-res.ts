@@ -1,4 +1,4 @@
-export interface ArticleResDto{
+export interface ArticleRes{
     articleId : string,
     title: string,
     contentArticle : string,
