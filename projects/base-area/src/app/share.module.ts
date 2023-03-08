@@ -14,10 +14,12 @@ import {PasswordModule} from 'primeng/password';
 
   ],
   imports: [
-    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule
+    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule,
+     PasswordModule
   ],
   exports:[
-    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule
+    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule,
+    PasswordModule
   ]
 })
 export class ShareModule { }
