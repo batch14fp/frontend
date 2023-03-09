@@ -1,17 +1,10 @@
+import { AttachmentPostInsertReq } from "./attachment-post-insert-req";
+import { PollingInsertReq } from "./polling-insert-req";
+
 export interface PostReq{
-  postTitle: string,
-  postContent: string,
-  postTypeId: string,
-  attachmentPostInsertReq: [{
-  	fileCodes: string,
-  	extensions: string,
-  	postId: string,
-	}],
-  pollInsertReq: {
-	pollTitle: string,
-	endAt: string,
-	pollOptionInsertReqs: [{
-    	pollContent:string 
-  	}]
-  }
+    title:string,
+    content:string,
+    typeId:string,
+    attachmentPost:AttachmentPostInsertReq;
+    pollingInsert: PollingInsertReq[]
 }
