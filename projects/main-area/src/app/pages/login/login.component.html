@@ -1,21 +1,33 @@
-<div class="grid col-12 flex flex-row md:flex-column h-screen">
-    <div class="col-6 bg-blue-600 h-full"></div>
-    <div class="col-9 h-full ">
-        <div class="flex md:flex-column h-full ">
-                <div>
-                    <h1>Login</h1>
-                </div>
-                <form class="mt-5">
-                    <div class="mb-3 flex flex-column">
-                        <label for="emailInput" class=" col-form-label">Email Address</label>
-                        <input type="text" class="w-full" pInputText id="emailInput" placeholder="email"
-                            name="emailInput">
-                    </div>
-                    <div class="mb-3 flex flex-column">
-                        <label for="emailInput" class="col-form-label">Password</label>
-                        <p-password class="w-full" id="passwordInput" [toggleMask]="true"></p-password>
-                    </div>
-                </form>
-        </div>
+<div class="grid col-12 flex flex-column md:flex-row h-screen">
+  <div style="background-image: url('./../../../assets/images/login-illustration.png');"
+    class="col-6 bg-blue-600 h-full">
+  </div>
+  <div class="flex flex-column h-full col-6 justify-content-center align-content-center">
+    <div class="align-self-center">
+      <h1 class="text-3xl text-800 font-base">Login</h1>
     </div>
+    <form class="mt-1 col-12 md:col-6 flex-column justify-content-center align-self-center">
+      <div class="mb-3 flex flex-column w-full">
+        <label for="emailInput" class="font-medium col-form-label">Email Address</label>
+        <input type="text" class="w-full " pInputText id="emailInput" placeholder="email" name="emailInput">
+      </div>
+      <div class="mb-3 flex flex-column">
+        <label for="emailInput" class="font-medium col-form-label">Password</label>
+        <input type="password" class="w-full " pInputText id="passwordInput" placeholder="password"
+          name="passwordInput">
+      </div>
+      <div class="align-self-end -mt-2">
+        <a href="" class="no-underline text-blue-800">Lupas password ?</a>
+      </div>
+      <div class="mt-4">
+        <app-button-primary label="Login"></app-button-primary>
+      </div>
+      <div class="flex flex-row mt-2">
+        <p>Belum punya akun ?</p>
+        <span>
+          <a href="" class="ml-2 no-underline">Daftar</a>
+        </span>
+      </div>
+    </form>
+  </div>
 </div>

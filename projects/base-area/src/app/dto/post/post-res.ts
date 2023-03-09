@@ -1,19 +1,16 @@
 export interface PostRes{
-	userId: string,
-	fullname: string,
+    userId:string,
+	fullname:string,
 	timeAgo:string,
 	title:string,
 	content:string,
 	imgPostId:string,
-    typeCode: string,
-	typeName: string,
-    categoryCode:string,
+	typeCode:string,
+	typeName:string,
+	categoryCode:string,
 	categoryName:string,
-	countPostLike: number,
+	countPostLike:number,
 	countPostComment:number,
 	isLike:boolean,
 	isBookmark:boolean,
-	pollingOption:[{
-    content:string
-    }]
 }
