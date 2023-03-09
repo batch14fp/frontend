@@ -1,0 +1,27 @@
+<div class="mx-6">
+    <h1>Social Media</h1>
+    <div class="col-3 my-2">
+        <app-button-primary label="Create Social Media"></app-button-primary>
+    </div>
+    <p-table [value]="socmeds" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Url image</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-socmeds let-i="rowIndex">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{socmeds.name}}</td>
+                    <td>{{socmeds.url}}</td>
+                    <td class="flex gap-2">
+                        <app-button-icon ></app-button-icon>
+                        <app-button-danger></app-button-danger>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+</div>

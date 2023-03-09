@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingModule } from './components/loading/loading.module';
 import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
+import { NavbarModule } from './components/navbar/navbar.module';
 
 
 
@@ -14,12 +15,13 @@ import {PasswordModule} from 'primeng/password';
 
   ],
   imports: [
-    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule,
-     PasswordModule
+    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule, NavbarModule
   ],
   exports:[
-    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule,
-    PasswordModule
+    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,NavbarModule
+    CommonModule, LoadingModule, InputTextModule,
+     PasswordModule
+  ],
   ]
 })
 export class ShareModule { }
