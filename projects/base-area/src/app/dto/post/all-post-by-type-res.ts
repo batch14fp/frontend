@@ -1,6 +1,6 @@
 import { PollingOptionRes } from "./polling-option-res";
 
-export interface AllPostRes{
+export interface AllPostByTypeRes{
     userId:string,
 	fullname:string,
 	timeAgo:string,
