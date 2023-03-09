@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: "app-button-primary",
@@ -11,13 +11,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 
 export class ButtonPrimary{
-   @Output() clickButton = new EventEmitter<void>()
-   @Input() label = ""
-   @Input() height = ""
-   @Input() width = ""
+    @Output() clickButton = new EventEmitter<void>()
+    @Input() label = ""
 
-
-  class: string = ""
+    class: string = ""
 
    onClickButton(): void {
     this.clickButton.emit()

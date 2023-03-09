@@ -1,0 +1,43 @@
+<div class="mx-6">
+    <h1>User</h1>
+    <div class="col-3 my-2">
+        <app-button-primary label="Create User"></app-button-primary>
+    </div>
+    <p-table [value]="users" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No</th>
+                    <th>Fullname</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Country</th>
+                    <th>Province</th>
+                    <th>City</th>
+                    <th>Postal Code</th>
+                    <th>Company</th>
+                    <th>Industry</th>
+                    <th>Position</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-users let-i="rowIndex">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{users.fullname}}</td>
+                    <td>{{users.email}}</td>
+                    <td>{{users.phoneNumber}}</td>
+                    <td>{{users.country}}</td>
+                    <td>{{users.province}}</td>
+                    <td>{{users.city}}</td>
+                    <td>{{users.postalCode}}</td>
+                    <td>{{users.company}}</td>
+                    <td>{{users.industryId}}</td>
+                    <td>{{users.positionId}}</td>
+                    <td class="flex gap-2">
+                        <app-button-icon ></app-button-icon>
+                        <app-button-danger></app-button-danger>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+</div>
