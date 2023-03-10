@@ -22,5 +22,6 @@ import { NavbarModule } from './components/navbar/navbar.module';
     CommonModule, LoadingModule, InputTextModule,
      PasswordModule
   ]
+
 })
 export class ShareModule { }
