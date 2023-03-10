@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ArticleComponent } from "./page/article/article.component";
 import { CategoryComponent } from "./page/category/category.component";
 import { DashboardComponent } from "./page/dashboard.component";
 import { IndustryComponent } from "./page/industry/industry.component";
@@ -31,6 +32,10 @@ const appRoutes : Routes = [
     {
         path : 'user',
         component: UserComponent
+    },
+    {
+        path : 'article',
+        component: ArticleComponent
     }
 ]
 

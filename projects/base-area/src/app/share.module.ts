@@ -22,6 +22,7 @@ import { NavbarModule } from './components/navbar/navbar.module';
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,NavbarModule,
     CommonModule, LoadingModule, InputTextModule,
      PasswordModule
-  ],
+  ]
+
 })
 export class ShareModule { }

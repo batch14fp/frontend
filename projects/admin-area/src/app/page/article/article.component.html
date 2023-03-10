@@ -1,0 +1,38 @@
+
+<div class="mx-6">
+    <h1>Article</h1>
+
+    <div class="sm:hidden md:flex col-3 my-2">
+        <app-button-primary label="Create article"></app-button-primary>
+    </div>
+    <div class="lg:hidden md:flex flex col-3 my-2">
+        <app-button-primary icon="pi pi-plus"></app-button-primary>
+    </div>
+
+    
+    <p-table [value]="articles"  [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>No</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>CreatedAt</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-articles let-i="rowIndex">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{articles.image}}</td>
+                <td>{{articles.title}}</td>
+                <td>{{articles.content}}</td>
+                <td>{{articles.createdAt}}</td>
+                <td class="flex gap-2">
+                    <app-button-icon ></app-button-icon>
+                    <app-button-danger></app-button-danger>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
