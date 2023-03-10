@@ -1,4 +1,4 @@
 export interface LoginReq{
-    emaiL:string, 
-    password: string, 
+    email:string,
+    password: string,
 }
