@@ -16,7 +16,9 @@ import { Router } from "@angular/router";
 
 export class LoginComponent implements OnDestroy{
   constructor(private title: Title, private fb: FormBuilder,
-    private userService: UserService,  private router: Router){}
+    private userService: UserService,  private router: Router){
+      this.title.setTitle("Login")
+    }
 
 
   login = this.fb.group({
