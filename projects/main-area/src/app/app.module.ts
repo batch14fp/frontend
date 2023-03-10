@@ -10,10 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CodeInputModule } from 'angular-code-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ForgetPassComponent } from './pages/forget-pass/forget-pass.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, SignUpComponent
+    AppComponent, LoginComponent, SignUpComponent,ForgetPassComponent
   ],
   imports: [
     BrowserModule, AppRouting, ShareModule, FormsModule, ReactiveFormsModule, HttpClientModule,
