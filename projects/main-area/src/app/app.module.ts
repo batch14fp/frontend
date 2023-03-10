@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CodeInputModule } from 'angular-code-input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForgetPassComponent } from './pages/forget-pass/forget-pass.component';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ForgetPassComponent } from './pages/forget-pass/forget-pass.component';
   ],
   imports: [
     BrowserModule, AppRouting, ShareModule, FormsModule, ReactiveFormsModule, HttpClientModule,
+    BrowserAnimationsModule,
     CodeInputModule.forRoot({
       codeLength: 6,
       isCharsCode: true,

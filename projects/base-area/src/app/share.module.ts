@@ -7,6 +7,7 @@ import { LoadingModule } from './components/loading/loading.module';
 import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
 import { NavbarModule } from './components/navbar/navbar.module';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 
@@ -16,12 +17,12 @@ import { NavbarModule } from './components/navbar/navbar.module';
   ],
   imports: [
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
-    NavbarModule
+    NavbarModule, DropdownModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,NavbarModule,
     CommonModule, LoadingModule, InputTextModule,
-     PasswordModule
+     PasswordModule, DropdownModule
   ]
 
 })
