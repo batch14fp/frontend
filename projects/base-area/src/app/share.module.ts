@@ -15,7 +15,8 @@ import { NavbarModule } from './components/navbar/navbar.module';
 
   ],
   imports: [
-    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule, NavbarModule
+    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
+    NavbarModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,NavbarModule,
