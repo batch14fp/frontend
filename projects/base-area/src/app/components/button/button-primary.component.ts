@@ -6,7 +6,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
     `<button pButton pRipple
     type="button"
     [label]="label"
-    class="p-button-rounded bg-indigo-600 hover:bg-indigo-800 border-transparent
+    [icon]="icon"
+    class="p-button-round bg-indigo-600 hover:bg-indigo-800 border-transparent 
     text-white px-6 py-2 text-md font-base w-full h-full">
     </button>`,
 })
@@ -14,6 +15,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ButtonPrimary{
     @Output() clickButton = new EventEmitter<void>()
     @Input() label = ""
+    @Input() icon = ""
 
     class: string = ""
 

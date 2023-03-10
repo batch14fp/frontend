@@ -12,10 +12,11 @@ import { PositionComponent } from './page/position/position.component';
 import { IndustryComponent } from './page/industry/industry.component';
 import { SocmedComponent } from './page/socmed/socmed.component';
 import { UserComponent } from './page/user/user.component';
+import { ArticleComponent } from './page/article/article.component';
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent
+    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,ArticleComponent
   ],
   imports: [
     BrowserModule,ShareModule, AppRouting,TableModule
