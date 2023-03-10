@@ -1,4 +1,4 @@
-function getInitials(strName: string): string {
+export function getInitials(strName: string): string {
   var names = strName.split(' '),
       initials = names[0].substring(0, 1).toUpperCase();
 
