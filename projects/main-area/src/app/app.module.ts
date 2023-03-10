@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CodeInputModule } from 'angular-code-input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CodeInputModule } from 'angular-code-input';
   ],
   imports: [
     BrowserModule, AppRouting, ShareModule, FormsModule, ReactiveFormsModule, HttpClientModule,
+    BrowserAnimationsModule,
     CodeInputModule.forRoot({
       codeLength: 6,
       isCharsCode: true,
