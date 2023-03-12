@@ -1,3 +1,4 @@
+import { WelcomeComponent } from './welcome/welcome';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { NgModule } from '@angular/core';
@@ -14,13 +15,13 @@ export function playerFactory(): any {
 
 @NgModule({
     declarations: [
-      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent
+      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent
     ],
     imports: [
      LottieModule.forRoot({ player: playerFactory }),
     ],
     exports:[
-      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent
+      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent
     ]
 })
 

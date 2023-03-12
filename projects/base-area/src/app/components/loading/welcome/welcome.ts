@@ -3,14 +3,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 @Component({
-    selector: "app-email-send",
-    templateUrl: "./email-send.component.html",
+    selector: "app-welcome",
+    templateUrl: "./welcome.html",
 })
 
-export class EmailSendAnimationComponent implements OnInit{
+export class WelcomeComponent implements OnInit{
   options: AnimationOptions = {
-
-    path: '../../../../assets/animation/130189-email.json',
+    path: '../../../../assets/animation/96757-genio-welcome.json'
   };
 
   ngOnInit(): void {

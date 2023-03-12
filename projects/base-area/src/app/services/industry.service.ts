@@ -14,7 +14,7 @@ export class IndustryService{
 
     constructor(private http : HttpClient){}
 
-    getIndustry() : Observable<IndustryRes[]>{
+    getAllIndustry() : Observable<IndustryRes[]>{
         return this.http.get<IndustryRes[]>(`${BASE_URL}/industries`)
     }
 

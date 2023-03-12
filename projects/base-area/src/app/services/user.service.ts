@@ -4,6 +4,9 @@ import {Injectable} from "@angular/core"
 import { Observable, Subscription } from 'rxjs';
 import { LoginReq } from '../dto/user/login-req';
 import { LoginRes } from '../dto/user/login-res';
+import { VerificationCodeReq } from '../dto/user/verification-code-req';
+import { VerificationCodeRes } from '../dto/user/verification-get-res';
+import { SignUpReqInsert } from '../dto/user/sign-up-req-insert';
 
 @Injectable({
   providedIn: "root"
@@ -56,4 +59,18 @@ export class UserService{
   saveDataLogin(data: LoginRes){
     localStorage.setItem("dataLogin", JSON.stringify(data))
   }
+
+  getVerified(code : string) : Observable<VerificationCodeRes>{
+    return this.http.get<VerificationCodeRes>(`${BASE_URL}/users/sign-up/verify-code/${code}`)
+}
+
+
+  insertVerification(data : VerificationCodeReq) : Observable<VerificationCodeReq>{
+    return this.http.post<VerificationCodeReq>(`${BASE_URL}/users/sign-up/`,data)
+  }
+
+  signUpMember(data : SignUpReqInsert) : Observable<SignUpReqInsert>{
+    return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify/`,data)
+  }
+
 }
