@@ -9,3 +9,7 @@
 img {
   object-fit: cover;
 }
+
+.p-dropdown-clearable {
+  width: 100%;
+}
