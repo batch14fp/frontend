@@ -4,7 +4,7 @@
     <div class="col-3 my-2">
         <app-button-primary label="Create category"></app-button-primary>
     </div>
-    <p-table [value]="categorys"  [tableStyle]="{'min-width': '50rem'}">
+    <p-table [value]="getAllCategory"  [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
                 <th>No</th>
@@ -13,11 +13,11 @@
                 <th>Action</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-categorys let-i="rowIndex">
+        <ng-template pTemplate="body" let-getAllCategory let-i="rowIndex">
             <tr>
                 <td>{{i + 1}}</td>
-                <td>{{categorys.code}}</td>
-                <td>{{categorys.name}}</td>
+                <td>{{getAllCategory.code}}</td>
+                <td>{{getAllCategory.name}}</td>
                 <td class="flex gap-2">
                     <app-button-icon ></app-button-icon>
                     <app-button-danger></app-button-danger>
