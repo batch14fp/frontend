@@ -15,12 +15,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
 import { CommonModule } from '@angular/common';
-import { CourseComponent } from './pages/course/course.componenet';
+import { ArticleComponent } from './pages/article/article.component';
+// import { CourseComponent } from './pages/course/course.componenet';
 
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,CourseComponent
+    AppComponent,DashboardComponent,ArticleComponent
   ],
   imports: [
     BrowserModule, ShareModule, AppRouting,CardModule,DropdownModule,TabViewModule,CommonModule
