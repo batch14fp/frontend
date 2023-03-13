@@ -11,29 +11,29 @@ import { Subscription } from "rxjs";
 
 export class CategoryComponent {
 
-    categorys  = [
-       {code:'po', name :'category'},
-       {code:'po', name :'category'},
-       {code:'po', name :'category'},
-       {code:'po', name :'category'},
-       {code:'po', name :'category'},
-    ]
+    // categorys  = [
+    //    {code:'po', name :'category'},
+    //    {code:'po', name :'category'},
+    //    {code:'po', name :'category'},
+    //    {code:'po', name :'category'},
+    //    {code:'po', name :'category'},
+    // ]
 
-    // getAllCategory : CategoryRes[] = []
+    getAllCategory : CategoryRes[] = []
 
-    // private getAllCategory$? : Subscription 
+    private getAllCategory$? : Subscription 
 
-    // constructor(private title : Title, private categoryService : CategoryService){
-    //     this.title.setTitle('category')
-    // }
-    // ngOnInit(): void {
-    //     this.getAllCategory$ = this.categoryService.getCategory().subscribe(res => {
-    //         this.getAllCategory = res
-    //     })   
-    // }
-    // ngOnDestroy(): void {
-    //    this.getAllCategory$?.unsubscribe()
-    // }
+    constructor(private title : Title, private categoryService : CategoryService){
+        this.title.setTitle('category')
+    }
+    ngOnInit(): void {
+        this.getAllCategory$ = this.categoryService.getAllCategory().subscribe(res => {
+            this.getAllCategory = res
+        })   
+    }
+    ngOnDestroy(): void {
+       this.getAllCategory$?.unsubscribe()
+    }
 
 
 

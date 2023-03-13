@@ -13,16 +13,21 @@ import { IndustryComponent } from './page/industry/industry.component';
 import { SocmedComponent } from './page/socmed/socmed.component';
 import { UserComponent } from './page/user/user.component';
 import { ArticleComponent } from './page/article/article.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginAdminComponent } from './page/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,ArticleComponent
+    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,ArticleComponent,LoginAdminComponent
   ],
   imports: [
-    BrowserModule,ShareModule, AppRouting,TableModule
+    BrowserModule,ShareModule, AppRouting,TableModule, FormsModule, ReactiveFormsModule, HttpClientModule,CommonModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
