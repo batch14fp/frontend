@@ -2,7 +2,7 @@ import { Component, OnDestroy } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { LoginReq } from "projects/base-area/src/app/dto/user/login-req";
+import { LoginReq } from "projects/base-area/src/app/dto/login/login-req";
 import { LoginRes } from "projects/base-area/src/app/dto/user/login-res";
 import { UserService } from "projects/base-area/src/app/services/user.service";
 import { Subscription } from "rxjs";
