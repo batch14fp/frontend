@@ -14,16 +14,16 @@ import {DropdownModule} from 'primeng/dropdown';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
-import { ProfileModule } from './pages/profile/profile.module';
-import { ArticleComponent } from './pages/article/article.component';
+import { CommonModule } from '@angular/common';
+import { CourseComponent } from './pages/course/course.componenet';
 
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,ArticleComponent
+    AppComponent,DashboardComponent,CourseComponent
   ],
   imports: [
-    BrowserModule, ShareModule, AppRouting,CardModule,DropdownModule,TabViewModule
+    BrowserModule, ShareModule, AppRouting,CardModule,DropdownModule,TabViewModule,CommonModule
   ],
   providers: [
     {
