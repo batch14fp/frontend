@@ -10,7 +10,7 @@ import { NavbarModule } from './components/navbar/navbar.module';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-
+import {ImageModule} from 'primeng/image';
 
 
 
@@ -20,12 +20,11 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
   ],
   imports: [
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
-    NavbarModule, DropdownModule, ButtonModule, ProgressSpinnerModule
+     DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule
   ],
   exports:[
-    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,NavbarModule,
-    CommonModule, LoadingModule, InputTextModule,
-     PasswordModule, DropdownModule, ButtonModule, ProgressSpinnerModule
+    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
+    CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule
   ]
 
 })

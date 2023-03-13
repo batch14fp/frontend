@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { NavbarComponent } from "projects/base-area/src/app/components/navbar/navbar.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { TreadComponent } from "./pages/thread/tread.component";
+import { CourseComponent } from './pages/course/course.componenet';
 
 
 const memberRoutes : Routes = [
@@ -25,8 +26,11 @@ const memberRoutes : Routes = [
                 component : ProfileComponent
             }
         ]
-
-    }
+    },
+    {
+      path:'course',
+      component:CourseComponent
+  },
 ]
 
 @NgModule({

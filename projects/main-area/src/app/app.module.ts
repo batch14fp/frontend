@@ -11,10 +11,11 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CodeInputModule } from 'angular-code-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForgetPassComponent } from './pages/forget-pass/forget-pass.component';
+import { CourseComponent } from './pages/course/course.componenent';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, SignUpComponent,ForgetPassComponent
+    AppComponent, LoginComponent, SignUpComponent,ForgetPassComponent, CourseComponent
   ],
   imports: [
     BrowserModule, AppRouting, ShareModule, FormsModule, ReactiveFormsModule, HttpClientModule,
