@@ -14,14 +14,17 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
+import { CourseComponent } from './pages/course/course.componenet';
+import { NavbarComponent } from '../../../base-area/src/app/components/navbar/navbar.component';
+import { NavbarModule } from '../../../base-area/src/app/components/navbar/navbar.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,ProfileComponent
+    AppComponent,DashboardComponent,ProfileComponent, CourseComponent
   ],
   imports: [
-    BrowserModule, ShareModule, AppRouting,CardModule,TabMenuModule,DropdownModule
+    BrowserModule, ShareModule, AppRouting,CardModule,TabMenuModule,DropdownModule, NavbarModule
   ],
   providers: [
     {
