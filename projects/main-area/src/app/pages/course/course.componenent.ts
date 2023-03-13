@@ -14,11 +14,12 @@ import { Router } from "@angular/router";
     templateUrl: './course.componenet.html'
 })
 
+
 export class CourseComponent{
   constructor(private title: Title, private fb: FormBuilder,
     private userService: UserService,  private router: Router){
       this.title.setTitle("Course")
     }
 
-
+    dateSearch!:Date
 }
