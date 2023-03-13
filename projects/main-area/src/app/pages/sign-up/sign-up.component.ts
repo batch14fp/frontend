@@ -1,5 +1,6 @@
+import { VerificationCodeRes } from './../../../../../base-area/src/app/dto/user/verification-get-res';
 import { AllPostBookmarkRes } from './../../../../../base-area/src/app/dto/post/all-post-bookmark-res';
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { getInitials } from '../../../../../base-area/src/app/utils/getInitial';
 import { Subscription } from "rxjs";
@@ -8,8 +9,13 @@ import { LoginReq } from "projects/base-area/src/app/dto/user/login-req";
 import { UserService } from '../../../../../base-area/src/app/services/user.service';
 import { LoginRes } from '../../../../../base-area/src/app/dto/user/login-res';
 import { Router } from "@angular/router";
-import { SignUpReq } from '../../../../../base-area/src/app/dto/user/sign-up-req';
-import { Industry } from './industries';
+import { ResInsert } from '../../../../../base-area/src/app/dto/res-insert';
+import { VerificationCodeReq } from '../../../../../base-area/src/app/dto/user/verification-code-req';
+import { IndustryRes } from '../../../../../base-area/src/app/dto/industry/industry-res';
+import { IndustryService } from '../../../../../base-area/src/app/services/industry.service';
+import { PositionRes } from '../../../../../base-area/src/app/dto/position/postion-res';
+import { PositionService } from '../../../../../base-area/src/app/services/position.service';
+import { SignUpReqInsert } from '../../../../../base-area/src/app/dto/user/sign-up-req-insert';
 
 @Component({
     selector:'app-sign-up',
@@ -17,51 +23,75 @@ import { Industry } from './industries';
 })
 
 
-export class SignUpComponent{
+export class SignUpComponent implements OnInit{
+  private verificationCode$?: Subscription
+  private codeVerified$?: Subscription
+  private industries$?: Subscription
+  private positions$?: Subscription
+  private userSignup$?: Subscription
+
+  verificationCode!: ResInsert
+  codeVerified!: VerificationCodeRes
+  industries: IndustryRes[] = []
+  positions: PositionRes[] = []
+  userSignup!: ResInsert
 
 
   signUp = this.fb.group({
     email: ["",  Validators.required],
-    password: ["", [Validators.required, Validators.minLength(8)]],
+    password: ["", [Validators.required, Validators.minLength(6)]],
   })
 
   accountDetail = this.fb.group({
-    email: ["",  Validators.required],
-    selectedIndustry: ["",  Validators.required],
-
-    // email: ["",  Validators.required],
+    fullName: ["",  Validators.required],
+    industry: ["",  Validators.required],
+    phoneNumber: ["",  Validators.required],
+    company: ["",  Validators.required],
+    position: ["",  Validators.required],
   })
 
-  industries: Industry[] = []
-  selectedIndustry!: Industry;
+
+  selectedIndustry!: IndustryRes
+  selectedPosition!: PositionRes
 
   isSignup = true
   isLoading = false
   showVerification = false
+  isWrongCode = false
+  susccessSignUp = false;
+
 
 
   constructor(private title: Title, private fb: FormBuilder,
-    private userService: UserService,  private router: Router){
+    private userService: UserService,  private router: Router, private industryService: IndustryService,
+    private positionService: PositionService){
       this.title.setTitle("Sign Up")
-      this.industries = [
-        {id: '1', name: 'Agriculture'},
-        {id: '2', name: 'Mining'},
-        {id: '3', name: 'Manufacturing'},
-        {id: '4', name: 'Electricity and Gas'},
-        {id: '5', name: 'Water'},
-        {id: '6', name: 'Construction'},
-        {id: '7', name: 'Wholesale and Retail Trade'},
-        {id: '8', name: 'Transportation and Storage'},
-        {id: '9', name: 'Accommodation and Food Services'},
-        {id: '10', name: 'Information and Communication'},
-        {id: '11', name: 'Financial and Insurance Activities'},
-        {id: '11', name: 'Real Estate'},
-        {id: '12', name: 'Business Activities'},
-      ]
     }
 
+    initIndustries(){
+      this.industries$ = this.industryService.getAllIndustry().subscribe(res => this.industries =res)
+    }
+    initPositions(){
+      this.industries$ = this.positionService.getAllPosition().subscribe(res => this.positions =res)
+    }
+
+
+
+
+  ngOnInit(): void {
+    this.initIndustries()
+    this.initPositions()
+  }
+
   onClickSendVerification(){
-    this.showVerification =  true
+    const data: VerificationCodeReq = {
+      email: this.signUp.value.email!,
+      password: this.signUp.value.password!
+    }
+    this.verificationCode$ = this.userService.insertVerification(data).subscribe(res => {
+      this.showVerification =  true
+    })
+
   }
 
   private signUp$?: Subscription
@@ -73,30 +103,38 @@ export class SignUpComponent{
   // this called only if user entered full code
   onCodeCompleted(code: string) {
     this.isLoading = true
-    setTimeout(() => {
-    this.isLoading = false
-    }, 2000);
-   setTimeout(() => {
-    this.isSignup = false
-   }, 2000);
+
+    this.codeVerified$ = this.userService.getVerified(code).subscribe(res=>{
+      if(res.code){
+        setTimeout(() => {
+          this.isLoading = false
+          this.isSignup = false
+        }, 1000);
+      }
+      if(!res.code){
+        this.isLoading = false
+        this.isWrongCode = true
+      }
+    })
+}
+
+onsignUp(){
+  if(this.signUp.valid && this.accountDetail.valid){
+    const data: SignUpReqInsert = {
+      email: this.signUp.value.email!,
+      password: this.signUp.value.password!,
+      fullName: this.accountDetail.value.fullName!,
+      company: this.accountDetail.value.company!,
+      industryId: this.accountDetail.value.industry!,
+      phoneNumber: this.accountDetail.value.phoneNumber!,
+      positionId: this.accountDetail.value.position!
+    }
+
+    this.userSignup$ = this.userService.signUpMember(data).subscribe(result => {
+      console.log(result)
+      this.susccessSignUp = true
+    })
   }
-
-
-  // onsignUp(){
-  //   if(this.signUp.valid){
-  //     const data: SignUpReq = {
-  //       email: this.signUp.value.email!,
-  //       password: this.signUp.value.password!
-  //     }
-
-  //     this.login$ = this.userService.login(data).subscribe(result => {
-  //       this.userService.saveDataLogin(result)
-  //       this.router.navigateByUrl("/dashboard")
-  //       console.log(result)
-  //     })
-  //   }
-  // }
-
-
+}
 
 }
