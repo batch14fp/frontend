@@ -2,7 +2,7 @@ import { BASE_URL } from './../constant/base.service';
 import { HttpClient } from "@angular/common/http";
 import {Injectable} from "@angular/core"
 import { Observable, Subscription } from 'rxjs';
-import { LoginReq } from '../dto/user/login-req';
+import { LoginReq } from '../dto/login/login-req';
 import { LoginRes } from '../dto/user/login-res';
 import { VerificationCodeReq } from '../dto/user/verification-code-req';
 import { VerificationCodeRes } from '../dto/user/verification-get-res';

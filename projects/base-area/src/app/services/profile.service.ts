@@ -3,10 +3,10 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 import { ResInsert } from "../dto/res-insert";
-import { PasswordReqUpdate } from "../dto/user/profile/password-req-update";
-import { PasswordResUpdate } from "../dto/user/profile/password-res-update";
-import { ProfileReqUpdate } from "../dto/user/profile/profile-req-update";
-import { ProfileResDetail } from "../dto/user/profile/profile-res-detail";
+import { PasswordReqUpdate } from "../dto/profile/password-req-update";
+import { PasswordResUpdate } from "../dto/profile/password-res-update";
+import { ProfileReqUpdate } from "../dto/profile/profile-req-update";
+import { ProfileResDetail } from "../dto/profile/profile-res-detail";
 
 @Injectable({
     providedIn : "root"

@@ -9,9 +9,7 @@ export interface ProfileReqUpdate{
     company: string,
     industryId: string,
     poistionId: string,
-    socialmedia:[{
-        socialmediaId:string,
-        platformName:string,
-        url:string,
-    }]
+    socialmedia: string[]
+    ver : number
+    isActive : boolean
 }
