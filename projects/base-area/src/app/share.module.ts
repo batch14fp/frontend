@@ -7,6 +7,11 @@ import { LoadingModule } from './components/loading/loading.module';
 import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
 import { NavbarModule } from './components/navbar/navbar.module';
+import {DropdownModule} from 'primeng/dropdown';
+import {ButtonModule} from 'primeng/button';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ImageModule} from 'primeng/image';
+import {CalendarModule} from 'primeng/calendar';
 
 
 
@@ -15,12 +20,12 @@ import { NavbarModule } from './components/navbar/navbar.module';
 
   ],
   imports: [
-    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule, NavbarModule
+    CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
+     DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule
   ],
   exports:[
-    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,NavbarModule,
-    CommonModule, LoadingModule, InputTextModule,
-     PasswordModule
+    CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
+    CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule
   ]
 
 })

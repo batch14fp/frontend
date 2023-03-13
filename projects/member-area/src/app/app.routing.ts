@@ -1,13 +1,15 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { DashboardComponent } from "./pages/dashboard.component";
-import { TreadComponent } from "./pages/tread.component";
+import { NavbarComponent } from "projects/base-area/src/app/components/navbar/navbar.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
+import { TreadComponent } from "./pages/thread/tread.component";
+import { CourseComponent } from './pages/course/course.componenet';
 
 
 const memberRoutes : Routes = [
     {
         path : 'dashboard',
-        component : DashboardComponent,
+        component : NavbarComponent,
         children : [
             {
                 path : "thread",
@@ -15,6 +17,20 @@ const memberRoutes : Routes = [
             }
         ]
     },
+    {
+        path : '',
+        component : NavbarComponent,
+        children : [
+            {
+                path : 'profile',
+                component : ProfileComponent
+            }
+        ]
+    },
+    {
+      path:'course',
+      component:CourseComponent
+  },
 ]
 
 @NgModule({

@@ -9,3 +9,13 @@
 img {
   object-fit: cover;
 }
+
+.p-dropdown-clearable {
+  width: 100%;
+}
+
+.imgBanner {
+  width: 100% !important;
+  height: 180px;
+  object-fit: cover !important;
+}
