@@ -11,6 +11,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ImageModule} from 'primeng/image';
+import {CalendarModule} from 'primeng/calendar';
 
 
 
@@ -20,11 +21,11 @@ import {ImageModule} from 'primeng/image';
   ],
   imports: [
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
-     DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule
+     DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
-    CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule
+    CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule
   ]
 
 })
