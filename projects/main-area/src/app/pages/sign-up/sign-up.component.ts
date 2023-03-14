@@ -16,6 +16,7 @@ import { IndustryService } from '../../../../../base-area/src/app/services/indus
 import { PositionRes } from '../../../../../base-area/src/app/dto/position/postion-res';
 import { PositionService } from '../../../../../base-area/src/app/services/position.service';
 import { SignUpReqInsert } from '../../../../../base-area/src/app/dto/user/sign-up-req-insert';
+import { CountdownConfig, CountdownEvent } from 'ngx-countdown';
 
 @Component({
     selector:'app-sign-up',
