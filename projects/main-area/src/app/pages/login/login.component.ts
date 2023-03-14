@@ -38,7 +38,7 @@ export class LoginComponent implements OnDestroy{
 
       this.login$ = this.userService.login(data).subscribe(result => {
         this.userService.saveDataLogin(result)
-        this.router.navigateByUrl("/dashboard")
+        this.router.navigateByUrl("/course")
         console.log(result)
       })
     }
