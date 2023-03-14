@@ -7,6 +7,7 @@ import { LoginRes } from '../dto/login/login-res';
 import { VerificationCodeReq } from '../dto/verificationcode/verification-code-req';
 import { VerificationGetRes } from '../dto/verificationcode/verification-get-res';
 import { SignUpReqInsert } from '../dto/user/sign-up-req-insert';
+import { LoginRes } from '../dto/login/login-res';
 
 @Injectable({
   providedIn: "root"

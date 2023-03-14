@@ -6,6 +6,7 @@ import { CategoryComponent } from "./page/category/category.component";
 import { DashboardComponent } from "./page/dashboard.component";
 import { IndustryComponent } from "./page/industry/industry.component";
 import { LoginAdminComponent } from "./page/login/login.component";
+import { MembershipComponent } from "./page/membership/membership.component";
 import { PositionComponent } from "./page/position/position.component";
 import { SocmedComponent } from "./page/socmed/socmed.component";
 import { UserComponent } from "./page/user/user.component";
@@ -42,6 +43,10 @@ const appRoutes : Routes = [
     {
         path : 'article',
         component: ArticleComponent
+    },
+    {
+        path : 'memberships',
+        component : MembershipComponent
     }
 ]
 
