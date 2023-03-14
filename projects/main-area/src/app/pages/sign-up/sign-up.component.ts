@@ -1,4 +1,4 @@
-import { VerificationCodeRes } from './../../../../../base-area/src/app/dto/user/verification-get-res';
+import { VerificationGetRes } from '../../../../../base-area/src/app/dto/verificationcode/verification-get-res'
 import { AllPostBookmarkRes } from './../../../../../base-area/src/app/dto/post/all-post-bookmark-res';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
@@ -7,10 +7,10 @@ import { Subscription } from "rxjs";
 import { FormBuilder, Validators } from "@angular/forms";
 import { LoginReq } from "projects/base-area/src/app/dto/login/login-req";
 import { UserService } from '../../../../../base-area/src/app/services/user.service';
-import { LoginRes } from '../../../../../base-area/src/app/dto/user/login-res';
+import { LoginRes } from '../../../../../base-area/src/app/dto/login/login-res';
 import { Router } from "@angular/router";
 import { ResInsert } from '../../../../../base-area/src/app/dto/res-insert';
-import { VerificationCodeReq } from '../../../../../base-area/src/app/dto/user/verification-code-req';
+import { VerificationCodeReq } from '../../../../../base-area/src/app/dto/verificationcode/verification-code-req';
 import { IndustryRes } from '../../../../../base-area/src/app/dto/industry/industry-res';
 import { IndustryService } from '../../../../../base-area/src/app/services/industry.service';
 import { PositionRes } from '../../../../../base-area/src/app/dto/position/postion-res';
@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit{
   private userSignup$?: Subscription
 
   verificationCode!: ResInsert
-  codeVerified!: VerificationCodeRes
+  codeVerified!: VerificationGetRes
   industries: IndustryRes[] = []
   positions: PositionRes[] = []
   userSignup!: ResInsert
