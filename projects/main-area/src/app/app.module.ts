@@ -17,8 +17,9 @@ import { ArticleComponent } from './pages/article/article.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, SignUpComponent,ForgetPassComponent, CourseComponent, PostComponent,
-    ArticleComponent
+    AppComponent,
+    LoginComponent, SignUpComponent, ForgetPassComponent, CourseComponent, PostComponent, ArticleComponent,
+
   ],
   imports: [
     BrowserModule, AppRouting, ShareModule, FormsModule, ReactiveFormsModule, HttpClientModule,

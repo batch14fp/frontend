@@ -25,11 +25,11 @@ import { ArticleModule } from './page/article/article.module';
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,LoginAdminComponent,MembershipComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule,ShareModule, AppRouting, FormsModule, ReactiveFormsModule, HttpClientModule,CommonModule,
-    BrowserAnimationsModule,ArticleModule,TableModule
+    BrowserModule, AppRouting, HttpClientModule,CommonModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

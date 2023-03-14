@@ -1,6 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { CustomButtonModule } from "projects/base-area/src/app/components/button/button.module";
 import { NavbarComponent } from "projects/base-area/src/app/components/navbar/navbar.component";
+import { ShareModule } from "projects/base-area/src/app/share.module";
+import { ArticleModule } from "./page/article/article.module";
 import { CategoryComponent } from "./page/category/category.component";
 import { DashboardComponent } from "./page/dashboard.component";
 import { IndustryComponent } from "./page/industry/industry.component";
@@ -46,20 +49,24 @@ export const adminRoutes: Routes = [
         component: UserComponent
     },
     {
-      path:'article',
-      loadChildren:()=>import("./page/article/article.module").then(a=>a.ArticleModule),
-      component:NavbarComponent
+        path: 'article',
+        loadChildren: () => import("./page/article/article.module").then(a => a.ArticleModule),
+        component: NavbarComponent
     }
-    
+
 ]
 
 @NgModule({
+    declarations: [
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, UserComponent, LoginAdminComponent, MembershipComponent,
+    ],
     imports: [
-        RouterModule.forRoot(adminRoutes)
-
+        RouterModule.forRoot(adminRoutes),
+        ArticleModule, CustomButtonModule, ShareModule
     ],
     exports: [
-        RouterModule
+        RouterModule,
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, UserComponent, LoginAdminComponent, MembershipComponent
     ]
 })
 
