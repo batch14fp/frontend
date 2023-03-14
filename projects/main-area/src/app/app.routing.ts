@@ -5,6 +5,7 @@ import { LoginComponent } from "./pages/login/login.component";
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CourseComponent } from './pages/course/course.componenent';
 import { PostComponent } from './pages/post/post.component';
+import { ArticleComponent } from './pages/article/article.component';
 
 const appRoutes: Routes = [
     {
@@ -26,6 +27,10 @@ const appRoutes: Routes = [
     {
         path:'post',
         component:PostComponent
+    },
+    {
+        path:'article',
+        component:ArticleComponent
     },
 ]
 

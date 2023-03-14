@@ -8,7 +8,6 @@ import { VerificationCodeReq } from '../dto/verificationcode/verification-code-r
 import { VerificationGetRes } from '../dto/verificationcode/verification-get-res';
 import { SignUpReqInsert } from '../dto/user/sign-up-req-insert';
 
-
 @Injectable({
   providedIn: "root"
 })
@@ -62,7 +61,7 @@ export class UserService{
   }
 
   getVerified(code : string) : Observable<VerificationGetRes>{
-    return this.http.get<VerificationGetRes>(`${BASE_URL}/users/sign-up/verify-code/${code}`)
+    return this.http.get<VerificationGetRes>(`${BASE_URL}/users/sign-up/verify/${code}`)
 }
 
 
