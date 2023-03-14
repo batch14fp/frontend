@@ -4,35 +4,73 @@
       text-white px-6 py-2 text-md font-base w-full h-full border-round-3xl cursor-pointer" type="button">
       Write New Thread
     </button>
-    <div class="flex bg-indigo-100 p-4 border-round-2xl ">
-      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle"
-        style="width: 42px; height: 42px;" alt="Avatar" />
-      <div class="col-10">
-        <div class=" flex align-items-center gap-4">
-          <p>Rizki irvandi</p>
-          <p class=" text-xs">.1 Hours</p>
-        </div>
-        <div class="flex flex-column">
-          <p class="text-sm">HR Admin</p>
-          <p class="text-sm">Planning & Recruitment</p>
-        </div>
-        <div class="flex flex-column">
-          <h1 class="text-2xl font-semibold text-indigo-800">Hati hati dalam mencari pekerjaan di jakarta, terutama
-            perusahaan baru</h1>
-          <p class="mt-2">it is a long established fact that a reader will be distracted by the readable content of a
-            page when
-            looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
-            letters, as opposed to using 'Content here, content here', making it look like readable...
-            <span class="text-gray-600 cursor-pointer font-semibold">more</span></p>
-        </div>
-        <div class="mt-2 flex gap-2">
-          <fa-icon class="text-gray-600 cursor-pointer" [icon]="faComment"></fa-icon><span class="mr-2">4</span>
-          <fa-icon class="text-gray-600 cursor-pointer" [icon]="faHeart"></fa-icon><span>2</span>
+    <div class="flex flex-column gap-6">
+      <div *ngFor="let item of [].constructor(10)" class="flex bg-indigo-50 p-4 border-round-2xl
+      hover:bg-indigo-100 animation-duration-400 animation-all ">
+        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle"
+          style="width: 42px; height: 42px;" alt="Avatar" />
+        <div class="col-10 pt-0">
+          <div class=" flex align-items-center gap-4">
+            <p>Rizki irvandi</p>
+            <p class=" text-xs">.1 Hours</p>
+          </div>
+          <div class="flex flex-column">
+            <p class="text-sm">HR Admin</p>
+            <p class="text-sm">Planning & Recruitment</p>
+          </div>
+          <div class="flex flex-column">
+            <h1 class="text-2xl font-semibold text-indigo-800">Hati hati dalam mencari pekerjaan di jakarta, terutama
+              perusahaan baru</h1>
+            <p class="mt-2">it is a long established fact that a reader will be distracted by the readable content of a
+              page when
+              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
+              letters, as opposed to using 'Content here, content here', making it look like readable...
+              <span class="text-gray-600 cursor-pointer font-semibold">more</span></p>
+          </div>
+          <div class="mt-2 flex gap-2">
+            <fa-icon class="text-gray-600 cursor-pointer" [icon]="faComment"></fa-icon><span class="mr-2">4</span>
+            <fa-icon class="text-gray-600 cursor-pointer" [icon]="faHeart"></fa-icon><span>2</span>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
-  <div class=" col-4 mt-4 pl-8">
-    <p class="text-xl font-semibold">Most Like</p>
+  <div class=" col-3 mt-4">
+    <p class="text-xl font-semibold mb-4">Most Like</p>
+    <div class="flex flex-column gap-4">
+      <div *ngFor="let item of [].constructor(6)" class="flex bg-indigo-50 p-4 border-round-2xl
+      hover:bg-indigo-100 animation-duration-400 animation-all ">
+
+        <div class="col-12">
+          <div class="flex gap-4">
+            <img src=" https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle"
+              style="width: 42px; height: 42px;" alt="Avatar" />
+            <div class="">
+              <div class=" flex align-items-center gap-4 m-0 p-0">
+                <p>Rizki irvandi</p>
+                <p class=" text-xs">.1 Hours</p>
+              </div>
+              <div class="flex flex-column">
+                <p class="text-sm">HR Admin</p>
+                <p class="text-sm">Planning & Recruitment</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-column">
+            <h1 class="text-xl font-semibold text-indigo-800">Hati hati dalam mencari pekerjaan di jakarta, terutama
+              perusahaan baru</h1>
+            <p class="mt-2">it is a long established fact that a reader will be distracted by the readable content of a
+              page when...
+              <span class="text-gray-600 cursor-pointer font-semibold">more</span></p>
+          </div>
+          <div class="mt-2 flex gap-2">
+            <fa-icon class="text-gray-600 cursor-pointer" [icon]="faComment"></fa-icon><span class="mr-2">4</span>
+            <fa-icon class="text-gray-600 cursor-pointer" [icon]="faHeart"></fa-icon><span>2</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
