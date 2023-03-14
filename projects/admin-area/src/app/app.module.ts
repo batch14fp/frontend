@@ -20,10 +20,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginAdminComponent } from './page/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { MembershipComponent } from './page/membership/membership.component';
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,ArticleComponent,LoginAdminComponent
+    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,ArticleComponent,LoginAdminComponent, MembershipComponent
   ],
   imports: [
     BrowserModule,ShareModule, AppRouting,TableModule, FormsModule, ReactiveFormsModule, HttpClientModule,CommonModule,

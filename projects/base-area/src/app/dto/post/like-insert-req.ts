@@ -1,4 +1,4 @@
-export interface LikeInsertRes{
+export interface LikeInsertReq{
     postId : string
     userId : string
 }

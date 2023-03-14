@@ -1,5 +1,5 @@
-export interface UpdateRes{
-    id : number
-    message : string
-    ver : number
+export interface ErrorRes{
+
+    // message : string
+    
 }
