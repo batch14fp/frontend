@@ -10,9 +10,9 @@ import { PositionComponent } from "./page/position/position.component";
 import { SocmedComponent } from "./page/socmed/socmed.component";
 import { UserComponent } from "./page/user/user.component";
 
-const appRoutes: Routes = [
+export const adminRoutes: Routes = [
     {
-        path: 'loginAdmin',
+        path: '',
         component: LoginAdminComponent
     },
     {
@@ -55,7 +55,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(adminRoutes)
 
     ],
     exports: [

@@ -5,6 +5,7 @@ import { LoginComponent } from "./pages/login/login.component";
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CourseComponent } from './pages/course/course.componenent';
 import { PostComponent } from './pages/post/post.component';
+import { adminRoutes } from "projects/admin-area/src/app/app.routing";
 
 const appRoutes: Routes = [
     {
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
         path:'post',
         component:PostComponent
     },
+    ...adminRoutes
 ]
 
 @NgModule({

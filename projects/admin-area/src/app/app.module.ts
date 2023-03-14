@@ -20,6 +20,7 @@ import { LoginAdminComponent } from './page/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MembershipComponent } from './page/membership/membership.component';
+import { ArticleModule } from './page/article/article.module';
 
 
 @NgModule({
@@ -27,8 +28,8 @@ import { MembershipComponent } from './page/membership/membership.component';
     AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,LoginAdminComponent,MembershipComponent
   ],
   imports: [
-    BrowserModule,ShareModule, AppRouting,TableModule, FormsModule, ReactiveFormsModule, HttpClientModule,CommonModule,
-    BrowserAnimationsModule
+    BrowserModule,ShareModule, AppRouting, FormsModule, ReactiveFormsModule, HttpClientModule,CommonModule,
+    BrowserAnimationsModule,ArticleModule,TableModule
   ],
   providers: [
     {
