@@ -3,6 +3,7 @@ export interface ProfileResDetail{
 	fullname: string,
 	email : string,
 	phoneNumber: string,
+	dob : Date
 	country:string,
     province: string,
     city:string,

@@ -1,36 +1,35 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { NavbarComponent } from "projects/base-area/src/app/components/navbar/navbar.component";
+import { ArticleComponent } from "./pages/article/article.component";
+// import { NavbarComponent } from "projects/base-area/src/app/components/navbar/navbar.component";
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+// import { ProfileComponent } from "./pages/profile/profile.component";
+// import { TreadComponent } from "./pages/thread/tread.component";
+// =======
 import { ProfileComponent } from "./pages/profile/profile.component";
-import { TreadComponent } from "./pages/thread/tread.component";
-import { CourseComponent } from './pages/course/course.componenet';
+// import { TreadComponent } from "./pages/thread/tread.component";
 
 
 const memberRoutes : Routes = [
     {
         path : 'dashboard',
-        component : NavbarComponent,
-        children : [
-            {
-                path : "thread",
-                component : TreadComponent
-            }
-        ]
+        component : DashboardComponent,
     },
     {
-        path : '',
-        component : NavbarComponent,
-        children : [
-            {
-                path : 'profile',
-                component : ProfileComponent
-            }
-        ]
+        path : 'profile',
+        loadChildren : () => import("./pages/profile/profile.module").then(c => c.ProfileModule),
+        component : NavbarComponent
+
     },
     {
-      path:'course',
-      component:CourseComponent
-  },
+        path : 'article',
+        component : ArticleComponent
+    },
+    // {
+    //   path:'course',
+    //   component:CourseComponent
+    // },
 ]
 
 @NgModule({

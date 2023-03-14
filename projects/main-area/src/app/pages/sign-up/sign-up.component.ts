@@ -6,7 +6,7 @@ import { Title } from "@angular/platform-browser";
 import { getInitials } from '../../../../../base-area/src/app/utils/getInitial';
 import { Subscription } from "rxjs";
 import { FormBuilder, Validators } from "@angular/forms";
-import { LoginReq } from "projects/base-area/src/app/dto/user/login-req";
+import { LoginReq } from "projects/base-area/src/app/dto/login/login-req";
 import { UserService } from '../../../../../base-area/src/app/services/user.service';
 import { LoginRes } from '../../../../../base-area/src/app/dto/user/login-res';
 import { Router } from "@angular/router";
