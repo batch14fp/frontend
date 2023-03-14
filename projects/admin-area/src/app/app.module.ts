@@ -24,7 +24,7 @@ import { MembershipComponent } from './page/membership/membership.component';
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,LoginAdminComponent
+    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,LoginAdminComponent,MembershipComponent
   ],
   imports: [
     BrowserModule,ShareModule, AppRouting,TableModule, FormsModule, ReactiveFormsModule, HttpClientModule,CommonModule,
