@@ -7,6 +7,7 @@ import { LoginRes } from '../dto/login/login-res';
 import { VerificationCodeReq } from '../dto/verificationcode/verification-code-req';
 import { VerificationGetRes } from '../dto/verificationcode/verification-get-res';
 import { SignUpReqInsert } from '../dto/user/sign-up-req-insert';
+import { VerificationCodeReqGet } from '../dto/verificationcode/verification-code-req-get';
 
 @Injectable({
   providedIn: "root"
@@ -60,8 +61,8 @@ export class UserService{
     localStorage.setItem("dataLogin", JSON.stringify(data))
   }
 
-  getVerified(code : string) : Observable<VerificationGetRes>{
-    return this.http.get<VerificationGetRes>(`${BASE_URL}/users/sign-up/verify/${code}`)
+  getVerified(data: VerificationCodeReqGet) : Observable<VerificationCodeReqGet>{
+    return this.http.post<VerificationCodeReqGet>(`${BASE_URL}/users/sign-up/verify-code/`, data)
 }
 
 
