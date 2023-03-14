@@ -15,6 +15,9 @@ import {CalendarModule} from 'primeng/calendar';
 import {CheckboxModule} from 'primeng/checkbox';
 import { CountdownModule } from 'ngx-countdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -25,12 +28,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
      DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule, 
-     CountdownModule, FontAwesomeModule
+     CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
-    CountdownModule, FontAwesomeModule
+    CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule
   ]
 
 })

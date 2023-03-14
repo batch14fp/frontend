@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { NavbarComponent } from "projects/base-area/src/app/components/navbar/navbar.component";
-import { ArticleComponent } from "./page/article/article.component";
 import { CategoryComponent } from "./page/category/category.component";
 import { DashboardComponent } from "./page/dashboard.component";
 import { IndustryComponent } from "./page/industry/industry.component";
@@ -11,43 +10,47 @@ import { PositionComponent } from "./page/position/position.component";
 import { SocmedComponent } from "./page/socmed/socmed.component";
 import { UserComponent } from "./page/user/user.component";
 
-const appRoutes : Routes = [
+const appRoutes: Routes = [
     {
         path: 'loginAdmin',
         component: LoginAdminComponent
     },
     {
-        path: 'dashboard',
-        component: NavbarComponent
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'dashboard',
+                component: NavbarComponent
+            }
+        ]
     },
     {
-        path : 'category',
+        path: 'category',
         component: CategoryComponent
     },
     {
-        path : 'position',
+        path: 'position',
         component: PositionComponent
     },
     {
-        path : 'industry',
+        path: 'industry',
         component: IndustryComponent
     },
     {
-        path : 'socialmedia',
+        path: 'socialmedia',
         component: SocmedComponent
     },
     {
-        path : 'user',
+        path: 'user',
         component: UserComponent
     },
     {
-        path : 'article',
-        component: ArticleComponent
-    },
-    {
-        path : 'memberships',
-        component : MembershipComponent
+      path:'article',
+      loadChildren:()=>import("./page/article/article.module").then(a=>a.ArticleModule),
+      component:NavbarComponent
     }
+    
 ]
 
 @NgModule({
@@ -55,9 +58,9 @@ const appRoutes : Routes = [
         RouterModule.forRoot(appRoutes)
 
     ],
-    exports:[
+    exports: [
         RouterModule
     ]
 })
 
-export class AppRouting{}
+export class AppRouting { }
