@@ -1,0 +1,29 @@
+<div class="flex flex-column">
+    <div class="flex">
+        <h1>Create Article</h1>
+    </div>
+    <form class="mt-1 col-12 md:col-3 flex-column justify-content-center">
+        <div class="mb-3 flex flex-column w-full">
+            <label for="emailInput" class="font-medium col-form-label">Title</label>
+            <input type="text" class="w-full " pInputText id="emailInput" placeholder="email" name="emailInput"
+              formControlName="email">
+        </div>
+        <div class="mb-3 flex flex-column">
+            <label for="emailInput" class="font-medium col-form-label">Content</label>
+            <span class="p-float-label">
+                <textarea id="float-input" rows="5" cols="45" pInputTextarea></textarea>
+                <label for="float-input">add content</label>
+            </span>
+        </div>
+        <div class="mb-3 flex flex-column">
+            <label for="emailInput" class="font-medium col-form-label">Upload Image</label>
+            <span class="p-float-label">        
+                <p-fileUpload #fubauto mode="basic" chooseLabel="Browse" class="p-2"></p-fileUpload>
+            </span>
+        </div>
+
+        <div class="mt-4">
+            <button pButton type="submit" label="Create" class="p-2"></button>
+        </div>
+    </form>
+</div>

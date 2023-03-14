@@ -10,7 +10,7 @@
     </div>
 
     
-    <p-table [value]="articles"  [tableStyle]="{'min-width': '50rem'}">
+    <p-table [value]="article"  [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
                 <th>No</th>
@@ -21,13 +21,13 @@
                 <th>Action</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-articles let-i="rowIndex">
+        <ng-template pTemplate="body" let-article let-i="rowIndex">
             <tr>
                 <td>{{i + 1}}</td>
-                <td>{{articles.image}}</td>
-                <td>{{articles.title}}</td>
+                <td>{{article.title}}</td>
+                <!-- <td>{{articles.title}}</td>
                 <td>{{articles.content}}</td>
-                <td>{{articles.createdAt}}</td>
+                <td>{{articles.createdAt}}</td> -->
                 <td class="flex gap-2">
                     <app-button-icon ></app-button-icon>
                     <app-button-danger></app-button-danger>
