@@ -1,0 +1,29 @@
+<div class="mx-6">
+    <h1>Memberhips</h1>
+    <div class="col-3 my-2">
+        <app-button-primary label="Create memberhips"></app-button-primary>
+    </div>
+    <p-table [value]="memberhips" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No</th>
+                    <th>Code</th>
+                    <th>Membership</th>
+                    <th>Periode</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-memberhips let-i="rowIndex">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{memberhips.code}}</td>
+                    <td>{{memberhips.name}}</td>
+                    <td>{{memberhips.periode}}</td>
+                    <td class="flex gap-2">
+                        <app-button-icon ></app-button-icon>
+                        <app-button-danger></app-button-danger>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+</div>
