@@ -1,4 +1,5 @@
-<p-menubar [model]="items" *ngIf="role =='SA'">
+<p-menubar [model]="items" >
+    <!-- *ngIf="role =='SA'" -->
     <ng-template pTemplate="start">
         <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
     </ng-template>
@@ -11,7 +12,8 @@
     </ng-template>
 </p-menubar>
 
-<p-menubar [model]="memberItem" *ngIf="role == 'MR'">
+<p-menubar [model]="memberItem" >
+    <!-- *ngIf="role == 'MR'" -->
     <ng-template pTemplate="start">
         <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
     </ng-template>
@@ -35,3 +37,5 @@
         <!-- <p-avatar shape="circle">{{initial('Rizky Irvandi')}}</p-avatar> -->
     </ng-template>
 </p-menubar>
+
+<router-outlet></router-outlet>
