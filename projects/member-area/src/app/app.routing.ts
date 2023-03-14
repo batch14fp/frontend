@@ -8,13 +8,22 @@ import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 // =======
 import { ProfileComponent } from "./pages/profile/profile.component";
+import { TreadComponent } from "./pages/thread/tread.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
 const memberRoutes : Routes = [
     {
-        path : 'dashboard',
-        component : DashboardComponent,
+        // path : 'dashboard',
+        // component : DashboardComponent,
+        path:'',
+        component:NavbarComponent,
+        children:[
+            {
+                path:'dashboard',
+                component: DashboardComponent
+            }
+        ]
     },
     {
         path : 'profile',
@@ -23,8 +32,18 @@ const memberRoutes : Routes = [
 
     },
     {
-        path : 'article',
-        component : ArticleComponent
+        // path:'',
+        // component:NavbarComponent,
+        // children:[
+        //     {
+                path : 'article',
+                component : ArticleComponent
+        //     }
+        // ]
+    },
+    {
+        path:'thread',
+        component: TreadComponent,
     },
     // {
     //   path:'course',

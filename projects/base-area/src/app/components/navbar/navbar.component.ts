@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { MenuItem } from 'primeng/api';
+import { UserService } from "../../services/user.service";
 import { getInitials } from "../../utils/getInitial";
 
 @Component({
@@ -8,11 +10,17 @@ import { getInitials } from "../../utils/getInitial";
 })
 
 export class NavbarComponent{
+    constructor(private userService:UserService, private router:Router){
 
-    // initial(name : string){
-    //     getInitials(name) 
-    // }
-    
+    }
+
+    role = this.userService.getRoleCode()
+
+    onLogout(){
+        localStorage.clear()
+        this.router.navigateByUrl('/login')
+    }
+
     memberItem! : MenuItem[]
     items!: MenuItem[];
 
