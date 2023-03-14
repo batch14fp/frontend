@@ -47,10 +47,19 @@
           (codeCompleted)="onCodeCompleted($event)">
         </code-input>
         <p *ngIf="isWrongCode" class="text-xs text-red-800">The code you enter is wrong !</p>
-        <div class="flex">
-          <p class="text-sm">Didn't get a verification code ?</p>
-          <button class="border-none text-sm bg-transparent cursor-pointer text-blue-600 font-medium">Request new
-            one</button>
+        <div class="flex justify-content-between align-items-center ">
+          <button *ngIf=" !noLeftTime" class="border-none text-sm bg-transparent cursor-pointer text-blue-600
+          hover:text-blue-700 font-medium" (click)='onClickSendVerification()'>Resend
+            verification code
+          </button>
+          <button *ngIf="noLeftTime"
+            class="border-none text-sm bg-transparent cursor-wait text-blue-600 font-medium">Resend
+            verification code
+          </button>
+          <div class="text-sm">
+            <countdown class="text-sm" #cd (event)="handleEvent($event)" [config]="{leftTime: 120, format: 'mm:ss'}">
+            </countdown>
+          </div>
         </div>
       </div>
     </form>
