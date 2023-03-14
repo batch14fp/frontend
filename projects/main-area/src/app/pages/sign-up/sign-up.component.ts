@@ -1,6 +1,6 @@
 import { VerificationGetRes } from '../../../../../base-area/src/app/dto/verificationcode/verification-get-res'
 import { AllPostBookmarkRes } from './../../../../../base-area/src/app/dto/post/all-post-bookmark-res';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { getInitials } from '../../../../../base-area/src/app/utils/getInitial';
 import { Subscription } from "rxjs";
@@ -19,7 +19,8 @@ import { SignUpReqInsert } from '../../../../../base-area/src/app/dto/user/sign-
 
 @Component({
     selector:'app-sign-up',
-    templateUrl: './sign-up.component.html'
+    templateUrl: './sign-up.component.html',
+    // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -59,12 +60,30 @@ export class SignUpComponent implements OnInit{
   showVerification = false
   isWrongCode = false
   susccessSignUp = false;
+  noLeftTime = false;
+
+  config: CountdownConfig = {
+    leftTime: 120,
+    format: 'mm:ss',
+    prettyText: (text: string) => {
+      return text
+        .split(':')
+        .map((v) => `<span class="item text-sm text-blue-600">${v}</span>`)
+        .join('');
+    },
+  };
+
+  handleEvent(e: CountdownEvent) {
+    this.noLeftTime = !this.noLeftTime
+    // console.log(this.noLeftTime);
+    // console.log('Actions', e);
+  }
 
 
 
   constructor(private title: Title, private fb: FormBuilder,
     private userService: UserService,  private router: Router, private industryService: IndustryService,
-    private positionService: PositionService){
+    private positionService: PositionService, private cdRef: ChangeDetectorRef){
       this.title.setTitle("Sign Up")
     }
 
@@ -74,8 +93,6 @@ export class SignUpComponent implements OnInit{
     initPositions(){
       this.industries$ = this.positionService.getAllPosition().subscribe(res => this.positions =res)
     }
-
-
 
 
   ngOnInit(): void {
@@ -91,7 +108,7 @@ export class SignUpComponent implements OnInit{
     this.verificationCode$ = this.userService.insertVerification(data).subscribe(res => {
       this.showVerification =  true
     })
-
+    console.log("send code")
   }
 
   private signUp$?: Subscription
@@ -133,6 +150,9 @@ onsignUp(){
     this.userSignup$ = this.userService.signUpMember(data).subscribe(result => {
       console.log(result)
       this.susccessSignUp = true
+      setTimeout(() => {
+        this.router.navigateByUrl("/course")
+      }, 3000);
     })
   }
 }
