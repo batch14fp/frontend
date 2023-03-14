@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import {Injectable} from "@angular/core"
 import { Observable, Subscription } from 'rxjs';
 import { LoginReq } from '../dto/login/login-req';
+import { LoginRes } from '../dto/login/login-res';
 import { VerificationCodeReq } from '../dto/verificationcode/verification-code-req';
 import { VerificationGetRes } from '../dto/verificationcode/verification-get-res';
 import { SignUpReqInsert } from '../dto/user/sign-up-req-insert';
@@ -71,6 +72,14 @@ export class UserService{
 
   signUpMember(data : SignUpReqInsert) : Observable<SignUpReqInsert>{
     return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify/`,data)
+  }
+
+  getRoleCode():string{
+    const data = localStorage.getItem("dataLogin")
+    if(data){
+      return JSON.parse(data).roleCode
+    }
+    throw new Error("Role is empty")
   }
 
 }

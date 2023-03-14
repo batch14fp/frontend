@@ -12,10 +12,11 @@ import { CodeInputModule } from 'angular-code-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForgetPassComponent } from './pages/forget-pass/forget-pass.component';
 import { CourseComponent } from './pages/course/course.componenent';
+import { PostComponent } from './pages/post/post.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, SignUpComponent,ForgetPassComponent, CourseComponent
+    AppComponent, LoginComponent, SignUpComponent,ForgetPassComponent, CourseComponent, PostComponent
   ],
   imports: [
     BrowserModule, AppRouting, ShareModule, FormsModule, ReactiveFormsModule, HttpClientModule,

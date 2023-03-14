@@ -1,3 +1,6 @@
+<pre>
+  {{categories | json}}
+</pre>
 <div class="flex w-full h-full flex-column">
   <div class="w-full">
     <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
@@ -12,14 +15,62 @@
         </span>
       </div>
       <div class="date-search mt-4">
-        <p>Jadwal</p>
+        <p>Schedule</p>
         <p-calendar [(ngModel)]="dateSearch" [showIcon]="true" inputId="icon"></p-calendar>
       </div>
       <div class="category mt-4">
         <p class="text-xl">Category</p>
+        <div class="field-checkbox mt-2">
+          <p-checkbox name="group1" value="HR Admin" [(ngModel)]="selectedCategory" inputId="hr"></p-checkbox>
+          <label for="hr">HR Admin</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="Performance & Dev" [(ngModel)]="selectedCategory" inputId="pd"></p-checkbox>
+          <label for="pd">Performance & Dev</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="Planning & Recruit" [(ngModel)]="selectedCategory" inputId="pr"></p-checkbox>
+          <label for="pr">Planning & Recruit</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="Tax Legal" [(ngModel)]="selectedCategory" inputId="tl"></p-checkbox>
+          <label for="tl">Tax Legal</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="Career & Succession" [(ngModel)]="selectedCategory" inputId="cs">
+          </p-checkbox>
+          <label for="cs">Career & Succession</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="HR Digital" [(ngModel)]="selectedCategory" inputId="hd"></p-checkbox>
+          <label for="hd">HR Digital</label>
+        </div>
+      </div>
+      <div class="category mt-4">
+        <p class="text-xl">Sort</p>
+        <div class="field-checkbox mt-2">
+          <p-checkbox name="group1" value="Paling Sesuai" [(ngModel)]="selectedCategory" inputId="ps"></p-checkbox>
+          <label for="ny">Paling Sesuai</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="Terbaru" [(ngModel)]="selectedCategory" inputId="tb"></p-checkbox>
+          <label for="ny">Terbaru</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="Harga Tertinggi" [(ngModel)]="selectedCategory" inputId="ht"></p-checkbox>
+          <label for="ny">Harga Tertinggi</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="Harga Terendah" [(ngModel)]="selectedCategory" inputId="hr"></p-checkbox>
+          <label for="ny">Harga Terendah</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox name="group1" value="Ulasan" [(ngModel)]="selectedCategory" inputId="ul"></p-checkbox>
+          <label for="ny">Ulasan</label>
+        </div>
       </div>
     </div>
-    <div class=" col-9 flex justify-content-between flex-wrap">
+    <div class="col-9 flex justify-content-between flex-wrap  ">
       <div *ngFor=" let item of [].constructor(10)"
         class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4">
         <div class="flex flex-column w-full h-full">
@@ -59,6 +110,18 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class=" mx-6 mt-6 flex justify-content-between border-1 border-blue-600 border-round-md mb-4 shadow-1 h-10rem
+  align-items-center justify-content-center hover:shadow-2">
+    <div class=" flex flex-column justify-content-end col-4 ml-8">
+      <p class="text-xl font-semibold">Create your <span class="text-2xl text-blue-600">Course</span></p>
+      <p class="text-blue-600 font-semibold">and upgrade your skill</p>
+    </div>
+    <div class="col-2 mr-8">
+      <button class="p-button-rounded bg-indigo-600 hover:bg-indigo-800 border-transparent h-3rem
+      text-white px-6 py-2 text-md font-base w-full h-full border-round-3xl cursor-pointer" type="button">Create
+        Course</button>
     </div>
   </div>
 </div>

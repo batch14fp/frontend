@@ -8,23 +8,48 @@ import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 // =======
 import { ProfileComponent } from "./pages/profile/profile.component";
+import { TreadComponent } from "./pages/thread/tread.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
-const memberRoutes : Routes = [
+const memberRoutes: Routes = [
     {
-        path : 'dashboard',
-        component : DashboardComponent,
+        // path : 'dashboard',
+        // component : DashboardComponent,
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'dashboard',
+                component: DashboardComponent
+            }
+        ]
     },
     {
-        path : 'profile',
-        loadChildren : () => import("./pages/profile/profile.module").then(c => c.ProfileModule),
-        component : NavbarComponent
+        path: 'profile',
+        loadChildren: () => import("./pages/profile/profile.module").then(c => c.ProfileModule),
+        component: NavbarComponent
 
     },
     {
-        path : 'article',
-        component : ArticleComponent
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'article',
+                component: ArticleComponent
+            }
+        ]
+    },
+    {
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'thread',
+                component: TreadComponent,
+            }
+        ]
     },
     // {
     //   path:'course',
@@ -41,4 +66,4 @@ const memberRoutes : Routes = [
     ]
 })
 
-export class AppRouting{}
+export class AppRouting { }
