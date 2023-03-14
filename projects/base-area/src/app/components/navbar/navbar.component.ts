@@ -18,7 +18,7 @@ export class NavbarComponent{
 
     onLogout(){
         localStorage.clear()
-        this.router.navigateByUrl('/login')
+        this.router.navigateByUrl('')
     }
 
     memberItem! : MenuItem[]
