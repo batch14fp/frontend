@@ -11,11 +11,12 @@ import {TabViewModule} from 'primeng/tabview';
 import {DropdownModule} from 'primeng/dropdown';
 
 // import { ProfileComponent } from './pages/profile/profile.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
 import { CommonModule } from '@angular/common';
 import { ArticleComponent } from './pages/article/article.component';
+import { NavbarModule } from 'projects/base-area/src/app/components/navbar/navbar.module';
 // import { CourseComponent } from './pages/course/course.componenet';
 
 
@@ -24,7 +25,8 @@ import { ArticleComponent } from './pages/article/article.component';
     AppComponent,DashboardComponent,ArticleComponent
   ],
   imports: [
-    BrowserModule, ShareModule, AppRouting,CardModule,DropdownModule,TabViewModule,CommonModule
+    BrowserModule, ShareModule, AppRouting,CardModule,DropdownModule,TabViewModule,CommonModule,
+    HttpClientModule, NavbarModule
   ],
   providers: [
     {
