@@ -6,6 +6,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CourseComponent } from './pages/course/course.componenent';
 import { PostComponent } from './pages/post/post.component';
 import { adminRoutes } from "projects/admin-area/src/app/app.routing";
+import { LoginAdminComponent } from "projects/admin-area/src/app/page/login/login.component";
 import { NotFoundComponent } from './pages/404/404.component';
 
 const appRoutes: Routes = [
@@ -14,8 +15,12 @@ const appRoutes: Routes = [
         component : ForgetPassComponent
     },
     {
-        path:'',
+        path:'member',
         component:LoginComponent
+    },
+    {
+        path:'admin',
+        component:LoginAdminComponent
     },
     {
         path:'signup',
