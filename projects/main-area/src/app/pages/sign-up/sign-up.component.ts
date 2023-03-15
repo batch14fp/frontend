@@ -17,11 +17,12 @@ import { PositionRes } from '../../../../../base-area/src/app/dto/position/posti
 import { PositionService } from '../../../../../base-area/src/app/services/position.service';
 import { SignUpReqInsert } from '../../../../../base-area/src/app/dto/user/sign-up-req-insert';
 import { CountdownConfig, CountdownEvent } from 'ngx-countdown';
+import { VerificationCodeReqGet } from '../../../../../base-area/src/app/dto/verificationcode/verification-code-req-get';
 
 @Component({
     selector:'app-sign-up',
     templateUrl: './sign-up.component.html',
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -108,6 +109,7 @@ export class SignUpComponent implements OnInit{
     }
     this.verificationCode$ = this.userService.insertVerification(data).subscribe(res => {
       this.showVerification =  true
+      this.cdRef.markForCheck()
     })
     console.log("send code")
   }
@@ -120,9 +122,13 @@ export class SignUpComponent implements OnInit{
 
   // this called only if user entered full code
   onCodeCompleted(code: string) {
+    const codeVerify: VerificationCodeReqGet = {
+      code
+    }
+
     this.isLoading = true
 
-    this.codeVerified$ = this.userService.getVerified(code).subscribe(res=>{
+    this.codeVerified$ = this.userService.getVerified(codeVerify).subscribe(res=>{
       if(res.code){
         setTimeout(() => {
           this.isLoading = false

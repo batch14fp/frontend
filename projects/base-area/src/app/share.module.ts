@@ -20,6 +20,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NotFoundModule } from './components/not-found/not-found.module';
 
 
 
@@ -29,15 +30,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
-     DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule, 
+     DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
-     ReactiveFormsModule
+     ReactiveFormsModule, NotFoundModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, NotFoundModule
   ]
 
 })
