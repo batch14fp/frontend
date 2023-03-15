@@ -127,17 +127,20 @@ export class SignUpComponent implements OnInit{
     }
 
     this.isLoading = true
-
+    this.cdRef.markForCheck()
     this.codeVerified$ = this.userService.getVerified(codeVerify).subscribe(res=>{
       if(res.code){
         setTimeout(() => {
           this.isLoading = false
           this.isSignup = false
+          this.cdRef.markForCheck()
+
         }, 1000);
       }
       if(!res.code){
         this.isLoading = false
         this.isWrongCode = true
+        this.cdRef.markForCheck()
       }
     })
 }
