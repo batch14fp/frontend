@@ -22,7 +22,7 @@ import { VerificationCodeReqGet } from '../../../../../base-area/src/app/dto/ver
 @Component({
     selector:'app-sign-up',
     templateUrl: './sign-up.component.html',
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -109,6 +109,7 @@ export class SignUpComponent implements OnInit{
     }
     this.verificationCode$ = this.userService.insertVerification(data).subscribe(res => {
       this.showVerification =  true
+      this.cdRef.markForCheck()
     })
     console.log("send code")
   }
