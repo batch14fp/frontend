@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
-import {MenuItem} from 'primeng/api';
+import { Router } from "@angular/router";
+import { MenuItem } from 'primeng/api';
+import { UserService } from "../../services/user.service";
+import { getInitials } from "../../utils/getInitial";
 
 @Component({
     selector : 'app-navbar',
@@ -7,7 +10,18 @@ import {MenuItem} from 'primeng/api';
 })
 
 export class NavbarComponent{
+    constructor(private userService:UserService, private router:Router){
 
+    }
+
+    role = this.userService.getRoleCode()
+
+    onLogout(){
+        localStorage.clear()
+        this.router.navigateByUrl('')
+    }
+
+    memberItem! : MenuItem[]
     items!: MenuItem[];
 
     ngOnInit() {
@@ -32,8 +46,32 @@ export class NavbarComponent{
             {
                 label : 'User',
                 routerLink : '/user'
+            },
+            {
+                label : 'Article',
+                routerLink : '/article'
             }
         ];
+
+        this.memberItem = [
+            {
+                label:'Post',
+                routerLink:''
+            },
+            {
+                label:'Course',
+                routerLink : ''
+            },
+            {
+                label:'Article',
+                routerLink : ''
+                
+            },
+            {
+                label:'Event',
+                routerLink : ''
+            },
+        ]
     }
 
 }

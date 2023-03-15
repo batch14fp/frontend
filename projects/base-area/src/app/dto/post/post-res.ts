@@ -1,4 +1,5 @@
 export interface PostRes{
+	postId : string
     userId:string,
 	fullname:string,
 	timeAgo:string,

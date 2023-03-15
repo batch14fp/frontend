@@ -1,4 +1,4 @@
-function toTitleCase(str: string) {
+export function toTitleCase(str: string) {
   return str.replace(
       /\w\S*/g,
       function (txt) {

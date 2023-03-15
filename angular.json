@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lottie-web"
+           ],
             "outputPath": "dist/admin-area",
             "index": "projects/admin-area/src/index.html",
             "main": "projects/admin-area/src/main.ts",
@@ -113,6 +116,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lottie-web"
+           ],
             "outputPath": "dist/member-area",
             "index": "projects/member-area/src/index.html",
             "main": "projects/member-area/src/main.ts",
@@ -213,6 +219,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lottie-web"
+           ],
             "outputPath": "dist/main-area",
             "index": "projects/main-area/src/index.html",
             "main": "projects/main-area/src/main.ts",
@@ -233,8 +242,8 @@
               "projects/main-area/src/styles.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeflex/primeflex.css"
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": []
           },
@@ -313,6 +322,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lottie-web"
+           ],
             "outputPath": "dist/base-area",
             "index": "projects/base-area/src/index.html",
             "main": "projects/base-area/src/main.ts",
