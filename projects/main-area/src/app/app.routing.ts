@@ -6,6 +6,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { CourseComponent } from './pages/course/course.componenent';
 import { PostComponent } from './pages/post/post.component';
 import { adminRoutes } from "projects/admin-area/src/app/app.routing";
+import { NotFoundComponent } from './pages/404/404.component';
 
 const appRoutes: Routes = [
     {
@@ -27,6 +28,11 @@ const appRoutes: Routes = [
     {
         path:'post',
         component:PostComponent
+    },
+    {
+        path:'**',
+        pathMatch: 'full',
+        component: NotFoundComponent
     },
     ...adminRoutes
 ]
