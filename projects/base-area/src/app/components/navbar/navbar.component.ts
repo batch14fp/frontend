@@ -50,6 +50,18 @@ export class NavbarComponent{
             {
                 label : 'Article',
                 routerLink : '/article'
+            },
+            {
+                label : 'Activity Type',
+                routerLink : '/activitytype'
+            },
+            {
+                label : 'Bank',
+                routerLink : '/bankpayment'
+            },
+            {
+                label : 'Post Type',
+                routerLink : '/posttype'
             }
         ];
 

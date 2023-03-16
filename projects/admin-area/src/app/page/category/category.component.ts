@@ -11,13 +11,6 @@ import { Subscription } from "rxjs";
 
 export class CategoryComponent {
 
-    // categorys  = [
-    //    {code:'po', name :'category'},
-    //    {code:'po', name :'category'},
-    //    {code:'po', name :'category'},
-    //    {code:'po', name :'category'},
-    //    {code:'po', name :'category'},
-    // ]
 
     getAllCategory : CategoryRes[] = []
 

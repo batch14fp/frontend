@@ -1,0 +1,27 @@
+<div class="mx-6">
+    <h1>Post Type</h1>
+    <div class="col-3 my-2">
+        <app-button-primary label="Create Post Type"></app-button-primary>
+    </div>
+    <p-table [value]="getPostType"  [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>No</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-getPostType let-i="rowIndex">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{getPostType.postTypeCode}}</td>
+                <td>{{getPostType.postTypeName}}</td>
+                <td class="flex gap-2">
+                    <app-button-icon ></app-button-icon>
+                    <app-button-danger></app-button-danger>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

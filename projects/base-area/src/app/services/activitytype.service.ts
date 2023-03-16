@@ -16,8 +16,8 @@ import { UpdateRes } from "../dto/res-update";
 export class ActivityTypeService{
     constructor(private http : HttpClient){}
 
-    getAllActivityType() : Observable<ActivityTypeRes>{
-        return this.http.get<ActivityTypeRes>(`${BASE_URL}/activity-types`)
+    getAllActivityType() : Observable<ActivityTypeRes[]>{
+        return this.http.get<ActivityTypeRes[]>(`${BASE_URL}/activity-types`)
     }
 
     insertActivityType(data :ActivityTypeReq) : Observable<ResInsert>{

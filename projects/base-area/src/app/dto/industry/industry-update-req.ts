@@ -1,3 +1,6 @@
 export interface IndustryUpdateReq{
-    industryName:string,
+    industryId:string,
+    industryName:string
+    isActive : boolean
+    ver : number
 }
