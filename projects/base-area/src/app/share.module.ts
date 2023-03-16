@@ -21,7 +21,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotFoundModule } from './components/not-found/not-found.module';
-
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -32,13 +32,13 @@ import { NotFoundModule } from './components/not-found/not-found.module';
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
      DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
-     ReactiveFormsModule, NotFoundModule
+     ReactiveFormsModule, NotFoundModule,DialogModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
-    ReactiveFormsModule, NotFoundModule
+    ReactiveFormsModule, NotFoundModule,DialogModule
   ]
 
 })
