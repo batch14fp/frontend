@@ -23,13 +23,13 @@ import { MembershipComponent } from './page/membership/membership.component';
 import { ArticleModule } from './page/article/article.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, AppRouting, HttpClientModule,CommonModule,
-    BrowserAnimationsModule
+    BrowserModule, AppRouting, HttpClientModule,CommonModule,BrowserAnimationsModule
   ],
   providers: [
     {

@@ -15,11 +15,12 @@ import { CourseComponent } from './pages/course/course.componenent';
 import { PostComponent } from './pages/post/post.component';
 import { ArticleComponent } from './pages/article/article.component';
 import { NotFoundComponent } from './pages/404/404.component';
+import { DetailComponent } from './pages/course/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent, SignUpComponent, ForgetPassComponent, CourseComponent, PostComponent, ArticleComponent,
+    LoginComponent, SignUpComponent, ForgetPassComponent, CourseComponent, PostComponent, ArticleComponent, DetailComponent,
     NotFoundComponent
 
   ],

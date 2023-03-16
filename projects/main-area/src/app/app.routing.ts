@@ -8,6 +8,7 @@ import { PostComponent } from './pages/post/post.component';
 import { adminRoutes } from "projects/admin-area/src/app/app.routing";
 import { LoginAdminComponent } from "projects/admin-area/src/app/page/login/login.component";
 import { NotFoundComponent } from './pages/404/404.component';
+import { DetailComponent } from "./pages/course/details.component";
 
 const appRoutes: Routes = [
     {
@@ -29,6 +30,10 @@ const appRoutes: Routes = [
     {
         path:'course',
         component:CourseComponent
+    },
+    {
+        path:'course/details',
+        component:DetailComponent
     },
     {
         path:'post',
