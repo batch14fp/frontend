@@ -1,8 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { IndustryUpdateReq } from "@pojo/industry/industry-update-req";
-import { res } from "@pojo/res";
-import { UpdateRes } from "@pojo/res-update";
+import { IndustryUpdateReq } from "@dto/industry/industry-update-req";
+import { UpdateRes } from "@dto/res-update";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 import { IndustryReq } from "../dto/industry/industry-req";
@@ -25,11 +24,10 @@ export class IndustryService{
         return this.http.post<ResInsert>(`${BASE_URL}/industries`,data)
     }
 
-    updateIndustry(data :  IndustryUpdateReq) : Observable<UpdateRes>{
-        return this.http.put<UpdateRes>(`${BASE_URL}/industries`,data)
+    updateIndustry(data:IndustryUpdateReq):Observable<UpdateRes>{
+        return this.http.put<UpdateRes>(`${BASE_URL}/industries`, data)
     }
-
-    deleteIndustry(id : string) : Observable<res>{
-        return this.http.delete<res>(`${BASE_URL}/industries/${id}`)
+    deleteIndustry(id:string):Observable<any>{
+        return this.http.delete<any>(`${BASE_URL}/industries/${id}`)
     }
 }
