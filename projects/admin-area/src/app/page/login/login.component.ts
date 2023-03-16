@@ -9,7 +9,7 @@ import { Subscription } from "rxjs";
 
 @Component({
     selector : 'app-login-admin',
-    templateUrl : 'login.component.html'
+    templateUrl : './login.component.html'
 })
 
 export class LoginAdminComponent implements OnDestroy{

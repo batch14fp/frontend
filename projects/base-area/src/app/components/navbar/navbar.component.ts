@@ -14,7 +14,7 @@ export class NavbarComponent{
 
     }
 
-    role = this.userService.getRoleCode()
+    role = this.userService.getRole()
 
     onLogout(){
         localStorage.clear()

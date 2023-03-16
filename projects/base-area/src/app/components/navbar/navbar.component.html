@@ -1,5 +1,5 @@
 <p-menubar [model]="items" >
-    <!-- *ngIf="role =='SA'" -->
+    *ngIf="role =='SA' && role == 'AD'"
     <ng-template pTemplate="start">
         <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
     </ng-template>
@@ -13,7 +13,7 @@
 </p-menubar>
 
 <p-menubar [model]="memberItem" >
-    <!-- *ngIf="role == 'MR'" -->
+    *ngIf="role == 'MR'"
     <ng-template pTemplate="start">
         <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
     </ng-template>
