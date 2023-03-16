@@ -29,16 +29,34 @@ export const adminRoutes: Routes = [
         ]
     },
     {
-        path: 'category',
-        component: CategoryComponent
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'category',
+                component: CategoryComponent
+            }
+        ]
     },
     {
-        path: 'position',
-        component: PositionComponent
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'position',
+                component: PositionComponent
+            }
+        ]
     },
     {
-        path: 'industry',
-        component: IndustryComponent
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'industry',
+                component: IndustryComponent
+            }
+        ]
     },
     {
         path: 'socialmedia',

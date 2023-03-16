@@ -13,7 +13,7 @@ import { Subscription } from "rxjs";
 
 export class ArticleAdminComponent implements OnInit, OnDestroy{
     private arcticles$?:Subscription
-    article:ArticleRes[]=[]
+    articleAdmin:ArticleRes[]=[]
 
     constructor(private userService:UserService, private articleService:ArticlesService, private title:Title,
         private router:Router){
@@ -22,8 +22,7 @@ export class ArticleAdminComponent implements OnInit, OnDestroy{
    
     ngOnInit(): void {
         this.arcticles$ = this.articleService.getAllArticle().subscribe(res=>{
-
-        this.article = res
+            this.articleAdmin = res
         })
     }
 
