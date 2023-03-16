@@ -1,5 +1,7 @@
 export interface SocialMediaGetRes{
-    SocialMediaId : string
+    socialMediaId : string
     platformName : string
     url : string
+    ver:number
+    isActive: boolean
 }

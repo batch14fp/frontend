@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { MemberStatusRes } from "@dto/memberstatus/member-status-res";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 import { MemberStatusReq } from "../dto/memberstatus/member-status-req";
@@ -11,9 +12,13 @@ import { UpdateRes } from "../dto/res-update";
     providedIn : 'root'
 }) 
 
-export class MemberStatus{
+export class MemberStatusService{
 
     constructor(private http : HttpClient ){}
+
+    getAllMemberStatus():Observable<MemberStatusRes[]>{
+        return this.http.get<MemberStatusRes[]>(`${BASE_URL}/members/status`)
+    }
 
     insertMemberStatus(data : MemberStatusReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/members/status`,data)

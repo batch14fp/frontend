@@ -14,7 +14,7 @@ export class NavbarComponent{
 
     }
 
-    role = this.userService.getRoleCode()
+    role = this.userService.getRole()
 
     onLogout(){
         localStorage.clear()
@@ -50,6 +50,10 @@ export class NavbarComponent{
             {
                 label : 'Article',
                 routerLink : '/article'
+            },
+            {
+                label : 'Membership',
+                routerLink : '/membership'
             }
         ];
 

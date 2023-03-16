@@ -21,9 +21,9 @@ export class ArticleAdminComponent implements OnInit, OnDestroy{
     }
    
     ngOnInit(): void {
-        this.arcticles$ = this.articleService.getAllArticle().subscribe(res=>{
-            this.articleAdmin = res
-        })
+        // this.arcticles$ = this.articleService.getAllArticle().subscribe(res=>{
+        //     this.articleAdmin = res
+        // })
     }
 
     ngOnDestroy(): void {

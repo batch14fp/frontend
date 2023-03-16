@@ -17,8 +17,8 @@ export class ArticlesService {
 
     constructor(private http : HttpClient){}
 
-    getAllArticle() : Observable<ArticleRes[]>{
-        return this.http.get<ArticleRes[]>(`${BASE_URL}/articles`)
+    getAllArticle(page:number,size:number) : Observable<ArticleRes[]>{
+        return this.http.get<ArticleRes[]>(`${BASE_URL}/articles?page=${page}&${size}`)
     }
 
     // getArticleDtl

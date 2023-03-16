@@ -24,7 +24,7 @@ export const adminRoutes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                component: NavbarComponent
+                component: DashboardComponent
             }
         ]
     },
@@ -59,8 +59,24 @@ export const adminRoutes: Routes = [
         ]
     },
     {
-        path: 'socialmedia',
-        component: SocmedComponent
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'socialmedia',
+                component: SocmedComponent
+            }
+        ]
+    },
+    {
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'membership',
+                component: MembershipComponent
+            }
+        ]
     },
     {
         path: 'user',
