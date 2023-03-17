@@ -1,6 +1,6 @@
 export enum ROLE {
-    MEMBER = "MR",
-    ADMIN = "AD",
-    SUPERADMIN = "SA",
-    SYSTEM = "SY"
+    MEMBER = "MMBR",
+    ADMIN = "ADMIN",
+    SUPERADMIN = "SPADM",
+    SYSTEM = "SYSTM"
 }

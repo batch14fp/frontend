@@ -45,6 +45,9 @@ export class LoginAdminComponent implements OnDestroy{
             console.log(result)
           })
         }
+        // else(!this.login.valid){
+
+        // }
       }
     
       saveDataLogin(data: LoginRes){
