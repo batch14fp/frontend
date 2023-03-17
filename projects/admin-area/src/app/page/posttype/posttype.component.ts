@@ -26,7 +26,7 @@ export class PostTypeComponent implements OnInit,OnDestroy{
     showResponsiveDialog(){
         this.displayResponsive = true
     }
- 
+
 
     displayDelete!:boolean
     showDeleteDialog(){
@@ -44,7 +44,7 @@ export class PostTypeComponent implements OnInit,OnDestroy{
             isActive : postType.isActive
         })
         this.displayUpdate = true
-        
+
     }
 
     constructor(
@@ -53,7 +53,7 @@ export class PostTypeComponent implements OnInit,OnDestroy{
         private router : Router,
         private title : Title){
             this.title.setTitle('Post Type')
-    
+
     }
 
     createPostType = this.fb.group({
@@ -75,7 +75,7 @@ export class PostTypeComponent implements OnInit,OnDestroy{
             alert('Delete Success')
             this.initPostType()
         })
-        
+
     }
 
     onUpdatePostType(){
@@ -114,5 +114,5 @@ export class PostTypeComponent implements OnInit,OnDestroy{
     ngOnDestroy(): void {
         this.getPostType$?.unsubscribe()
     }
-     
+
 }

@@ -15,8 +15,6 @@ import { VerificationCodeReqGet } from '../dto/verificationcode/verification-cod
 export class UserService{
   constructor(private http: HttpClient){}
 
-
-
   login(data: LoginReq): Observable<LoginRes>{
     return this.http.post<LoginRes>(`${BASE_URL}/users/login`, data,{
       headers:{
@@ -74,12 +72,20 @@ export class UserService{
     return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify/`,data)
   }
 
-  getRoleCode():string{
+  get roleCode():string{
     const data = localStorage.getItem("dataLogin")
     if(data){
       return JSON.parse(data).roleCode
     }
     throw new Error("Role is empty")
+  }
+
+  get images():string{
+    const data = localStorage.getItem("dataLogin")
+    if(data){
+      return JSON.parse(data).imgProfileId
+    }
+    throw new Error("Images is empty")
   }
 
 }

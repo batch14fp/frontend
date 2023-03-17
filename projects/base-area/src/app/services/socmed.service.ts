@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { res } from "@dto/res";
 import { ResInsert } from "@dto/res-insert";
 import { UpdateRes } from "@dto/res-update";
 import { SocialMediaAdminReq } from "@dto/socialmedia/social-media-admin-req";
@@ -26,8 +27,8 @@ export class SocmedService{
     updateSocmedAdmin(data:SocialMediaUpdateReq):Observable<UpdateRes>{
         return this.http.put<UpdateRes>(`${BASE_URL}/social-media`, data)
     }
-    deleteSocmedAdmin(id:string):Observable<any>{
-        return this.http.delete<any>(`${BASE_URL}/social-media/${id}`)
+    deleteSocmedAdmin(id:string):Observable<res>{
+        return this.http.delete<res>(`${BASE_URL}/social-media/${id}`)
     }
 
 }

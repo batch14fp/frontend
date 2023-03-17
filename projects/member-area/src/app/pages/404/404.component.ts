@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
-import { getInitials } from '../../../../../base-area/src/app/utils/getInitial';
 import { Subscription } from "rxjs";
 import { FormBuilder, Validators } from "@angular/forms";
-import { UserService } from '../../../../../base-area/src/app/services/user.service';
 import { Router } from "@angular/router";
-import { CategoryService } from '../../../../../base-area/src/app/services/category.service';
-import { CategoryRes } from '../../../../../base-area/src/app/dto/category/category-res';
+import { UserService } from '@service/user.service';
+import { CategoryService } from '@service/category.service';
+
 
 
 @Component({

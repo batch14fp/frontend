@@ -15,7 +15,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
 import { CommonModule } from '@angular/common';
-import { ArticleComponent } from './pages/article/article.component';
 import { NavbarModule } from 'projects/base-area/src/app/components/navbar/navbar.module';
 // import { CourseComponent } from './pages/course/course.componenet';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
@@ -27,8 +26,8 @@ import { PostComponent } from './pages/post/post.component';
     AppComponent,DashboardComponent,ArticleComponent, InvoiceComponent, PostComponent
   ],
   imports: [
-    BrowserModule, ShareModule, AppRouting,CardModule,DropdownModule,TabViewModule,CommonModule,
-    HttpClientModule, NavbarModule
+    BrowserModule, AppRouting,
+    HttpClientModule,FormsModule, ReactiveFormsModule, BrowserAnimationsModule
   ],
   providers: [
     {
