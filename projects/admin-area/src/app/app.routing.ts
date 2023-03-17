@@ -28,10 +28,6 @@ export const adminRoutes: Routes = [
         component: NavbarComponent,
         children: [
             {
-                path: 'dashboard',
-                component: DashboardComponent
-            },
-            {
                 path: 'category',
                 component: CategoryComponent
             },
