@@ -21,8 +21,6 @@ export class ArticlesService {
         return this.http.get<ArticleRes[]>(`${BASE_URL}/articles?page=${page}&${size}`)
     }
 
-    // getArticleDtl
-
     insertArticle(data : ArticleReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/articles`, data)
     }

@@ -35,7 +35,7 @@ export class ActivityTypeComponent implements OnInit, OnDestroy{
     displayUpdate!:boolean
     showUpdateDialog(activityType:ActivityTypeRes){
         console.log(activityType);
-        
+
         this.updateActivityType.setValue({
             activityTypeId : activityType.activityTypeId,
             typeName : activityType.typeName,
@@ -74,8 +74,8 @@ export class ActivityTypeComponent implements OnInit, OnDestroy{
             alert('Delete Success')
             this.initActivityType()
         })
-        
-    }    
+
+    }
 
     onUpdateActivityType(){
         const data : ActivityTypeUpdateReq = {
@@ -117,5 +117,5 @@ export class ActivityTypeComponent implements OnInit, OnDestroy{
     }
 
 
-    
+
 }

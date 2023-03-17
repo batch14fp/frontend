@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { IndustryUpdateReq } from "@dto/industry/industry-update-req";
+import { res } from "@dto/res";
 import { UpdateRes } from "@dto/res-update";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
@@ -27,7 +28,7 @@ export class IndustryService{
     updateIndustry(data:IndustryUpdateReq):Observable<UpdateRes>{
         return this.http.put<UpdateRes>(`${BASE_URL}/industries`, data)
     }
-    deleteIndustry(id:string):Observable<any>{
-        return this.http.delete<any>(`${BASE_URL}/industries/${id}`)
+    deleteIndustry(id:string):Observable<res>{
+        return this.http.delete<res>(`${BASE_URL}/industries/${id}`)
     }
 }

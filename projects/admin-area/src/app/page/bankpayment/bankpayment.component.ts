@@ -14,7 +14,7 @@ import { Subscription } from "rxjs";
 })
 
 export class BankPaymentComponent implements OnInit, OnDestroy{
-    
+
     getBank : BankPaymentRes [] = []
 
     private getBank$? : Subscription
@@ -78,7 +78,7 @@ export class BankPaymentComponent implements OnInit, OnDestroy{
             alert('Delete Success')
             this.initBankPayment()
         })
-        
+
     }
 
 
@@ -119,7 +119,7 @@ export class BankPaymentComponent implements OnInit, OnDestroy{
     ngOnInit(): void {
        this.initBankPayment()
     }
-    
+
     ngOnDestroy(): void {
         this.getBank$?.unsubscribe()
     }

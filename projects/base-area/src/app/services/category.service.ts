@@ -12,7 +12,6 @@ import { ResInsert } from "../dto/res-insert";
 @Injectable({
     providedIn : "root"
 })
-
 export class CategoryService{
 
     constructor(private http: HttpClient){}
@@ -29,7 +28,7 @@ export class CategoryService{
         return this.http.put<UpdateRes>(`${BASE_URL}/categories`, data)
     }
 
-    deleteCategory(id:string):Observable<any>{
-        return this.http.delete<any>(`${BASE_URL}/categories/${id}`)
+    deleteCategory(id:string):Observable<res>{
+        return this.http.delete<res>(`${BASE_URL}/categories/${id}`)
     }
 }

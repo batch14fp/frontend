@@ -112,13 +112,11 @@
       </div>
       <div class="mb-3 flex flex-column w-full">
         <label for="industry" class="font-medium col-form-label">Industry</label>
-        <p-dropdown formControlName="industry" [options]="industries" optionLabel="industry.industryName"
-          optionValue="industryId" [filter]="true" filterBy="industryName" [showClear]="true"
-          placeholder="Select a Industry">
+        <p-dropdown formControlName="industry" [options]="industries" optionLabel="industryName" [filter]="true"
+          filterBy="industryName" [showClear]="true" placeholder="Select a Industry">
           <ng-template pTemplate="selectedItem">
-            <div class="industry-item industry-item-value p-0 w-full" *ngIf="selectedIndustry">
-              <div class="">{{selectedIndustry}}</div>
-              <p>tes</p>
+            <div class="industry-item industry-item-value p-0 w-full" *ngIf="accountDetail.value">
+              <div class="">{{accountDetail.value.industry!['industryName']}}</div>
             </div>
           </ng-template>
           <ng-template let-industry pTemplate="item">

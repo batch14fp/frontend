@@ -20,7 +20,7 @@ import { UserComponent } from "./page/user/user.component";
 
 export const adminRoutes: Routes = [
     {
-        path: 'admin',
+        path: 'login/admin',
         component: LoginAdminComponent
     },
     {
