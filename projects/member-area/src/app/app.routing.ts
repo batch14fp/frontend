@@ -9,7 +9,6 @@ import { NavbarComponent } from "projects/base-area/src/app/components/navbar/na
 import { NavbarModule } from "projects/base-area/src/app/components/navbar/navbar.module";
 import { ShareModule } from "projects/base-area/src/app/share.module";
 import { NotFoundComponent } from "./pages/404/404.component";
-import { ArticleComponent } from "./pages/article/article.component";
 import { CourseModule } from "./pages/course/course.module";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 // import { ProfileComponent } from "./pages/profile/profile.component";
@@ -23,13 +22,14 @@ import { SignUpComponent } from "./pages/sign-up/sign-up.component";
 import { ForgetPassComponent } from "./pages/forget-pass/forget-pass.component";
 import { ProfileModule } from "./pages/profile/profile.module";
 import { ThreadComponent } from "./pages/thread/thread.component";
+import { ArticleComponent } from "./pages/article/article.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
 
 export const memberRoutes: Routes = [
     {
-        path: 'member',
+        path: 'login/member',
         component: LoginComponent
     },
     {
@@ -41,20 +41,25 @@ export const memberRoutes: Routes = [
         component: ForgetPassComponent
     },
     {
-        path: '**',
-        pathMatch: 'full',
-        component: NotFoundComponent
+        path:'course',
+        loadChildren:()=>import("./pages/course/course.module").then(c=>c.CourseModule),
+        component:NavbarComponent
+    },
+    {
+        path: 'profile',
+        loadChildren: () => import("./pages/profile/profile.module").then(p => p.ProfileModule),
+        component: NavbarComponent
+
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
     },
     {
         path: '',
-        // component: NavbarComponent,
         children: [
             {
-                path: 'dashboard',
-                component: DashboardComponent,
-            },
-            {
-                path: 'article',
+                path: 'article/member',
                 component: ArticleComponent,
             },
             {
@@ -64,12 +69,7 @@ export const memberRoutes: Routes = [
             {
                 path: 'invoice',
                 component: InvoiceComponent
-            }
-        ]
-    },
-    {
-        path: '',
-        children: [
+            },
             {
                 path: 'post',
                 component: PostComponent
@@ -77,20 +77,9 @@ export const memberRoutes: Routes = [
         ]
     },
     {
-        path: 'profile',
-        loadChildren: () => import("./pages/profile/profile.module").then(p => p.ProfileModule),
-        component: NavbarComponent
-
-    },
-    {
-        path: '',
-        component: NavbarComponent,
-        children: [
-            {
-                path: 'article',
-                component: ArticleComponent
-            }
-        ]
+        path: '**',
+        pathMatch: 'full',
+        component: NotFoundComponent
     },
 
 ]
@@ -98,7 +87,7 @@ export const memberRoutes: Routes = [
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent, InvoiceComponent
+        NotFoundComponent, InvoiceComponent,PostComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
@@ -111,7 +100,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent,CustomButtonModule
+        NotFoundComponent,CustomButtonModule,PostComponent
     ]
 })
 

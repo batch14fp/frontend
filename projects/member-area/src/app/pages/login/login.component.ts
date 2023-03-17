@@ -7,6 +7,7 @@ import { LoginReq } from "projects/base-area/src/app/dto/login/login-req";
 import { UserService } from '../../../../../base-area/src/app/services/user.service';
 import { LoginRes } from '../../../../../base-area/src/app/dto/login/login-res';
 import { Router } from "@angular/router";
+import { ROLE } from "projects/base-area/src/app/constant/role.service";
 
 
 @Component({
@@ -38,7 +39,10 @@ export class LoginComponent implements OnDestroy{
 
       this.login$ = this.userService.login(data).subscribe(result => {
         this.userService.saveDataLogin(result)
-        this.router.navigateByUrl("/course")
+        const roleCode = this.userService.roleCode
+        if(roleCode == ROLE.MMBR){
+          this.router.navigateByUrl("/course")
+        }
         console.log(result)
       })
     }
