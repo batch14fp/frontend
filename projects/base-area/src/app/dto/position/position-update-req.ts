@@ -1,4 +1,4 @@
-export interface PositionRes{
+export interface PositionUpdateReq{
     positionId:string,
     positionName:string,
     positionCode:string,

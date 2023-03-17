@@ -13,8 +13,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ImageModule} from 'primeng/image';
 import {CalendarModule} from 'primeng/calendar';
 import {CheckboxModule} from 'primeng/checkbox';
-import { CountdownModule } from 'ngx-countdown';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {CountdownModule } from 'ngx-countdown';
+import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
@@ -24,9 +24,7 @@ import { NotFoundModule } from './components/not-found/not-found.module';
 import {AccordionModule} from 'primeng/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {EditorModule} from 'primeng/editor';
-
-
-
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -38,12 +36,14 @@ import {EditorModule} from 'primeng/editor';
      DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, BrowserAnimationsModule, EditorModule
+     ,DialogModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, BrowserAnimationsModule, EditorModule
+    ,DialogModule
   ]
 
 })

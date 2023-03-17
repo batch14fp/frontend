@@ -1,16 +1,16 @@
-
+<pre>{{articleAdmin|json}}</pre>
 <div class="mx-6">
     <h1>Article</h1>
 
     <div class="sm:hidden md:flex col-3 my-2">
-        <app-button-primary label="Create article"></app-button-primary>
+        <app-button-primary label="Create article" routerLink="/create"></app-button-primary>
     </div>
     <div class="lg:hidden md:flex flex col-3 my-2">
         <app-button-primary icon="pi pi-plus"></app-button-primary>
     </div>
 
     
-    <p-table [value]="article"  [tableStyle]="{'min-width': '50rem'}">
+    <p-table [value]="articleAdmin"  [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
                 <th>No</th>
@@ -21,10 +21,12 @@
                 <th>Action</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-article let-i="rowIndex">
+        <ng-template pTemplate="body" let-a let-i="rowIndex">
             <tr>
                 <td>{{i + 1}}</td>
-                <td>{{article.title}}</td>
+                <td>{{a.title}}</td>
+                <td>{{a.content}}</td>
+                <td>{{a.createdAt}}</td>
                 <!-- <td>{{articles.title}}</td>
                 <td>{{articles.content}}</td>
                 <td>{{articles.createdAt}}</td> -->

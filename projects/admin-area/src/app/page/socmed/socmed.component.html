@@ -1,25 +1,72 @@
+<pre>
+    {{getAllSocmed|json}}
+</pre>
 <div class="mx-6">
     <h1>Social Media</h1>
     <div class="col-3 my-2">
-        <app-button-primary label="Create Social Media"></app-button-primary>
+        <app-button-primary label="Create Social Media" id="create" (click)="showResponsiveDialog()"></app-button-primary>
+        <form [formGroup]="createSocmed">
+            <p-dialog header="Create Socmed" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}"
+                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                <pre>{{createSocmed.value|json}}</pre>
+                <div class="mb-3">
+                    <div class="mb-3 flex flex-column w-full">
+                        <label for="platformName" class="font-medium col-form-label">Platform Name</label>
+                        <input type="text" class="w-full " formControlName="platformName" pInputText id="platformName"
+                            name="platformName">
+                    </div>
+                </div>
+                <ng-template pTemplate="footer">
+                    <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
+                    <p-button type="button" label="Create" styleClass="p-button-text" (click)="onCreateSocmed()"
+                        (click)="displayResponsive=false"></p-button>
+                </ng-template>
+            </p-dialog>
+        </form>
     </div>
-    <p-table [value]="socmeds" [tableStyle]="{'min-width': '50rem'}">
+    <p-table [value]="getAllSocmed" [tableStyle]="{'min-width': '50rem'}">
             <ng-template pTemplate="header">
                 <tr>
                     <th>No</th>
                     <th>Name</th>
-                    <th>Url image</th>
                     <th>Action</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-socmeds let-i="rowIndex">
+            <ng-template pTemplate="body" let-socmed let-i="rowIndex">
                 <tr>
                     <td>{{i + 1}}</td>
-                    <td>{{socmeds.name}}</td>
-                    <td>{{socmeds.url}}</td>
+                    <td>{{socmed.platformName}}</td>
                     <td class="flex gap-2">
-                        <app-button-icon ></app-button-icon>
-                        <app-button-danger></app-button-danger>
+                        <app-button-icon id="update" (click)="showUpdateDialog(socmed)"></app-button-icon>
+                        <form [formGroup]="updateSocmed">
+                            <p-dialog header="Update Social Media" [(visible)]="displayUpdate" [breakpoints]="{'960px': '75vw'}"
+                                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                                <pre>{{updateSocmed.value|json}}</pre>
+                                <div class="mb-3">
+                                    <div class="mb-3 flex flex-column w-full">
+                                        <label for="platformName" class="font-medium col-form-label">Platform Name</label>
+                                        <input type="text" class="w-full " formControlName="platformName" pInputText
+                                            id="platformName" name="platformName">
+                                    </div>
+                                </div>
+                                <ng-template pTemplate="footer">
+                                    <p-button (click)="displayUpdate=false" label="Cancel" styleClass="p-button-text">
+                                    </p-button>
+                                    <p-button type="button" label="Update" styleClass="p-button-text"
+                                        (click)="onUpdateSocmedConfirm()" (click)="displayUpdate=false"></p-button>
+                                </ng-template>
+                            </p-dialog>
+                        </form>
+                        <app-button-danger id="delete" (click)="showDeleteDialog()"></app-button-danger>
+                        <p-dialog header="Delete Social Media" [(visible)]="displayDelete" [breakpoints]="{'960px': '75vw'}"
+                        [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                        <h4>Are you sure delete this social media?</h4>
+                        <ng-template pTemplate="footer">
+                            <p-button (click)="displayDelete=false" label="No" styleClass="p-button-text"></p-button>
+                            <p-button type="button" label="Yes" styleClass="p-button-text"
+                                (click)="onDeleteSocmed(socmed)" (click)="displayDelete=false"></p-button>
+                        </ng-template>
+                    </p-dialog>
                     </td>
                 </tr>
             </ng-template>

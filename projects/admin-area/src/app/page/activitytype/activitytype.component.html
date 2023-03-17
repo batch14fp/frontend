@@ -1,0 +1,87 @@
+<pre>
+    {{getAllactivityType|json}}
+</pre>
+<div class="mx-6">
+    <h1>Activity Type</h1>
+    <div class="col-3 my-2">
+        <app-button-primary label="Create Activity Type" (click)="showResponsiveDialog()"></app-button-primary>
+        <form [formGroup]="createActivityType">
+            <p-dialog header="Create Activity Type" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}"
+                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                <pre>{{createActivityType.value|json}}</pre>
+                <div class="mb-3">
+                    <div class="mb-3 flex flex-column w-full">
+                        <label for="emailInput" class="font-medium col-form-label">Activity Type Code</label>
+                        <input type="text" class="w-full " formControlName="typeCode" pInputText id="emailInput"
+                            name="typeCode">
+                    </div>
+                    <div class="mb-3 flex flex-column w-full">
+                        <label for="cname" class="font-medium col-form-label">Activity Name</label>
+                        <input type="text" class="w-full " formControlName="typeName" pInputText id="cname"
+                            name="typeName">
+                    </div>
+                </div>
+                <ng-template pTemplate="footer">
+                    <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
+                    <p-button type="button" label="Create" styleClass="p-button-text" (click)="onCreateActivityType()" (click)="displayResponsive=false">
+                    </p-button>
+                </ng-template>
+            </p-dialog>
+        </form>
+    </div>
+    <p-table [value]="getAllactivityType" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No</th>
+                    <th>Code</th>
+                    <th>Membership</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-activityType let-i="rowIndex">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{activityType.typeCode}}</td>
+                    <td>{{activityType.typeName}}</td> 
+                    <td class="flex gap-2">
+
+                        <app-button-icon id="update" (click)="showUpdateDialog(activityType)"></app-button-icon>
+                        <form [formGroup]="updateActivityType">
+                            <p-dialog header="Update Activity Type" [(visible)]="displayUpdate" [breakpoints]="{'960px': '75vw'}"
+                                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                                <pre>{{updateActivityType.value|json}}</pre>
+                                <div class="mb-3">
+                                    <div class="mb-3 flex flex-column w-full">
+                                        <label for="typeName" class="font-medium col-form-label">Activity Name</label>
+                                        <input type="text" class="w-full " formControlName="typeName" pInputText
+                                            id="typeName" name="typeName">
+                                    </div>
+                                    <div class="mb-3 flex flex-column w-full">
+                                        <label for="typeCode" class="font-medium col-form-label">Activity Code</label>
+                                        <input type="text" class="w-full " formControlName="typeCode" pInputText
+                                            id="typeCode" name="typeCode">
+                                    </div>
+                                </div>
+                                <ng-template pTemplate="footer">
+                                    <p-button (click)="displayUpdate=false" label="Cancel" styleClass="p-button-text">
+                                    </p-button>
+                                    <p-button type="button" label="Update" styleClass="p-button-text"
+                                        (click)="onUpdateActivityType()" (click)="displayUpdate=false"></p-button>
+                                </ng-template>
+                            </p-dialog>
+                        </form>
+                        <app-button-danger id="delete" (click)="showDeleteDialog()" ></app-button-danger>
+                        <p-dialog header="Delete Industry" [(visible)]="displayDelete" [breakpoints]="{'960px': '75vw'}"
+                        [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                        <h4>Are you sure delete this industry?</h4>
+                        <ng-template pTemplate="footer">
+                            <p-button (click)="displayDelete=false" label="No" styleClass="p-button-text"></p-button>
+                            <p-button type="button" label="Yes" styleClass="p-button-text"
+                            (click)="onDeleteActivityType(activityType)" (click)="displayDelete=false"></p-button>
+                        </ng-template>
+                    </p-dialog>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+</div>
