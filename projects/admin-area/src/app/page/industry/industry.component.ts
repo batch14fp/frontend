@@ -32,7 +32,7 @@ export class IndustryComponent implements OnInit, OnDestroy {
             industryId: industry.industryId,
             industryName: industry.industryName,
             active: industry.isActive,
-            ver: industry.ver
+            ver: industry.ver,
         })
         this.displayUpdate = true
     }

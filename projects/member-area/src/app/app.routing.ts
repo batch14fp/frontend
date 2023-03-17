@@ -18,7 +18,11 @@ import { PostComponent } from './pages/post/post.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 // =======
 import { ProfileComponent } from "./pages/profile/profile.component";
-import { TreadComponent } from "./pages/thread/tread.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { SignUpComponent } from "./pages/sign-up/sign-up.component";
+import { ForgetPassComponent } from "./pages/forget-pass/forget-pass.component";
+import { ProfileModule } from "./pages/profile/profile.module";
+import { ThreadComponent } from "./pages/thread/thread.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -56,12 +60,15 @@ export const memberRoutes: Routes = [
             {
                 path: 'thread',
                 component: ThreadComponent
+            },
+            {
+                path: 'invoice',
+                component: InvoiceComponent
             }
         ]
     },
     {
         path: '',
-        // component: NavbarComponent,
         children: [
             {
                 path: 'post',
@@ -85,36 +92,13 @@ export const memberRoutes: Routes = [
             }
         ]
     },
-    {
-        path: '',
-        component: NavbarComponent,
-        children: [
-            {
-                path: 'invoice',
-                component: InvoiceComponent
-            }
-        ]
-    },
-    {
-        path: '',
-        component: NavbarComponent,
-        children: [
-            {
-                path: 'thread',
-                component: TreadComponent,
-            }
-        ]
-    },
-    // {
-    //   path:'course',
-    //   component:CourseComponent
-    // },
+
 ]
 
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent
+        NotFoundComponent, InvoiceComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
@@ -127,7 +111,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent
+        NotFoundComponent,CustomButtonModule
     ]
 })
 
