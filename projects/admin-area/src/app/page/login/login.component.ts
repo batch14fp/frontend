@@ -56,6 +56,9 @@ export class LoginAdminComponent implements OnDestroy{
 
         
         }
+        // else(!this.login.valid){
+
+        // }
       }
 
     
