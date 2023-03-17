@@ -21,6 +21,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotFoundModule } from './components/not-found/not-found.module';
+import {AccordionModule} from 'primeng/accordion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {EditorModule} from 'primeng/editor';
+
+
 
 
 
@@ -32,13 +37,13 @@ import { NotFoundModule } from './components/not-found/not-found.module';
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
      DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
-     ReactiveFormsModule, NotFoundModule
+     ReactiveFormsModule, NotFoundModule, AccordionModule, BrowserAnimationsModule, EditorModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
-    ReactiveFormsModule, NotFoundModule
+    ReactiveFormsModule, NotFoundModule, AccordionModule, BrowserAnimationsModule, EditorModule
   ]
 
 })

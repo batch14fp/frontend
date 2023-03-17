@@ -18,11 +18,13 @@ import { CommonModule } from '@angular/common';
 import { ArticleComponent } from './pages/article/article.component';
 import { NavbarModule } from 'projects/base-area/src/app/components/navbar/navbar.module';
 // import { CourseComponent } from './pages/course/course.componenet';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { PostComponent } from './pages/post/post.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,ArticleComponent
+    AppComponent,DashboardComponent,ArticleComponent, InvoiceComponent, PostComponent
   ],
   imports: [
     BrowserModule, ShareModule, AppRouting,CardModule,DropdownModule,TabViewModule,CommonModule,
