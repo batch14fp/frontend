@@ -13,7 +13,7 @@ import { LoginAdminComponent } from "./page/login/login.component";
 import { MembershipComponent } from "./page/membership/membership.component";
 import { PositionComponent } from "./page/position/position.component";
 import { PostTypeComponent } from "./page/posttype/posttype.component";
-import { SettingComponent } from "./page/setting/setting.component";
+import { SalesSettingComponent } from "./page/sales-setting/salesseting.component";
 import { SocmedComponent } from "./page/socmed/socmed.component";
 import { UserComponent } from "./page/user/user.component";
 
@@ -52,10 +52,6 @@ export const adminRoutes: Routes = [
                 component: UserComponent
             },
             {
-                path : 'setting',
-                component : SettingComponent
-            },
-            {
                 path : 'bankpayment',
                 component : BankPaymentComponent
             },
@@ -66,7 +62,16 @@ export const adminRoutes: Routes = [
             {
                 path : 'posttype',
                 component : PostTypeComponent
-            }
+            },
+            {
+                path : 'membership',
+                component : MembershipComponent
+            },
+            {
+                path : 'sales-setting',
+                component : SalesSettingComponent
+            },
+
         ]
     },
     {
@@ -79,7 +84,7 @@ export const adminRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, UserComponent, LoginAdminComponent, MembershipComponent,SettingComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, UserComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent,SalesSettingComponent
     ],
     imports: [
         RouterModule.forRoot(adminRoutes),
@@ -87,7 +92,7 @@ export const adminRoutes: Routes = [
     ],
     exports: [
         RouterModule,
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, UserComponent, LoginAdminComponent, MembershipComponent,SettingComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, UserComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent,SalesSettingComponent
     ]
 })
 

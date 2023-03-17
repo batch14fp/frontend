@@ -1,27 +1,85 @@
+<pre>
+    {{getPostType | json}}
+</pre>
 <div class="mx-6">
-    <h1>Post Type</h1>
+    <h1>Bank Payment</h1>
     <div class="col-3 my-2">
-        <app-button-primary label="Create Post Type"></app-button-primary>
+        <app-button-primary label="Create Post Type" id="create" (click)="showResponsiveDialog()" ></app-button-primary>
+
+        <form [formGroup]="createPostType">
+            <p-dialog header="Create Post Type" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}"
+            [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+            <pre>{{createPostType.value|json}}</pre>
+            <div class="mb-3">
+                <div class="mb-3 flex flex-column w-full">
+                    <label for="postTypeCode" class="font-medium col-form-label">Post Type Code</label>
+                    <input type="text" class="w-full " formControlName="postTypeCode" pInputText id="postTypeCode" name="postTypeCode">
+                </div>
+                <div class="mb-3 flex flex-column w-full">
+                    <label for="postTypeName" class="font-medium col-form-label">Post Type Name</label>
+                    <input type="text" class="w-full " formControlName="postTypeName" pInputText id="postTypeName" name="postTypeName">
+                </div>
+            </div>
+            <ng-template pTemplate="footer">
+                <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
+                <p-button type="button" label="Create" styleClass="p-button-text" (click)="onCreatePostType()" (click)="displayResponsive=false"></p-button>
+            </ng-template>
+            </p-dialog>
+        </form>
     </div>
-    <p-table [value]="getPostType"  [tableStyle]="{'min-width': '50rem'}">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>No</th>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-getPostType let-i="rowIndex">
-            <tr>
-                <td>{{i + 1}}</td>
-                <td>{{getPostType.postTypeCode}}</td>
-                <td>{{getPostType.postTypeName}}</td>
-                <td class="flex gap-2">
-                    <app-button-icon ></app-button-icon>
-                    <app-button-danger></app-button-danger>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+    <p-table [value]="getPostType" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No</th>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-postType let-i="rowIndex">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{postType.postTypeCode}}</td>
+                    <td>{{postType.postTypeName}}</td>
+                   
+                    <td class="flex gap-2">
+
+                        <app-button-icon id="update" (click)="showUpdateDialog(postType)" ></app-button-icon>
+                        <form [formGroup]="updatePostType">
+                            <p-dialog header="Update Post Type" [(visible)]="displayUpdate" [breakpoints]="{'960px': '75vw'}"
+                                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                                <pre>{{updatePostType.value|json}}</pre>
+                                <div class="mb-3">
+                                    <div class="mb-3 flex flex-column w-full">
+                                        <label for="postTypeCode" class="font-medium col-form-label">Post Type Code</label>
+                                        <input type="text" class="w-full " formControlName="postTypeCode" pInputText id="postTypeCode" name="postTypeCode">
+                                    </div>
+                                    <div class="mb-3 flex flex-column w-full">
+                                        <label for="postTypeName" class="font-medium col-form-label">Post Type Name</label>
+                                        <input type="text" class="w-full " formControlName="postTypeName" pInputText id="postTypeName" name="postTypeName">
+                                    </div>
+                                </div>
+                                <ng-template pTemplate="footer">
+                                    <p-button (click)="displayUpdate=false" label="Cancel" styleClass="p-button-text">
+                                    </p-button>
+                                    <p-button type="button" label="Update" styleClass="p-button-text"
+                                        (click)="onUpdatePostType()" (click)="displayUpdate=false"></p-button>
+                                </ng-template>
+                            </p-dialog>
+                        </form>
+                        
+                        <app-button-danger id="delete" (click)="showDeleteDialog()"></app-button-danger>
+                            <p-dialog header="Delete Post Type" [(visible)]="displayDelete" [breakpoints]="{'960px': '75vw'}"
+                                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                                <h4>Are you sure delete this Post Type?</h4>
+                                <ng-template pTemplate="footer">
+                                    <p-button (click)="displayDelete=false" label="No" styleClass="p-button-text"></p-button>
+                                    <p-button type="button" label="Yes" styleClass="p-button-text"
+                                    (click)="onDeletePostType(postType)" (click)="displayDelete=false"></p-button>
+                                </ng-template>
+                            </p-dialog>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
 </div>
