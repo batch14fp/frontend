@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
-import { ActivityTypeRes } from "@dto/activitytype/activity-type-res";
 import { Router } from "@angular/router";
 import { ActivityTypeReq } from "@dto/activitytype/activity-type-req";
 import { ActivityTypeRes } from "@dto/activitytype/activity-type-res";
