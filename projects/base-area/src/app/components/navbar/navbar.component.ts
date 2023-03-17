@@ -62,7 +62,15 @@ export class NavbarComponent{
             {
                 label : 'Post Type',
                 routerLink : '/posttype'
-            }
+            },
+            {
+                label : 'Membership',
+                routerLink : '/membership'
+            },
+            {
+                label : 'Sales Setting',
+                routerLink : '/sales-setting'
+            },
         ];
 
         this.memberItem = [
