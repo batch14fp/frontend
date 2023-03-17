@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { BankPaymentReq } from "@pojo/bankpayment/bank-payment-req";
-import { BankPaymentRes } from "@pojo/bankpayment/bank-payment-res";
+import { BankPaymentReq } from "@dto/bankpayment/bank-payment-req";
+import { BankPaymentRes } from "@dto/bankpayment/bank-payment-res";
 import { BankPaymentService } from "projects/base-area/src/app/services/bankpayment.service";
 import { Subscription } from "rxjs";
 

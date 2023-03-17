@@ -6,6 +6,7 @@ import { LoginReq } from "projects/base-area/src/app/dto/login/login-req";
 import { LoginRes } from "../../../../../base-area/src/app/dto/login/login-res";
 import { UserService } from "projects/base-area/src/app/services/user.service";
 import { Subscription } from "rxjs";
+import { ROLE } from "projects/base-area/src/app/constant/role.service";
 
 @Component({
     selector : 'app-login-admin',
@@ -41,11 +42,22 @@ export class LoginAdminComponent implements OnDestroy{
     
           this.login$ = this.userService.login(data).subscribe(result => {
             this.userService.saveDataLogin(result)
-            this.router.navigateByUrl("/dashboard")
+            const roleCode = this.userService.roleCode
+
+            if(roleCode == ROLE.SPADM ){
+              this.router.navigateByUrl("/dashboard")
+            }
+            if(roleCode == ROLE.ADMIN ){
+              this.router.navigateByUrl("/dashboard")
+            }
             console.log(result)
+            
           })
+
+        
         }
       }
+
     
       saveDataLogin(data: LoginRes){
         localStorage.setItem("dataLogin", JSON.stringify(data))

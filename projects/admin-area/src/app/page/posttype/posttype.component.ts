@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { PostTypeReq } from "@pojo/posttype/post-type-req";
-import { PostTypeGetRes } from "@pojo/posttype/post-type-res";
+import { PostTypeReq } from "@dto/posttype/post-type-req";
+import { PostTypeGetRes } from "@dto/posttype/post-type-res";
 import { PostTypeService } from "projects/base-area/src/app/services/posttype.service";
 import { Subscription } from "rxjs";
 

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
-import { ActivityTypeRes } from "@pojo/activitytype/activity-type-res";
+import { ActivityTypeRes } from "@dto/activitytype/activity-type-res";
 import { ActivityTypeService } from "projects/base-area/src/app/services/activitytype.service";
 import { Subscription } from "rxjs";
 

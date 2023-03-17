@@ -14,17 +14,21 @@ export class NavbarComponent{
 
     }
 
-    role = this.userService.getRole()
-
     onLogout(){
         localStorage.clear()
         this.router.navigateByUrl('')
     }
 
     memberItem! : MenuItem[]
-    items!: MenuItem[];
+    adminItem! : MenuItem[]
+    items!: MenuItem[]
+    role!:string
+    img!:string
 
     ngOnInit() {
+        this.role = this.userService.roleCode
+        this.img = this.userService.images
+        console.log(this.role)
         this.items = [
             {
                 label:'Category',

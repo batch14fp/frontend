@@ -24,7 +24,8 @@
       "dom"
     ],
     "paths": {
-      "@dto/*":["projects/base-area/src/app/dto/*"]
+      "@dto/*":["projects/base-area/src/app/dto/*"],
+      "@service/*":["projects/base-area/src/app/services/*"],
     }
   },
   "angularCompilerOptions": {
