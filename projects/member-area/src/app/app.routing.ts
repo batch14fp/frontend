@@ -12,12 +12,14 @@ import { NotFoundComponent } from "./pages/404/404.component";
 import { ArticleComponent } from "./pages/article/article.component";
 import { CourseModule } from "./pages/course/course.module";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
-import { ForgetPassComponent } from "./pages/forget-pass/forget-pass.component";
-import { LoginComponent } from "./pages/login/login.component";
-import { PostComponent } from "./pages/post/post.component";
-import { ProfileModule } from "./pages/profile/profile.module";
-import { SignUpComponent } from "./pages/sign-up/sign-up.component";
-import { ThreadComponent } from "./pages/thread/thread.component";
+// import { ProfileComponent } from "./pages/profile/profile.component";
+// import { TreadComponent } from "./pages/thread/tread.component";
+import { PostComponent } from './pages/post/post.component';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
+// =======
+import { ProfileComponent } from "./pages/profile/profile.component";
+import { TreadComponent } from "./pages/thread/tread.component";
+// import { TreadComponent } from "./pages/thread/tread.component";
 
 
 
@@ -41,7 +43,7 @@ export const memberRoutes: Routes = [
     },
     {
         path: '',
-        component: NavbarComponent,
+        // component: NavbarComponent,
         children: [
             {
                 path: 'dashboard',
@@ -58,9 +60,14 @@ export const memberRoutes: Routes = [
         ]
     },
     {
-        path: 'course',
-        loadChildren: () => import("./pages/course/course.module").then(c => c.CourseModule),
-        component: NavbarComponent
+        path: '',
+        // component: NavbarComponent,
+        children: [
+            {
+                path: 'post',
+                component: PostComponent
+            }
+        ]
     },
     {
         path: 'profile',
@@ -68,6 +75,40 @@ export const memberRoutes: Routes = [
         component: NavbarComponent
 
     },
+    {
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'article',
+                component: ArticleComponent
+            }
+        ]
+    },
+    {
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'invoice',
+                component: InvoiceComponent
+            }
+        ]
+    },
+    {
+        path: '',
+        component: NavbarComponent,
+        children: [
+            {
+                path: 'thread',
+                component: TreadComponent,
+            }
+        ]
+    },
+    // {
+    //   path:'course',
+    //   component:CourseComponent
+    // },
 ]
 
 @NgModule({

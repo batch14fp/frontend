@@ -3,4 +3,5 @@ export interface ActivityTypeRes{
 	typeName : string
 	typeCode : string
     isActive : boolean
+    ver : number
 }

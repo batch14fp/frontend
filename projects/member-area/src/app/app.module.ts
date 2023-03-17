@@ -16,22 +16,14 @@ import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
 import { CommonModule } from '@angular/common';
 import { NavbarModule } from 'projects/base-area/src/app/components/navbar/navbar.module';
-import { LoginComponent } from './pages/login/login.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { ForgetPassComponent } from './pages/forget-pass/forget-pass.component';
+// import { CourseComponent } from './pages/course/course.componenet';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { PostComponent } from './pages/post/post.component';
-import { NotFoundComponent } from './pages/404/404.component';
-import { ArticleComponent } from './pages/article/article.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CodeInputModule } from 'angular-code-input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CourseModule } from './pages/course/course.module';
-import { ProfileModule } from './pages/profile/profile.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,DashboardComponent,ArticleComponent, InvoiceComponent, PostComponent
   ],
   imports: [
     BrowserModule, AppRouting,

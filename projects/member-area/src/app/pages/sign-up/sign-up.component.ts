@@ -43,12 +43,11 @@ export class SignUpComponent implements OnInit{
 
   accountDetail = this.fb.group({
     fullName: ["",  Validators.required],
-    industry: ["",  Validators.required],
+    industry: [{},  Validators.required],
     phoneNumber: ["",  Validators.required],
     company: ["",  Validators.required],
     position: ["",  Validators.required],
   })
-
 
   selectedIndustry!: IndustryRes
   selectedPosition!: PositionRes
@@ -130,7 +129,6 @@ export class SignUpComponent implements OnInit{
           this.isLoading = false
           this.isSignup = false
           this.cdRef.markForCheck()
-
         }, 1000);
       }
       if(!res.code){
