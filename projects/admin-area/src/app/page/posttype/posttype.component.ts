@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { PostTypeReq } from "@pojo/posttype/post-type-req";
-import { PostTypeGetRes } from "@pojo/posttype/post-type-res";
+import { PostTypeReq } from "@dto/posttype/post-type-req";
+import { PostTypeGetRes } from "@dto/posttype/post-type-res";
+import { PostTypeUpdateReq } from "@dto/posttype/post-type-update-req";
 import { PostTypeService } from "projects/base-area/src/app/services/posttype.service";
 import { Subscription } from "rxjs";
 
@@ -25,11 +26,24 @@ export class PostTypeComponent implements OnInit,OnDestroy{
     showResponsiveDialog(){
         this.displayResponsive = true
     }
+ 
+
+    displayDelete!:boolean
+    showDeleteDialog(){
+        this.displayDelete = true
+    }
 
     displayUpdate!:boolean
-    showUpdateDialog(postType: PostTypeReq){
+    showUpdateDialog(postType:PostTypeGetRes){
         console.log(postType)
-
+        this.updatePostType.setValue({
+            postTypeId : postType.postTypeId,
+            postTypeName : postType.postTypeName,
+            postTypeCode : postType.postTypeCode,
+            ver : postType.ver,
+            isActive : postType.isActive
+        })
+        this.displayUpdate = true
         
     }
 
@@ -46,6 +60,38 @@ export class PostTypeComponent implements OnInit,OnDestroy{
         postTypeName : [""],
         postTypeCode : [""]
     })
+
+    updatePostType = this.fb.group({
+        postTypeId : [""],
+        postTypeName : [""],
+        postTypeCode : [""],
+        ver : [0],
+        isActive : [true]
+    })
+
+    onDeletePostType(postType:PostTypeGetRes){
+        console.log('delete')
+        this.postType$ = this.postTypeService.deletePostType(postType.postTypeId).subscribe(res => {
+            alert('Delete Success')
+            this.initPostType()
+        })
+        
+    }
+
+    onUpdatePostType(){
+        const data : PostTypeUpdateReq = {
+            postTypeId : this.updatePostType.value.postTypeId!,
+            postTypeName : this.updatePostType.value.postTypeName!,
+            postTypeCode : this.updatePostType.value.postTypeCode!,
+            ver : this.updatePostType.value.ver!,
+            isActive : this.updatePostType.value.isActive!
+        }
+
+        this.postTypeUpadte$ = this.postTypeService.updatePostType(data).subscribe(res => {
+            alert('Update Post Type Success')
+            this.initPostType()
+        })
+    }
 
     onCreatePostType(){
         const data: PostTypeReq = {
