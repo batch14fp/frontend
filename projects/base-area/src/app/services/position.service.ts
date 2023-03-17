@@ -1,5 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { PositionUpdateReq } from "@dto/position/position-update-req";
+import { res } from "@dto/res";
+import { UpdateRes } from "@dto/res-update";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 import { PositionReq } from "../dto/position/position-req";
@@ -20,5 +23,12 @@ export class PositionService{
 
     insertPosition(data : PositionReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/positions`,data)
+    }
+
+    updatePosition(data:PositionUpdateReq):Observable<UpdateRes>{
+        return this.http.put<UpdateRes>(`${BASE_URL}/positions`, data)
+    }
+    deletePosition(id:string):Observable<res>{
+        return this.http.delete<res>(`${BASE_URL}/positions/${id}`)
     }
 }

@@ -1,23 +1,19 @@
-import { VerificationGetRes } from '../../../../../base-area/src/app/dto/verificationcode/verification-get-res'
-import { AllPostBookmarkRes } from './../../../../../base-area/src/app/dto/post/all-post-bookmark-res';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
-import { getInitials } from '../../../../../base-area/src/app/utils/getInitial';
 import { Subscription } from "rxjs";
 import { FormBuilder, Validators } from "@angular/forms";
-import { LoginReq } from "projects/base-area/src/app/dto/login/login-req";
-import { UserService } from '../../../../../base-area/src/app/services/user.service';
-import { LoginRes } from '../../../../../base-area/src/app/dto/login/login-res';
 import { Router } from "@angular/router";
-import { ResInsert } from '../../../../../base-area/src/app/dto/res-insert';
-import { VerificationCodeReq } from '../../../../../base-area/src/app/dto/verificationcode/verification-code-req';
-import { IndustryRes } from '../../../../../base-area/src/app/dto/industry/industry-res';
-import { IndustryService } from '../../../../../base-area/src/app/services/industry.service';
-import { PositionRes } from '../../../../../base-area/src/app/dto/position/postion-res';
-import { PositionService } from '../../../../../base-area/src/app/services/position.service';
-import { SignUpReqInsert } from '../../../../../base-area/src/app/dto/user/sign-up-req-insert';
 import { CountdownConfig, CountdownEvent } from 'ngx-countdown';
-import { VerificationCodeReqGet } from '../../../../../base-area/src/app/dto/verificationcode/verification-code-req-get';
+import { VerificationGetRes } from '@dto/verificationcode/verification-get-res';
+import { ResInsert } from '@dto/res-insert';
+import { IndustryRes } from '@dto/industry/industry-res';
+import { PositionRes } from '@dto/position/postion-res';
+import { UserService } from '@service/user.service';
+import { PositionService } from '@service/position.service';
+import { IndustryService } from '@service/industry.service';
+import { VerificationCodeReq } from '@dto/verificationcode/verification-code-req';
+import { VerificationCodeReqGet } from '@dto/verificationcode/verification-code-req-get';
+import { SignUpReqInsert } from '@dto/user/sign-up-req-insert';
 
 @Component({
     selector:'app-sign-up',
@@ -127,17 +123,20 @@ export class SignUpComponent implements OnInit{
     }
 
     this.isLoading = true
-
+    this.cdRef.markForCheck()
     this.codeVerified$ = this.userService.getVerified(codeVerify).subscribe(res=>{
       if(res.code){
         setTimeout(() => {
           this.isLoading = false
           this.isSignup = false
+          this.cdRef.markForCheck()
+
         }, 1000);
       }
       if(!res.code){
         this.isLoading = false
         this.isWrongCode = true
+        this.cdRef.markForCheck()
       }
     })
 }

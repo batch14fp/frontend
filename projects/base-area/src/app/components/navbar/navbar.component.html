@@ -1,27 +1,12 @@
-<p-menubar [model]="items" >
-    <!-- *ngIf="role =='SA'" -->
-    <ng-template pTemplate="start">
-        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
-    </ng-template>
-    <ng-template pTemplate="end">
-        <!-- <div class="avatar">
-            <p>{{initial('Rizky Irvandi')}}</p>
-            <p>iki</p>
-        </div> -->
-        <!-- <p-avatar shape="circle">{{initial('Rizky Irvandi')}}</p-avatar> -->
-    </ng-template>
-</p-menubar>
-
-<p-menubar [model]="memberItem" >
-    <!-- *ngIf="role == 'MR'" -->
+<p-menubar [model]="items" *ngIf="role =='SPADM'">
+    
     <ng-template pTemplate="start">
         <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
     </ng-template>
     <ng-template pTemplate="end">
         <div (click)="op.toggle($event)">
-            <p-avatar image="/assets/img/profile.jpg" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+            <p-avatar image="http://localhost:2121/files/{{img}}" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
         </div>
-        <!-- <p-tieredMenu #menu [model]="itemsEnd" [popup]="true"></p-tieredMenu> -->
         <p-overlayPanel #op>
             <ng-template pTemplate>
                 <div routerLink="/profile"> <i class="pi pi-fw pi-user"></i>Profile</div>
@@ -29,12 +14,24 @@
                 <div (click)="onLogout()"><i class="pi pi-fw pi-sign-out"></i> Logout</div>
             </ng-template>
         </p-overlayPanel>
+    </ng-template>
+</p-menubar>
 
-        <!-- <div class="avatar">
-            <p>{{initial('Rizky Irvandi')}}</p>
-            <p>iki</p>
-        </div> -->
-        <!-- <p-avatar shape="circle">{{initial('Rizky Irvandi')}}</p-avatar> -->
+<p-menubar [model]="memberItem"  *ngIf="role == 'MMBR'">
+    <ng-template pTemplate="start">
+        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
+    </ng-template>
+    <ng-template pTemplate="end">
+        <div (click)="op.toggle($event)">
+            <p-avatar image="http://localhost:2121/files/{{img}}" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+        </div>
+        <p-overlayPanel #op>
+            <ng-template pTemplate>
+                <div routerLink="/profile"> <i class="pi pi-fw pi-user"></i>Profile</div>
+                <p-divider></p-divider>
+                <div (click)="onLogout()"><i class="pi pi-fw pi-sign-out"></i> Logout</div>
+            </ng-template>
+        </p-overlayPanel>
     </ng-template>
 </p-menubar>
 

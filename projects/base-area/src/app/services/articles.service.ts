@@ -2,12 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
-import { ArticleReq } from "@pojo/article/article-req";
-import { ArticleRes } from "@pojo/article/article-res";
-import { res } from "@pojo/res";
-import { ResInsert } from "@pojo/res-insert";
-import { UpdateRes } from "@pojo/res-update";
-import { ArticleUpdateReq } from "@pojo/article/article-update-req";
+import { ArticleReq } from "@dto/article/article-req";
+import { ArticleRes } from "@dto/article/article-res";
+import { res } from "@dto/res";
+import { ResInsert } from "@dto/res-insert";
+import { UpdateRes } from "@dto/res-update";
+import { ArticleUpdateReq } from "@dto/article/article-update-req";
 
 @Injectable({
     providedIn : 'root'
@@ -17,11 +17,9 @@ export class ArticlesService {
 
     constructor(private http : HttpClient){}
 
-    getAllArticle() : Observable<ArticleRes[]>{
-        return this.http.get<ArticleRes[]>(`${BASE_URL}/articles`)
+    getAllArticle(page:number,size:number) : Observable<ArticleRes[]>{
+        return this.http.get<ArticleRes[]>(`${BASE_URL}/articles?page=${page}&${size}`)
     }
-
-    // getArticleDtl
 
     insertArticle(data : ArticleReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/articles`, data)
