@@ -37,16 +37,16 @@ export class SignUpComponent implements OnInit{
 
 
   signUp = this.fb.group({
-    email: ["",  Validators.required, Validators.email],
+    email: ["",  [Validators.required, Validators.email]],
     password: ["", [Validators.required, Validators.minLength(4)]],
   })
 
   accountDetail = this.fb.group({
     fullName: ["",  Validators.required],
     industry: [{},  Validators.required],
+    position: [{},  Validators.required],
     phoneNumber: ["",  Validators.required],
     company: ["",  Validators.required],
-    position: ["",  Validators.required],
   })
 
   selectedIndustry!: IndustryRes
@@ -146,16 +146,16 @@ onsignUp(){
       password: this.signUp.value.password!,
       fullName: this.accountDetail.value.fullName!,
       company: this.accountDetail.value.company!,
-      industryId: this.accountDetail.value.industry!,
+      industryId: this.accountDetail.value.industry!['industryId'],
       phoneNumber: this.accountDetail.value.phoneNumber!,
-      positionId: this.accountDetail.value.position!
+      positionId: this.accountDetail.value.position!['positionId']
     }
 
     this.userSignup$ = this.userService.signUpMember(data).subscribe(result => {
       console.log(result)
       this.susccessSignUp = true
       setTimeout(() => {
-        this.router.navigateByUrl("/course")
+        this.router.navigateByUrl("/login/member")
       }, 3000);
     })
   }
