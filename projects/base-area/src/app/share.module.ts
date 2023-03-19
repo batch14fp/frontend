@@ -24,6 +24,9 @@ import { NotFoundModule } from './components/not-found/not-found.module';
 import {AccordionModule} from 'primeng/accordion';
 import {EditorModule} from 'primeng/editor';
 import {DialogModule} from 'primeng/dialog';
+import {InputSwitchModule} from 'primeng/inputswitch';
+
+
 
 
 @NgModule({
@@ -35,14 +38,14 @@ import {DialogModule} from 'primeng/dialog';
      DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
-     ,DialogModule
+     ,DialogModule, InputSwitchModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
-    ,DialogModule
+    ,DialogModule, InputSwitchModule
   ]
 
 })

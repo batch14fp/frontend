@@ -92,10 +92,12 @@
       </div>
     </div>
     <div class="w-10 bg-gray-100 border-round-bottom-xl flex justify-content-center">
-      <div class="w-10 mt-2">
+      <div class="w-11 border-round-md mt-2 bg-white p-6">
         <form [formGroup]="postFb" class="gap-4 flex flex-column">
-          <div class="flex justify-content-between">
-            <div class="flex flex-column">
+
+          <div [ngClass]="postFb.value.postType!['postTypeCode'] !== 'PPOL' ?
+            'flex justify-content-between' : 'flex justify-content-end' ">
+            <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
               <label for="cover" class="text-xl font-medium text-800">Cover Image</label>
               <p-fileUpload mode="basic" name="myfile[]" [showUploadButton]="false" [showCancelButton]="false"
                 [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple" (onSelect)="onUpload($event)"
@@ -103,21 +105,99 @@
               </p-fileUpload>
             </div>
             <div class="">
-              <div class="bg-gray-300 border-round-md px-3 py-1">
+              <div *ngIf="postFb.value.postType!['postTypeCode'] == 'PREG'"
+                class="bg-gray-300 border-round-md px-3 py-1">
                 <p class="text-gray-600 font-medium">Free</p>
               </div>
-              <!-- <div class="bg-blue-100 border-round-md px-3 py-1">
+              <div *ngIf="postFb.value.postType!['postTypeCode'] == 'PPRM'"
+                class="bg-blue-100 border-round-md px-3 py-1">
                 <p class="text-blue-600 font-medium">Premium</p>
-              </div> -->
+              </div>
+              <div *ngIf="postFb.value.postType!['postTypeCode'] == 'PPOL'"
+                class="bg-green-100 border-round-md px-3 py-1 justify-content-end">
+                <p class="text-green-600 font-medium">Polling</p>
+              </div>
             </div>
           </div>
-          <div class="flex flex-column">
+
+          <div class="flex w-12 gap-6">
+            <div class="flex flex-column w-6">
+              <label for="category" class="text-xl font-medium text-800">Category</label>
+              <p-dropdown formControlName="category" [options]="categories" optionLabel="categoryName" [filter]="true"
+                filterBy="categoryName" [showClear]="true" placeholder="Select a Category">
+                <ng-template pTemplate="selectedItem">
+                  <div class="category-item category-item-value p-0 w-full" *ngIf="postFb.value">
+                    <div class="">{{postFb.value.category!['categoryName']}}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-category pTemplate="item">
+                  <div class="category-item p-0 ">
+                    <div class="p-0">{{category.categoryName}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+            <div class="flex flex-column w-6">
+              <label for="postType" class="text-xl font-medium text-800">Type</label>
+              <p-dropdown formControlName="postType" [options]="postTypes" optionLabel="postTypeName" [filter]="true"
+                filterBy="postTypeName" [showClear]="true" placeholder="Select a Type">
+                <ng-template pTemplate="selectedItem">
+                  <div class="postType-item postType-item-value p-0 w-full" *ngIf="postFb.value">
+                    <div class="">{{postFb.value.postType!['postTypeName']}}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-postType pTemplate="item">
+                  <div class="postType-item p-0 ">
+                    <div class="p-0">{{postType.postTypeName}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <!-- <p-inputSwitch formControlName="isPremium"></p-inputSwitch> -->
+            </div>
+          </div>
+
+          <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
             <label for="title" class="text-xl font-medium text-800">Title</label>
             <input type="text" id="title" pInputText />
           </div>
-          <div class="flex flex-column">
+
+          <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
             <label for="title" class="text-xl font-medium text-800">Description</label>
             <p-editor formControlName="description" [style]="{'height':'320px'}"></p-editor>
+          </div>
+
+          <div *ngIf="postFb.value.postType!['postTypeCode'] === 'PPOL'" class="flex flex-column">
+            <p class="text-xl font-medium text-800">End Date</p>
+            <div class="flex flex-column mt-2 mb-4">
+              <label for="question" class="text-md font-medium text-800">Question</label>
+              <input type="text" id="question" pInputText formControlName="pollingTitle" />
+            </div>
+
+            <div formArrayName="pollingOptions" class="mt-2 flex flex-column gap-2">
+              <div class="flex w-12 gap-3 flex justify-content-between"
+                *ngFor="let option of pollingOptions.controls; let i = index">
+                <input class="w-11 h-full" formControlName="{{i}}" type="text" id="choice" pInputText />
+                <!-- <input class="input" placeholder="Type option..." formControlName="{{i}}"> -->
+
+                <button class="cursor-pointer bg-red-600 text-white border-none border-round-md px-2 h-10"
+                  (click)="removeOption(i)">
+                  Remove
+                </button>
+              </div>
+            </div>
+            <button class="bg-blue-600 text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer"
+              (click)="addOption()">Add
+              Option</button>
+            <button
+              class="bg-blue-600 justify-content-end text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer">
+              Post
+            </button>
+
+            <!-- <div class="flex flex-column mt-2">
+              <label for="question" class="text-md font-medium text-800">Option 1</label>
+              <input formControlName="pollingOptions" type="text" id="choice" pInputText />
+            </div> -->
+
           </div>
         </form>
       </div>

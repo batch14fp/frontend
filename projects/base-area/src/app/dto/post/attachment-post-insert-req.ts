@@ -1,5 +1,4 @@
 export interface AttachmentPostInsertReq{
-    fileCodes:string,
-    extensions:string,
-    postId:string,
+  fileContent:string,
+  extensions:string,
 }
