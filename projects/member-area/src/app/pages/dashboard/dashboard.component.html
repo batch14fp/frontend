@@ -104,7 +104,8 @@
                   <div class="flex gap-4">
                     <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
                       style="width: 42px;" alt="Avatar" />
-                    <div class="hover:bg-gray-100 border-1 border-gray-400 border-round-3xl w-full flex cursor-pointer">
+                    <div routerLink="/post"
+                      class="hover:bg-gray-100 border-1 border-gray-400 border-round-3xl w-full flex cursor-pointer">
                       <p class="text-sm text-gray-600 font-medium align-self-center pl-4 cursor-pointer">Start a post
                       </p>
                     </div>
@@ -115,13 +116,14 @@
                         <i class="pi pi-calendar px-2 align-self-center text-blue-600"></i>
                         <p>Event</p>
                       </div>
-                      <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                      <div routerLink="/post"
+                        class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
                         <i class="pi pi-calendar px-2 align-self-center text-yellow-600"></i>
                         <p>Polling</p>
                       </div>
                       <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
                         <i class="pi pi-calendar px-2 align-self-center text-green-600"></i>
-                        <p>Write Article</p>
+                        <p>Create Course</p>
                       </div>
                     </div>
                     <!-- <div class="flex align-content-center">
@@ -281,7 +283,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="" *ngFor="let item of [].constructor(6)">
+                <div class="" *ngFor="let item of posts">
                   <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
                     <div class="flex gap-3">
                       <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border-circle align-self-center"

@@ -21,8 +21,8 @@ export class PostService{
 
     constructor(private http : HttpClient){}
 
-    getAllPost(): Observable<AllPostRes[]>{
-        return this.http.get<AllPostRes[]>(`${BASE_URL}/posts`)
+    getAllPost(page:number, size:number): Observable<AllPostRes[]>{
+        return this.http.get<AllPostRes[]>(`${BASE_URL}/posts?page=${page}&size=${size}`)
     }
 
     getActivity(id:number): Observable<AllPostByTypeRes[]>{
@@ -32,7 +32,7 @@ export class PostService{
     insertPost(data : PostReq): Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/posts`,data)
     }
-    
+
     insertPostLike(data : LikeInsertReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/posts/like`,data)
     }
@@ -56,5 +56,5 @@ export class PostService{
     deletePostBookmaek(id : string): Observable<res>{
         return this.http.delete<res>(`${BASE_URL}/posts/bookmark/${id}`)
     }
-    
+
 }

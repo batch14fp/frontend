@@ -93,15 +93,20 @@
     </div>
     <div class="w-10 bg-gray-100 border-round-bottom-xl flex justify-content-center">
       <div class="w-11 border-round-md mt-2 bg-white p-6">
-        <form [formGroup]="postFb" class="gap-4 flex flex-column">
+        <form [formGroup]="postFb" class="gap-4 flex flex-column" (ngSubmit)="onPost()">
 
           <div [ngClass]="postFb.value.postType!['postTypeCode'] !== 'PPOL' ?
             'flex justify-content-between' : 'flex justify-content-end' ">
             <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
               <label for="cover" class="text-xl font-medium text-800">Cover Image</label>
-              <p-fileUpload mode="basic" name="myfile[]" [showUploadButton]="false" [showCancelButton]="false"
+              <!-- <p-fileUpload mode="basic" name="myfile[]" [showUploadButton]="false" [showCancelButton]="false"
                 [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple" (onSelect)="onUpload($event)"
                 formArrayName="files" class="col-8">
+              </p-fileUpload> -->
+              <p-fileUpload [showUploadButton]="false" (onSelect)="onUpload($event)" (onRemove)="onRemove($event)"
+                (onClear)="onClear()" [multiple]="true" accept="image/*">
+                <ng-template pTemplate="content">
+                </ng-template>
               </p-fileUpload>
             </div>
             <div class="">
@@ -158,18 +163,21 @@
 
           <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
             <label for="title" class="text-xl font-medium text-800">Title</label>
-            <input type="text" id="title" pInputText />
+            <input formControlName="title" type="text" id="title" pInputText />
           </div>
 
           <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
             <label for="title" class="text-xl font-medium text-800">Description</label>
-            <p-editor formControlName="description" [style]="{'height':'320px'}"></p-editor>
+            <textarea formControlName="description" [rows]="5" [cols]="30" pInputTextarea
+              [autoResize]="true"></textarea>
+            <!-- <p-editor formControlName="description" [style]="{'height':'320px'}"></p-editor> -->
           </div>
 
           <div *ngIf="postFb.value.postType!['postTypeCode'] === 'PPOL'" class="flex flex-column">
-            <p class="text-xl font-medium text-800">End Date</p>
+            <p class="text-xl font-medium text-800">Close Polling date</p>
+            <p-calendar [showIcon]="true" [minDate]="today" dateFormat="yy-mm-dd" formControlName="endAt"></p-calendar>
             <div class="flex flex-column mt-2 mb-4">
-              <label for="question" class="text-md font-medium text-800">Question</label>
+              <label for="question" class="text-xl font-medium text-800">Question</label>
               <input type="text" id="question" pInputText formControlName="pollingTitle" />
             </div>
 
@@ -185,20 +193,19 @@
                 </button>
               </div>
             </div>
-            <button class="bg-blue-600 text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer"
+            <button type="button"
+              class="bg-blue-600 text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer"
               (click)="addOption()">Add
               Option</button>
-            <button
-              class="bg-blue-600 justify-content-end text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer">
-              Post
-            </button>
-
             <!-- <div class="flex flex-column mt-2">
               <label for="question" class="text-md font-medium text-800">Option 1</label>
               <input formControlName="pollingOptions" type="text" id="choice" pInputText />
             </div> -->
-
           </div>
+          <button type="submit"
+            class="bg-blue-600 justify-content-end text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer">
+            Post
+          </button>
         </form>
       </div>
     </div>

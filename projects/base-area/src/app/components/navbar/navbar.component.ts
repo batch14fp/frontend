@@ -53,7 +53,7 @@ export class NavbarComponent{
             },
             {
                 label : 'Article',
-                routerLink : '/article'
+                routerLink : '/admin/article'
             },
             {
                 label : 'Activity Type',
