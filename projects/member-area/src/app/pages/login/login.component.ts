@@ -41,7 +41,7 @@ export class LoginComponent implements OnDestroy{
         this.userService.saveDataLogin(result)
         const roleCode = this.userService.roleCode
         if(roleCode == ROLE.MMBR){
-          this.router.navigateByUrl("/course")
+          this.router.navigateByUrl("/dashboard")
         }
         console.log(result)
       })

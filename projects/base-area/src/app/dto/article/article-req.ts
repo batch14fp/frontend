@@ -1,5 +1,5 @@
 export interface ArticleReq{
 	title: string,
-	contentArticle: string,
+	content: string,
 	imageArticle: string
 }

@@ -29,7 +29,7 @@ import { ArticleComponent } from "./pages/article/article.component";
 
 export const memberRoutes: Routes = [
     {
-        path: 'login/member',
+        path: 'member/login',
         component: LoginComponent
     },
     {
@@ -59,7 +59,7 @@ export const memberRoutes: Routes = [
         path: '',
         children: [
             {
-                path: 'article/member',
+                path: 'member/article',
                 component: ArticleComponent,
             },
             {
