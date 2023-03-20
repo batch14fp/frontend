@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 import { ArticleReq } from "@dto/article/article-req";
 import { ArticleRes } from "@dto/article/article-res";
@@ -17,8 +17,8 @@ export class ArticlesService {
 
     constructor(private http : HttpClient){}
 
-    getAllArticle(page:number,size:number) : Observable<ArticleRes[]>{
-        return this.http.get<ArticleRes[]>(`${BASE_URL}/articles?page=${page}&${size}`)
+    getAllArticle(startPage: number, maxPage: number, query?: string) : Observable<ArticleRes[]>{
+        return this.http.get<ArticleRes[]>(`${BASE_URL}/articles?page=${startPage}&size=${maxPage}`)
     }
 
     insertArticle(data : ArticleReq) : Observable<ResInsert>{

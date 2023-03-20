@@ -45,10 +45,10 @@ export class LoginAdminComponent implements OnDestroy{
             const roleCode = this.userService.roleCode
 
             if(roleCode == ROLE.SPADM ){
-              this.router.navigateByUrl("/dashboard")
+              this.router.navigateByUrl("/category")
             }
             if(roleCode == ROLE.ADMIN ){
-              this.router.navigateByUrl("/dashboard")
+              this.router.navigateByUrl("/category")
             }
             console.log(result)
             
