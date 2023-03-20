@@ -24,7 +24,7 @@ import { convertLocalDateToUTCISO, convertUTCToLocalDateISO } from 'projects/bas
 
 export class PostComponent implements OnInit{
 
-  private caetgories$?: Subscription
+  private categories$?: Subscription
   private postTypes$?: Subscription
 
   categories!: CategoryRes[]
@@ -77,13 +77,15 @@ export class PostComponent implements OnInit{
     return this.postFb.get("files") as FormArray
   }
 
-  addFiles(contentFile: string, fileExt:string){
+  addFiles(file:any, resultBase64:string, resultExtension: string){
     this.uploads.push(new FormGroup({
       fileTitle : new FormControl(Date.now().toString()),
-      contentFile: new FormControl(contentFile),
-      fileExt: new FormControl(fileExt),
+      contentFile: new FormControl(resultBase64),
+      fileExt: new FormControl(resultExtension),
 
     }))
+
+    this.uploadedFiles.push(file)
 }
 
   onUpload(event: any) {
@@ -101,7 +103,7 @@ export class PostComponent implements OnInit{
         const resultBase64 = result.substring(result.indexOf(",") + 1, result.length)
         const resultExtension = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length)
 
-        this.addFiles(resultBase64,resultExtension)
+        this.addFiles(file, resultBase64, resultExtension)
         // this.base64Image(resultBase64)
         // console.log(this.base64Image)
       })
@@ -109,6 +111,8 @@ export class PostComponent implements OnInit{
   }
 
   onRemove(event: any) {
+    console.log(event)
+    console.log(this.uploadedFiles)
     const filter = this.uploadedFiles.map((f, i) => {
         if (f.name == event.file.name) {
             return i
@@ -125,7 +129,7 @@ export class PostComponent implements OnInit{
 
 onClear() {
   this.uploadedFiles = []
-  this.postFb.value.files = []
+  this.uploads.clear()
 }
 
   onPost(){
@@ -134,6 +138,12 @@ onClear() {
     console.log(this.pollingOptions.value);
 
     // console.log("upload files: " +JSON.stringify(this.uploads.value))
+
+    if(this.type === 'PPOL'){
+      this.uploads.clear();
+      this.postFb.value.title = ""
+      this.postFb.value.description = ""
+    }
 
     const files = this.uploads.value
 
@@ -146,7 +156,7 @@ onClear() {
       )
     }
 
-  //   if (this.files.length) {
+  //   if (this.uploads.length) {
   //     data.file = []
   //     this.file.value.forEach((f: any) => {
   //         const fileTemp = f as any
@@ -192,7 +202,7 @@ onClear() {
   }
 
   initCategories(){
-    this.caetgories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
+    this.categories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
   }
 
   initPostType(){

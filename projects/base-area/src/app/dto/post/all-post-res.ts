@@ -16,6 +16,7 @@ export interface AllPostRes{
 	isLike:boolean,
 	isBookmark:boolean,
 	titlePolling:string,
+  ver: number,
 	pollingOptionId:string,
 	pollingOption:PollingOptionRes,
 }
