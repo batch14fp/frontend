@@ -1,5 +1,5 @@
 import { AccordionModule } from 'primeng/accordion';
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MenuItem } from "primeng/api";
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +8,7 @@ import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup } from '@fortawe
     templateUrl : './dashboard.component.html'
 })
 
-export class DashboardComponent{
+export class DashboardComponent implements OnInit{
     items!: MenuItem[];
 
     faHeart = faHeart
