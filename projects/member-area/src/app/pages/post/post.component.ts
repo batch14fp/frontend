@@ -24,7 +24,7 @@ import { convertLocalDateToUTCISO, convertUTCToLocalDateISO } from 'projects/bas
 
 export class PostComponent implements OnInit{
 
-  private caetgories$?: Subscription
+  private categories$?: Subscription
   private postTypes$?: Subscription
 
   categories!: CategoryRes[]
@@ -202,7 +202,7 @@ onClear() {
   }
 
   initCategories(){
-    this.caetgories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
+    this.categories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
   }
 
   initPostType(){
