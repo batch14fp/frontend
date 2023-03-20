@@ -9,7 +9,6 @@ export interface ProfileReqUpdate{
     company: string,
     industryId: string,
     poistionId: string,
-    socialmedia: string[]
     ver : number
     isActive : boolean
 }

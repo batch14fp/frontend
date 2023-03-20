@@ -48,12 +48,12 @@ export const memberRoutes: Routes = [
     {
         path: 'profile',
         loadChildren: () => import("./pages/profile/profile.module").then(p => p.ProfileModule),
-        component: NavbarComponent
+        // component: NavbarComponent
 
     },
     {
         path: 'dashboard',
-        component: DashboardComponent,
+        component: DashboardComponent, 
     },
     {
         path: '',
