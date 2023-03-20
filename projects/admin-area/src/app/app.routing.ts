@@ -20,7 +20,7 @@ import { UserComponent } from "./page/user/user.component";
 
 export const adminRoutes: Routes = [
     {
-        path: 'login/admin',
+        path: 'admin/login',
         component: LoginAdminComponent
     },
     {
@@ -71,7 +71,7 @@ export const adminRoutes: Routes = [
         ]
     },
     {
-        path: 'article',
+        path: 'admin/article',
         loadChildren: () => import("./page/article/article.module").then(a => a.ArticleModule),
         component: NavbarComponent
     }
