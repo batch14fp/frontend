@@ -1,3 +1,5 @@
+import { SocialMediaGetRes } from "@dto/socialmedia/social-media-res"
+
 export interface ProfileResDetail{
 	userId: string,
 	fullname: string,
@@ -11,4 +13,7 @@ export interface ProfileResDetail{
     company:string,
 	industryId:string,
 	positionId: string,
+	socialMediaList : SocialMediaGetRes[],
+	ver : number,
+	isActive : boolean
 }
