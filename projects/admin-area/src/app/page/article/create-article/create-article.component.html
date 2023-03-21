@@ -2,36 +2,46 @@
     <div class="flex">
         <h1>Create Article</h1>
     </div>
-    <!-- <div class="w-10 bg-gray-100 border-round-bottom-xl flex justify-content-center">
-        <div class="w-10 mt-2">
-            <form [formGroup]="createArticle" class="gap-4 flex flex-column">
-                <div class="flex justify-content-between">
-                    <div class="flex flex-column">
-                        <label for="cover" class="text-xl font-medium text-800">Cover Image</label>
-                        <p-fileUpload mode="basic" name="myfile[]" [showUploadButton]="false" [showCancelButton]="false"
-                            [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple"
-                            (onSelect)="onUpload($event)" formArrayName="files" class="col-8">
-                        </p-fileUpload>
-                    </div>
-                    <div class="">
-                        <div class="bg-gray-300 border-round-md px-3 py-1">
-                            <p class="text-gray-600 font-medium">Free</p>
-                        </div>
-                    </div>
-                </div>
+    <pre>{{createArticle.value|json}}</pre>
+
+    <div class="w-10 bg-gray-100 border-round-bottom-xl flex justify-content-center">
+        <div class="w-11 border-round-md mt-2 bg-white p-6">
+          <form [formGroup]="createArticle" class="gap-4 flex flex-column">
+            <div>
+              <div class="flex flex-column">
                 <div class="flex flex-column">
-                    <label for="title" class="text-xl font-medium text-800">Title</label>
-                    <input type="text" id="title" pInputText />
+                  <label for="title" class="text-xl font-medium text-800">Title</label>
+                  <input type="text" formControlName="title" id="title" pInputText />
                 </div>
                 <div class="flex flex-column">
                     <label for="title" class="text-xl font-medium text-800">Content</label>
                     <p-editor formControlName="content" [style]="{'height':'320px'}"></p-editor>
-                </div>
-            </form>
+                  </div>
+                <label for="cover" class="text-xl font-medium text-800">Add Cover</label>
+                <p-fileUpload mode="basic" name="myfile[]" [showUploadButton]="false" [showCancelButton]="false"
+                  [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple" (onSelect)="onUpload($event)"
+                  formArrayName="imageArticle" class="col-8">
+                </p-fileUpload>
+              </div>
+            </div>
+  
+            <div class="flex w-12 gap-6">
+              <button
+               (click)="onCreateArticle()" class="bg-blue-600 justify-content-end text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer">
+                Create
+              </button>
+  
+              <!-- <div class="flex flex-column mt-2">
+                <label for="question" class="text-md font-medium text-800">Option 1</label>
+                <input formControlName="pollingOptions" type="text" id="choice" pInputText />
+              </div> -->
+  
+            </div>
+          </form>
         </div>
-    </div> -->
-    <pre>{{createArticle.value|json}}/</pre>
-    <form class="mt-1 col-12 md:col-3 flex-column justify-content-center" [formGroup]="createArticle">
+      </div>
+
+    <!-- <form class="mt-1 col-12 md:col-3 flex-column justify-content-center" [formGroup]="createArticle">
         <div class="mb-3 flex flex-column w-full">
             <label for="title" class="font-medium col-form-label">Title</label>
             <input type="text" class="w-full " pInputText id="title"
@@ -54,5 +64,5 @@
         <div class="mt-4">
             <button pButton type="submit" label="Create" class="p-2"></button>
         </div>
-    </form>
+    </form> -->
 </div>

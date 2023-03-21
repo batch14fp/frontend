@@ -7,11 +7,13 @@ import { ShareModule } from "projects/base-area/src/app/share.module";
 import { ArticleRouting } from "./article.routing";
 import { CreateArticleComponent } from "./create-article/create-article.component";
 import { ArticleAdminComponent } from "./list-article/article-admin.component";
+import { UpdateArticleComponent } from "./update-article/update-article.component";
 
 @NgModule({
     declarations:[
         CreateArticleComponent,
-        ArticleAdminComponent
+        ArticleAdminComponent,
+        UpdateArticleComponent
     ],
     imports:[
         ArticleRouting,CommonModule, ReactiveFormsModule,FormsModule, HttpClientModule,

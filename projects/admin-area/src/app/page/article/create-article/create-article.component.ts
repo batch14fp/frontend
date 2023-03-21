@@ -7,60 +7,75 @@ import { ArticlesService } from "@service/articles.service";
 import { Subscription } from "rxjs";
 
 @Component({
-    selector:'app-create-article',
-    templateUrl:'./create-article.component.html'
+  selector: 'app-create-article',
+  templateUrl: './create-article.component.html'
 })
 
-export class CreateArticleComponent implements OnInit, OnDestroy{
-    private createArticle$?:Subscription
+export class CreateArticleComponent implements OnInit, OnDestroy {
+  private createArticle$?: Subscription
 
-    constructor(private fb:FormBuilder, private title:Title, private articleService:ArticlesService,
-        private router:Router){
-            this.title.setTitle('Article')
-    }
+  constructor(private fb: FormBuilder, private title: Title, private articleService: ArticlesService,
+    private router: Router) {
+    this.title.setTitle('Article')
+  }
 
-    createArticle = this.fb.group({
-        title:[""],
-        content:[""],
-        imageArticle:this.fb.array([])
+  createArticle = this.fb.group({
+    title: [""],
+    content: [""],
+    imageArticle: this.fb.group({
+      fileTitle: [""],
+      contentFile:[""],
+      fileExt:[""]
     })
+  })
 
-    get uploads(){
-        return this.createArticle.get("imageArticle") as FormArray
-      }
-    
-      addFiles(contentFile: string, fileExt:string){
-        this.uploads.push(new FormGroup({
-          fileTitle : new FormControl(Date.now().toString()),
-          contentFile: new FormControl(contentFile),
-          fileExt: new FormControl(fileExt),
-    
-        }))
+  addFiles(contentFile: string, fileExt: string) {
+    this.createArticle.get('imageArticle')?.patchValue({
+      fileTitle: (Date.now().toString()),
+      contentFile: (contentFile),
+      fileExt: (fileExt),
+
+    })
+  }
+
+  onUpload(event: any) {
+    const toBase64 = (file: File) => new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (typeof reader.result === "string") resolve(reader.result)
+      };
+      reader.onerror = error => reject(error);
+    });
+
+    for (let file of event.files) {
+      toBase64(file).then(result => {
+        const resultBase64 = result.substring(result.indexOf(",") + 1, result.length)
+        const resultExtension = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length)
+
+        this.addFiles(resultBase64, resultExtension)
+      })
     }
-    
-      onUpload(event: any) {
-        const toBase64 = (file: File) => new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => {
-            if (typeof reader.result === "string") resolve(reader.result)
-          };
-          reader.onerror = error => reject(error);
-        });
-    
-        for (let file of event.files) {
-          toBase64(file).then(result => {
-            const resultBase64 = result.substring(result.indexOf(",") + 1, result.length)
-            const resultExtension = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length)
-    
-            this.addFiles(resultBase64,resultExtension)
-          })
-        }
-      }
-    ngOnInit(): void {
-        throw new Error("Method not implemented.");
+  }
+
+  onCreateArticle(){
+    const data:ArticleReq={
+      title:this.createArticle.value.title!,
+      content:this.createArticle.value.content!
     }
-    ngOnDestroy(): void {
-        throw new Error("Method not implemented.");
-    }
+    const files = this.createArticle.value.imageArticle
+      data.fileContent = files?.contentFile!
+      data.extensions = files?.fileExt!
+    this.createArticle$ = this.articleService.insertArticle(data).subscribe(res=>{
+      alert('create article success')
+      this.router.navigateByUrl('admin/article')
+    })
+  }
+
+  ngOnInit(): void {
+   
+  }
+  ngOnDestroy(): void {
+    this.createArticle$?.unsubscribe()
+  }
 }
