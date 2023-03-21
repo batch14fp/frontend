@@ -25,7 +25,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {EditorModule} from 'primeng/editor';
 import {DialogModule} from 'primeng/dialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
-
+import {AvatarModule} from 'primeng/avatar';
 
 
 
@@ -38,14 +38,14 @@ import {InputSwitchModule} from 'primeng/inputswitch';
      DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
-     ,DialogModule, InputSwitchModule
+     ,DialogModule, InputSwitchModule,AvatarModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
-    ,DialogModule, InputSwitchModule
+    ,DialogModule, InputSwitchModule,AvatarModule
   ]
 
 })

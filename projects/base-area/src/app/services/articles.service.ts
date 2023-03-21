@@ -8,6 +8,7 @@ import { res } from "@dto/res";
 import { ResInsert } from "@dto/res-insert";
 import { UpdateRes } from "@dto/res-update";
 import { ArticleUpdateReq } from "@dto/article/article-update-req";
+import { ArticleResData } from "@dto/article/article-res-data";
 
 @Injectable({
     providedIn : 'root'
@@ -31,5 +32,9 @@ export class ArticlesService {
 
     deleteArticle(id : string) : Observable<res>{
         return this.http.delete<res>(`${BASE_URL}/articles/${id}`)
+    }
+
+    getArticleByIdForAdmin(id:string):Observable<ArticleResData>{
+        return this.http.get<ArticleResData>(`${BASE_URL}/articles/admin/${id}`)
     }
 }
