@@ -5,6 +5,7 @@ import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup } from '@fortawe
 import { PostService } from '../../../../../base-area/src/app/services/post.service';
 import { Subscription } from 'rxjs';
 import { AllPostRes } from '@dto/post/all-post-res';
+import { getInitials } from '../../../../../base-area/src/app/utils/getInitial';
 
 @Component({
     selector : 'app-dashboard-user',
@@ -24,8 +25,11 @@ export class DashboardComponent implements OnInit{
 
     constructor(private postService: PostService){}
 
+
+
     initPosts(){
       this.posts$ = this.postService.getAllPost(1, 5).subscribe(res => this.posts = res)
+
       console.log(this.posts)
     }
 
