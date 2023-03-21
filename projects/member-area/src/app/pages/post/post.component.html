@@ -1,0 +1,213 @@
+<pre>{{postFb.value | json}}</pre>
+<main>
+  <div class="w-12 min-h-screen max-h-full flex relative">
+    <div class="w-2 pt-4 px-4 top-0">
+      <div class="w-6">
+        <img class="w-full w-0" style="object-fit: contain !important;"
+          src="../../../assets/images/wecommunity-logo.png" alt="logo wecommunity">
+      </div>
+      <div class="flex flex-column m-0 mt-6 gap-2">
+        <div class="text-blue-600 flex">
+          <button
+            class="text-blue-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-blue-50 cursor-pointer">
+            <i class="pi pi-home px-2"></i>
+            Home</button>
+        </div>
+        <div class="text-600 flex">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <i class="pi pi-calendar px-2"></i>
+            Event</button>
+        </div>
+        <div class="text-600 flex hover:text-blue-600">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
+            <i class="pi pi-book px-2"></i>
+            Course
+          </button>
+        </div>
+        <div class="text-600 flex">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <i class="pi pi-home px-2"></i>
+            Post</button>
+        </div>
+        <div class="text-600 flex border-bottom-1 border-gray-200 pb-4">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <fa-icon class="text-gray-600 cursor-pointer px-2 hover:text-blue-600" [icon]="faNewspaper"></fa-icon>
+            Article
+          </button>
+        </div>
+        <div class="flex flex-column mt-4">
+          <div class="flex justify-content-between mb-3">
+            <p>Upcoming Event</p>
+            <div class="bg-blue-100 text-blue-600 border-circle w-1 h-1 align-self-center flex justify-content-center">
+              <p class="font-semibold text-xs">3</p>
+            </div>
+          </div>
+          <div class="flex flex-column gap-4">
+            <div class="flex w-12 gap-4">
+              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
+                <p class="font-semibold">20</p>
+                <p class="font-light text-gray-600">Mar</p>
+              </div>
+              <div class="flex flex-column w-9">
+                <p class="cursor-pointer">Modern Web...</p>
+                <div class="flex">
+                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
+                  <p class="text-xs font-light text-gray-600">100 people going</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex w-12 gap-4">
+              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
+                <p class="font-semibold">24</p>
+                <p class="font-light text-gray-600">Mar</p>
+              </div>
+              <div class="flex flex-column w-9">
+                <p class="cursor-pointer">Modern Web...</p>
+                <div class="flex">
+                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
+                  <p class="text-xs font-light text-gray-600">100 people going</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex w-12 gap-4">
+              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
+                <p class="font-semibold">4</p>
+                <p class="font-light text-gray-600">Apr</p>
+              </div>
+              <div class="flex flex-column w-9">
+                <p class="cursor-pointer">Modern Web...</p>
+                <div class="flex">
+                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
+                  <p class="text-xs font-light text-gray-600">100 people going</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="w-10 bg-gray-100 border-round-bottom-xl flex justify-content-center">
+      <div class="w-11 border-round-md mt-2 bg-white p-6">
+        <form [formGroup]="postFb" class="gap-4 flex flex-column" (ngSubmit)="onPost()">
+
+          <div [ngClass]="postFb.value.postType!['postTypeCode'] !== 'PPOL' ?
+            'flex justify-content-between' : 'flex justify-content-end' ">
+            <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
+              <label for="cover" class="text-xl font-medium text-800">Cover Image</label>
+              <!-- <p-fileUpload mode="basic" name="myfile[]" [showUploadButton]="false" [showCancelButton]="false"
+                [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple" (onSelect)="onUpload($event)"
+                formArrayName="files" class="col-8">
+              </p-fileUpload> -->
+              <p-fileUpload [showUploadButton]="false" (onSelect)="onUpload($event)" (onRemove)="onRemove($event)"
+                (onClear)="onClear()" [multiple]="true" accept="image/*">
+                <ng-template pTemplate="content">
+                </ng-template>
+              </p-fileUpload>
+            </div>
+            <div class="">
+              <div *ngIf="postFb.value.postType!['postTypeCode'] == 'PREG'"
+                class="bg-gray-300 border-round-md px-3 py-1">
+                <p class="text-gray-600 font-medium">Free</p>
+              </div>
+              <div *ngIf="postFb.value.postType!['postTypeCode'] == 'PPRM'"
+                class="bg-blue-100 border-round-md px-3 py-1">
+                <p class="text-blue-600 font-medium">Premium</p>
+              </div>
+              <div *ngIf="postFb.value.postType!['postTypeCode'] == 'PPOL'"
+                class="bg-green-100 border-round-md px-3 py-1 justify-content-end">
+                <p class="text-green-600 font-medium">Polling</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex w-12 gap-6">
+            <div class="flex flex-column w-6">
+              <label for="category" class="text-xl font-medium text-800">Category</label>
+              <p-dropdown formControlName="category" [options]="categories" optionLabel="categoryName" [filter]="true"
+                filterBy="categoryName" [showClear]="true" placeholder="Select a Category">
+                <ng-template pTemplate="selectedItem">
+                  <div class="category-item category-item-value p-0 w-full" *ngIf="postFb.value">
+                    <div class="">{{postFb.value.category!['categoryName']}}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-category pTemplate="item">
+                  <div class="category-item p-0 ">
+                    <div class="p-0">{{category.categoryName}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+            <div class="flex flex-column w-6">
+              <label for="postType" class="text-xl font-medium text-800">Type</label>
+              <p-dropdown formControlName="postType" [options]="postTypes" optionLabel="postTypeName" [filter]="true"
+                filterBy="postTypeName" [showClear]="true" placeholder="Select a Type">
+                <ng-template pTemplate="selectedItem">
+                  <div class="postType-item postType-item-value p-0 w-full" *ngIf="postFb.value">
+                    <div class="">{{postFb.value.postType!['postTypeName']}}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-postType pTemplate="item">
+                  <div class="postType-item p-0 ">
+                    <div class="p-0">{{postType.postTypeName}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <!-- <p-inputSwitch formControlName="isPremium"></p-inputSwitch> -->
+            </div>
+          </div>
+
+          <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
+            <label for="title" class="text-xl font-medium text-800">Title</label>
+            <input formControlName="title" type="text" id="title" pInputText />
+          </div>
+
+          <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
+            <label for="title" class="text-xl font-medium text-800">Description</label>
+            <textarea formControlName="description" [rows]="5" [cols]="30" pInputTextarea
+              [autoResize]="true"></textarea>
+            <!-- <p-editor formControlName="description" [style]="{'height':'320px'}"></p-editor> -->
+          </div>
+
+          <div *ngIf="postFb.value.postType!['postTypeCode'] === 'PPOL'" class="flex flex-column">
+            <p class="text-xl font-medium text-800">Close Polling date</p>
+            <p-calendar [showIcon]="true" [minDate]="today" dateFormat="yy-mm-dd" formControlName="endAt"></p-calendar>
+            <div class="flex flex-column mt-2 mb-4">
+              <label for="question" class="text-xl font-medium text-800">Question</label>
+              <input type="text" id="question" pInputText formControlName="pollingTitle" />
+            </div>
+
+            <div formArrayName="pollingOptions" class="mt-2 flex flex-column gap-2">
+              <div class="flex w-12 gap-3 flex justify-content-between"
+                *ngFor="let option of pollingOptions.controls; let i = index">
+                <input class="w-11 h-full" formControlName="{{i}}" type="text" id="choice" pInputText />
+                <!-- <input class="input" placeholder="Type option..." formControlName="{{i}}"> -->
+
+                <button class="cursor-pointer bg-red-600 text-white border-none border-round-md px-2 h-10"
+                  (click)="removeOption(i)">
+                  Remove
+                </button>
+              </div>
+            </div>
+            <button type="button"
+              class="bg-blue-600 text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer"
+              (click)="addOption()">Add
+              Option</button>
+            <!-- <div class="flex flex-column mt-2">
+              <label for="question" class="text-md font-medium text-800">Option 1</label>
+              <input formControlName="pollingOptions" type="text" id="choice" pInputText />
+            </div> -->
+          </div>
+          <button type="submit"
+            class="bg-blue-600 justify-content-end text-white px-2 py-2 border-none border-round-md w-2 mt-3 cursor-pointer">
+            Post
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

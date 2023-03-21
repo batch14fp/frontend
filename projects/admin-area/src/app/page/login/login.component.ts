@@ -2,14 +2,15 @@ import { Component, OnDestroy } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { LoginReq } from "projects/base-area/src/app/dto/user/login-req";
-import { LoginRes } from "projects/base-area/src/app/dto/user/login-res";
+import { LoginReq } from "projects/base-area/src/app/dto/login/login-req";
+import { LoginRes } from "../../../../../base-area/src/app/dto/login/login-res";
 import { UserService } from "projects/base-area/src/app/services/user.service";
 import { Subscription } from "rxjs";
+import { ROLE } from "projects/base-area/src/app/constant/role.service";
 
 @Component({
     selector : 'app-login-admin',
-    templateUrl : 'login.component.html'
+    templateUrl : './login.component.html'
 })
 
 export class LoginAdminComponent implements OnDestroy{
@@ -41,11 +42,25 @@ export class LoginAdminComponent implements OnDestroy{
     
           this.login$ = this.userService.login(data).subscribe(result => {
             this.userService.saveDataLogin(result)
-            this.router.navigateByUrl("/dashboard")
+            const roleCode = this.userService.roleCode
+
+            if(roleCode == ROLE.SPADM ){
+              this.router.navigateByUrl("/category")
+            }
+            if(roleCode == ROLE.ADMIN ){
+              this.router.navigateByUrl("/category")
+            }
             console.log(result)
+            
           })
+
+        
         }
+        // else(!this.login.valid){
+
+        // }
       }
+
     
       saveDataLogin(data: LoginRes){
         localStorage.setItem("dataLogin", JSON.stringify(data))

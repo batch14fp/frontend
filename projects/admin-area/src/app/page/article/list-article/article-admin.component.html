@@ -1,0 +1,38 @@
+<pre>{{articleAdmin|json}}</pre>
+<div class="mx-6">
+    <h1>Article</h1>
+
+    <div class="sm:hidden md:flex col-3 my-2">
+        <app-button-primary label="Create article" routerLink="/admin/article/create"></app-button-primary>
+    </div>
+    <div class="lg:hidden md:flex flex col-3 my-2">
+        <app-button-primary icon="pi pi-plus"></app-button-primary>
+    </div>
+
+    
+    <p-table [value]="articleAdmin"  [lazy]="true" (onLazyLoad)="loadData($event)" responsiveLayout="scroll" [paginator]="true"
+    [rows]="maxPage" [totalRecords]="totalData" [loading]="loading" [rowsPerPageOptions]="[3, 5]"
+    tyleClass="p-datatable-gridlines" [globalFilterFields]="['id', 'title','content']" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Created</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-a let-i="rowIndex">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{a.title}}</td>
+                <td>{{a.content}}</td>
+                <td>{{a.createdAt | date:'medium'}}</td>
+                <td class="flex gap-2">
+                    <app-button-icon ></app-button-icon>
+                    <app-button-danger></app-button-danger>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

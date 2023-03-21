@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { MenuItem } from 'primeng/api';
+import { UserService } from "../../services/user.service";
 import { getInitials } from "../../utils/getInitial";
 
 @Component({
@@ -8,15 +10,25 @@ import { getInitials } from "../../utils/getInitial";
 })
 
 export class NavbarComponent{
+    constructor(private userService:UserService, private router:Router){
 
-    // initial(name : string){
-    //     getInitials(name) 
-    // }
-    
+    }
+
+    onLogout(){
+        localStorage.clear()
+        this.router.navigateByUrl('')
+    }
+
     memberItem! : MenuItem[]
-    items!: MenuItem[];
+    adminItem! : MenuItem[]
+    items!: MenuItem[]
+    role!:string
+    img!:string
 
     ngOnInit() {
+        this.role = this.userService.roleCode
+        this.img = this.userService.images
+        console.log(this.role)
         this.items = [
             {
                 label:'Category',
@@ -41,8 +53,28 @@ export class NavbarComponent{
             },
             {
                 label : 'Article',
-                routerLink : '/article'
-            }
+                routerLink : '/admin/article'
+            },
+            {
+                label : 'Activity Type',
+                routerLink : '/activitytype'
+            },
+            {
+                label : 'Bank',
+                routerLink : '/bankpayment'
+            },
+            {
+                label : 'Post Type',
+                routerLink : '/posttype'
+            },
+            {
+                label : 'Membership',
+                routerLink : '/membership'
+            },
+            {
+                label : 'Sales Setting',
+                routerLink : '/sales-setting'
+            },
         ];
 
         this.memberItem = [

@@ -1,5 +1,7 @@
 export interface PositionRes{
     positionId:string,
-    positionCode:string,
     positionName:string,
+    positionCode:string,
+    ver:number,
+    isActive:boolean,
 }

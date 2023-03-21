@@ -19,3 +19,7 @@ img {
   height: 180px;
   object-fit: cover !important;
 }
+
+img {
+  object-fit: contain !important;
+}

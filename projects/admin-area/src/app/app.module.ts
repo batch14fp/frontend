@@ -12,7 +12,6 @@ import { PositionComponent } from './page/position/position.component';
 import { IndustryComponent } from './page/industry/industry.component';
 import { SocmedComponent } from './page/socmed/socmed.component';
 import { UserComponent } from './page/user/user.component';
-import { ArticleComponent } from './page/article/article.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
@@ -20,14 +19,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginAdminComponent } from './page/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { MembershipComponent } from './page/membership/membership.component';
+import { ArticleModule } from './page/article/article.module';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent,DashboardComponent,CategoryComponent,PositionComponent,IndustryComponent,SocmedComponent,UserComponent,ArticleComponent,LoginAdminComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule,ShareModule, AppRouting,TableModule, FormsModule, ReactiveFormsModule, HttpClientModule,CommonModule,
-    BrowserAnimationsModule,
+    BrowserModule, AppRouting, HttpClientModule,CommonModule,BrowserAnimationsModule
   ],
   providers: [
     {

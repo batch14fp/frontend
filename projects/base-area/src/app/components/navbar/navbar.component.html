@@ -1,25 +1,38 @@
-<p-menubar [model]="items">
+<p-menubar [model]="items" *ngIf="role =='SPADM'">
+    
     <ng-template pTemplate="start">
         <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
     </ng-template>
     <ng-template pTemplate="end">
-        <!-- <div class="avatar">
-            <p>{{initial('Rizky Irvandi')}}</p>
-            <p>iki</p>
-        </div> -->
-        <!-- <p-avatar shape="circle">{{initial('Rizky Irvandi')}}</p-avatar> -->
+        <div (click)="op.toggle($event)">
+            <p-avatar image="http://localhost:2121/files/{{img}}" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+        </div>
+        <p-overlayPanel #op>
+            <ng-template pTemplate>
+                <div routerLink="/profile"> <i class="pi pi-fw pi-user"></i>Profile</div>
+                <p-divider></p-divider>
+                <div (click)="onLogout()"><i class="pi pi-fw pi-sign-out"></i> Logout</div>
+            </ng-template>
+        </p-overlayPanel>
     </ng-template>
 </p-menubar>
 
-<p-menubar [model]="memberItem">
+<p-menubar [model]="memberItem"  *ngIf="role == 'MMBR'">
     <ng-template pTemplate="start">
         <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2">
     </ng-template>
     <ng-template pTemplate="end">
-        <!-- <div class="avatar">
-            <p>{{initial('Rizky Irvandi')}}</p>
-            <p>iki</p>
-        </div> -->
-        <!-- <p-avatar shape="circle">{{initial('Rizky Irvandi')}}</p-avatar> -->
+        <div (click)="op.toggle($event)">
+            <p-avatar image="http://localhost:2121/files/{{img}}" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+        </div>
+        <p-overlayPanel #op>
+            <ng-template pTemplate>
+                <div routerLink="/profile"> <i class="pi pi-fw pi-user"></i>Profile</div>
+                <p-divider></p-divider>
+                <div (click)="onLogout()"><i class="pi pi-fw pi-sign-out"></i> Logout</div>
+            </ng-template>
+        </p-overlayPanel>
     </ng-template>
 </p-menubar>
+
+<router-outlet></router-outlet>

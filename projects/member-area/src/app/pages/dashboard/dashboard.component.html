@@ -1,161 +1,357 @@
-<div class="flex gap-3 m-5">
-    <div class="col-3">
-        <h3>Most Like</h3>
-        <!-- card like  -->
-        <div class="card">
-            <div class="card-container">
-                <div class=" bg-indigo-100 text-xs font-base p-3 border-round mb-3">
-                    <!-- profile -->
-                    <div class="grid flex">
-                        <div class="col-3">
-                            <p>p</p>
-                        </div>
-                        <div class="text-left">
-                            <p>muhamad rizky irvandi</p>
-                            <p>hr.digital</p>
-                            <p>hr.digital</p>
-                        </div>
-                    </div>
-                    <!-- content -->
-                    <div class="flex flex-column my-2">
-                        <h3>title 1</h3>
-                        <p>jhbcuwevycxtrwsdrz</p>
-                    </div>
-                    <!-- sosial -->
-                    <div class="flex gap-2" >
-                        <p><i class="pi pi-comments pr-2" style="font-size: 15px"></i>5</p>
-                        <p><i class="pi pi-bookmark pr-2" style="font-size: 15px"></i>5</p>
-                    </div>
-                </div>
-            </div>
+<main>
+  <div class="w-12 h-full flex relative">
+    <div class="w-2 pt-4 px-4 top-0">
+      <div class="w-6">
+        <img class="w-full w-0" style="object-fit: contain !important;"
+          src="../../../assets/images/wecommunity-logo.png" alt="logo wecommunity">
+      </div>
+      <div class="flex flex-column m-0 mt-6 gap-2">
+        <div class="text-blue-600 flex">
+          <button
+            class="text-blue-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-blue-50 cursor-pointer">
+            <i class="pi pi-home px-2"></i>
+            Home</button>
         </div>
-        <!--  end card like  -->
-        <!-- card like  -->
-        <div class="card">
-            <div class="card-container">
-                <div class=" bg-indigo-100 text-xs font-base p-3 border-round mb-3">
-                    <!-- profile -->
-                    <div class="grid flex">
-                        <div class="col-3">
-                            <p>p</p>
-                        </div>
-                        <div class="text-left">
-                            <p>muhamad rizky irvandi</p>
-                            <p class="">hr.digital</p>
-                        </div>
-                    </div>
-                    <!-- content -->
-                    <div class="flex flex-column my-2">
-                        <h3>title 1</h3>
-                        <p>jhbcuwevycxtrwsdrz</p>
-                    </div>
-                    <!-- sosial -->
-                    <div class="flex gap-2" >
-                        <p><i class="pi pi-comments pr-2" style="font-size: 15px"></i>5</p>
-                        <p><i class="pi pi-bookmark pr-2" style="font-size: 15px"></i>5</p>
-                    </div>
-                </div>
-            </div>
+        <div class="text-600 flex">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <i class="pi pi-calendar px-2"></i>
+            Event</button>
         </div>
-        <!--  end card like  -->
-        <!-- card like  -->
-        <div class="card">
-            <div class="card-container">
-                <div class=" bg-indigo-100 text-xs font-base p-3 border-round mb-3">
-                    <!-- profile -->
-                    <div class="grid flex">
-                        <div class="col-3">
-                            <p>p</p>
-                        </div>
-                        <div class="text-left">
-                            <p>muhamad rizky irvandi</p>
-                            <p class="">hr.digital</p>
-                        </div>
-                    </div>
-                    <!-- content -->
-                    <div class="flex flex-column my-2">
-                        <h3>title 1</h3>
-                        <p>jhbcuwevycxtrwsdrz</p>
-                    </div>
-                    <!-- sosial -->
-                    <div class="flex gap-2" >
-                        <p><i class="pi pi-comments pr-2" style="font-size: 15px"></i>5</p>
-                        <p><i class="pi pi-bookmark pr-2" style="font-size: 15px"></i>5</p>
-                    </div>
-                </div>
-            </div>
+        <div class="text-600 flex hover:text-blue-600">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
+            <i class="pi pi-book px-2"></i>
+            Course
+          </button>
         </div>
-        <!--  end card like  -->
-        
-    </div>
-    <div class="col-7">
-        <div class="flex flex-column">
+        <div class="text-600 flex">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <i class="pi pi-home px-2"></i>
+            Post</button>
+        </div>
+        <div class="text-600 flex border-bottom-1 border-gray-200 pb-4">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <fa-icon class="text-gray-600 cursor-pointer px-2 hover:text-blue-600" [icon]="faNewspaper"></fa-icon>
+            Article
+          </button>
+        </div>
+        <div class="flex flex-column mt-4">
+          <div class="flex justify-content-between mb-3">
+            <p>Upcoming Event</p>
+            <div class="bg-blue-100 text-blue-600 border-circle w-1 h-1 align-self-center flex justify-content-center">
+              <p class="font-semibold text-xs">3</p>
+            </div>
+          </div>
+          <div class="flex flex-column gap-4">
+            <div class="flex w-12 gap-4">
+              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
+                <p class="font-semibold">20</p>
+                <p class="font-light text-gray-600">Mar</p>
+              </div>
+              <div class="flex flex-column w-9">
+                <p class="cursor-pointer">Modern Web...</p>
+                <div class="flex">
+                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
+                  <p class="text-xs font-light text-gray-600">100 people going</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex w-12 gap-4">
+              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
+                <p class="font-semibold">24</p>
+                <p class="font-light text-gray-600">Mar</p>
+              </div>
+              <div class="flex flex-column w-9">
+                <p class="cursor-pointer">Modern Web...</p>
+                <div class="flex">
+                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
+                  <p class="text-xs font-light text-gray-600">100 people going</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex w-12 gap-4">
+              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
+                <p class="font-semibold">4</p>
+                <p class="font-light text-gray-600">Apr</p>
+              </div>
+              <div class="flex flex-column w-9">
+                <p class="cursor-pointer">Modern Web...</p>
+                <div class="flex">
+                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
+                  <p class="text-xs font-light text-gray-600">100 people going</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-            <h1>main bar</h1>
-            <p-tabView>
-                <p-tabPanel header="Thread">
-                   <!-- card like  -->
-        <div class="card">
-            <div class="card-container">
-                <div class=" bg-indigo-100 text-xs font-base p-3 border-round mb-3">
-                    <!-- profile -->
-                    <div class="grid flex">
-                        <div class="col-3">
-                            <p>p</p>
-                        </div>
-                        <div class="text-left">
-                            <p>muhamad rizky irvandi</p>
-                            <p class="">hr.digital</p>
-                        </div>
-                    </div>
-                    <!-- content -->
-                    <div class="flex flex-column my-2">
-                        <h3>title 1</h3>
-                        <p>jhbcuwevycxtrwsdrz</p>
-                    </div>
-                    <!-- sosial -->
-                    <div class="flex gap-2" >
-                        <p><i class="pi pi-comments pr-2" style="font-size: 15px"></i>5</p>
-                        <p><i class="pi pi-bookmark pr-2" style="font-size: 15px"></i>5</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  end card like  -->
-                </p-tabPanel>
-                <p-tabPanel header="Bookmark">
-                    <!-- card like  -->
-                    <div class="card">
-                        <div class="card-container">
-                            <div class=" bg-green-100 text-xs font-base p-3 border-round mb-3">
-                                <!-- profile -->
-                                <div class="grid flex">
-                                    <div class="col-3">
-                                        <p>p</p>
-                                    </div>
-                                    <div class="text-left">
-                                        <p>muhamad rizky irvandi</p>
-                                        <p class="">hr.digital</p>
-                                    </div>
-                                </div>
-                                <!-- content -->
-                                <div class="flex flex-column my-2">
-                                    <h3>title 1</h3>
-                                    <p>jhbcuwevycxtrwsdrz</p>
-                                </div>
-                                <!-- sosial -->
-                                <div class="flex gap-2" >
-                                    <p><i class="pi pi-comments pr-2" style="font-size: 15px"></i>5</p>
-                                    <p><i class="pi pi-bookmark pr-2" style="font-size: 15px"></i>5</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--  end card like  -->
-                </p-tabPanel>
-              
-            </p-tabView>
-            
-        </div>
+      </div>
     </div>
-</div>
+    <div class="w-10 bg-gray-100 border-round-bottom-xl">
+      <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem">
+        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
+          style="width: 32px;" alt="Avatar" />
+      </div>
+      <div class="w-12 flex">
+        <div class="flex mt-4 w-9 justify-content-center">
+          <div class="w-full flex align-content-center justify-content-center align-self-center">
+            <div class="w-11 flex flex-column">
+              <div class=" mb-2 w-12 pb-4 border-bottom-1 border-gray-400 align-self-center">
+                <div class="flex w-full flex-column bg-white p-3 border-round-xl">
+                  <div class="flex gap-4">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
+                      style="width: 42px;" alt="Avatar" />
+                    <div routerLink="/post"
+                      class="hover:bg-gray-100 border-1 border-gray-400 border-round-3xl w-full flex cursor-pointer">
+                      <p class="text-sm text-gray-600 font-medium align-self-center pl-4 cursor-pointer">Start a post
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex mt-3 gap-2 justify-content-between">
+                    <div class="flex">
+                      <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-calendar px-2 align-self-center text-blue-600"></i>
+                        <p>Event</p>
+                      </div>
+                      <div routerLink="/post"
+                        class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-calendar px-2 align-self-center text-yellow-600"></i>
+                        <p>Polling</p>
+                      </div>
+                      <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-calendar px-2 align-self-center text-green-600"></i>
+                        <p>Create Course</p>
+                      </div>
+                    </div>
+                    <!-- <div class="flex align-content-center">
+                      <button
+                        class="bg-blue-600 text-white border-none px-4 py-1 border-round-md cursor-pointer hover:bg-blue-700">Post</button>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="" *ngFor="let post of posts">
+                <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                  <div class="flex gap-3">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border-circle align-self-center"
+                      style="width: 32px;" alt="Avatar" />
+                    <div class="flex flex-column">
+                      <p class="font-medium text-sm">{{post.fullname}}</p>
+                      <p class="text-xs font-light text-xs text-gray-400">1 Hours ago</p>
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    <p class="text-md font-medium">How to make a cupcake</p>
+                    <p class="text-sm font-light">Jujubes candy canes dessert pudding cupcake jelly cake danish candy
+                      canes. Pastry ice cream
+                      liquorice chocolate muffin oat cake dragée sugar pl <span
+                        class="cursor-pointer text-gray-400 ">...see more</span></p>
+                  </div>
+                  <div class="flex mt-3 pt-2 gap-2 justify-content-between border-top-1 border-gray-300">
+                    <div class="flex">
+                      <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-heart px-2 align-self-center"></i>
+                        <p>2 Like</p>
+                      </div>
+                      <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-comment px-2 align-self-center"></i>
+                        <p>5 Comment</p>
+                      </div>
+                    </div>
+                    <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md cursor-pointer">
+                      <i class="pi pi-bookmark px-2 align-self-center"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4 flex flex-column gap-3">
+                <div class="">
+                  <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                    <div class="flex gap-3">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border-circle align-self-center"
+                        style="width: 32px;" alt="Avatar" />
+                      <div class="flex flex-column">
+                        <div class="flex w-full align-content-center gap-2">
+                          <p class="font-medium text-sm align-self-center">John Doe</p>
+                          <div class="flex">
+                            <i class="pi pi-clock px-2 align-self-center" style="color: gray; font-size: 12px;"></i>
+                            <p class="text-xs font-light text-xs text-gray-400 align-self-center">1 Hour</p>
+                          </div>
+                        </div>
+                        <p class="text-xs font-light text-xs text-gray-400">HR Admin</p>
+                        <p class="text-xs font-light text-xs text-gray-400">Planning & Recruitment</p>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <p class="text-md font-medium">How to make a cupcake</p>
+                      <p class="text-sm font-light">Oat cake bonbon cotton candy sugar plum sweet roll. Brownie apple
+                        pie liquorice marzipan sweet roll. Toffee cookie cake tootsie roll dragée chocolate. <span
+                          class="cursor-pointer text-gray-400 ">...see more</span></p>
+                      <div class="flex w-full justify-content-between">
+                        <img class="w-3 max-h-16rem hover:bg-gray-100" style="object-fit: cover !important;"
+                          src="https://picsum.photos/600" alt="">
+                        <img class="w-3 max-h-16rem" style="object-fit: cover !important;"
+                          src="https://picsum.photos/700" alt="">
+                        <img class="w-3 max-h-16rem" style="object-fit: cover !important;"
+                          src="https://picsum.photos/800" alt="">
+                        <div class="w-3 max-h-16rem relative cursor-pointer">
+                          <div class="bg-gray-200 opacity-10">
+                            <img class="w-full h-full" style="object-fit: contain !important;"
+                              src="https://picsum.photos/900" alt="">
+                          </div>
+                          <p class="absolute top-50 right-50 text-800 opacity-100 text-md font-medium">+5</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex mt-3 pt-2 gap-2 justify-content-between border-top-1 border-gray-300">
+                      <div class="flex">
+                        <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                          <i class="pi pi-heart-fill px-2 align-self-center text-red-500"></i>
+                          <p>2 Like</p>
+                        </div>
+                        <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                          <i class="pi pi-comment px-2 align-self-center"></i>
+                          <p>5 Comment</p>
+                        </div>
+                      </div>
+                      <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-bookmark px-2 align-self-center"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                    <div class="flex gap-3">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border-circle align-self-center"
+                        style="width: 32px;" alt="Avatar" />
+                      <div class="flex flex-column">
+                        <div class="flex w-full align-content-center gap-2">
+                          <p class="font-medium text-sm align-self-center">John Doe</p>
+                          <div class="flex">
+                            <i class="pi pi-clock px-2 align-self-center" style="color: gray; font-size: 12px;"></i>
+                            <p class="text-xs font-light text-xs text-gray-400 align-self-center">1 Hour</p>
+                          </div>
+                        </div>
+                        <p class="text-xs font-light text-xs text-gray-400">HR Admin</p>
+                        <p class="text-xs font-light text-xs text-gray-400">Planning & Recruitment</p>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <p class="text-md font-medium">How to make a cupcake</p>
+                      <p class="text-sm font-light">Oat cake bonbon cotton candy sugar plum sweet roll. Brownie apple
+                        pie liquorice marzipan sweet roll. Toffee cookie cake tootsie roll dragée chocolate. <span
+                          class="cursor-pointer text-gray-400 ">...see more</span></p>
+                      <div class="flex w-full justify-content-between">
+                        <img class="w-4 max-h-16rem hover:bg-gray-100" style="object-fit: cover !important;"
+                          src="https://picsum.photos/600" alt="">
+                        <img class="w-4 max-h-16rem" style="object-fit: cover !important;"
+                          src="https://picsum.photos/700" alt="">
+                        <img class="w-4 max-h-16rem" style="object-fit: cover !important;"
+                          src="https://picsum.photos/800" alt="">
+                      </div>
+                    </div>
+                    <div class="flex mt-3 pt-2 gap-2 justify-content-between border-top-1 border-gray-300">
+                      <div class="flex">
+                        <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                          <i class="pi pi-heart px-2 align-self-center"></i>
+                          <p>2 Like</p>
+                        </div>
+                        <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                          <i class="pi pi-comment px-2 align-self-center"></i>
+                          <p>5 Comment</p>
+                        </div>
+                      </div>
+                      <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-bookmark px-2 align-self-center"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                    <div class="flex gap-3">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border-circle align-self-center"
+                        style="width: 32px;" alt="Avatar" />
+                      <div class="flex flex-column">
+                        <div class="flex w-full align-content-center gap-2">
+                          <p class="font-medium text-sm align-self-center">John Doe</p>
+                          <div class="flex">
+                            <i class="pi pi-clock px-2 align-self-center" style="color: gray; font-size: 12px;"></i>
+                            <p class="text-xs font-light text-xs text-gray-400 align-self-center">1 Hour</p>
+                          </div>
+                        </div>
+                        <p class="text-xs font-light text-xs text-gray-400">HR Admin</p>
+                        <p class="text-xs font-light text-xs text-gray-400">Planning & Recruitment</p>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <p class="text-md font-medium">How to make a cupcake</p>
+                      <p class="text-sm font-light">Oat cake bonbon cotton candy sugar plum sweet roll. Brownie apple
+                        pie liquorice marzipan sweet roll. Toffee cookie cake tootsie roll dragée chocolate. <span
+                          class="cursor-pointer text-gray-400 ">...see more</span></p>
+                      <div class="flex w-full justify-content-between">
+                        <img class="w-6 max-h-16rem hover:bg-gray-100" style="object-fit: cover !important;"
+                          src="https://picsum.photos/600" alt="">
+                        <img class="w-6 max-h-16rem" style="object-fit: cover !important;"
+                          src="https://picsum.photos/800" alt="">
+                      </div>
+                    </div>
+                    <div class="flex mt-3 pt-2 gap-2 justify-content-between border-top-1 border-gray-300">
+                      <div class="flex">
+                        <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                          <i class="pi pi-heart px-2 align-self-center"></i>
+                          <p>2 Like</p>
+                        </div>
+                        <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                          <i class="pi pi-comment px-2 align-self-center"></i>
+                          <p>5 Comment</p>
+                        </div>
+                      </div>
+                      <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-bookmark px-2 align-self-center"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-3 mt-2">
+          <div class="w-10">
+            <div class="flex mb-2 bg-red-100 w-4 justify-content-center py-1 border-round-md">
+              <i class="pi pi-heart-fill pr-2 align-self-center" style="color: red;"></i>
+              <p class="text-red-600">Like</p>
+            </div>
+            <div class="flex flex-column gap-3">
+              <div class="bg-white border-round-lg" *ngFor="let item of [].constructor(2)">
+                <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                  <div class="flex gap-3">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border-circle align-self-center"
+                      style="width: 32px;" alt="Avatar" />
+                    <div class="flex flex-column">
+                      <p class="font-medium text-sm">John Doe</p>
+                      <p class="text-xs font-light text-xs text-gray-400">1 Hours ago</p>
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    <p class="text-md font-medium">How to make a cupcake</p>
+                    <p class="text-sm font-light">Jujubes candy canes dessert pudding cupcake jelly cake danish candy
+                      canes. Pastry ice cream
+                      liquorice chocolate muffin oat cake dragée sugar pl <span
+                        class="cursor-pointer text-gray-400 ">...see more</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

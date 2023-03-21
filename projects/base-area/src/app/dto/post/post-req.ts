@@ -5,6 +5,7 @@ export interface PostReq{
     title:string,
     content:string,
     typeId:string,
-    attachmentPost:AttachmentPostInsertReq;
-    pollingInsert: PollingInsertReq[]
+    categoryId : string,
+    attachmentPost:AttachmentPostInsertReq[],
+    pollingInsert: PollingInsertReq
 }

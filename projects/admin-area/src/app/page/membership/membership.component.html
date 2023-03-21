@@ -1,0 +1,96 @@
+<pre>{{getAllMembership|json}}</pre>
+<div class="mx-6">
+    <h1>Memberhip</h1>
+    <div class="col-3 my-2">
+        <app-button-primary label="Create Memberhip" id="create" (click)="showResponsiveDialog()"></app-button-primary>
+        <form [formGroup]="createMembership">
+            <p-dialog header="Create Memberhip" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}"
+                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                <pre>{{createMembership.value|json}}</pre>
+                <div class="mb-3">
+                    <div class="mb-3 flex flex-column w-full">
+                        <label for="codeStatus" class="font-medium col-form-label">Code Status</label>
+                        <input type="text" class="w-full " formControlName="codeStatus" pInputText id="codeStatus"
+                            name="codeStatus">
+                    </div>
+                    <div class="mb-3 flex flex-column w-full">
+                        <label for="statusName" class="font-medium col-form-label">Status Name</label>
+                        <input type="text" class="w-full " formControlName="statusName" pInputText id="statusName"
+                            name="statusName">
+                    </div>
+                    <div class="mb-3 flex flex-column w-full">
+                        <label for="periodDay" class="font-medium col-form-label">Period Day</label>
+                        <input type="text" class="w-full " formControlName="periodDay" pInputText id="periodDay"
+                            name="periodDay">
+                    </div>
+                </div>
+                <ng-template pTemplate="footer">
+                    <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
+                    <p-button type="button" label="Create" styleClass="p-button-text" (click)="onCreateMembership()"
+                        (click)="displayResponsive=false"></p-button>
+                </ng-template>
+            </p-dialog>
+        </form>
+    </div>
+    <p-table [value]="getAllMembership" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No</th>
+                    <th>Code</th>
+                    <th>Membership</th>
+                    <th>Periode</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-membership let-i="rowIndex">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{membership.codeStatus}}</td>
+                    <td>{{membership.statusName}}</td>
+                    <td>{{membership.periodDay}}</td>
+                    <td class="flex gap-2">
+                        <app-button-icon id="update" (click)="showUpdateDialog(membership)"></app-button-icon>
+                        <form [formGroup]="updateMembership">
+                            <p-dialog header="Update Membership" [(visible)]="displayUpdate" [breakpoints]="{'960px': '75vw'}"
+                                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                                <pre>{{updateMembership.value|json}}</pre>
+                                <div class="mb-3">
+                                    <div class="mb-3 flex flex-column w-full">
+                                        <label for="codeStatus" class="font-medium col-form-label">Code Status</label>
+                                        <input type="text" class="w-full " formControlName="codeStatus" pInputText id="codeStatus"
+                                            name="codeStatus">
+                                    </div>
+                                    <div class="mb-3 flex flex-column w-full">
+                                        <label for="statusName" class="font-medium col-form-label">Status Name</label>
+                                        <input type="text" class="w-full " formControlName="statusName" pInputText id="statusName"
+                                            name="statusName">
+                                    </div>
+                                    <div class="mb-3 flex flex-column w-full">
+                                        <label for="periodDay" class="font-medium col-form-label">Period Day</label>
+                                        <input type="text" class="w-full " formControlName="periodDay" pInputText id="periodDay"
+                                            name="periodDay">
+                                    </div>
+                                </div>
+                                <ng-template pTemplate="footer">
+                                    <p-button (click)="displayUpdate=false" label="Cancel" styleClass="p-button-text">
+                                    </p-button>
+                                    <p-button type="button" label="Update" styleClass="p-button-text"
+                                        (click)="onUpdateMembershipConfirm()" (click)="displayUpdate=false"></p-button>
+                                </ng-template>
+                            </p-dialog>
+                        </form>
+                        <app-button-danger id="delete" (click)="showDeleteDialog()"></app-button-danger>
+                        <p-dialog header="Delete Category" [(visible)]="displayDelete" [breakpoints]="{'960px': '75vw'}"
+                        [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                        <h4>Are you sure delete this category?</h4>
+                        <ng-template pTemplate="footer">
+                            <p-button (click)="displayDelete=false" label="No" styleClass="p-button-text"></p-button>
+                            <p-button type="button" label="Yes" styleClass="p-button-text"
+                                (click)="onDeleteMembership(membership)" (click)="displayDelete=false"></p-button>
+                        </ng-template>
+                    </p-dialog>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+</div>

@@ -16,7 +16,7 @@ export class AuthAdminGuard implements CanActivate{
        console.log(state);
 
        try {
-        if(this.userService.getRole() == ROLE.MEMBER ){
+        if(this.userService.getRole() == ROLE.MMBR ){
             return true
         }else{
             return false
