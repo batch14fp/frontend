@@ -1,7 +1,10 @@
 import { PollingOptionRes } from "./polling-option-res";
 
 export interface AllPostRes{
-    userId:string,
+  id:string,
+  userId:string,
+  imageProfileId:string,
+  position:string,
 	fullname:string,
 	timeAgo:string,
 	title:string,
@@ -13,10 +16,10 @@ export interface AllPostRes{
 	categoryName:string,
 	countPostLike:number,
 	countPostComment:number,
-	isLike:boolean,
+	like:boolean,
 	isBookmark:boolean,
 	titlePolling:string,
   ver: number,
 	pollingOptionId:string,
-	pollingOption:PollingOptionRes,
+	pollingOption:PollingOptionRes[],
 }

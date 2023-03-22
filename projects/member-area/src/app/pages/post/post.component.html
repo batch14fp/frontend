@@ -166,7 +166,7 @@
             <input formControlName="title" type="text" id="title" pInputText />
           </div>
 
-          <div *ngIf="postFb.value.postType!['postTypeCode'] !== 'PPOL'" class="flex flex-column">
+          <div class="flex flex-column">
             <label for="title" class="text-xl font-medium text-800">Description</label>
             <textarea formControlName="description" [rows]="5" [cols]="30" pInputTextarea
               [autoResize]="true"></textarea>
@@ -178,7 +178,11 @@
             <p-calendar [showIcon]="true" [minDate]="today" dateFormat="yy-mm-dd" formControlName="endAt"></p-calendar>
             <div class="flex flex-column mt-2 mb-4">
               <label for="question" class="text-xl font-medium text-800">Question</label>
-              <input type="text" id="question" pInputText formControlName="pollingTitle" />
+              <textarea class="w-full" formControlName="pollingTitle" [rows]="1" [cols]="1" pInputTextarea
+                [autoResize]="true"></textarea>
+              <!-- <textarea formControlName="pollingTitle" [rows]="5" [cols]="30" pInputTextarea
+                [autoResize]="true"></textarea> -->
+              <!-- <input type="text" id="question" pInputText formControlName="pollingTitle" /> -->
             </div>
 
             <div formArrayName="pollingOptions" class="mt-2 flex flex-column gap-2">
