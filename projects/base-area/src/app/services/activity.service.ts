@@ -15,8 +15,8 @@ export class ActivityService{
 
     constructor(private http : HttpClient){}
 
-    getAllActivity() : Observable<ActivityRes>{
-        return this.http.get<ActivityRes>(`${BASE_URL}/activities`)
+    getAllActivity() : Observable<ActivityRes[]>{
+        return this.http.get<ActivityRes[]>(`${BASE_URL}/activities`)
     }
 
     getActivity(id: string) : Observable<ActivityRes>{
