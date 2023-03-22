@@ -1,5 +1,11 @@
 export interface ArticleUpdateReq{
+	articleId:string,
 	title: string,
-	contentArticle: string,
-	imageArticle:string,
+	content: string,
+	fileId?:string,
+	fileContent?:string,
+	fileExtension?:string,
+	fileVer?:number,
+	ver:number,
+	isActive:boolean
 }

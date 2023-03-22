@@ -27,6 +27,7 @@ import {DialogModule} from 'primeng/dialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { TimeAgoPipe } from './utils/time-ago.pipe';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {AvatarModule} from 'primeng/avatar';
 
 
 
@@ -40,6 +41,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
      ,DialogModule, InputSwitchModule, ConfirmDialogModule
+     ,AvatarModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
@@ -47,6 +49,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
     ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule
+    ,AvatarModule
   ]
 
 })
