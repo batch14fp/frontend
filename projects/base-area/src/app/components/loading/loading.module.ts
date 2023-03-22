@@ -6,6 +6,7 @@ import { ShareModule } from '../../share.module';
 import { EmailSendAnimationComponent } from './email-send/email-sendcomponent';
 import { SearchDataComponent } from './search-data/search-data.componenet';
 import { LoadingDotComponent } from './loading-dot/loading-dot.component';
+import { LikeComponent } from './like/like.component';
 
 
 
@@ -15,13 +16,13 @@ export function playerFactory(): any {
 
 @NgModule({
     declarations: [
-      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent
+      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent, LikeComponent
     ],
     imports: [
      LottieModule.forRoot({ player: playerFactory }),
     ],
     exports:[
-      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent
+      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent, LikeComponent
     ]
 })
 

@@ -25,27 +25,28 @@ import {AccordionModule} from 'primeng/accordion';
 import {EditorModule} from 'primeng/editor';
 import {DialogModule} from 'primeng/dialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
-
+import { TimeAgoPipe } from './utils/time-ago.pipe';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 
 
 @NgModule({
   declarations: [
-
+    TimeAgoPipe
   ],
   imports: [
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
      DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
-     ,DialogModule, InputSwitchModule
+     ,DialogModule, InputSwitchModule, ConfirmDialogModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
-    ,DialogModule, InputSwitchModule
+    ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule
   ]
 
 })

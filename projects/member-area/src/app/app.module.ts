@@ -11,6 +11,8 @@ import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
+import { ShareModule } from '../../../base-area/src/app/share.module';
 
 
 @NgModule({
@@ -19,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule, AppRouting,
-    HttpClientModule,FormsModule, ReactiveFormsModule, BrowserAnimationsModule
+    HttpClientModule,FormsModule, ReactiveFormsModule, BrowserAnimationsModule, ShareModule
   ],
   providers: [
     {
@@ -27,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     },
     {
       provide : HTTP_INTERCEPTORS, useClass : ResponseInterceptor, multi : true
-    }
+    },
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })
