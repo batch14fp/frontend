@@ -1,4 +1,3 @@
-<!-- <<<<<<< HEAD -->
 <main>
     <div class="w-12 h-full flex relative">
       <div class="w-2 pt-4 px-4 top-0">
@@ -96,10 +95,11 @@
           <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
             style="width: 32px;" alt="Avatar" />
         </div>
-        <form>
+        <form [formGroup]="editProfile">
             <div class="flex mx-4 justify-content-end">
                 <app-button-primary label="Save" class="m-3" icon="pi pi-save"></app-button-primary>
             </div>
+            {{editProfile.value|json}}
             <div class="w-12 flex">
             <div class="flex my-4 w-7 justify-content-center">
                 <div class="w-full flex align-content-center justify-content-center">
@@ -110,7 +110,7 @@
                                 <h2>Edit Profile</h2>
                             </div>
                             <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
-                                <i class="pi pi-user-edit align-self-center"></i>
+                                <i class="pi pi-user-edit align-self-center cursor-pointer hover:bg-gray-100 "></i>
                             </div>
                         </div>
                         <div class="flex">
@@ -124,29 +124,35 @@
                             <div class="mb-3 flex flex-column ">
                                 <label for="fullname" class="font-medium col-form-label">Full Name</label>
                                 <input type="text" class="mt-2" style="border-radius: 10px;" pInputText id="fullname" placeholder="ex.budi doremi"
-                                name=" fullname">
+                                name=" fullname" formControlName="fullname">
                             </div>
                             <div class="mb-3 flex flex-column ">
-                                <label for="fullname" class="font-medium col-form-label">E-mail</label>
-                                <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="fullname" placeholder="example@gmail.com"
-                                name=" fullname">
+                                <label for="email" class="font-medium col-form-label">E-mail</label>
+                                <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="email" formControlName="email"  placeholder="example@gmail.com"
+                                name=" email">
+                            </div>
+                            <div class="mb-3 flex flex-column ">
+                                <label for="phoneNumber" class="font-medium col-form-label">Phone Number</label>
+                                <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="phoneNumber" placeholder="+62 982 3453 2345"
+                                name=" phoneNumber" formControlName="phoneNumber">
                             </div>
                             <div class="mb-3 flex flex-column ">
                                 <label for="fullname" class="font-medium col-form-label">Country</label>
-                                <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="fullname" placeholder="example@gmail.com"
-                                name=" fullname">
-                                <!-- <p-dropdown [options]="cities" formControlName="selectedCity" optionLabel="name"></p-dropdown> -->
+                                <p-dropdown styleClass="w-full" [options]="countries"  formControlName="country" optionLabel="name" optionValue="shortName" [filter]="true"
+                                filterBy="name"></p-dropdown>
+                            </div>
+                            <div class="mb-3 flex flex-column ">
+                                <label for="fullname" class="font-medium col-form-label">Province</label>
+                                <p-dropdown styleClass="w-full" [options]="states" formControlName="province"></p-dropdown>
                             </div>
                             <div class="mb-3 flex flex-column ">
                                 <label for="fullname" class="font-medium col-form-label">City</label>
-                                <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="fullname" placeholder="example@gmail.com"
-                                name=" fullname">
-                                <!-- <p-dropdown [options]="cities" formControlName="selectedCity" optionLabel="name"></p-dropdown> -->
+                                <p-dropdown styleClass="w-full" [options]="cities" formControlName="city" ></p-dropdown>
                             </div>
                             <div class="mb-3 flex flex-column ">
                                 <label for="postalcode" class="font-medium col-form-label">Postal Code</label>
                                 <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="postalcode"
-                                name=" postalcode">
+                                name=" postalcode" formControlName="postalCode">
                             </div>
                         </div>
                 
@@ -171,16 +177,17 @@
                         <div class="mt-3 flex flex-column ">
                             <label for="Company" class="font-medium col-form-label">Company</label>
                             <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="Company"
-                                name=" Company">
+                                name=" Company" formControlName="company">
                         </div>
                         <div class="mt-3 flex flex-column ">
                             <label for="industry" class="font-medium col-form-label">Industry</label>
-                            <p-dropdown styleClass="w-full"  [options]="getIndustry" formControlName="selectedIndustry" optionLabel="industryName"></p-dropdown>
-                                
+                            <p-dropdown styleClass="w-full"  [options]="getIndustry" formControlName="industryId" optionLabel="industryName" [filter]="true"
+                            filterBy="industryName" ></p-dropdown>
+
                         </div>
                         <div class="mt-3 w-12 flex flex-column ">
                             <label for="position" class="font-medium col-form-label">Position</label>
-                                <p-dropdown styleClass="w-full"  [options]="getPosition" formControlName="selectedPosition" optionLabel="positionName"></p-dropdown>
+                                <p-dropdown styleClass="w-full"  [options]="getPosition" formControlName="poistionId" optionLabel="positionName"></p-dropdown>
                         </div>
                     </div>
                     </div>
@@ -194,13 +201,18 @@
                                 <i class="pi pi-wallet align-self-center"></i>
                             </div>
                         </div>
+                        {{getBankPayment | json}}
+                        <div class="mt-3 w-12 flex flex-column ">
+                          <label for="bankPayment" class="font-medium col-form-label">Bank</label>
+                              <p-dropdown styleClass="w-full"  [options]="getBankPayment" formControlName="selectedBank" optionLabel="bankPaymentName"></p-dropdown>
+                      </div>
                         <div class="mt-3 flex flex-column ">
-                            <label for="Company" class="font-medium col-form-label">Company</label>
-                            <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="Company"
-                                name=" Company">
+                            <label for="industry" class="font-medium col-form-label">Account Number</label>
+                            <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="industry"
+                                name=" industry">
                         </div>
                         <div class="mt-3 flex flex-column ">
-                            <label for="industry" class="font-medium col-form-label">Industry</label>
+                            <label for="industry" class="font-medium col-form-label">Account Name</label>
                             <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="industry"
                                 name=" industry">
                         </div>
@@ -228,13 +240,11 @@
                         </div>
                     </div>
                     </div>
-
                 </div>
                 </div>
             </div>
         </div>
         </form>
-        
       </div>
     </div>
   </main>
