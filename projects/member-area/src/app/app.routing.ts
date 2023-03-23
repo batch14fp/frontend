@@ -23,6 +23,7 @@ import { ForgetPassComponent } from "./pages/forget-pass/forget-pass.component";
 import { ProfileModule } from "./pages/profile/profile.module";
 import { ThreadComponent } from "./pages/thread/thread.component";
 import { ArticleComponent } from "./pages/article/article.component";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -53,7 +54,7 @@ export const memberRoutes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent, 
+        component: DashboardComponent,
     },
     {
         path: '',
@@ -91,6 +92,7 @@ export const memberRoutes: Routes = [
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
+        InfiniteScrollModule,
         ShareModule, CustomButtonModule, CardModule, DropdownModule, TabViewModule, NavbarModule, CourseModule, ProfileModule,
         CodeInputModule.forRoot({
             codeLength: 6,

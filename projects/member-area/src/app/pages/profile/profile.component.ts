@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     getIndustry : IndustryRes[] = []
     getBankPayment : BankPaymentRes[] = []
     getProfile? : ProfileResDetail
+
     getBank = bankList
     getSocmed : SocialMediaGetRes[] = []
 
@@ -186,8 +187,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
        this.selectedCountry()
        this.initProfile()
        this.initSocialMedia()
-        
-        
+
         // this.citis = countryService.get
         // console.log(countryService.getCountries())
         // console.log(countryService.getStatesByShort('ID'))
