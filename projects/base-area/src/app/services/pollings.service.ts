@@ -7,6 +7,7 @@ import { PollingUpdateReq } from "../dto/post/polling-update-req";
 import { res } from "../dto/res";
 import { ResInsert } from "../dto/res-insert";
 import { UpdateRes } from "../dto/res-update";
+import {  PollingVoteReqInsert } from '../dto/post/polling-vote-req';
 
 @Injectable({
     providedIn : 'root'
@@ -27,4 +28,10 @@ export class PollingsService {
     deletePolling(id : string) : Observable<res>{
         return this.http.delete<res>(`${BASE_URL}/pollings/${id}`)
     }
+
+
+    insertVote(data : PollingVoteReqInsert) : Observable<ResInsert>{
+      return this.http.post<ResInsert>(`${BASE_URL}/pollings/vote`,data)
+  }
+
 }

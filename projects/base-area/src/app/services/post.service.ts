@@ -12,6 +12,8 @@ import { PostUpdateReq } from "../dto/post/post-update-req";
 import { res } from "../dto/res";
 import { ResInsert } from "../dto/res-insert";
 import { UpdateRes } from "../dto/res-update";
+import { PostCommentInsertReq } from '../dto/post/post-comment-insert-req';
+import { PostCommentRes } from '../dto/post/all-post-comment-res';
 
 @Injectable({
     providedIn : 'root'
@@ -25,12 +27,20 @@ export class PostService{
         return this.http.get<AllPostRes[]>(`${BASE_URL}/posts?page=${page}&size=${size}`)
     }
 
+    getAllCommentByPostId(id:string, page:number, size:number): Observable<PostCommentRes[]>{
+        return this.http.get<PostCommentRes[]>(`${BASE_URL}/posts/${id}/comment?page=${page}&size=${size}`)
+    }
+
     getActivity(id:number): Observable<AllPostByTypeRes[]>{
         return this.http.get<AllPostByTypeRes[]>(`${BASE_URL}/posts/${id}`)
     }
 
     insertPost(data : PostReq): Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/posts`,data)
+    }
+
+    insertComment(data : PostCommentInsertReq): Observable<ResInsert>{
+        return this.http.post<ResInsert>(`${BASE_URL}/posts/comment`,data)
     }
 
     insertPostLike(data : LikeInsertReq) : Observable<ResInsert>{

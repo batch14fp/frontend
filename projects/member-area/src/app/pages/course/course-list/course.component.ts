@@ -32,6 +32,12 @@ export class CourseComponent implements OnInit, OnDestroy{
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
 
+    // startPage: number = 0
+    // maxPage: number = 5
+    // totalData: number = 0
+    // query?: string
+    // loading: boolean = true
+
     categories: CategoryRes[] = []
     dateSearch!:Date
 
@@ -43,15 +49,15 @@ export class CourseComponent implements OnInit, OnDestroy{
       })
     }
 
-    initCourse(){
-      this.course$ = this.activityService.getAllActivity().subscribe( res => {
-        this.allActivity = res
-      })
-    }
+    // initCourse(){
+    //   this.course$ = this.activityService.getAllActivity().subscribe( res => {
+    //     this.allActivity = res
+    //   })
+    // }
 
     ngOnInit(): void {
       this.initCategory()
-      this.initCourse()
+      // this.initCourse()
     }
 
     ngOnDestroy(): void {
