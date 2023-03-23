@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     getPosition : PositionRes[] = []
     getIndustry : IndustryRes[] = []
     getBankPayment : BankPaymentRes[] = []
-    getProfile? : ProfileResDetail 
+    getProfile? : ProfileResDetail
 
     position$? : Subscription
     industry$? : Subscription
@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     location$? : Subscription
     profile$? : Subscription
 
-  countries!: any[]
+  // countries!: any[]
 
     // selectedPosition! : PositionRes
     // selectedIndustry! : IndustryRes
@@ -180,8 +180,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
        this.initBankPayment()
        this.selectedCountry()
        this.initProfile()
-        
-        
+
+
         // this.citis = countryService.get
         // console.log(countryService.getCountries())
         // console.log(countryService.getStatesByShort('ID'))

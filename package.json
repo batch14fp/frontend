@@ -26,6 +26,7 @@
     "countrycitystatejson": "^21.2.2301",
     "lottie-web": "^5.10.2",
     "ngx-countdown": "^15.0.0",
+    "ngx-infinite-scroll": "^15.0.0",
     "ngx-lottie": "^10.0.0",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",

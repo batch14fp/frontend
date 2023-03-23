@@ -1,3 +1,4 @@
 export interface PollingOptionReq{
-    pollingContent : string
+    pollingContent : string,
+    pollingOptionId: string
 }
