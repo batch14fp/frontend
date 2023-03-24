@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     location$? : Subscription
     profile$? : Subscription
 
-  countries!: any[]
+//   countries!: any[]
 
     // selectedPosition! : PositionRes
     // selectedIndustry! : IndustryRes
