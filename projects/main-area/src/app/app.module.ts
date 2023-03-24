@@ -9,9 +9,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
+
 import { MessageService, ConfirmationService } from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
-
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [

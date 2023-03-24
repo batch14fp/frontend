@@ -10,7 +10,7 @@ export interface ProfileResDetail{
 	userBalance : number
 	statusMember : string
 	phoneNumber : string
-	dob : Date
+	dob : string
 	country : string
 	province : string
 	city : string
