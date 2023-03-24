@@ -23,4 +23,5 @@ export interface AllPostRes{
   ver: number,
 	pollingOptionId:string,
 	pollingOption:PollingOptionReq[],
+  showInsertComment: boolean
 }
