@@ -11,3 +11,7 @@
 img {
   object-fit: contain !important;
 }
+
+.postImageProfile {
+  object-fit: contain !important;
+}

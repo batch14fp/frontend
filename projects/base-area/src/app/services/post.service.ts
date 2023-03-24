@@ -66,5 +66,8 @@ export class PostService{
     deletePostBookmaek(id : string): Observable<res>{
         return this.http.delete<res>(`${BASE_URL}/posts/bookmark/${id}`)
     }
+    deletePostComment(id : string): Observable<res>{
+        return this.http.delete<res>(`${BASE_URL}/posts/comment/${id}`)
+    }
 
 }

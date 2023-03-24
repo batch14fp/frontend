@@ -137,6 +137,34 @@
               </div>
               <div infinite-scroll (scrolled)="onScroll()">
                 <div class="mt-4 flex flex-column gap-4">
+
+                  <ng-container *ngIf="isLoading">
+                    <div *ngFor="let item of [].constructor(5)"
+                      class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
+                      <div class="flex gap-3 justify-content-between mt-2">
+                        <div class="flex gap-2">
+                          <p-skeleton shape="circle" size="3rem" styleClass="mr-2"></p-skeleton>
+                          <div class="flex flex-column gap-2">
+                            <p-skeleton width="12rem" height="1.2rem"></p-skeleton>
+                            <p-skeleton width="8rem" height="1.2rem"></p-skeleton>
+                          </div>
+                        </div>
+                        <div class="flex flex-column gap-2 justify-content-end">
+                          <p-skeleton width="4rem" height="1.2rem" class="align-self-end"></p-skeleton>
+                          <p-skeleton width="8rem" height="1.2rem"></p-skeleton>
+                        </div>
+                      </div>
+                      <div class="flex flex-column mt-4 gap-3">
+                        <p-skeleton width="20rem" height="1.6rem"></p-skeleton>
+                        <p-skeleton width="100%" height="150px"></p-skeleton>
+                      </div>
+                      <div class="flex justify-content-between mt-4">
+                        <p-skeleton width="6rem" height="1.6rem"></p-skeleton>
+                        <p-skeleton width="3rem" height="1.6rem"></p-skeleton>
+                      </div>
+                    </div>
+                  </ng-container>
+
                   <div *ngFor="let post of posts" class="">
                     <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
                       <div class="flex flex-column">
@@ -164,8 +192,21 @@
                         </div>
                         <div class="flex gap-3 justify-content-between">
                           <div class="flex gap-2">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
-                              class="border-circle align-self-center" style="width: 42px;" alt="Avatar" />
+                            <div *ngIf="!post.imageProfileId" style="width: 42px;  height: 42px;"
+                              class="border-circle align-self-center bg-blue-400 flex justify-content-center align-content-center">
+                              <p
+                                class="text-white font-medium text-xl align-self-center align-content-center text-center">
+                                {{fotoName(post.fullname)}}</p>
+                            </div>
+                            <div *ngIf="post.imageProfileId" class="postImageProfile">
+                              <img src="http://localhost:2121/files/{{post.imageProfileId}}"
+                                class="border-circle align-self-center" style="width: 42px;height: 42px;"
+                                alt="Avatar" />
+                              <!-- <p-avatar size="large" image="http://localhost:2121/files/{{post.imageProfileId}}"
+                                styleClass="mr-2" shape="circle" class=""></p-avatar> -->
+                            </div>
+                            <!-- <img *ngIf="post.imageProfileId" image src='http://localhost:4200/files/'
+                              class="border-circle align-self-center " style="width: 42px;" alt="Avatar" /> -->
                             <div class="flex flex-column">
                               <div class="flex w-full align-content-center gap-2">
                                 <p class="font-medium text-md align-self-center">{{post.fullname}}</p>
