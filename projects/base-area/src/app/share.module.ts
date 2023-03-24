@@ -32,6 +32,7 @@ import { AnimateModule } from 'primeng/animate';
 
 
 
+
 @NgModule({
   declarations: [
     TimeAgoPipe
@@ -42,7 +43,7 @@ import { AnimateModule } from 'primeng/animate';
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
      ,DialogModule, InputSwitchModule, ConfirmDialogModule, AnimateModule
-     ,AvatarModule
+     ,AvatarModule, SkeletonModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
@@ -50,7 +51,7 @@ import { AnimateModule } from 'primeng/animate';
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
     ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule, AnimateModule
-    ,AvatarModule
+    ,AvatarModule, SkeletonModule
   ]
 
 })

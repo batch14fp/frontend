@@ -9,6 +9,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
+
+import { MessageService, ConfirmationService } from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
 import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
@@ -17,16 +20,16 @@ import { ConfirmationService } from 'primeng/api';
   ],
   imports: [
     BrowserModule, AppRouting, ShareModule, FormsModule, ReactiveFormsModule, HttpClientModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, ToastModule
   ],
-  providers: [  
+  providers: [
     {
     provide : HTTP_INTERCEPTORS, useClass : TokenInterception, multi: true
     },
     {
     provide : HTTP_INTERCEPTORS, useClass : ResponseInterceptor, multi : true
     },
-    ConfirmationService
+    ConfirmationService, MessageService
   ],
   bootstrap: [AppComponent]
 })
