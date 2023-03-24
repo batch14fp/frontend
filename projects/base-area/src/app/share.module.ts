@@ -28,6 +28,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import { TimeAgoPipe } from './utils/time-ago.pipe';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {AvatarModule} from 'primeng/avatar';
+import { AnimateModule } from 'primeng/animate';
+
 
 
 
@@ -40,16 +42,16 @@ import {AvatarModule} from 'primeng/avatar';
      DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
-     ,DialogModule, InputSwitchModule, ConfirmDialogModule
-     ,AvatarModule
+     ,DialogModule, InputSwitchModule, ConfirmDialogModule, AnimateModule
+     ,AvatarModule, SkeletonModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
     CommonModule, DropdownModule, ButtonModule, ProgressSpinnerModule, ImageModule, CalendarModule, CheckboxModule,
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
-    ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule
-    ,AvatarModule
+    ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule, AnimateModule
+    ,AvatarModule, SkeletonModule
   ]
 
 })

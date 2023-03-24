@@ -14,6 +14,10 @@ import { PositionService } from "@service/position.service";
 import { ProfileService } from "@service/profile.service";
 import { UserService } from "@service/user.service";
 import { Subscription } from "rxjs";
+import { bankList } from "projects/base-area/src/app/constant/bank.service";
+import { SocmedService } from "@service/socmed.service";
+import { SocialMediaGetRes } from "@dto/socialmedia/social-media-res";
+import { getInitials } from "projects/base-area/src/app/utils/getInitial";
 
 const countryService= require('countrycitystatejson')
 
@@ -41,43 +45,39 @@ export class ProfileComponent implements OnInit, OnDestroy {
     getPosition : PositionRes[] = []
     getIndustry : IndustryRes[] = []
     getBankPayment : BankPaymentRes[] = []
-    getProfile? : ProfileResDetail 
+    getProfile? : ProfileResDetail
+
+    getBank = bankList
+    getSocmed : SocialMediaGetRes[] = []
 
     position$? : Subscription
     industry$? : Subscription
     bankPaymnet$? : Subscription
     location$? : Subscription
     profile$? : Subscription
+    socmed$? : Subscription
 
-//   countries!: any[]
 
     // selectedPosition! : PositionRes
     // selectedIndustry! : IndustryRes
     selectedBank! : BankPaymentRes
     selectedContries! : string
 
+    photoName = ""
 
+    walletMember = this.fb.group({
+        bankPaymentName : [""],
+        accountNumber : [""],
+        accountName : [""]
+    })
 
-    // showProfile(profile : ProfileResDetail){
-    //     console.log(profile);
-    //     this.editProfile.setValue({
-    //         userId : profile.userId,
-    //         fullname: profile.fullname,
-    //         phoneNumber: profile.phoneNumber,
-    //         country: profile.country,
-    //         province: profile.province,
-    //         city: profile.city,
-    //         postalCode: profile.postalCode,
-    //         company: profile.company,
-    //         industryId: profile.industryId,
-    //         poistionId: profile.positionId,
-    //         socialmedia: profile,
-    //         ver : profile.ver,
-    //         isActive : profile.isActive
-    //     })
-    // }
-
-
+    socmedMember = this.fb.group({
+        userId : [""],
+        socialMediaId : [""],
+        url : [""],
+        isActive : [true],
+        ver : [0]
+    })
 
     editProfile = this.fb.group({
         userId : [""],
@@ -89,7 +89,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         userBalance : [0],
         statusMember : [""],
         phoneNumber : [""],
-        dob : ["yyyy-MM-dd"],
+        dob : [""],
         country : [""],
         province : [""],
         city : [""],
@@ -108,8 +108,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private positionService : PositionService,
         private bankPaymentService : BankPaymentService,
         private profileService : ProfileService,
-        private userService : UserService
-
+        private userService : UserService,
+        private socialMediaService : SocmedService
     ){}
 
 
@@ -148,19 +148,26 @@ export class ProfileComponent implements OnInit, OnDestroy {
         })
     }
 
+    initSocialMedia(){
+        this.socmed$ = this.socialMediaService.getAllSocmed().subscribe(res=>{
+            this.getSocmed = res
+        })
+    }
+
     initProfile(){
-        this.profile$ = this.profileService.getProfileDetail(this.userService.getIdLogin()).subscribe(res => {
+        this.profile$ = this.profileService.getProfileDetail().subscribe(res => {
+            this.photoName = getInitials(res.fullname)
             this.editProfile.patchValue({
                 userId : res.userId,
                 industryId : res.industryId,
                 positionId : res.positionId,
                 statusMemberId : res.statusMember,
-                fullname : res.email,
+                fullname : res.fullname,
                 email : res.email,
                 userBalance : res.userBalance,
                 statusMember : res.statusMember,
                 phoneNumber : res.phoneNumber,
-                // dob : res.dob.getDate,
+                dob : res.dob,
                 country : res.country,
                 province : res.province,
                 city : res.city,
@@ -180,8 +187,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
        this.initBankPayment()
        this.selectedCountry()
        this.initProfile()
-        
-        
+       this.initSocialMedia()
+
         // this.citis = countryService.get
         // console.log(countryService.getCountries())
         // console.log(countryService.getStatesByShort('ID'))

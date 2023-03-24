@@ -1,4 +1,7 @@
 export interface PasswordReqUpdate{
-	newPassword :string,
-	confirmNewPassword:string,
+	profileId : string
+	oldPassword : string
+	newPassword :string
+	confirmNewPassword:string
+	ver: number
 }
