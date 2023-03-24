@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
+import { PasswordReqUpdate } from "@dto/profile/password-req-update";
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup,faPenToSquare, faGlobe} from '@fortawesome/free-solid-svg-icons';
 import { ProfileService } from "@service/profile.service";
 import { UserService } from "@service/user.service";
@@ -34,29 +35,29 @@ export class ChangePasswordComponent implements OnInit, OnDestroy{
     }
 
     formPass = this.fb.group({
-        profileId : [""],
         oldPassword : [""],
         newPassword :[""],
-        confirmNewPassword:[""],
-        ver: [""]
+        ver: [0]
     })
-    // initUser(){
 
-    // }
+    onSave(){
+        const data : PasswordReqUpdate = {
+            oldPassword : this.formPass.value.oldPassword!,
+            newPassword : this.formPass.value.newPassword!,
+        }
 
-    initProfile(){
-        this.profile$ = this.profileService.getProfileDetail().subscribe(res => {
-            this.formPass.patchValue({
-                
-            })
+        this.profile$ = this.profileService.updatePass(data).subscribe(res=>{
+            alert('Update Password Success')
         })
     }
 
+
+
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+    //   this.initProfile()
     }
     ngOnDestroy(): void {
-        throw new Error("Method not implemented.");
+        this.profile$?.unsubscribe()
     }
 
     
