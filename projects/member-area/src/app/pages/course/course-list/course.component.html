@@ -122,7 +122,8 @@
       </div>
     </div>
   </div> -->
-
+<!-- <pre>{{allActivity|json}}</pre> -->
+<pre>{{categoriesList.value|json}}</pre>
 <main>
   <div class="w-12 h-full flex relative">
     <div class="w-2 pt-4 px-4 top-0">
@@ -210,6 +211,10 @@
                 </div>
               </div>
             </div>
+
+            <div class="sm:hidden md:flex col-3 my-2">
+              <app-button-primary label="Create course" routerLink=""></app-button-primary>
+            </div>
           </div>
         </div>
 
@@ -231,35 +236,36 @@
               <div>
                 <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
               </div>
-              <div class="col-12 flex justify-content-between flex-wrap  ">
-
-                <div *ngFor=" let item of [].constructor(10)"
-                  class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4">
-                  <div class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-12 justify-content-start flex p-3 border-round-md">
+              <div class="col-12 flex justify-content-start flex-wrap  ">
+                <div *ngFor=" let course of allActivity"
+                  class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4"
+                  routerLink="/course/detail/{{course.activityId}}">
+                  <div
+                    class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-12 justify-content-start p-3 border-round-md ">
                     <div class="flex flex-column w-full h-full">
-                      <p class="text-md font-semibold text-indigo-300">HR Digital</p>
+                      <p class="text-md font-semibold text-indigo-300">{{course.categoryName}}</p>
                       <div class="flex flex-column w-full h-full overflow-hidden">
                         <div>
                           <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt="">
                         </div>
                       </div>
                     </div>
-                    <div class="flex justify-content-between align-content-center mt-4">
-                      <p class="align-self-center text-200 font-semibold text-xl text-indigo-800">Pelatihan Dasar Java
+                    <div class="flex justify-content-between align-content-center">
+                      <p class="align-self-center text-200 font-semibold text-l text-indigo-800">{{course.title}}
                       </p>
                     </div>
                     <div class="flex flex-column mt-3">
                       <div class="flex justify-content-between">
-                        <p class="text-800 text-md-2">Google</p>
-                        <p class="text-800 text-md-2">Online</p>
+                        <p class="text-800 text-md-2">{{course.providers}}</p>
+                        <p class="text-800 text-md-2"> <i class="pi pi-map-marker"></i> Online</p>
                       </div>
                       <div class=" flex justify-content-between">
-                        <p class="text-800 text-md-2">Jum'at, 12 Maret 2023</p>
-                        <p class="text-800 text-md-2">19.30-20.30</p>
+                        <p class="text-800 text-md-2">Start Date </p>
+                        <p class="text-800 text-md-2">{{course.startDate | date: 'medium'}}</p>
                       </div>
                       <div class="flex justify-content-between">
-                        <p class="text-800 text-md-2">Sabtu, 13 Maret 2023</p>
-                        <p class="text-800 text-md-2">20.00</p>
+                        <p class="text-800 text-md-2">End Date </p>
+                        <p class="text-800 text-md-2">{{course.endDate | date: 'medium'}}</p>
                       </div>
                     </div>
                   </div>
@@ -268,7 +274,7 @@
             </div>
           </div>
         </div>
-        <div class="flex w-3 ml-2 p-5 bg-white">
+        <div class="flex w-3 p-5 bg-white">
           <div class="w-10">
             <div class="filter">
               <p>filter</p>
@@ -281,13 +287,14 @@
               <p>Schedule</p>
               <p-calendar [(ngModel)]="dateSearch" [showIcon]="true" inputId="icon"></p-calendar>
             </div>
-            <div class="category mt-4">
+            <div class="category mt-4" [formGroup]="categoriesList">
               <p class="text-xl">Category</p>
-              <div class="field-checkbox mt-2">
-                <p-checkbox name="group1" value="HR Admin" [(ngModel)]="selectedCategory" inputId="hr"></p-checkbox>
-                <label for="hr">HR Admin</label>
+              <div class="field-checkbox mt-2" *ngFor="let cat of categories">
+                <p-checkbox name="group1" formControlName="category" value="{{cat.categoryCode}}" inputId="hr">
+                </p-checkbox>
+                <label for="hr">{{cat.categoryName}}</label>
               </div>
-              <div class="field-checkbox">
+              <!-- <div class="field-checkbox">
                 <p-checkbox name="group1" value="Performance & Dev" [(ngModel)]="selectedCategory" inputId="pd">
                 </p-checkbox>
                 <label for="pd">Performance & Dev</label>
@@ -309,7 +316,7 @@
               <div class="field-checkbox">
                 <p-checkbox name="group1" value="HR Digital" [(ngModel)]="selectedCategory" inputId="hd"></p-checkbox>
                 <label for="hd">HR Digital</label>
-              </div>
+              </div> -->
             </div>
             <div class="category mt-4">
               <p class="text-xl">Sort</p>
@@ -338,7 +345,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

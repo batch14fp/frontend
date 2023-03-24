@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.interceptor';
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
+import { ConfirmationService } from 'primeng/api';
 
 import { MessageService, ConfirmationService } from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
@@ -24,7 +25,7 @@ import { ConfirmationService } from 'primeng/api';
   ],
   providers: [
     {
-    provide : HTTP_INTERCEPTORS, useClass : TokenInterception, multi: true
+      provide: HTTP_INTERCEPTORS, useClass: TokenInterception, multi: true
     },
     {
     provide : HTTP_INTERCEPTORS, useClass : ResponseInterceptor, multi : true

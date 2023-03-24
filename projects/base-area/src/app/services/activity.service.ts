@@ -15,8 +15,16 @@ export class ActivityService{
 
     constructor(private http : HttpClient){}
 
-    getAllActivity(startPage: number, maxPage: number) : Observable<ActivityRes[]>{
-        return this.http.get<ActivityRes[]>(`${BASE_URL}/activities?page=${startPage}&size=${maxPage}`)
+    getAllActivity(page: number, size: number, activityTypes?:string, categories?:string) : Observable<ActivityRes[]>{
+        if(activityTypes == null){
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities?page=${page}&size=${size}`)
+        }else if(categories == null){
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}`)
+        }else{
+            console.log("cfjkfskfnkfsjnkj");
+            
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}&categoryCode=${categories}`)
+        }
     }
 
     getActivity(id: string) : Observable<ActivityRes>{
