@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     profile$? : Subscription
     socmed$? : Subscription
 
+
     // selectedPosition! : PositionRes
     // selectedIndustry! : IndustryRes
     selectedBank! : BankPaymentRes
