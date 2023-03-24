@@ -148,13 +148,14 @@ export class DashboardComponent implements OnInit, OnDestroy{
       })
     }
 
-    onShowInsertComment(postId: string){
+    onShowInsertComment(postId: string, idx:number){
       this.postIdToComment = postId
      this.initComment(postId)
-      this.showInsertComment = !this.showInsertComment
-      if(!this.showInsertComment){
-        this.postIdToComment = ""
-      }
+     this.posts[idx].showInsertComment = !this.posts[idx].showInsertComment
+      // this.showInsertComment = !this.showInsertComment
+      // if(!this.showInsertComment){
+      //   this.postIdToComment = ""
+      // }
       console.log(this.commentPost)
     }
 
