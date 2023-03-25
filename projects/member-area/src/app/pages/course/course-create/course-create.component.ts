@@ -8,6 +8,12 @@ import { PostService } from '../../../../../../base-area/src/app/services/post.s
 import { CategoryService } from '../../../../../../base-area/src/app/services/category.service';
 import { Subscription } from 'rxjs';
 import { CategoryRes } from '../../../../../../base-area/src/app/dto/category/category-res';
+import { MenuItem } from 'primeng/api';
+import { ActivityTypeService } from '../../../../../../base-area/src/app/services/activitytype.service';
+import { ACTIVITY_TYPE } from '../../../../../../base-area/src/app/constant/activity-type';
+import { ActivityReq } from '../../../../../../base-area/src/app/dto/activity/activity-req';
+import { convertUTCToLocalDateISO, convertUTCToLocalDateTimeISO } from 'projects/base-area/src/app/utils/dateutil';
+import { ActivityService } from '../../../../../../base-area/src/app/services/activity.service';
 
 @Component({
     selector : 'app-create-course',
@@ -28,8 +34,8 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
       fileExt:[""]
     }),
     category: [{},  Validators.required],
-    startDateVoucher:["",  Validators.required],
-    endDateVoucher:["",  Validators.required],
+    startDateCourse:["",  Validators.required],
+    endDateCourse:["",  Validators.required],
     codeVoucher:["",  Validators.required],
     limit:[0,  Validators.required],
     expiredDate:["",  Validators.required],
@@ -39,17 +45,19 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
 
 
   private categories$?: Subscription
+  private activity$?: Subscription
 
   categories!: CategoryRes[]
-
   today = new Date()
   startDate = new Date()
+  activityTypeId!: string
 
   imageSource!:SafeResourceUrl
 
 
   constructor(private fb: FormBuilder, private _sanitizer: DomSanitizer,  private categoryService: CategoryService,
-    private postTypeService: PostTypeService, private postService: PostService){}
+    private postTypeService: PostTypeService, private postService: PostService, private activityTypeService: ActivityTypeService,
+    private activityService: ActivityService){}
 
 
     faHeart = faHeart
@@ -98,6 +106,36 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
       }
     }
 
+    onCreateCourse(){
+      const courseStartDate = this.courseFb.value.startDateCourse && convertUTCToLocalDateTimeISO(this.courseFb.value.startDateCourse)
+      const courseEndDate = this.courseFb.value.startDateCourse && convertUTCToLocalDateTimeISO(this.courseFb.value.endDateCourse)
+      const data:ActivityReq = {
+        title : this.courseFb.value.title!,
+        content: this.courseFb.value.description!,
+        providers: this.courseFb.value.provider!,
+        typeId: this.activityTypeId!,
+        activityLocation: this.courseFb.value.location!,
+        price: this.courseFb.value.price!,
+        categoryId: this.courseFb.value.category!['categoryId']!,
+        startDate: courseStartDate!,
+        endDate: courseEndDate!,
+        limitApplied: this.courseFb.value.limit!,
+        voucherCode: this.courseFb.value.codeVoucher!,
+        expDate: this.courseFb.value.expiredDate!,
+        discountPercent: this.courseFb.value.discount!,
+        file: {
+          fileContent: this.courseFb.get('imageCover')?.value.contentFile!,
+          extension: this.courseFb.get('imageCover')?.value.fileExt!
+        }
+      }
+
+      this.activity$ = this.activityService.insertActivity(data).subscribe(res =>{
+        console.log(res)
+      })
+
+    }
+
+
     // onCreateArticle(){
     //   const data:ArticleReq={
     //     title:this.createArticle.value.title!,
@@ -114,7 +152,9 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
 
     ngOnInit(): void {
     this.initCategories()
-    this.courseFb.get("startDateVoucher")?.valueChanges.subscribe(res => this.startDate = new Date(res!) )
+    this.courseFb.get("startDateCourse")?.valueChanges.subscribe(res => this.startDate = new Date(res!) )
+    this.activity$ = this.activityTypeService.getActivityTypeByCode(ACTIVITY_TYPE.COURSE).subscribe(res => this.activityTypeId = res.activityTypeId)
+
   }
 
   ngOnDestroy(): void {

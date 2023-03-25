@@ -1,7 +1,7 @@
 <pre>{{courseFb.value | json}}</pre>
 <main>
-  <div class="w-12 flex sm:flex-column md:flex-row relative">
-    <div class="w-2 sm:hidden md:block pt-4 px-4 top-0">
+  <div class="w-12 flex sm:flex-column lg:flex-row relative">
+    <div class="w-2 sm:hidden md:hidden lg:block pt-4 px-4 top-0">
       <div class="w-6">
         <img class="w-full w-0" style="object-fit: contain !important;"
           src="../../../assets/images/wecommunity-logo.png" alt="logo wecommunity">
@@ -13,15 +13,15 @@
             <i class="pi pi-home px-2"></i>
             Home</button>
         </div>
-        <div class="text-600 flex">
+        <div class="text-900 flex">
           <button
-            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
             <i class="pi pi-calendar px-2"></i>
             Event</button>
         </div>
-        <div class="text-600 flex hover:text-blue-600">
+        <div class="text-900 flex hover:text-blue-600">
           <button
-            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
+            class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
             <i class="pi pi-book px-2"></i>
             Course
           </button>
@@ -88,22 +88,51 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
-    <div class="w-10 bg-gray-100 border-round-bottom-xl">
+    <!-- Mobile Menu -->
+    <div
+      class="sm:flex bg-white pt-2 justify-content-between border-top-1 border-gray-200 w-12 gap-4 px-4 md:hidden fixed bottom-0 z-5 justify-content-center align-content-center align-self-center">
+      <div
+        class="text-blue-600  border-blue-600 border-bottom-3 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-home align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">
+          Home</p>
+      </div>
+      <div class="w-2 text-900 font-medium bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-calendar px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Event</p>
+      </div>
+      <div
+        class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center hover:text-blue-600">
+        <i class="pi pi-book px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Course</p>
+      </div>
+      <div class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-home px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Post</p>
+      </div>
+      <div class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <fa-icon class="text-gray-600 align-self-center cursor-pointer hover:text-blue-600" size="xl"
+          [icon]="faNewspaper"></fa-icon>
+        <p class="align-self-center">Article</p>
+      </div>
+    </div>
+
+
+    <div class="lg:w-10 sm:mb-6 md:mb-0 sm:w-12 bg-gray-100 border-round-bottom-xl">
       <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem">
         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
           style="width: 32px;" alt="Avatar" />
       </div>
       <div>
-        <form [formGroup]="courseFb" class="w-12 flex justify-content-center">
-          <div class="w-11 flex flex-column">
+        <form [formGroup]="courseFb" (ngSubmit)="onCreateCourse()" class="w-12 flex justify-content-center">
+          <div class="sm:w-12 md:w-11 flex flex-column">
             <div class="w-full bg-white border-round-md w-full py-2 mt-4">
               <p class="font-medium text-xl text-center">Create New Course</p>
             </div>
             <div class="w-full border-round-md w-full py-2 mt-2 flex justify-content-end">
-              <button
+              <button type="submit"
                 class="bg-blue-600 w-fit border-none border-round-md cursor-pointer px-4 hover:bg-blue-800 py-2 text-white">Save</button>
             </div>
             <div class="flex sm:flex-column md:flex-row  my-2 gap-4">
@@ -133,12 +162,12 @@
                 <div class="bg-white border-round-md flex justify-content-between w-12 gap-4">
                   <div class="flex flex-column w-6">
                     <label for="title" class="text-sm font-medium">Start Date</label>
-                    <p-calendar formControlName="startDateVoucher" [showTime]="true" [minDate]="today"
+                    <p-calendar formControlName="startDateCourse" [showTime]="true" [minDate]="today"
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
                   </div>
                   <div class="flex flex-column w-6">
                     <label for="title" class="text-sm font-medium">End Date</label>
-                    <p-calendar formControlName="endDateVoucher" [showTime]="true" [minDate]="startDate"
+                    <p-calendar formControlName="endDateCourse" [showTime]="true" [minDate]="startDate"
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
                   </div>
                 </div>
