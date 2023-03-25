@@ -155,7 +155,7 @@ onsignUp(){
       console.log(result)
       this.susccessSignUp = true
       setTimeout(() => {
-        this.router.navigateByUrl("/login/member")
+        this.router.navigateByUrl("/member/login")
       }, 3000);
     })
   }

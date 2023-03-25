@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { DetailComponent } from "./course-detail/details.component";
 import { CourseComponent } from "./course-list/course.component";
+import { CreateCourseComponent } from './course-create/course-create.component';
 
 const courseRoutes:Routes = [
     {
@@ -12,6 +13,7 @@ const courseRoutes:Routes = [
         path:'detail/:id',
         component:DetailComponent
     },
+
 ]
 
 @NgModule({

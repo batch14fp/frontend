@@ -14,7 +14,10 @@ import { Subscription } from "rxjs";
 export class CreateArticleComponent implements OnInit, OnDestroy {
   private createArticle$?: Subscription
 
-  constructor(private fb: FormBuilder, private title: Title, private articleService: ArticlesService,
+  constructor(
+    private fb: FormBuilder, 
+    private title: Title, 
+    private articleService: ArticlesService,
     private router: Router) {
     this.title.setTitle('Article')
   }

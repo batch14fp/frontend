@@ -9,7 +9,7 @@ const profileRoutes : Routes = [
         component : ProfileComponent
     },
     {
-        path : 'profile/password',
+        path : 'password',
         component : ChangePasswordComponent
     }
 ]

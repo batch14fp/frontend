@@ -1,4 +1,5 @@
 import { PollingOptionRes } from "./polling-option-res";
+import { PollingOptionReq } from './polling-option-req';
 
 export interface AllPostRes{
   id:string,
@@ -17,9 +18,10 @@ export interface AllPostRes{
 	countPostLike:number,
 	countPostComment:number,
 	like:boolean,
-	isBookmark:boolean,
+	bookmark:boolean,
 	titlePolling:string,
   ver: number,
 	pollingOptionId:string,
-	pollingOption:PollingOptionRes[],
+	pollingOption:PollingOptionReq[],
+  showInsertComment: boolean
 }
