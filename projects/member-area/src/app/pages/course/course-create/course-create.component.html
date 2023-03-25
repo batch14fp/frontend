@@ -138,7 +138,8 @@
             <div class="flex sm:flex-column md:flex-row  my-2 gap-4">
               <div class="md:w-6 sm:w-12 bg-white px-3 py-3 border-round-md flex flex-column gap-3">
                 <div class="flex flex-column">
-                  <p class="text-sm font-medium">Upload Cover Image</p>
+                  <p class="text-sm font-medium">Upload Cover Image<span class="text-red-400"
+                      pTooltip="This field is required">*</span></p>
                   <!-- <p-fileUpload #file mode="basic" name="myfile[]" [showUploadButton]="false" [showCancelButton]="false"
                     [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple" (onSelect)="onUpload($event)"
                     formArrayName="imageCover" class="" style="width: 100%;">
@@ -155,18 +156,21 @@
                   </div>
                 </div>
                 <div class="flex flex-column w-full">
-                  <label for="title" class="text-sm font-medium">Title</label>
+                  <label for="title" class="text-sm font-medium">Title<span class="text-red-400"
+                      pTooltip="This field is required">*</span></label>
                   <input formControlName="title" placeholder="ex: Build Microservice App" type="text" id="title"
                     pInputText />
                 </div>
                 <div class="bg-white border-round-md flex justify-content-between w-12 gap-4">
                   <div class="flex flex-column w-6">
-                    <label for="title" class="text-sm font-medium">Start Date</label>
+                    <label for="title" class="text-sm font-medium">Start Date<span class="text-red-400"
+                        pTooltip="This field is required">*</span></label>
                     <p-calendar formControlName="startDateCourse" [showTime]="true" [minDate]="today"
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
                   </div>
                   <div class="flex flex-column w-6">
-                    <label for="title" class="text-sm font-medium">End Date</label>
+                    <label for="title" class="text-sm font-medium">End Date<span class="text-red-400"
+                        pTooltip="This field is required">*</span></label>
                     <p-calendar formControlName="endDateCourse" [showTime]="true" [minDate]="startDate"
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
                   </div>
@@ -174,23 +178,27 @@
 
 
                 <div class="flex flex-column w-full">
-                  <label for="title" class="text-sm font-medium">Price</label>
+                  <label for="title" class="text-sm font-medium">Price<span class="text-red-400"
+                      pTooltip="This field is required">*</span></label>
                   <p-inputNumber formControlName="price" inputId="integeronly" mode="currency" currency="IDR"
                     locale="id-ID" styleClass="w-full"> </p-inputNumber>
                 </div>
                 <div class="flex flex-column w-full">
-                  <label for="title" class="text-sm font-medium">Description</label>
+                  <label for="title" class="text-sm font-medium">Description<span class="text-red-400"
+                      pTooltip="This field is required">*</span></label>
                   <p-editor formControlName="description" [style]="{'height':'320px'}"></p-editor>
                 </div>
               </div>
               <div class="w-6 md:w-6 sm:w-12 flex flex-column gap-3">
                 <div class="bg-white border-round-md p-3 flex flex-column justify-content-between w-12 gap-3">
                   <div class="flex flex-column w-full">
-                    <label for="provider" class="text-sm font-medium">Provider</label>
+                    <label for="provider" class="text-sm font-medium">Provider<span class="text-red-400"
+                        pTooltip="This field is required">*</span></label>
                     <input formControlName="provider" placeholder="ex: Google" type="text" id="title" pInputText />
                   </div>
                   <div class="flex flex-column w-full">
-                    <label for="category" class="text-sm font-medium">Category</label>
+                    <label for="category" class="text-sm font-medium">Category<span class="text-red-400"
+                        pTooltip="This field is required">*</span></label>
                     <p-dropdown formControlName="category" [options]="categories" optionLabel="categoryName"
                       [filter]="true" filterBy="categoryName" [showClear]="true" placeholder="Select a Category">
                       <ng-template pTemplate="selectedItem">
@@ -206,8 +214,9 @@
                     </p-dropdown>
                   </div>
                   <div class="flex flex-column w-full">
-                    <label for="title" class="text-sm font-medium">Location</label>
-                    <textarea formControlName="location" placeholder="ex: Jl.Jendral Sudirman No.xx" [rows]="5"
+                    <label for="title" class="text-sm font-medium">Location<span class="text-red-400"
+                        pTooltip="This field is required">*</span></label>
+                    <textarea formControlName="location" placeholder="ex: Jl.Jendral Sudirman No.123" [rows]="5"
                       [cols]="30" pInputTextarea [autoResize]="true"></textarea>
                   </div>
                   <div class="flex flex-column border-1 p-4 border-gray-200 border-round-md">
@@ -216,7 +225,8 @@
                     <div class="flex flex-column w-full gap-3">
                       <div class="flex flex-column w-full">
                         <label for="provider" class="text-sm font-medium">Code</label>
-                        <input formControlName="codeVoucher" type="text" id="title" pInputText />
+                        <input formControlName="codeVoucher" style="text-transform: uppercase;" type="text" id="title"
+                          pInputText />
                       </div>
                       <div class="flex flex-column w-12">
                         <label for="provider" class="text-sm font-medium">Limit</label>
