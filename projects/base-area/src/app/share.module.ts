@@ -31,6 +31,8 @@ import {AvatarModule} from 'primeng/avatar';
 import { AnimateModule } from 'primeng/animate';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { BottomNavbarModule } from './components/bottom-navbar/buttom-navbar.module';
 
 
 
@@ -46,7 +48,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
      ,DialogModule, InputSwitchModule, ConfirmDialogModule, AnimateModule
-     ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule
+     ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule, BottomNavbarModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
@@ -54,7 +56,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
     ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule, AnimateModule
-    ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule
+    ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule, BottomNavbarModule
   ]
 
 })

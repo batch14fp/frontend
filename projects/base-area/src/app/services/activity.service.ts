@@ -31,6 +31,7 @@ export class ActivityService{
         return this.http.get<ActivityRes>(`${BASE_URL}/activities/${id}`)
     }
 
+
     insertActivity(data : ActivityReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/activities/`,data)
     }
