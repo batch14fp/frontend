@@ -11,7 +11,7 @@ const courseRoutes:Routes = [
     {
         path:'detail/:id',
         component:DetailComponent
-    }
+    },
 ]
 
 @NgModule({

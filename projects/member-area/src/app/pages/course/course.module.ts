@@ -7,10 +7,12 @@ import { DetailComponent } from "./course-detail/details.component";
 import { CourseComponent } from "./course-list/course.component";
 import { CourseRouting } from "./course.routing";
 
+
 @NgModule({
     declarations:[
         CourseComponent,
-        DetailComponent
+        DetailComponent,
+        
     ],
     imports:[
         CourseRouting, ShareModule, ReactiveFormsModule, HttpClientModule, CommonModule,FormsModule
