@@ -235,7 +235,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="mt-2">
+                      <div *ngIf="post.typeCode === 'PPOL'" class="mt-2">
                         <p>{{post.content}}</p>
                       </div>
                       <div *ngIf="post.typeCode === 'PPOL'"
@@ -255,9 +255,8 @@
                         </div>
                       </div>
                       <div *ngIf="post.typeCode !== 'PPOL'" class="mt-2 py-2">
-                        <p class="text-md font-medium">How to make a cupcake</p>
-                        <p class="text-sm font-light">Oat cake bonbon cotton candy sugar plum sweet roll. Brownie apple
-                          pie liquorice marzipan sweet roll. Toffee cookie cake tootsie roll dragée chocolate. <span
+                        <p class="text-md font-medium">{{post.title}}</p>
+                        <p class="text-sm font-light" [innerHtml]="post.content"> <span
                             class="cursor-pointer text-gray-400 ">...see more</span></p>
                         <div class="flex w-full justify-content-between">
                           <img class="w-3 max-h-16rem hover:bg-gray-100" style="object-fit: cover !important;"
