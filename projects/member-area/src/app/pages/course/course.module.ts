@@ -12,7 +12,7 @@ import { CreateCourseComponent } from './course-create/course-create.component';
 @NgModule({
     declarations:[
         CourseComponent,
-        DetailComponent,
+        DetailComponent, CreateCourseComponent
     ],
     imports:[
         CourseRouting, ShareModule, ReactiveFormsModule, HttpClientModule, CommonModule,FormsModule
