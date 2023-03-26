@@ -89,7 +89,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <div class="w-10 bg-gray-100 border-round-bottom-xl">
@@ -137,7 +136,6 @@
               </div>
               <div infinite-scroll (scrolled)="onScroll()">
                 <div class="mt-4 flex flex-column gap-4">
-
                   <ng-container *ngIf="isLoading">
                     <div *ngFor="let item of [].constructor(5)"
                       class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
@@ -164,8 +162,7 @@
                       </div>
                     </div>
                   </ng-container>
-
-                  <div *ngFor="let post of posts" class="">
+                  <div *ngFor="let post of posts; let i = index" class="">
                     <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
                       <div class="flex flex-column">
                         <div class="flex flex-column relative">
@@ -199,8 +196,8 @@
                                 {{fotoName(post.fullname)}}</p>
                             </div>
                             <div *ngIf="post.imageProfileId" class="postImageProfile">
-                              <img src="http://localhost:2121/files/{{post.imageProfileId}}"
-                                class="border-circle align-self-center" style="width: 42px;height: 42px;"
+                              <img src="http://localhost:2121/files/{{post.imageProfileId}}" class=" align-self-center"
+                                style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;"
                                 alt="Avatar" />
                               <!-- <p-avatar size="large" image="http://localhost:2121/files/{{post.imageProfileId}}"
                                 styleClass="mr-2" shape="circle" class=""></p-avatar> -->
@@ -238,7 +235,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="mt-2">
+                      <div *ngIf="post.typeCode === 'PPOL'" class="mt-2">
                         <p>{{post.content}}</p>
                       </div>
                       <div *ngIf="post.typeCode === 'PPOL'"
@@ -258,9 +255,8 @@
                         </div>
                       </div>
                       <div *ngIf="post.typeCode !== 'PPOL'" class="mt-2 py-2">
-                        <p class="text-md font-medium">How to make a cupcake</p>
-                        <p class="text-sm font-light">Oat cake bonbon cotton candy sugar plum sweet roll. Brownie apple
-                          pie liquorice marzipan sweet roll. Toffee cookie cake tootsie roll dragée chocolate. <span
+                        <p class="text-md font-medium">{{post.title}}</p>
+                        <p class="text-sm font-light" [innerHtml]="post.content"> <span
                             class="cursor-pointer text-gray-400 ">...see more</span></p>
                         <div class="flex w-full justify-content-between">
                           <img class="w-3 max-h-16rem hover:bg-gray-100" style="object-fit: cover !important;"
@@ -287,14 +283,14 @@
                           <div *ngIf="post.countPostLike" (click)="onLike(post.id, post.like)"
                             class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
                             <i *ngIf="post.like && likeClick"
-                              class="pi pi-heart-fill px-2 align-self-center text-red-600 scalein animation-duration-200 animation-iteration-1"></i>
+                              class="pi pi-heart-fill px-2 align-self-center text-red-600"></i>
                             <i *ngIf="post.like && !likeClick"
-                              class="pi pi-heart-fill px-2 align-self-center text-red-600 scalein animation-duration-200 animation-iteration-1"></i>
+                              class="pi pi-heart-fill px-2 align-self-center text-red-600"></i>
                             <i *ngIf="!post.like"
                               class="pi pi-heart px-2 align-self-center text-gray-400 scalein animation-duration-200 animation-iteration-1"></i>
                             <p>{{post.countPostLike}} Like</p>
                           </div>
-                          <div (click)="onShowInsertComment(post.id)"
+                          <div (click)="onShowInsertComment(post.id, i)"
                             class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
                             <i class="pi pi-comment px-2 align-self-center"></i>
                             <p *ngIf="post.countPostComment">{{post.countPostComment}} Comment</p>
@@ -309,7 +305,8 @@
                         </div>
                       </div>
 
-                      <div *ngIf="showInsertComment" class="mt-2 flex flex-column">
+                      <div *ngIf="post.showInsertComment" class="mt-2 flex flex-column">
+                        <!-- <ng-container *ngIf="postIdToComment === post.id"> -->
                         <ng-container *ngIf="postIdToComment === post.id">
                           <div class="flex align-content-center gap-3">
                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"

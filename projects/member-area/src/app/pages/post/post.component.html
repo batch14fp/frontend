@@ -14,7 +14,7 @@
             Home</button>
         </div>
         <div class="text-600 flex">
-          <button 
+          <button
             class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
             <i class="pi pi-calendar px-2"></i>
             Event</button>
@@ -168,9 +168,9 @@
 
           <div class="flex flex-column">
             <label for="title" class="text-xl font-medium text-800">Description</label>
-            <textarea formControlName="description" [rows]="5" [cols]="30" pInputTextarea
-              [autoResize]="true"></textarea>
-            <!-- <p-editor formControlName="description" [style]="{'height':'320px'}"></p-editor> -->
+            <!-- <textarea formControlName="description" [rows]="5" [cols]="30" pInputTextarea
+              [autoResize]="true"></textarea> -->
+            <p-editor formControlName="description" [style]="{'height':'320px'}"></p-editor>
           </div>
 
           <div *ngIf="postFb.value.postType!['postTypeCode'] === 'PPOL'" class="flex flex-column">
