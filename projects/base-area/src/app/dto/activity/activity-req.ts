@@ -1,19 +1,22 @@
 import { Time } from "@angular/common"
 
 export interface ActivityReq{
-
-    timeAgo : string
 	title : string
 	content : string
 	providers : string
 	typeId : string
-	imgActivityId : string
-	price : string
+  activityLocation: string
+	price : number
 	categoryId : string
-	startDate : Date
-	endDate : Date
-	startTime : Time
-	endTime : Time
-	isActive : boolean
+	startDate : string
+  endDate: string
+  limitApplied: number
+  voucherCode: string
+	expDate : string
+	discountPercent: number
+  file: {
+    fileContent: string,
+    extension: string
+  }
 
 }

@@ -210,6 +210,7 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
        this.selectedCountry()
        this.initProfile()
        this.initSocialMedia()
+
         
         
         // this.citis = countryService.get

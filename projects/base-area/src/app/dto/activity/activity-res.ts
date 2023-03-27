@@ -13,8 +13,8 @@ export interface ActivityRes{
 	price : number
 	categoryCode : string
 	categoryName : string
-	startDate : Date
-	endDate : Date
+	startDate : string
+	endDate : string
 	isActive : boolean
 	ver : number
 }

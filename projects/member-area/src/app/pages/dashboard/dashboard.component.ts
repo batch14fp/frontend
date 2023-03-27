@@ -1,5 +1,5 @@
 import { AccordionModule } from 'primeng/accordion';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuItem } from "primeng/api";
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { PostService } from '../../../../../base-area/src/app/services/post.service';
@@ -25,7 +25,7 @@ import { PostBookmarkReq } from '../../../../../base-area/src/app/dto/post/post-
     providers: [MessageService]
 })
 
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit, OnDestroy{
   private posts$?: Subscription
   private like$?: Subscription
   private postDelete$?: Subscription
@@ -33,6 +33,8 @@ export class DashboardComponent implements OnInit{
   private insertComment$?: Subscription
   private getComment$?: Subscription
   private insertBookmark$?: Subscription
+
+
 
 
     items!: MenuItem[];
@@ -43,6 +45,7 @@ export class DashboardComponent implements OnInit{
     showInsertComment = false
     postIdToDelete = ""
     postIdToComment = ""
+    isLoading = false
 
     faHeart = faHeart
     faBook = faBook
@@ -57,6 +60,7 @@ export class DashboardComponent implements OnInit{
       private messageService: MessageService, private pollingsService: PollingsService,
       private fb: FormBuilder, private userService: UserService){}
 
+
       COMMENT_POST_LIMIT =5
       commentPostPage = 0
       isMoreComments = false
@@ -69,17 +73,22 @@ export class DashboardComponent implements OnInit{
         console.log("scrolled")
         console.log(this.postPage)
         this.posts$ = this.postService.getAllPost(++this.postPage, this.POST_LIMIT).subscribe(result => {
-          if(this.posts.length) {
+          if(this.posts?.length) {
             this.posts = [...this.posts, ...result]
           } else {
             this.posts = result
           }
-          this.posts.map(p => {
+          // this.posts.map(p => {
             // p.showComment = false
 
-          })
+          // })
         })
       }
+
+      fotoName(name: string){
+        return getInitials(name)
+      }
+
       onLoadMoreComment(postId: string) : void {
         console.log("scrolled")
         this.posts$ = this.postService.getAllCommentByPostId(postId, ++this.commentPostPage, this.COMMENT_POST_LIMIT).subscribe(result => {
@@ -97,7 +106,11 @@ export class DashboardComponent implements OnInit{
 
 
     initPosts(){
-      this.posts$ = this.postService.getAllPost(this.postPage, this.POST_LIMIT).subscribe(res => this.posts = res)
+      this.isLoading = true
+      this.posts$ = this.postService.getAllPost(this.postPage, this.POST_LIMIT).subscribe(res => {
+        this.isLoading = false
+        this.posts = res
+      })
       console.log(this.posts)
     }
 
@@ -135,19 +148,21 @@ export class DashboardComponent implements OnInit{
       })
     }
 
-    onShowInsertComment(postId: string){
+    onShowInsertComment(postId: string, idx:number){
       this.postIdToComment = postId
      this.initComment(postId)
-      this.showInsertComment = !this.showInsertComment
-      if(!this.showInsertComment){
-        this.postIdToComment = ""
-      }
+     this.posts[idx].showInsertComment = !this.posts[idx].showInsertComment
+      // this.showInsertComment = !this.showInsertComment
+      // if(!this.showInsertComment){
+      //   this.postIdToComment = ""
+      // }
       console.log(this.commentPost)
     }
 
 
 
     onInsertBookmark(postId: string){
+      this.showPostOption = false
       const dataInsert: PostBookmarkReq ={
         postId
       }
@@ -212,7 +227,9 @@ export class DashboardComponent implements OnInit{
         pollingOptionId
       }
       console.log(pollingOptionId)
-      this.vote$ = this.pollingsService.insertVote(data).subscribe(res => this.initPosts())
+      this.vote$ = this.pollingsService.insertVote(data).subscribe(res => {
+        // this.initPosts()
+      })
 
     }
 
@@ -246,6 +263,16 @@ export class DashboardComponent implements OnInit{
             {label: 'Thread', routerLink: ['thread']},
             {label: 'Calendar'}
         ];
+    }
+
+    ngOnDestroy(): void {
+      this.posts$?.unsubscribe()
+      this.like$?.unsubscribe()
+      this.postDelete$?.unsubscribe()
+      this.vote$?.unsubscribe()
+      this.insertComment$?.unsubscribe()
+      this.getComment$?.unsubscribe()
+      this.insertBookmark$?.unsubscribe
     }
 
 }
