@@ -18,7 +18,6 @@ import { UserService } from '../../../../../base-area/src/app/services/user.serv
 import { PostBookmarkReq } from '../../../../../base-area/src/app/dto/post/post-bookmark-req';
 
 
-
 @Component({
     selector : 'app-dashboard-user',
     templateUrl : './dashboard.component.html',
@@ -104,7 +103,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
         })
       }
 
-
+      postUpdate!: AllPostRes[]
     initPosts(){
       this.isLoading = true
       this.posts$ = this.postService.getAllPost(this.postPage, this.POST_LIMIT).subscribe(res => {
