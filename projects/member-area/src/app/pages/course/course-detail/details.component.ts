@@ -26,6 +26,8 @@ export class DetailComponent implements OnInit, OnDestroy{
     detailActivity = this.fb.group({
         activityId:[""],
         title:[""],
+        location:[""],
+        imgActivityId:[""],
         content:[""],
         providers:[""],
         categoryName:[""],
@@ -33,7 +35,7 @@ export class DetailComponent implements OnInit, OnDestroy{
         startDate:[""],
         endDate:[""]
     })
- 
+
     ngOnInit(): void {
         this.activatedRouter.params.subscribe(res=>{
             const params = res as any
@@ -45,11 +47,13 @@ export class DetailComponent implements OnInit, OnDestroy{
                     activityId:res.activityId,
                     title:res.title,
                     content:res.content,
+                    location: res.activityLocation,
                     providers:res.providers,
                     categoryName:res.categoryName,
                     price:res.price,
                     startDate:res.startDate,
-                    endDate:res.endDate
+                    endDate:res.endDate,
+                    imgActivityId: res.imgActivityId
                 })
             })
         })

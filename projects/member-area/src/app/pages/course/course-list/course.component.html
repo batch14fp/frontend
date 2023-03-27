@@ -258,16 +258,19 @@
                     </div>
                     <div class="flex flex-column mt-3">
                       <div class="flex justify-content-between">
-                        <p class="text-800 text-md-2">{{course.providers}}</p>
-                        <p class="text-800 text-md-2"> <i class="pi pi-map-marker"></i> Online</p>
+                        <p class="text-800 text-md">{{course.providers}}</p>
+                        <p class="text-800 text-md"> <i class="pi pi-map-marker"></i> Online</p>
                       </div>
                       <div class=" flex justify-content-between">
-                        <p class="text-800 text-md-2">Start Date </p>
-                        <p class="text-800 text-md-2">{{course.startDate | date: 'medium'}}</p>
+                        <p class="text-800 text-xs text-400">Start Date </p>
+                        <p class="text-800 text-xs text-400">{{course.startDate | date: 'medium'}}</p>
                       </div>
                       <div class="flex justify-content-between">
-                        <p class="text-800 text-md-2">End Date </p>
-                        <p class="text-800 text-md-2">{{course.endDate | date: 'medium'}}</p>
+                        <p class="text-800 text-xs text-400">End Date </p>
+                        <p class="text-800 text-xs text-400">{{course.endDate | date: 'medium'}}</p>
+                      </div>
+                      <div class="mt-2">
+                        <p class="font-medium text-xl">{{course.price | currency:'Rp' : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
                   </div>

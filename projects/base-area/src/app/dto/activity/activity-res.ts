@@ -7,6 +7,7 @@ export interface ActivityRes{
 	timeAgo : string
 	title : string
 	content : string
+	activityLocation : string
 	providers : string
 	typeCode : string
 	typeName : string
