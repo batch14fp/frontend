@@ -5,6 +5,7 @@ export interface ActivityRes{
 	createdAt : string
 	title : string
 	content : string
+	activityLocation : string
 	providers : string
 	typeCode : string
 	typeName : string
