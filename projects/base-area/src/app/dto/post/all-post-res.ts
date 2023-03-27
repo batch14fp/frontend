@@ -1,5 +1,6 @@
 import { PollingOptionRes } from "./polling-option-res";
 import { PollingOptionReq } from './polling-option-req';
+import { PollingResponRes } from './polling-response-res';
 
 export interface AllPostRes{
   id:string,
@@ -13,6 +14,8 @@ export interface AllPostRes{
 	typeCode:string,
 	typeName:string,
 	imgPostId:string,
+  isVote: boolean,
+  pollingRespon: PollingResponRes[]
 	categoryCode:string,
 	categoryName:string,
 	countPostLike:number,

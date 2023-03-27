@@ -135,25 +135,32 @@
           <app-button-primary label="Save" class="m-3" icon="pi pi-save"></app-button-primary>
       </div>
       </form> -->
-      <div class="grid mx-6 mt-6 flex justify-content-between">
-        <div class="col-8">
+      <div class="grid mx-3 mt-3 flex justify-content-start">
+        <div class="w-10">
           <div class="article-populer">
             <div class="title">
               <p class="text-xl font-semibold text-indigo-800"> Artikel Populer</p>
               <hr class="border-2 border-indigo-400 w-3rem">
             </div>
-            <div class="flex flex-column md:flex-row gap-4">
-              <div *ngFor="let item of [].constructor(4)" class="col-4 overflow-hidden">
-                <div>
-                  <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt="">
+            <div class="flex md:flex-row gap-3 flex-wrap">
+              <div *ngFor=" let item of [].constructor(10)"
+                  class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4">
+                  <div class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-12 justify-content-start flex p-3 border-round-md">
+                    <div class="flex flex-column w-full h-full">
+                      <p class="text-md font-semibold text-indigo-300">HR Digital</p>
+                      <div class="flex flex-column w-full h-full overflow-hidden">
+                        <div class="p-3">
+                          <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-l font-semibold text-indigo-800">Hati-hati dalam mencari pekerjaan di jakarta, terutama...</p>
+                    <div class="flex justify-content-between mt-2">
+                      <p class="text-sm font-light text-indigo-800">Budi</p>
+                      <p class="text-sm font-light text-indigo-800">19 Februari 2023</p>
+                    </div>
+                  </div>
                 </div>
-                <p class="text-indigo-600 font-medium">HR Digital</p>
-                <p class="text-xl font-semibold text-indigo-800">Hati-hati dalam mencari pekerjaan di jakarta, terutama...</p>
-                <div class="flex justify-content-between mt-2">
-                  <p class="text-sm font-light text-indigo-800">Budi</p>
-                  <p class="text-sm font-light text-indigo-800">19 Februari 2023</p>
-                </div>
-              </div>
             </div>
           </div>
       
@@ -162,8 +169,8 @@
               <p class="text-xl font-semibold text-indigo-800"> Artikel Terbaru</p>
               <hr class="border-2 border-indigo-400 w-3rem">
             </div>
-            <div class="flex gap-4">
-              <div *ngFor="let item of [].constructor(4)" class="col-4 overflow-hidden">
+            <div class="flex gap-4 flex-wrap">
+              <div *ngFor="let item of [].constructor(4)" class="col-3 overflow-hidden">
                 <div>
                   <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt="">
                 </div>
@@ -177,9 +184,9 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-3 flex justify-content-between align-self-center ">
-          <div class="col-6 flex justify-content-between flex-column h-30rem border-indigo-400 border-1 shadow-2
-          border-bottom-2 align-items-center">
+        <div class="col-2 flex align-self-start  ">
+          <div class="col-8 flex justify-content-between flex-column h-30rem border-indigo-400 border-1 shadow-2
+          border-bottom-2 align-items-center sticky top-0">
             <p class="text-xl font-semibold text-indigo-600 ">Upgrade your skill and explore all feature without limitation
             </p>
             <div class="flex flex-column">
@@ -190,7 +197,7 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

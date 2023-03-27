@@ -3,6 +3,8 @@ export interface PostCommentRes {
   userId: string,
   fullname: string,
   contentComment: string,
+  imageProfileId: string,
+  position: string,
   createdAt: string,
   ver: number
 }

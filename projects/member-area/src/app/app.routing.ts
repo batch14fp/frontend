@@ -24,6 +24,7 @@ import { ProfileModule } from "./pages/profile/profile.module";
 import { ThreadComponent } from "./pages/thread/thread.component";
 import { ArticleComponent } from "./pages/article/article.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { ReportComponent } from "./pages/report/report.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -62,6 +63,10 @@ export const memberRoutes: Routes = [
         component: DashboardComponent,
     },
     {
+        path : 'report',
+        component : ReportComponent
+    },
+    {
         path: '',
         children: [
             {
@@ -93,7 +98,7 @@ export const memberRoutes: Routes = [
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent, InvoiceComponent,PostComponent
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
@@ -107,7 +112,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent
     ]
 })
 

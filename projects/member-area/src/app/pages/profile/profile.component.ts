@@ -1,7 +1,7 @@
 // <<<<<<< HEAD
 import { formatDate } from "@angular/common";
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { AfterContentChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { BankPaymentRes } from "@dto/bankpayment/bank-payment-res";
 import { IndustryRes } from "@dto/industry/industry-res";
@@ -28,7 +28,7 @@ const countryService= require('countrycitystatejson')
 })
 
 
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked{
 
     faHeart = faHeart
     faComment = faComment
@@ -46,7 +46,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     getIndustry : IndustryRes[] = []
     getBankPayment : BankPaymentRes[] = []
     getProfile? : ProfileResDetail
-
     getBank = bankList
     getSocmed : SocialMediaGetRes[] = []
 
@@ -56,7 +55,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     location$? : Subscription
     profile$? : Subscription
     socmed$? : Subscription
-
 
     // selectedPosition! : PositionRes
     // selectedIndustry! : IndustryRes
@@ -109,8 +107,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private bankPaymentService : BankPaymentService,
         private profileService : ProfileService,
         private userService : UserService,
-        private socialMediaService : SocmedService
+        private socialMediaService : SocmedService,
+        private ref : ChangeDetectorRef
     ){}
+
+    ngAfterContentChecked(): void {
+       this.ref.detectChanges();
+    }
+
+    get socialMediaList(){ 
+        return this.editProfile.get('socialMediaList') as FormArray
+    }
 
 
     initPostion(){
@@ -173,13 +180,28 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 city : res.city,
                 postalCode : res.postalCode,
                 company : res.company,
-                imageId : res.imageId,
-                socialMediaList : res.socialMediaList,
+                // imageId : res.imageId,
+                socialMediaList : [],
                 ver : res.ver,
                 isActive : res.isActive
             })
+
+            for(let i = 0; i < this.getSocmed.length ; i++ ){
+                console.log(this.getSocmed[i].socialMediaId);
+                
+                this.socialMediaList?.push({
+                    socialMediaId : this.getSocmed[i].socialMediaId,
+                    url : this.getSocmed[i].url,
+                    isActive : this.getSocmed[i].isActive,
+                    ver : this.getSocmed[i].ver,
+                })
+            }
+
+            // this.editProfile
         })
+
     }
+
 
     ngOnInit(): void {
        this.initPostion()
@@ -189,6 +211,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
        this.initProfile()
        this.initSocialMedia()
 
+        
+        
         // this.citis = countryService.get
         // console.log(countryService.getCountries())
         // console.log(countryService.getStatesByShort('ID'))

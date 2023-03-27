@@ -89,7 +89,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <div class="w-10 bg-gray-100 border-round-bottom-xl">
@@ -236,17 +235,27 @@
                           </div>
                         </div>
                       </div>
-                      <div class="mt-2">
-                        <p>{{post.content}}</p>
+                      <div *ngIf="post.typeCode === 'PPOL'" class="mt-2">
+                        <p [innerHtml]="post.content"></p>
                       </div>
                       <div *ngIf="post.typeCode === 'PPOL'"
                         class="mt-2 border-1 border-gray-400 border-round-md px-3 py-3">
-                        <p class="font-medium mb-2">{{post.titlePolling}}</p>
+                        <p class="font-medium mb-2" [innerHtml]="post.titlePolling | wordLimit:60"></p>
                         <div class="flex flex-column gap-2">
-                          <ng-container *ngFor="let polling of post.pollingOption">
-                            <p (click)="onVote(polling.pollingOptionId)"
-                              class="bg-blue-100 hover:bg-blue-200 hover:text-blue-800 text-blue-600 border-1 border-round-md py-1 text-center cursor-pointer">
-                              {{polling.pollingContent}}</p>
+                          <ng-container *ngIf="!post.isVote">
+                            <ng-container *ngFor="let polling of post.pollingOption">
+                              <p (click)="onVote(polling.pollingOptionId)"
+                                class="bg-blue-100 hover:bg-blue-200 hover:text-blue-800 text-blue-600 border-1 border-round-md py-1 text-center cursor-pointer">
+                                {{polling.pollingContent}}</p>
+                            </ng-container>
+                          </ng-container>
+                          <ng-container *ngIf="post.isVote">
+                            <ng-container *ngFor="let polling of post.pollingOption">
+
+                              <!-- <p (click)="onVote(polling.pollingOptionId)"
+                                class="bg-blue-100 hover:bg-blue-200 hover:text-blue-800 text-blue-600 border-1 border-round-md py-1 text-center cursor-pointer">
+                                {{polling.pollingContent}}</p> -->
+                            </ng-container>
                           </ng-container>
                         </div>
                         <div class="flex mt-3">
@@ -256,10 +265,10 @@
                         </div>
                       </div>
                       <div *ngIf="post.typeCode !== 'PPOL'" class="mt-2 py-2">
-                        <p class="text-md font-medium">How to make a cupcake</p>
-                        <p class="text-sm font-light">Oat cake bonbon cotton candy sugar plum sweet roll. Brownie apple
-                          pie liquorice marzipan sweet roll. Toffee cookie cake tootsie roll dragée chocolate. <span
-                            class="cursor-pointer text-gray-400 ">...see more</span></p>
+                        <p class="text-md font-medium">{{post.title}}</p>
+                        <p class="text-sm font-light" [innerHtml]="post.content | wordLimit:20">
+                          <!-- <span class="cursor-pointer text-gray-400 ">...see more</span> -->
+                        </p>
                         <div class="flex w-full justify-content-between">
                           <img class="w-3 max-h-16rem hover:bg-gray-100" style="object-fit: cover !important;"
                             src="https://picsum.photos/600" alt="">
