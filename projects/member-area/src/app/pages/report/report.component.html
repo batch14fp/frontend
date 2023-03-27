@@ -95,49 +95,112 @@
           <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
             style="width: 32px;" alt="Avatar" />
         </div>
-        <form [formGroup]="formPass">
-            <div class="w-12 flex">
+        <!-- <form [formGroup]="formPass"> -->
+        <div class="w-12 flex">
             <div class="flex my-4 w-full justify-content-center">
                 <div class="w-full flex align-content-center justify-content-center">
                   <div class="w-11 flex flex-column">
                       <div class="flex w-full flex-column bg-white p-3 border-round-xl">
-                        <pre>
-                          {{formPass.value | json}}
-                        </pre>
-                          <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
+                          <div class="flex gap-2 mb-2 justify-content-between border-gray-300 align-content-center ">
                               <div class="flex">
-                                  <h2>Change Password</h2>
+                                  <h2>Report</h2>
                               </div>
                               <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
-                                  <i class="pi pi-user-edit align-self-center cursor-pointer hover:bg-gray-100 "></i>
-                              </div>
-                          </div>
-                          <div class="flex">
-                            <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe ipsa temporibus expedita excepturi perspiciatis obcaecati nam! Delectus ducimus dolor eaque laborum ipsa autem, molestiae beatae aspernatur culpa exercitationem consequatur cupiditate. </p>
-                          </div>
-                          <div class=" my-2 flex flex-column">
-                              <div class="mb-3 ">
-                                  <label for="oldPassword" class="font-medium col-form-label">Old Password</label>
-                                  <input formControlName="oldPassword" type="password" class="mt-2 w-full" style="border-radius: 10px;" pInputText id="oldPassword" placeholder="ex.budi doremi" name="oldPassword " >
-                              </div>
-                              <div class="mb-3 ">
-                                  <label for="newPassword" class="font-medium col-form-label">New Password</label>
-                                  <input formControlName="newPassword" type="password" class="mt-2 w-full" style="border-radius: 10px;" pInputText id="newPassword" placeholder="ex.budi doremi" name="newPassword " >
-                              </div>
-                              <div class="mb-3 ">
-                                  <label for="confirmNewPassword" class="font-medium col-form-label">Confirm New Password</label>
-                                  <input formControlName="confirmNewPassword" type="password" class="mt-2 w-full" style="border-radius: 10px;" pInputText id="confirmNewPassword" placeholder="ex.budi doremi" name="confirmNewPassword " >
+                                  <i class="pi pi-chart-bar align-self-center cursor-pointer hover:bg-gray-100 "></i>
                               </div>
                           </div>
                       </div>
+                      <!--  -->
+                      <div class="card my-3">
+
+                          <div class="flex flex-wrap md:justify-content-between justify-content-center card-container blue-container">
+                              <div class="border-blue-500 w-15rem h-6rem m-2 surface-overlay border-round-left border-left-3 font-bold flex align-items-center justify-content-center">
+                                  <div class="flex flex-column">
+                                      <h2 class="">Course</h2>
+                                      <h1 class="text-center text-3xl">20</h1>
+                                      <p class="font-light text-xs">Participan</p>
+                                  </div>
+                              </div>
+                              <div class="border-indigo-500 w-15rem h-6rem m-2 surface-overlay border-round-left border-left-3 font-bold flex align-items-center justify-content-center">
+                                <div class="flex flex-column">
+                                    <h2 class="">Event</h2>
+                                    <h1 class="text-center text-3xl">20</h1>
+                                    <p class="font-light text-xs">Participan</p>
+                                </div>
+                            </div>
+                            <div class="border-grey-500 w-15rem h-6rem m-2 surface-overlay border-round-left border-left-3 font-bold flex align-items-center justify-content-center">
+                                <div class="flex flex-column">
+                                    <h2 class="">Total</h2>
+                                    <h1 class="text-center text-3xl">20</h1>
+                                    <p class="font-light text-xs">Participan</p>
+                                </div>
+                            </div>
+                            <div class="border-green-500 w-15rem h-6rem m-2 surface-overlay border-round-left border-left-3 font-bold flex align-items-center justify-content-center">
+                                <div class="flex flex-column">
+                                    <h2 class="">Incomes</h2>
+                                    <h1 class="text-center text-3xl">20</h1>
+                                    <p class="font-light text-xs">Participan</p>
+                                </div>
+                            </div>
+                          </div>                      
+                        </div>
+                
+                      <!--  -->
+                      
+                      <div class="flex w-full flex-column bg-white p-3 border-round-xl">
+                        <div class="flex gap-2 mb-2 justify-content-between border-gray-300  align-content-center border-bottom-2 p-3">
+                            
+                            <div class="flex align-content-center p-2 border-round-md gap-4">
+                                <div class="flex flex-column">
+                                    <p>From</p>
+                                    <p-calendar [showIcon]="true"></p-calendar>
+                                </div>
+                                <div class="flex flex-column">
+                                    <p>To</p>
+                                    <p-calendar [showIcon]="true"></p-calendar>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="flex justify-content-end">
+                                <app-button-primary label="Export" class="m-3" icon="pi pi-file-export"></app-button-primary>
+                            </div>
+                        </div>
+                        <p-table [tableStyle]="{'min-width': '50rem'}">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Member Name</th>
+                                    <th>Provider Name</th>
+                                    <th>Type</th>
+                                    <th>Title</th>
+                                    <th>Start Date</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-settings let-i="rowIndex">
+                                <tr>
+                                    <td>1</td>
+                                    <td><p>Hidayat</p></td>
+                                    <td><p>Netf</p></td>
+                                    <td>
+                                        <button>Course</button>
+                                    </td>
+                                   
+                                    <td class="flex gap-2">
+                
+                                        <app-button-icon ></app-button-icon>
+                                        
+                                        <app-button-danger ></app-button-danger>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
                   </div>
                 </div>
             </div>
         </div>
-        <div class="flex mx-4 justify-content-end">
-            <app-button-primary label="Save" class="m-3" icon="pi pi-save"></app-button-primary>
-        </div>
-        </form>
+        <!-- </form> -->
       </div>
     </div>
   </main>

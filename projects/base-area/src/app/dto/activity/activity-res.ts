@@ -1,23 +1,21 @@
-import { Time } from "@angular/common"
-
 export interface ActivityRes{
     activityId : string
 	userId : string
 	fullname : string
-	timeAgo : string
+	createdAt : string
 	title : string
 	content : string
 	activityLocation : string
 	providers : string
 	typeCode : string
 	typeName : string
+	activityLocation : string
 	imgActivityId : string
 	price : number
 	categoryCode : string
 	categoryName : string
 	startDate : string
 	endDate : string
-    startTime : Time
-    endTime : Time
 	isActive : boolean
+	ver : number
 }
