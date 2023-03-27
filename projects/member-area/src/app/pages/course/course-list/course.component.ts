@@ -9,7 +9,7 @@ import { CategoryRes } from '@dto/category/category-res';
 import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { ActivityService } from '@service/activity.service';
 import { ActivityRes } from '@dto/activity/activity-res';
-import { TYPE } from 'projects/base-area/src/app/constant/type.service';
+import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
 
 @Component({
     selector:'app-course',
@@ -67,14 +67,14 @@ export class CourseComponent implements OnInit, OnDestroy{
       this.categoriesList.get('category')?.valueChanges.subscribe(res=>{
         const temp = res as any
         if(!temp.length){
-          this.course$ = this.activityService.getAllActivity(1,5,TYPE.COU).subscribe(res=>{
+          this.course$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.COURSE).subscribe(res=>{
             this.allActivity =res
           })
         }
         else{
           console.log("dismozdosfjofsjiofsijofijsoisfjo");
           
-          this.course$ = this.activityService.getAllActivity(1,5,TYPE.COU,temp).subscribe(res=>{
+          this.course$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.COURSE,temp).subscribe(res=>{
             this.allActivity =res
           })
         }

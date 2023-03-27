@@ -8,7 +8,7 @@ import { faBook, faHeart, faNewspaper, faPeopleGroup } from "@fortawesome/free-s
 import { ActivityService } from "@service/activity.service";
 import { CategoryService } from "@service/category.service";
 import { UserService } from "@service/user.service";
-import { TYPE } from "projects/base-area/src/app/constant/type.service";
+import { ACTIVITY_TYPE } from "projects/base-area/src/app/constant/activity-type";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -49,7 +49,7 @@ export class EventListComponent implements OnInit, OnDestroy {
     }
 
     initEvent(){
-        this.event$ = this.activityService.getAllActivity(1,5).subscribe( res => {
+        this.event$ = this.activityService.getAllActivity(1,5, ACTIVITY_TYPE.EVENT).subscribe( res => {
           this.allActivity = res
         })
     }
@@ -63,14 +63,13 @@ export class EventListComponent implements OnInit, OnDestroy {
         this.categoriesList.get('category')?.valueChanges.subscribe(res=>{
           const temp = res as any
           if(!temp.length){
-            this.event$ = this.activityService.getAllActivity(1,5,TYPE.EVN).subscribe(res=>{
+            this.event$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.EVENT).subscribe(res=>{
               this.allActivity =res
             })
           }
           else{
-            console.log("dismozdosfjofsjiofsijofijsoisfjo");
             
-            this.event$ = this.activityService.getAllActivity(1,5,TYPE.EVN,temp).subscribe(res=>{
+            this.event$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.EVENT,temp).subscribe(res=>{
               this.allActivity =res
             })
           }

@@ -3,17 +3,22 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { FormBuilder, Validators } from '@angular/forms';
-import { PostTypeService } from '../../../../../../base-area/src/app/services/posttype.service';
-import { PostService } from '../../../../../../base-area/src/app/services/post.service';
-import { CategoryService } from '../../../../../../base-area/src/app/services/category.service';
+
+
 import { Subscription } from 'rxjs';
-import { CategoryRes } from '../../../../../../base-area/src/app/dto/category/category-res';
+
 import { MenuItem } from 'primeng/api';
-import { ActivityTypeService } from '../../../../../../base-area/src/app/services/activitytype.service';
-import { ACTIVITY_TYPE } from '../../../../../../base-area/src/app/constant/activity-type';
-import { ActivityReq } from '../../../../../../base-area/src/app/dto/activity/activity-req';
+
 import { convertUTCToLocalDateISO, convertUTCToLocalDateTimeISO } from 'projects/base-area/src/app/utils/dateutil';
-import { ActivityService } from '../../../../../../base-area/src/app/services/activity.service';
+
+import { PostTypeService } from '@service/posttype.service';
+import { CategoryRes } from '@dto/category/category-res';
+import { ActivityService } from '@service/activity.service';
+import { CategoryService } from '@service/category.service';
+import { PostService } from '@service/post.service';
+import { ActivityTypeService } from '@service/activitytype.service';
+import { ActivityReq } from '@dto/activity/activity-req';
+import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
 
 @Component({
     selector : 'app-create-course',

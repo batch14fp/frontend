@@ -20,7 +20,7 @@ export class DetailComponent implements OnInit, OnDestroy{
     faPeopleGroup = faPeopleGroup
 
     constructor(private fb:FormBuilder, private title:Title, private activityService:ActivityService, private router: Router, private activatedRouter:ActivatedRoute){
-        this.title.setTitle('Activity')
+        this.title.setTitle('Course')
     }
 
     detailActivity = this.fb.group({
