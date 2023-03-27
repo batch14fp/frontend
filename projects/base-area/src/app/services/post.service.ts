@@ -27,6 +27,10 @@ export class PostService{
         return this.http.get<AllPostRes[]>(`${BASE_URL}/posts?page=${page}&size=${size}`)
     }
 
+    getPostById(postId: string): Observable<AllPostRes>{
+        return this.http.get<AllPostRes>(`${BASE_URL}/posts/${postId}`)
+    }
+
     getAllCommentByPostId(id:string, page:number, size:number): Observable<PostCommentRes[]>{
         return this.http.get<PostCommentRes[]>(`${BASE_URL}/posts/${id}/comment?page=${page}&size=${size}`)
     }

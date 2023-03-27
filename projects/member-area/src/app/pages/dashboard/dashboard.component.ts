@@ -113,6 +113,18 @@ export class DashboardComponent implements OnInit, OnDestroy{
       console.log(this.posts)
     }
 
+    calculateDiff(endAt:string){
+      let date = new Date(endAt);
+      let currentDate = new Date();
+
+      let days = Math.floor((currentDate.getTime() - date.getTime()) / 1000 / 60 / 60 / 24);
+      return days*-1;
+    }
+
+    getPercent(count:number, totalCount:number){
+      return (count/totalCount)* 100
+    }
+
     initComment(postId: string){
       this.getComment$  = this.postService.getAllCommentByPostId(postId, this.commentPostPage, this.COMMENT_POST_LIMIT).subscribe(res => {
         this.commentPost = res
@@ -221,12 +233,32 @@ export class DashboardComponent implements OnInit, OnDestroy{
       this.showPostOption = false
     }
 
-    onVote(pollingOptionId: string){
+    onVote(pollingOptionId: string, index:number){
       const data:PollingVoteReqInsert = {
         pollingOptionId
       }
       console.log(pollingOptionId)
       this.vote$ = this.pollingsService.insertVote(data).subscribe(res => {
+        // const postUpdate: AllPostRes[] = []
+        // for (const post of this.posts) {
+        //   for (const polling of post.pollingOption) {
+        //     if(polling.pollingOptionId === pollingOptionId){
+
+        //       post.isVote = !post.isVote
+        //         console.log("sama polling option id")
+        //     }
+        //   }
+        //   postUpdate.push(post)
+        // }
+        // this.posts = []
+        // this.posts = [...postUpdate]
+        // console.log(this.posts)
+
+    //     this.postIdToComment = postId
+    //  this.initComment(postId)
+    //  this.posts[idx].showInsertComment = !this.posts[idx].showInsertComment
+
+
         // this.initPosts()
       })
 

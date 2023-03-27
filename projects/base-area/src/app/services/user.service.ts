@@ -31,6 +31,13 @@ export class UserService {
     }
     throw new Error("Token is empty")
   }
+  getmemberCode(): string {
+    const data = localStorage.getItem("dataLogin")
+    if (data) {
+      return JSON.parse(data).memberCode
+    }
+    throw new Error("MemberCode is empty")
+  }
 
   getIdLogin(): number {
     const data = localStorage.getItem("dataLogin")

@@ -15,7 +15,8 @@ export interface AllPostRes{
 	typeName:string,
 	imgPostId:string,
   isVote: boolean,
-  pollingRespon: PollingResponRes[]
+  endAt: string,
+  pollingRespon: PollingResponRes
 	categoryCode:string,
 	categoryName:string,
 	countPostLike:number,

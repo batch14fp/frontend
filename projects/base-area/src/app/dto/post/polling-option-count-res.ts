@@ -1,4 +1,5 @@
 export interface PollingCountRes{
-  pollingOptionId: string,
+  pollingOptionId: string
+  pollingContent: string
   count: number
 }
