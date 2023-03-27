@@ -48,6 +48,11 @@ export const memberRoutes: Routes = [
         component:NavbarComponent
     },
     {
+        path:'events',
+        loadChildren:()=>import("./pages/event/event.module").then(e=>e.EventModule),
+        component:NavbarComponent
+    },
+    {
         path: 'profile',
         loadChildren: () => import("./pages/profile/profile.module").then(p => p.ProfileModule),
         // component: NavbarComponent
