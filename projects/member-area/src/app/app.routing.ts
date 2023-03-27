@@ -25,6 +25,7 @@ import { ThreadComponent } from "./pages/thread/thread.component";
 import { ArticleComponent } from "./pages/article/article.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { ReportComponent } from "./pages/report/report.component";
+import { SubscriptionComponent } from "./pages/subscription/subscription.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -67,6 +68,10 @@ export const memberRoutes: Routes = [
         component : ReportComponent
     },
     {
+        path : 'subscription',
+        component : SubscriptionComponent
+    },
+    {
         path: '',
         children: [
             {
@@ -84,7 +89,7 @@ export const memberRoutes: Routes = [
             {
                 path: 'post',
                 component: PostComponent
-            }
+            },
         ]
     },
     {
@@ -98,7 +103,7 @@ export const memberRoutes: Routes = [
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent,SubscriptionComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
@@ -112,7 +117,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent,SubscriptionComponent
     ]
 })
 

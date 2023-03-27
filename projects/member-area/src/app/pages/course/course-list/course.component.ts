@@ -10,6 +10,8 @@ import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-s
 import { ActivityService } from '@service/activity.service';
 import { ActivityRes } from '@dto/activity/activity-res';
 import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
+import { TYPE } from 'projects/base-area/src/app/constant/type.service';
+
 
 @Component({
     selector:'app-course',
@@ -17,7 +19,7 @@ import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type
 })
 
 export class CourseComponent implements OnInit, OnDestroy{
-  
+
   constructor(private title: Title, private fb: FormBuilder,
     private userService: UserService,  private router: Router,private categoryService: CategoryService, private activityService:ActivityService){
       this.title.setTitle("Course")
@@ -52,11 +54,11 @@ export class CourseComponent implements OnInit, OnDestroy{
       this.category$ = this.categoryService.getAllCategory().subscribe(res => {
         this.categories = res;
       })
-      
+
     }
 
     initCourse(){
-      this.course$ = this.activityService.getAllActivity(1,5).subscribe( res => {
+      this.course$ = this.activityService.getAllActivity(1,5, ACTIVITY_TYPE.COURSE).subscribe( res => {
         this.allActivity = res
       })
     }
@@ -72,9 +74,7 @@ export class CourseComponent implements OnInit, OnDestroy{
           })
         }
         else{
-          console.log("dismozdosfjofsjiofsijofijsoisfjo");
-          
-          this.course$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.COURSE,temp).subscribe(res=>{
+          this.course$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.COURSE).subscribe(res=>{
             this.allActivity =res
           })
         }
