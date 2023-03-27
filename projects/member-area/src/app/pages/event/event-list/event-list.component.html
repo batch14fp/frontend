@@ -88,7 +88,7 @@
             </div>
 
             <div class="sm:hidden md:flex col-3 my-2">
-              <app-button-primary label="Create course" routerLink="/course/create"></app-button-primary>
+              <app-button-primary label="Create Event" routerLink="/events/create"></app-button-primary>
             </div>
           </div>
         </div>
@@ -112,13 +112,13 @@
                 <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
               </div>
               <div class="col-12 flex justify-content-start flex-wrap  ">
-                <div *ngFor=" let course of allActivity"
+                <div *ngFor=" let events of allActivity"
                   class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4"
-                  routerLink="/course/detail/{{course.activityId}}">
+                  routerLink="/events/detail/{{events.activityId}}">
                   <div
                     class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-12 justify-content-start p-3 border-round-md ">
                     <div class="flex flex-column w-full h-full">
-                      <p class="text-md font-semibold text-indigo-300">{{course.categoryName}}</p>
+                      <p class="text-md font-semibold text-indigo-300">{{events.categoryName}}</p>
                       <div class="flex flex-column w-full h-full overflow-hidden">
                         <div>
                           <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt="">
@@ -126,21 +126,21 @@
                       </div>
                     </div>
                     <div class="flex justify-content-between align-content-center">
-                      <p class="align-self-center text-200 font-semibold text-l text-indigo-800">{{course.title}}
+                      <p class="align-self-center text-200 font-semibold text-l text-indigo-800">{{events.title}}
                       </p>
                     </div>
                     <div class="flex flex-column mt-3">
                       <div class="flex justify-content-between">
-                        <p class="text-800 text-md-2">{{course.providers}}</p>
+                        <p class="text-800 text-md-2">{{events.providers}}</p>
                         <p class="text-800 text-md-2"> <i class="pi pi-map-marker"></i> Online</p>
                       </div>
                       <div class=" flex justify-content-between">
                         <p class="text-800 text-md-2">Start Date </p>
-                        <p class="text-800 text-md-2">{{course.startDate | date: 'medium'}}</p>
+                        <p class="text-800 text-md-2">{{events.startDate | date: 'medium'}}</p>
                       </div>
                       <div class="flex justify-content-between">
                         <p class="text-800 text-md-2">End Date </p>
-                        <p class="text-800 text-md-2">{{course.endDate | date: 'medium'}}</p>
+                        <p class="text-800 text-md-2">{{events.endDate | date: 'medium'}}</p>
                       </div>
                     </div>
                   </div>
@@ -169,29 +169,6 @@
                 </p-checkbox>
                 <label for="hr">{{cat.categoryName}}</label>
               </div>
-              <!-- <div class="field-checkbox">
-                <p-checkbox name="group1" value="Performance & Dev" [(ngModel)]="selectedCategory" inputId="pd">
-                </p-checkbox>
-                <label for="pd">Performance & Dev</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Planning & Recruit" [(ngModel)]="selectedCategory" inputId="pr">
-                </p-checkbox>
-                <label for="pr">Planning & Recruit</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Tax Legal" [(ngModel)]="selectedCategory" inputId="tl"></p-checkbox>
-                <label for="tl">Tax Legal</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Career & Succession" [(ngModel)]="selectedCategory" inputId="cs">
-                </p-checkbox>
-                <label for="cs">Career & Succession</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="HR Digital" [(ngModel)]="selectedCategory" inputId="hd"></p-checkbox>
-                <label for="hd">HR Digital</label>
-              </div> -->
             </div>
             <div class="category mt-4">
               <p class="text-xl">Sort</p>

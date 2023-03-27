@@ -9,8 +9,9 @@ import { CategoryRes } from '@dto/category/category-res';
 import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { ActivityService } from '@service/activity.service';
 import { ActivityRes } from '@dto/activity/activity-res';
+import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
 import { TYPE } from 'projects/base-area/src/app/constant/type.service';
-import { ACTIVITY_TYPE } from '../../../../../../base-area/src/app/constant/activity-type';
+
 
 @Component({
     selector:'app-course',
@@ -73,8 +74,6 @@ export class CourseComponent implements OnInit, OnDestroy{
           })
         }
         else{
-          console.log("dismozdosfjofsjiofsijofijsoisfjo");
-
           this.course$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.COURSE).subscribe(res=>{
             this.allActivity =res
           })
