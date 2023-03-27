@@ -117,9 +117,8 @@
                 [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple" (onSelect)="onUpload($event)"
                 formArrayName="files" class="col-8">
               </p-fileUpload> -->
-              <p-fileUpload styleClass="w-full" style="width: 100%;" [showUploadButton]="false"
-                (onSelect)="onUpload($event)" (onRemove)="onRemove($event)" (onClear)="onClear()" [multiple]="true"
-                accept="image/*">
+              <p-fileUpload styleClass="w-full" [showUploadButton]="false" (onSelect)="onUpload($event)"
+                (onRemove)="onRemove($event)" (onClear)="onClear()" [multiple]="true" accept="image/*">
                 <ng-template pTemplate="content">
                 </ng-template>
               </p-fileUpload>

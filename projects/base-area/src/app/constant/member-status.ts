@@ -1,0 +1,6 @@
+export enum MEMBER_STATUS {
+  REGULAR = "REG",
+  PREMIUM30 = "PR30",
+  PREMIUM60 = "PR60",
+  PREMIUM90 = "PR90"
+}
