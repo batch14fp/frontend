@@ -13,7 +13,10 @@ const courseRoutes:Routes = [
         path:'detail/:id',
         component:DetailComponent
     },
-
+    {
+        path:'create',
+        component:CreateCourseComponent
+    }
 ]
 
 @NgModule({

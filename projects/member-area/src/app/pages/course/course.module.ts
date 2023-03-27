@@ -13,6 +13,7 @@ import { CreateCourseComponent } from './course-create/course-create.component';
     declarations:[
         CourseComponent,
         DetailComponent,
+        CreateCourseComponent
     ],
     imports:[
         CourseRouting, ShareModule, ReactiveFormsModule, HttpClientModule, CommonModule,FormsModule
