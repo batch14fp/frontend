@@ -115,7 +115,7 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
        this.ref.detectChanges();
     }
 
-    get socialMediaList(){
+    get socialMediaList(){ 
         return this.editProfile.get('socialMediaList') as FormArray
     }
 
