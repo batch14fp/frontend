@@ -189,12 +189,12 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
             for(let i = 0; i < this.getSocmed.length ; i++ ){
                 console.log(this.getSocmed[i].socialMediaId);
                 
-                this.socialMediaList?.push({
+                this.socialMediaList?.push(this.fb.group({
                     socialMediaId : this.getSocmed[i].socialMediaId,
                     url : this.getSocmed[i].url,
                     isActive : this.getSocmed[i].isActive,
                     ver : this.getSocmed[i].ver,
-                })
+                }))
             }
 
             // this.editProfile
@@ -210,17 +210,15 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
        this.selectedCountry()
        this.initProfile()
        this.initSocialMedia()
-
-        
-        
-        // this.citis = countryService.get
-        // console.log(countryService.getCountries())
-        // console.log(countryService.getStatesByShort('ID'))
-        // console.log(countryService.getCities('ID', 'Jakarta'))
     }
 
     ngOnDestroy(): void {
-        throw new Error("Method not implemented.");
+        // position$?.unsubscribe()
+        // industry$?.unsubscribe()
+        // bankPaymnet$?.unsubscribe()
+        // location$?.unsubscribe()
+        // profile$?.unsubscribe()
+        // socmed$?.unsubscribe()
     }
 
 
