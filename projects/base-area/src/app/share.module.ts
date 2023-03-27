@@ -34,13 +34,14 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { BottomNavbarModule } from './components/bottom-navbar/buttom-navbar.module';
 import { TooltipModule } from 'primeng/tooltip';
+import { WordLimitPipe } from './utils/word-limit.pipe';
 
 
 
 
 @NgModule({
   declarations: [
-    TimeAgoPipe
+    TimeAgoPipe, WordLimitPipe
   ],
   imports: [
     CustomButtonModule, CustomSkeletonModule, CommonModule, LoadingModule, InputTextModule, PasswordModule,
@@ -56,7 +57,8 @@ import { TooltipModule } from 'primeng/tooltip';
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
     ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule, AnimateModule
-    ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule, BottomNavbarModule, TooltipModule
+    ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule,
+    BottomNavbarModule, TooltipModule, WordLimitPipe
   ]
 
 })
