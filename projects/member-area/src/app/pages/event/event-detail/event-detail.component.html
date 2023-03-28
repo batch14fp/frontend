@@ -115,9 +115,11 @@
             <form [formGroup]="detailActivity">
               <div class="w-full flex align-content-center justify-content-center align-self-center">
                 <div
-                  class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-8 justify-content-start p-3 border-round-md ">
+                  class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-8 justify-content-start p-3 mb-3 border-round-md ">
                   <div class="flex flex-column w-full h-full">
-                    <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
+                    <img class="imgBanner" src="http://localhost:2121/files/{{detailActivity.value.imgActivityId}}"
+                    alt="banner">
+                    <!-- <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner"> -->
                   </div>
                   <div class=" flex w-full justify-content-between">
                     <div class="w-6 mt-3">
@@ -126,19 +128,22 @@
                     </div>
                     <div class="w-4 mt-3 text-end flex flex-column gap-4">
                       <p><i class="pi pi-user pr-2"></i> {{detailActivity.value.providers}}</p>
+                      <p><i class="pi pi-map-marker pr-2"></i> {{detailActivity.value.location}}</p>
                       <p><i class="pi pi-tag pr-2"></i> {{detailActivity.value.categoryName}}</p>
                       <p><i class="pi pi-money-bill pr-2"></i> Rp. {{detailActivity.value.price}}</p>
                       <p><i class="pi pi-calendar pr-2"></i> {{detailActivity.value.startDate | date: 'medium'}}</p>
                       <p><i class="pi pi-calendar pr-2"></i> {{detailActivity.value.endDate | date: 'medium'}}</p>
+                      <div class="">
+                        <div class="sm:hidden md:flex col-3 my-2">
+                          <app-button-primary label="Buy" routerLink="/events/detail/{{activityId}}/invoice"></app-button-primary>
+                      </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </form>
           </div>
-        </div>
-        <div class="flex justify-content-start flex-wrap bg-white">
-          <p>test</p>
         </div>
       </div>
       <div>
