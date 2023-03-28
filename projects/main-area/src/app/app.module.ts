@@ -11,10 +11,11 @@ import { TokenInterception } from 'projects/base-area/src/app/interceptor/token.
 import { ResponseInterceptor } from 'projects/base-area/src/app/interceptor/response.interceptor';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, HomeComponent
   ],
   imports: [
     BrowserModule, AppRouting, ShareModule, FormsModule, ReactiveFormsModule, HttpClientModule,

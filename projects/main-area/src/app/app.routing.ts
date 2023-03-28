@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { adminRoutes } from "projects/admin-area/src/app/app.routing";
 import { memberRoutes } from "projects/member-area/src/app/app.routing";
+import { HomeComponent } from "./pages/home/home.component";
 
 
 const appRoutes: Routes = [
@@ -42,8 +43,13 @@ const appRoutes: Routes = [
     //     pathMatch: 'full',
     //     component: NotFoundComponent
     // },
+    {
+       path : '',
+       component : HomeComponent
+   },
     ...adminRoutes,
-    ...memberRoutes
+    ...memberRoutes,
+
 ]
 
 @NgModule({

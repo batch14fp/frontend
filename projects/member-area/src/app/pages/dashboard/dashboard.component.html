@@ -1,8 +1,8 @@
-<pre>{{commentFb.value | json}}</pre>
+<!-- <pre>{{commentFb.value | json}}</pre> -->
 
 <main>
   <div class="w-12 flex relative">
-    <div class="w-2 pt-4 px-4 top-0">
+    <div class="w-2 hidden lg:block pt-4 px-4 top-0">
       <div class="w-6">
         <img class="w-full w-0" style="object-fit: contain !important;"
           src="../../../assets/images/wecommunity-logo.png" alt="logo wecommunity">
@@ -14,15 +14,15 @@
             <i class="pi pi-home px-2"></i>
             Home</button>
         </div>
-        <div class="text-600 flex">
+        <div class="text-900 flex">
           <button
-            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
             <i class="pi pi-calendar px-2"></i>
             Event</button>
         </div>
-        <div class="text-600 flex hover:text-blue-600">
+        <div class="text-900 flex hover:text-blue-600">
           <button
-            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
+            class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
             <i class="pi pi-book px-2"></i>
             Course
           </button>
@@ -91,13 +91,45 @@
         </div>
       </div>
     </div>
-    <div class="w-10 bg-gray-100 border-round-bottom-xl">
-      <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem">
+    <!-- Mobile Menu -->
+    <div
+      class="flex bg-white pt-2 justify-content-between border-top-1 border-gray-200 w-12 gap-4 px-4 md:hidden fixed bottom-0 z-5 justify-content-center align-content-center align-self-center">
+      <div
+        class="text-blue-600  border-blue-600 border-bottom-3 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-home align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">
+          Home</p>
+      </div>
+      <div class="w-2 text-900 font-medium bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-calendar px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Event</p>
+      </div>
+      <div
+        class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center hover:text-blue-600">
+        <i class="pi pi-book px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Course</p>
+      </div>
+      <div class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-send px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Post</p>
+      </div>
+      <div class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <fa-icon class="text-gray-600 align-self-center cursor-pointer hover:text-blue-600" size="xl"
+          [icon]="faNewspaper"></fa-icon>
+        <p class="align-self-center">Article</p>
+      </div>
+    </div>
+    <div class="w-12 md:w-10 bg-gray-100 border-round-bottom-xl">
+      <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem align-content-center gap-4">
+        <ng-container *ngIf="memberStatus === memberReguler">
+          <button class="bg-red-600 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
+            style="height: 30px !important;">Upgrade</button>
+        </ng-container>
         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
           style="width: 32px;" alt="Avatar" />
       </div>
       <div class="w-12 flex">
-        <div class="flex mt-4 w-9 justify-content-center align-self-start">
+        <div class="flex mt-4 w-12 md:w-9 justify-content-center align-self-start">
           <div class="w-full flex align-content-center justify-content-center align-self-center">
             <div class="w-11 flex flex-column">
               <div class=" mb-2 w-12 pb-4 border-bottom-1 border-gray-400 align-self-center">
@@ -189,8 +221,8 @@
                         </div>
                         <div class="flex gap-3 justify-content-between">
                           <div class="flex gap-2">
-                            <div *ngIf="!post.imageProfileId" style="width: 42px;  height: 42px;"
-                              class="border-circle align-self-center bg-blue-400 flex justify-content-center align-content-center">
+                            <div *ngIf="!post.imageProfileId"
+                              class="border-circle align-self-center bg-blue-400 p-2 flex justify-content-center align-content-center">
                               <p
                                 class="text-white font-medium text-xl align-self-center align-content-center text-center">
                                 {{fotoName(post.fullname)}}</p>
@@ -205,7 +237,7 @@
                             <!-- <img *ngIf="post.imageProfileId" image src='http://localhost:4200/files/'
                               class="border-circle align-self-center " style="width: 42px;" alt="Avatar" /> -->
                             <div class="flex flex-column">
-                              <div class="flex w-full align-content-center gap-2">
+                              <div class="flex flex-column md:flex-row w-full align-content-center md:gap-2">
                                 <p class="font-medium text-md align-self-center">{{post.fullname}}</p>
                                 <div class="flex">
                                   <i class="pi pi-clock px-2 align-self-center"
@@ -539,7 +571,7 @@
             </div>
           </div>
         </div>
-        <div class="w-3 mt-2">
+        <div class="hidden md:block md:w-3 mt-2">
           <div class="w-10">
             <div class="flex mb-2 bg-red-100 w-4 justify-content-center py-1 border-round-md">
               <i class="pi pi-heart-fill pr-2 align-self-center" style="color: red;"></i>
