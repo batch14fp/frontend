@@ -2,7 +2,7 @@
 import { formatDate } from "@angular/common";
 import { AfterContentChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
-import { Title } from "@angular/platform-browser";
+import { DomSanitizer, SafeResourceUrl, Title } from "@angular/platform-browser";
 import { BankPaymentRes } from "@dto/bankpayment/bank-payment-res";
 import { IndustryRes } from "@dto/industry/industry-res";
 import { PositionRes } from "@dto/position/postion-res";
@@ -18,6 +18,8 @@ import { bankList } from "projects/base-area/src/app/constant/bank.service";
 import { SocmedService } from "@service/socmed.service";
 import { SocialMediaGetRes } from "@dto/socialmedia/social-media-res";
 import { getInitials } from "projects/base-area/src/app/utils/getInitial";
+import { ProfileReqUpdate } from "@dto/profile/profile-req-update";
+import { Router } from "@angular/router";
 
 const countryService= require('countrycitystatejson')
 
@@ -61,24 +63,13 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
     selectedBank! : BankPaymentRes
     selectedContries! : string
 
+    imageSource!:SafeResourceUrl
+
     photoName = ""
-
-    walletMember = this.fb.group({
-        bankPaymentName : [""],
-        accountNumber : [""],
-        accountName : [""]
-    })
-
-    socmedMember = this.fb.group({
-        userId : [""],
-        socialMediaId : [""],
-        url : [""],
-        isActive : [true],
-        ver : [0]
-    })
 
     editProfile = this.fb.group({
         userId : [""],
+        profileId : [""],
         industryId : [""],
         positionId : [""],
         statusMemberId : [""],
@@ -86,14 +77,20 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         email : [""],
         userBalance : [0],
         statusMember : [""],
+        accountName : [""],
+	    accountNumber :[""],
         phoneNumber : [""],
-        dob : [""],
+        dob : [new Date()],
         country : [""],
         province : [""],
         city : [""],
         postalCode : [""],
         company : [""],
         imageId : [""],
+        file : this.fb.group({
+            fileContent : [""],
+            extension : [""]
+        }),
         socialMediaList : this.fb.array([]),
         ver : [0],
         isActive : [true]
@@ -108,8 +105,12 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         private profileService : ProfileService,
         private userService : UserService,
         private socialMediaService : SocmedService,
-        private ref : ChangeDetectorRef
-    ){}
+        private ref : ChangeDetectorRef,
+        private _sanitizer: DomSanitizer,
+        private router : Router
+    ){
+        this.title.setTitle('Edit Profile')
+    }
 
     ngAfterContentChecked(): void {
        this.ref.detectChanges();
@@ -119,6 +120,59 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         return this.editProfile.get('socialMediaList') as FormArray
     }
 
+    addFiles(fileContent: string, extension: string) {
+        this.editProfile.get('file')?.patchValue({
+            fileContent: (fileContent),
+            extension: (extension),
+        })
+    }
+
+    onUpload(event: any) {
+        const toBase64 = (file: File) => new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            if (typeof reader.result === "string") resolve(reader.result)
+          };
+          reader.onerror = error => reject(error);
+        });
+        
+  
+        for (let file of event.target.files) {
+          toBase64(file).then(result => {
+            const resultBase64 = result.substring(result.indexOf(",") + 1, result.length)
+            const resultExtension = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length)
+  
+            this.addFiles(resultBase64, resultExtension)
+  
+            this.imageSource = this._sanitizer.bypassSecurityTrustResourceUrl(`data:image/${resultExtension};base64, ${resultBase64}`);
+  
+          })
+        }
+    }
+
+    // onUpdateProfile() : void {
+    //     const data : ProfileReqUpdate = {
+    //         profileId : this.editProfile.value.profileId!,
+    //         fullname : this.editProfile.value.fullname!,
+    //         company : this.editProfile.value.company!,
+    //         country : this.editProfile.value.country!,
+    //         province : this.editProfile.value.province!,
+    //         city : this.editProfile.value.city!,
+    //         dob : this.editProfile.value.dob!,
+    //         // walletId : this.editProfile.value.
+    //         postalCode : this.editProfile.value.postalCode!,
+    //         industryId : this.editProfile.value.industryId!,
+    //         positionId : this.editProfile.value.positionId!,
+    //         phoneNumber : this.editProfile.value.phoneNumber!,
+    //         // file : this.editProfile.value.file!
+    //     }
+
+    //     this.profile$ = this.profileService.updateProfile(data).subscribe(res=>{
+    //         this.router.navigateByUrl('/profile')
+    //     })
+
+    // }
 
     initPostion(){
         this.position$ = this.positionService.getAllPosition().subscribe(res => {
@@ -174,30 +228,31 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
                 userBalance : res.userBalance,
                 statusMember : res.statusMember,
                 phoneNumber : res.phoneNumber,
-                dob : res.dob,
+                dob : new Date(res.dob),
                 country : res.country,
                 province : res.province,
                 city : res.city,
                 postalCode : res.postalCode,
                 company : res.company,
-                // imageId : res.imageId,
+                imageId : res.imageId,
                 socialMediaList : [],
                 ver : res.ver,
                 isActive : res.isActive
             })
 
             for(let i = 0; i < this.getSocmed.length ; i++ ){
-                console.log(this.getSocmed[i].socialMediaId);
+                // console.log(this.getSocmed[i].socialMediaId);
                 
                 this.socialMediaList?.push(this.fb.group({
+                    
+                    profileSocialMediaId : this.getSocmed[i].profileSocialMediaId,
                     socialMediaId : this.getSocmed[i].socialMediaId,
+                    platformName : this.getSocmed[i].platformName,
                     url : this.getSocmed[i].url,
-                    isActive : this.getSocmed[i].isActive,
-                    ver : this.getSocmed[i].ver,
+                    ver:this.getSocmed[i].ver,
+                    isActive: this.getSocmed[i].isActive
                 }))
             }
-
-            // this.editProfile
         })
 
     }

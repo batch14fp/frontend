@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { CountMemberRes } from "@dto/report/count-member-res";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 import { ActivityReq } from "../dto/activity/activity-req";
@@ -38,5 +39,11 @@ export class ActivityService{
 
     deleteActivity(id : string) : Observable<res>{
         return this.http.delete<res>(`${BASE_URL}/activities/${id}`)
+    }
+
+
+
+    getDataActivity() : Observable<CountMemberRes>{
+        return this.http.get<CountMemberRes>(`${BASE_URL}/activities/total`)
     }
 }
