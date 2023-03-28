@@ -1,10 +1,15 @@
 export interface InvoiceRes{
-    activityName : string
-	typeName : string
-	categoryName : string
+	invoiceId:string
+	activityId:string
+	voucherId:string
+	membershipId:string
+	voucherCode:string
+	invoiceCode:string
+	activityTitle : string
+	price : number
 	startDate : string
 	endDate : string
-	startTime : string
-	endTime : string
-	price : string
+	isActive:boolean
+	ver:number
+	
 }

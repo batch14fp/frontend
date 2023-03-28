@@ -10,7 +10,7 @@ import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-s
 import { ActivityService } from '@service/activity.service';
 import { ActivityRes } from '@dto/activity/activity-res';
 import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
-import { TYPE } from 'projects/base-area/src/app/constant/type.service';
+
 
 
 @Component({

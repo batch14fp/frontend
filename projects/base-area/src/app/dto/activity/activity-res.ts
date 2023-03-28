@@ -9,7 +9,6 @@ export interface ActivityRes{
 	providers : string
 	typeCode : string
 	typeName : string
-	activityLocation : string
 	imgActivityId : string
 	price : number
 	categoryCode : string
