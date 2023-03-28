@@ -16,6 +16,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { PostCommentRes } from '@dto/post/all-post-comment-res';
 import { UserService } from '../../../../../base-area/src/app/services/user.service';
 import { PostBookmarkReq } from '../../../../../base-area/src/app/dto/post/post-bookmark-req';
+import { MEMBER_STATUS } from '../../../../../base-area/src/app/constant/member-status';
 
 
 @Component({
@@ -45,6 +46,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
     postIdToDelete = ""
     postIdToComment = ""
     isLoading = false
+    memberStatus!: string
+    memberReguler = MEMBER_STATUS.REGULAR
 
     faHeart = faHeart
     faBook = faBook
@@ -294,6 +297,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
             {label: 'Thread', routerLink: ['thread']},
             {label: 'Calendar'}
         ];
+
+        this.memberStatus =  this.userService.getMemberCode()
     }
 
     ngOnDestroy(): void {
