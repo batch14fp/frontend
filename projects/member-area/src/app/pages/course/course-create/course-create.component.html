@@ -144,16 +144,25 @@
                     [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple" (onSelect)="onUpload($event)"
                     formArrayName="imageCover" class="" style="width: 100%;">
                   </p-fileUpload> -->
+
+
                   <input type="file" #file class="hidden" (change)="onUpload($event)">
+
                   <img *ngIf="this.courseFb.value.imageCover!['contentFile']" [src]="imageSource" class="mt-2"
                     alt="Image Source">
+
                   <button *ngIf="this.courseFb.value.imageCover!['contentFile']" (click)="onRemoveImageCover()"
                     class="bg-red-600 mt-4 cursor-pointer hover:bg-red-700  text-white border-round-md font-medium  text-sm py-2 border-1 border-red-600 border-none">Remove</button>
+
                   <div *ngIf="!imageSource" (click)="file.click()" class="w-full border-round-md border-dashed border-gray-500 surface-overlay mt-2 border-1 h-4rem
                   flex justify-content-center align-content-center cursor-pointer hover:bg-gray-100">
+
                     <i class="pi pi-camera px-2 py-2 align-self-center relative text-800" style="font-size: 16px;">
                     </i>
+                    
                   </div>
+
+
                 </div>
                 <div class="flex flex-column w-full">
                   <label for="title" class="text-sm font-medium">Title<span class="text-red-400"

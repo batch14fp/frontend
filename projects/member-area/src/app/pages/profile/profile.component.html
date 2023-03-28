@@ -99,7 +99,9 @@
             <div class="flex mx-4 justify-content-end">
                 <app-button-primary label="Save" class="m-3" icon="pi pi-save"></app-button-primary>
             </div>
-            {{editProfile.value|json}}
+            <pre>
+              {{editProfile.value|json}}
+            </pre>
             <div class="w-12 flex">
             <div class="flex my-4 w-7 justify-content-center">
                 <div class="w-full flex align-content-center justify-content-center">
@@ -114,14 +116,36 @@
                             </div>
                         </div>
                         <div class="flex">
-                          <div class="flex flex-column relative" *ngIf="editProfile.value.imageId" formControlName="imageId">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center p-2" style="width: 60px;" alt="Avatar" />
-                            <fa-icon input type="file" class="absolute top-0 right-0 cursor-pointer" [icon]="faPenToSquare"></fa-icon>
+
+                          <div class="flex flex-column relative hover:bg-grey-700 coursor-pointer">
+
+                            <input type="file" #file class="hidden" (change)="onUpload($event)">
+
+                            <!-- <img *ngIf="editProfile.value.file!['fileContent']" [src]="imageSource" class="border-circle align-self-center p-2" style="width: 60px;" alt="Avatar" /> -->
+                            <!-- <p *ngIf="!editProfile.value.file!['fileContent']">test</p> -->
+                            
+                            <div class=" hover:bg-gray-100" *ngIf="!imageSource" (click)="file.click()" >
+                              <p class="border-circle w-6rem h-6rem m-2 bg-indigo-500 text-white font-bold flex align-items-center justify-content-center ">{{photoName}}</p>
+                              
+                              <fa-icon input type="file" class="absolute top-0 right-0" [icon]="faPenToSquare"></fa-icon>
+
+                            </div>
                           </div>
-                          <div class="flex flex-column relative" *ngIf="!editProfile.value.imageId" formControlName="imageId">
-                           <p class="border-circle w-6rem h-6rem m-2 bg-indigo-500 text-white font-bold flex align-items-center justify-content-center ">{{photoName}}</p>
-                            <fa-icon class="absolute top-0 right-0 cursor-pointer" [icon]="faPenToSquare"></fa-icon>
+
+                          <div class="flex flex-column relative" *ngIf="editProfile.value.file!['fileContent']" formControlName="imageId">
+                            
+                            <ng-container *ngIf="!editProfile.value.imageId">
+                              <p class="border-circle w-6rem h-6rem m-2 bg-indigo-500 text-white font-bold flex align-items-center justify-content-center ">{{photoName}}</p>
+                              <fa-icon class="absolute top-0 right-0 cursor-pointer" [icon]="faPenToSquare"></fa-icon>
+                            </ng-container>
+                            <ng-container *ngIf="editProfile.value.imageId">
+                              <img *ngIf="editProfile.value.file!['fileContent']" [src]="imageSource" class="border-circle align-self-center p-2" style="width: 60px;" alt="Avatar" />
+                              <fa-icon class="absolute top-0 right-0 cursor-pointer" [icon]="faPenToSquare"></fa-icon>
+                            </ng-container>
+
                           </div>
+
+                          
                         </div>
                         <div class="flex mt-3 gap-2 justify-content-between">
                         <div class="flex flex-column w-full">
@@ -139,7 +163,7 @@
                                 <label for="email" class="font-medium col-form-label"> Date of Birth  </label>
                                 <!-- <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="email" formControlName="email"  placeholder="example@gmail.com"
                                 name=" email"> -->
-                                <p-calendar styleClass="w-full" formControlNmae="dob" [showIcon]="true"></p-calendar>
+                                <p-calendar styleClass="w-full" formControlName="dob" [showIcon]="true"></p-calendar>
                             </div>
                             <div class="mb-3 flex flex-column ">
                                 <label for="phoneNumber" class="font-medium col-form-label">Phone Number</label>
@@ -202,10 +226,6 @@
                     </div>
                     </div>
                     <div class="bg-white border-round-lg">
-                      <form [formGroup]="walletMember">
-                        <pre>
-                          {{walletMember.value|json}}
-                        </pre>
                         <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
                             <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
                                 <div class="flex">
@@ -230,11 +250,13 @@
                                 <input type="text" class="mt-2 disable" formControlName="accountName" style="border-radius: 10px;" pInputText id="industry"
                                     name=" industry">
                             </div>
+                            <div class="mt-3 grid border-top-1 p-3 border-gray-300 justify-content-between">
+                                <label for="industry" class="font-medium col-form-label">Balance</label>
+                                <p >{{editProfile.value.userBalance}}</p>
+                            </div>
                         </div>
-                      </form>
                     </div>
                     <div class="bg-white border-round-lg">
-                      {{getSocmed|json}}
                       <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
                           <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
                               <div class="flex">
@@ -244,10 +266,10 @@
                                   <fa-icon class="px-2 " [icon]="faGlobe"></fa-icon>
                               </div>
                           </div>
-                          <div class="mt-3 flex flex-column " *ngFor="let sm of socialMediaList.controls; let i = index" formArrayName="socialMediaList">
-                            <div class="" [formGroupName]="i">
+                          <div class="mt-3" *ngFor="let sm of socialMediaList.controls; let i = index" formArrayName="socialMediaList">
+                            <div class="flex flex-column" [formGroupName]="i">
                               <label for="Company" class="font-medium col-form-label">{{sm.value.platformName}}</label>
-                              <input type="text" class="mt-2" formControlName="sm.value.url" style="border-radius: 10px;" pInputText id="Company"
+                              <input type="text" class="mt-2" formControlName="url" style="border-radius: 10px;" pInputText id="Company"
                                   name=" Company">
                             </div>
                           </div>

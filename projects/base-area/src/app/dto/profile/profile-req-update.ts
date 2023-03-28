@@ -8,12 +8,16 @@ export interface ProfileReqUpdate{
 	country : string
 	province : string
 	city : string
-	dob : string
-	memberStatusId : string
+	dob : string | Date
 	postalCode : string
 	industryId : string
 	positionId : string
 	phoneNumber : string
+	walletId : string
+	walletVer : string
+	bankPaymentId : string
+	accountName : string
+	accountNumber :string
 	file : FileUpdateReq
 	socialMediaList : SocialMediaGetRes[]
 	ver : number

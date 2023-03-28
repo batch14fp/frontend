@@ -1,4 +1,4 @@
-export interface SocialMediaAdminReq{
+export interface SocialMediaUserReq{
     userId : string
     socialMediaId : string
     url : string
