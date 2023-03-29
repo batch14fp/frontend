@@ -27,10 +27,13 @@ import { MEMBER_STATUS } from '../../../../../base-area/src/app/constant/member-
 
 export class DashboardComponent implements OnInit, OnDestroy{
   private posts$?: Subscription
+  private singlePost$?: Subscription
   private like$?: Subscription
   private postDelete$?: Subscription
   private vote$?: Subscription
+  private unVote$?: Subscription
   private insertComment$?: Subscription
+  private deleteComment$?: Subscription
   private getComment$?: Subscription
   private insertBookmark$?: Subscription
 
@@ -42,12 +45,28 @@ export class DashboardComponent implements OnInit, OnDestroy{
     commentPost!: PostCommentRes[]
     userIdlogin:string = this.userService.getIdLogin().toString()
     showPostOption = false
+    showCommentOption = false
     showInsertComment = false
     postIdToDelete = ""
     postIdToComment = ""
     isLoading = false
     memberStatus!: string
     memberReguler = MEMBER_STATUS.REGULAR
+    imageIdProfile= ""
+    fullNameLogin=""
+
+    // commentIdSelected =""
+    commentIdxEdit!: number
+
+    optionPost = {
+      postId: "",
+      idx: 0
+    }
+
+    onOptionPost(postId:string, idx:number){
+      this.optionPost.postId = postId
+      this.optionPost.idx =idx
+    }
 
     faHeart = faHeart
     faBook = faBook
@@ -55,6 +74,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
     faPeopleGroup = faPeopleGroup
 
     commentFb = this.fb.group({
+      contentComment: ["",  Validators.required],
+    })
+
+    editCommentFb = this.fb.group({
       contentComment: ["",  Validators.required],
     })
 
@@ -68,6 +91,49 @@ export class DashboardComponent implements OnInit, OnDestroy{
       isMoreComments = false
       loadedComment = 0
       commentPostLength = 0
+      editComment = false
+
+
+      optionMenuDelete: MenuItem[] = [
+        { label: 'Delete', icon: 'pi pi-fw pi-trash', command: e=> this.confirmDelete(this.optionPost.idx) },
+        { label: 'Save', icon: 'pi pi-fw pi-bookmark', command: e=> this.onInsertBookmark(this.optionPost.postId, this.optionPost.idx) }
+      ];
+      optionMenuSave: MenuItem[] = [
+        { label: 'Save', icon: 'pi pi-fw pi-bookmark', command: e=> this.onInsertBookmark(this.optionPost.postId, this.optionPost.idx) }
+      ];
+
+      optionCommentDelete: MenuItem[] = [
+        { label: 'Delete', icon: 'pi pi-fw pi-trash', command: e=> this.confirmDelete(this.optionPost.idx) },
+        { label: 'Edit', icon: 'pi pi-fw pi-pencil', command: e=> this.onEditComment() },
+        { label: 'Hide', icon: 'pi pi-fw pi-eye-slash', command: e=> this.onInsertBookmark(this.optionPost.postId, this.optionPost.idx) },
+      ];
+      optionCommentSave: MenuItem[] = [
+        { label: 'Hide', icon: 'pi pi-fw pi-eye-slash', command: e=> this.onInsertBookmark(this.optionPost.postId, this.optionPost.idx) }
+      ];
+
+
+      onCancelEdit(){
+        this.commentIdx = -1
+      }
+
+      commentIdx!:number
+      onShowEditComment(idx:number){
+        this.commentIdxEdit = idx
+        // this.commentIdSelected = postCommentId
+        // console.log(this.commentPost[this.commentIdxEdit].contentComment)
+      }
+
+      onEditComment(){
+        this.commentIdx = this.commentIdxEdit
+        console.log(this.commentPost[this.commentIdx].contentComment)
+        this.editCommentFb.patchValue({
+          contentComment: this.commentPost[this.commentIdx].contentComment
+        })
+        // this.editCommentFb.patchValue({contentComment: this.commentPost[this.commentIdx].contentComment })
+        // this.editCommentFb.value.contentComment = this.commentPost[this.commentIdx].contentComment
+      //  this.commentIdEdit = this.commentIdSelected
+      }
+
 
       POST_LIMIT = 3
       postPage = 1
@@ -80,6 +146,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
           } else {
             this.posts = result
           }
+          console.log(this.posts)
           // this.posts.map(p => {
             // p.showComment = false
 
@@ -162,6 +229,17 @@ export class DashboardComponent implements OnInit, OnDestroy{
       })
     }
 
+    onDeleteComment(commentId:string, postId: string){
+      this.deleteComment$ = this.postService.deletePostComment(commentId).subscribe(res =>{
+        this.posts.map(p => {
+          p.countPostComment--
+          this.commentFb.reset()
+        })
+
+        this.initComment(postId)
+      })
+    }
+
     onShowInsertComment(postId: string, idx:number){
       this.postIdToComment = postId
      this.initComment(postId)
@@ -175,8 +253,17 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
 
 
-    onInsertBookmark(postId: string){
-      this.showPostOption = false
+    onInsertBookmark(postId: string, idx?:number){
+      const postUpdate = []
+      for (const post of this.posts) {
+        post.showPostOption = false
+        postUpdate.push(post)
+      }
+      this.posts = postUpdate
+    //  if(idx){
+    //   this.posts[idx].showPostOption = !this.posts[idx].showPostOption
+    //  }
+
       const dataInsert: PostBookmarkReq ={
         postId
       }
@@ -224,24 +311,73 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
     }
 
-    onShowOption(postId: string){
-      this.postIdToDelete = postId
-      this.showPostOption = !this.showPostOption
-      console.log(this.postIdToDelete)
-      console.log(this.postIdToDelete)
-      console.log(this.showPostOption)
+    onShowOption(postId: string, idx: number){
+      const postUpdate = []
+      for (const post of this.posts) {
+        post.showPostOption = false
+        postUpdate.push(post)
+      }
+      this.posts = postUpdate
+     this.posts[idx].showPostOption = !this.posts[idx].showPostOption
+      console.log(this.posts[idx])
+
+      // this.postIdToDelete = postId
+      // this.showPostOption = !this.showPostOption
+      // console.log(this.postIdToDelete)
+      // console.log(this.postIdToDelete)
+      // console.log(this.showPostOption)
     }
 
     onHideOption(){
       this.showPostOption = false
     }
 
-    onVote(pollingOptionId: string, index:number){
+    onUnvote(pollingResponseId:string, postId: string){
+      this.unVote$ = this.pollingsService.unvotePolling(pollingResponseId).subscribe(res =>{
+        this.singlePost$ = this.postService.getPostById(postId).subscribe(res =>{
+          const postUpdate: AllPostRes[] = []
+          for (const post of this.posts) {
+            if(res.id === post.id){
+              postUpdate.push(res)
+            }else{
+              postUpdate.push(post)
+            }
+          }
+          this.posts = []
+          this.posts = [...postUpdate]
+        })
+      })
+    }
+
+    randomColor() {
+    let color = '#';
+    const letters = '0123456789ABCDEF';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+    onVote(pollingOptionId: string, index:number, postId:string){
       const data:PollingVoteReqInsert = {
         pollingOptionId
       }
-      console.log(pollingOptionId)
+      console.log("Polling option id: "+pollingOptionId)
       this.vote$ = this.pollingsService.insertVote(data).subscribe(res => {
+        this.singlePost$ = this.postService.getPostById(postId).subscribe(res =>{
+          const postUpdate: AllPostRes[] = []
+          for (const post of this.posts) {
+            if(res.id === post.id){
+              postUpdate.push(res)
+            }else{
+              postUpdate.push(post)
+            }
+          }
+          this.posts = []
+          this.posts = [...postUpdate]
+        })
+
+
         // const postUpdate: AllPostRes[] = []
         // for (const post of this.posts) {
         //   for (const polling of post.pollingOption) {
@@ -267,8 +403,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
     }
 
-    confirmDelete() {
-      this.showPostOption = false
+    confirmDelete(idx?:number) {
+      if(idx){
+        this.posts[idx].showPostOption = !this.posts[idx].showPostOption
+      }
       this.confirmationService.confirm({
           message: 'Do you want to delete this post?',
           header: 'Delete Confirmation',
@@ -291,6 +429,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
       });
   }
 
+
+
     ngOnInit() {
       this.initPosts()
         this.items = [
@@ -299,6 +439,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
         ];
 
         this.memberStatus =  this.userService.getMemberCode()
+        this.imageIdProfile = this.userService.getIdFotoProfile()
+        this.fullNameLogin = this.userService.getFullName()
     }
 
     ngOnDestroy(): void {

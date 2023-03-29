@@ -14,6 +14,7 @@ import { ResInsert } from "../dto/res-insert";
 import { UpdateRes } from "../dto/res-update";
 import { PostCommentInsertReq } from '../dto/post/post-comment-insert-req';
 import { PostCommentRes } from '../dto/post/all-post-comment-res';
+import { PostCommentReqUpdate } from '../dto/post/post-comment-req-update';
 
 @Injectable({
     providedIn : 'root'
@@ -57,6 +58,10 @@ export class PostService{
 
     updatePost(data : PostUpdateReq) : Observable<UpdateRes>{
         return this.http.put<UpdateRes>(`${BASE_URL}/posts`,data)
+    }
+
+    updateComment(data : PostCommentReqUpdate) : Observable<UpdateRes>{
+        return this.http.put<UpdateRes>(`${BASE_URL}/posts/comment`,data)
     }
 
     deletePost(id : string): Observable<res>{

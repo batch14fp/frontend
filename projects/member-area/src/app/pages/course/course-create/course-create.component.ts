@@ -14,6 +14,7 @@ import { ACTIVITY_TYPE } from '../../../../../../base-area/src/app/constant/acti
 import { ActivityReq } from '../../../../../../base-area/src/app/dto/activity/activity-req';
 import { convertUTCToLocalDateISO, convertUTCToLocalDateTimeISO } from 'projects/base-area/src/app/utils/dateutil';
 import { ActivityService } from '../../../../../../base-area/src/app/services/activity.service';
+import { UserService } from '../../../../../../base-area/src/app/services/user.service';
 
 @Component({
     selector : 'app-create-course',
@@ -57,13 +58,15 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
 
   constructor(private fb: FormBuilder, private _sanitizer: DomSanitizer,  private categoryService: CategoryService,
     private postTypeService: PostTypeService, private postService: PostService, private activityTypeService: ActivityTypeService,
-    private activityService: ActivityService){}
+    private activityService: ActivityService, private userService: UserService){}
 
 
     faHeart = faHeart
     faBook = faBook
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
+
+    memberStatus!: string
 
     initCategories(){
       this.categories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
@@ -154,7 +157,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     this.initCategories()
     this.courseFb.get("startDateCourse")?.valueChanges.subscribe(res => this.startDate = new Date(res!) )
     this.activity$ = this.activityTypeService.getActivityTypeByCode(ACTIVITY_TYPE.COURSE).subscribe(res => this.activityTypeId = res.activityTypeId)
-
+    this.memberStatus =  this.userService.getMemberCode()
   }
 
   ngOnDestroy(): void {

@@ -63,6 +63,14 @@ export class UserService {
     throw new Error("Role is empty")
   }
 
+  getFullName():string{
+    const data = localStorage.getItem("dataLogin")
+    if (data) {
+      return JSON.parse(data).fullname
+    }
+    throw new Error("Fullname is empty")
+  }
+
   saveDataLogin(data: LoginRes) {
     localStorage.setItem("dataLogin", JSON.stringify(data))
   }

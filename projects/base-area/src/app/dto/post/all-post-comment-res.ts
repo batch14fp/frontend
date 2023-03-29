@@ -6,5 +6,6 @@ export interface PostCommentRes {
   imageProfileId: string,
   position: string,
   createdAt: string,
-  ver: number
+  ver: number,
+  showEditComment:boolean
 }
