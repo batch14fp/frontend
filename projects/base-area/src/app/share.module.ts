@@ -63,7 +63,7 @@ import { DividerModule } from 'primeng/divider';
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
     ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule, AnimateModule
     ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule,
-    BottomNavbarModule, TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule
+    BottomNavbarModule, TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule, DividerModule
   ]
 
 })
