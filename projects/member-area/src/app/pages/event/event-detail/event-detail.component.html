@@ -105,17 +105,17 @@
   
         </div>
       </div>
-      <div class="w-10 bg-gray-100 border-round-bottom-xl">
+      <div class="w-12 bg-gray-100 border-round-bottom-xl">
         <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem">
           <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
             style="width: 32px;" alt="Avatar" />
         </div>
-        <div class="w-12 flex">
+        <div class="flex w-full">
           <div class="flex mt-4 w-12">
             <form [formGroup]="detailActivity">
-              <div class="w-full flex align-content-center justify-content-center align-self-center">
+              <div class="w-full flex align-content-center align-self-center p-3">
                 <div
-                  class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-8 justify-content-start p-3 mb-3 border-round-md ">
+                  class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-10 justify-content-start p-3 mb-3 border-round-md ">
                   <div class="flex flex-column w-full h-full">
                     <img class="imgBanner" src="http://localhost:2121/files/{{detailActivity.value.imgActivityId}}"
                     alt="banner">
@@ -127,7 +127,7 @@
                       <p class="text-md" [innerHTML]="detailActivity.value.content"></p>
                     </div>
                     <div class="w-4 mt-3 text-end flex flex-column gap-4">
-                      <p><i class="pi pi-user pr-2"></i> {{detailActivity.value.providers}}</p>
+                      <p><i class="pi pi-building pr-2"></i> {{detailActivity.value.providers}}</p>
                       <p><i class="pi pi-map-marker pr-2"></i> {{detailActivity.value.location}}</p>
                       <p><i class="pi pi-tag pr-2"></i> {{detailActivity.value.categoryName}}</p>
                       <p><i class="pi pi-money-bill pr-2"></i> Rp. {{detailActivity.value.price}}</p>

@@ -4,6 +4,7 @@ import { EventCreateComponent } from "./event-create/event-create.component";
 import { EventDetailComponent } from "./event-detail/event-detail.component";
 import { EventInvoiceComponent } from "./event-invoice/event-invoice.component";
 import { EventListComponent } from "./event-list/event-list.component";
+import { EventPaymentComponent } from "./event-payment/event-payment.component";
 
 const eventRoutes:Routes =[
     {
@@ -21,6 +22,10 @@ const eventRoutes:Routes =[
     {
         path:'detail/:id/invoice',
         component:EventInvoiceComponent
+    },
+    {
+        path:'detail/:id/invoice/:id/payment',
+        component:EventPaymentComponent
     }
 ]
 

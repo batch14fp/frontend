@@ -1,5 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { ActivityUpdateReq } from "@dto/activity/activity-update-req";
+import { UserPaymentReqUpdate } from "@dto/payment/user-payment-req-update";
+import { UpdateRes } from "@dto/res-update";
+import { ActivityVoucherRes } from "@dto/voucher/activity-voucher-res";
+import { VoucherAppliedRes } from "@dto/voucher/voucher-applied-res";
+import { VoucherAppliedReq } from "@dto/voucher/vourcher-applied-req";
 import { CountMemberRes } from "@dto/report/count-member-res";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
@@ -22,8 +28,6 @@ export class ActivityService{
         }else if(categories == null){
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}`)
         }else{
-            console.log("cfjkfskfnkfsjnkj");
-            
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}&categoryCode=${categories}`)
         }
     }
@@ -42,8 +46,24 @@ export class ActivityService{
     }
 
 
+    updateActivity(data:ActivityUpdateReq):Observable<UpdateRes>{
+        return this.http.put<UpdateRes>(`${BASE_URL}/activities`,data)
+    }
+
+    getPayment(data:UserPaymentReqUpdate):Observable<UpdateRes>{
+        return this.http.put<UpdateRes>(`${BASE_URL}/activities/payment`,data)
+    }
+
+    getListVoucher():Observable<ActivityVoucherRes>{
+        return this.http.get<ActivityVoucherRes>(`${BASE_URL}/activities/vouchers-list`)
+    }
+
+    setVoucherCode(data:VoucherAppliedReq):Observable<VoucherAppliedRes>{
+        return this.http.post<VoucherAppliedRes>(`${BASE_URL}/activities/voucher/applied`, data)
+
 
     getDataActivity() : Observable<CountMemberRes>{
         return this.http.get<CountMemberRes>(`${BASE_URL}/activities/total`)
+
     }
 }
