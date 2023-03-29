@@ -30,51 +30,60 @@ export class NavbarComponent{
         this.img = this.userService.images
         console.log(this.role)
         this.items = [
+
             {
-                label:'Category',
-                routerLink:'/category'
-            },
-            {
-                label:'Position',
-                routerLink : '/position'
-            },
-            {
-                label:'Industry',
-                routerLink : '/industry'
-                
-            },
-            {
-                label:'Social Media',
-                routerLink : '/socialmedia'
+                label : 'Master',
+                items : [
+                    {
+                        label:'Category',
+                        routerLink:'/category'
+                    },
+                    {
+                        label:'Position',
+                        routerLink : '/position'
+                    },
+                    {
+                        label:'Industry',
+                        routerLink : '/industry'
+                    },
+                    {
+                        label : 'Article',
+                        routerLink : '/admin/article'
+                    },
+                    {
+                        label : 'Activity Type',
+                        routerLink : '/activitytype'
+                    },
+                    {
+                        label : 'Bank',
+                        routerLink : '/bankpayment'
+                    },
+                    {
+                        label : 'Post Type',
+                        routerLink : '/posttype'
+                    },
+                    {
+                        label : 'Membership',
+                        routerLink : '/membership'
+                    },
+                    {
+                        label:'Social Media',
+                        routerLink : '/socialmedia'
+                    },
+                ]
             },
             {
                 label : 'User',
                 routerLink : '/user'
             },
             {
-                label : 'Article',
-                routerLink : '/admin/article'
-            },
-            {
-                label : 'Activity Type',
-                routerLink : '/activitytype'
-            },
-            {
-                label : 'Bank',
-                routerLink : '/bankpayment'
-            },
-            {
-                label : 'Post Type',
-                routerLink : '/posttype'
-            },
-            {
-                label : 'Membership',
-                routerLink : '/membership'
-            },
-            {
                 label : 'Sales Setting',
                 routerLink : '/sales-setting'
             },
+            {
+                label : 'Report',
+                routerLink : '/report'
+            }
         ];
 
         this.memberItem = [
