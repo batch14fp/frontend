@@ -14,12 +14,11 @@ export interface ProfileReqUpdate{
 	positionId : string
 	phoneNumber : string
 	walletId : string
-	walletVer : string
-	bankPaymentId : string
-	accountName : string
-	accountNumber :string
+	bankPaymentId? : string
+	accountName? : string
+	accountNumber? :string
 	file : FileUpdateReq
-	socialMediaList : SocialMediaGetRes[]
+	socialMediaList? : SocialMediaGetRes[]
 	ver : number
 	isActive : boolean
 }

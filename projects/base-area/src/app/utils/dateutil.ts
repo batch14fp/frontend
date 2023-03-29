@@ -1,6 +1,6 @@
 const convertUTCToLocalDateISO = function (date: any) {
   console.log(date)
-  const newDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+  const newDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   return newDate.toISOString().split('T')[0]
 }
 

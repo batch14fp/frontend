@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { InvoiceRes } from "@dto/invoice/invoice-res";
 import { MemberStatusRes } from "@dto/memberstatus/member-status-res";
+import { MembershipPaymentReq } from "@dto/payment/member-pay-req";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 import { MemberStatusReq } from "../dto/memberstatus/member-status-req";
@@ -30,5 +32,9 @@ export class MemberStatusService{
 
     deleteMemberStatus(id : string) : Observable<res>{
         return this.http.delete<res>(`${BASE_URL}/members/status/${id}`)
+    }
+
+    subscribtionMembership(data : MembershipPaymentReq) : Observable<InvoiceRes>{
+        return this.http.post<InvoiceRes>(`${BASE_URL}/members/status/subscription`,data)
     }
 }

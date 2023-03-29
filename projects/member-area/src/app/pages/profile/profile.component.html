@@ -97,7 +97,7 @@
         </div>
         <form [formGroup]="editProfile" class="flex md:flex-column">
             <div class="flex mx-4 justify-content-end">
-                <app-button-primary label="Save" class="m-3" icon="pi pi-save"></app-button-primary>
+                <app-button-primary label="Save" class="m-3" icon="pi pi-save" (click)="onUpdateProfile()"></app-button-primary>
             </div>
             <pre>
               {{editProfile.value|json}}
@@ -163,7 +163,7 @@
                                 <label for="email" class="font-medium col-form-label"> Date of Birth  </label>
                                 <!-- <input type="text" class="mt-2 disable" style="border-radius: 10px;" pInputText id="email" formControlName="email"  placeholder="example@gmail.com"
                                 name=" email"> -->
-                                <p-calendar styleClass="w-full" formControlName="dob" [showIcon]="true"></p-calendar>
+                                <p-calendar styleClass="w-full" formControlName="dobUtc" (onSelect)="onChange()" [showIcon]="true"></p-calendar>
                             </div>
                             <div class="mb-3 flex flex-column ">
                                 <label for="phoneNumber" class="font-medium col-form-label">Phone Number</label>

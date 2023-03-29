@@ -20,6 +20,7 @@ import { SocialMediaGetRes } from "@dto/socialmedia/social-media-res";
 import { getInitials } from "projects/base-area/src/app/utils/getInitial";
 import { ProfileReqUpdate } from "@dto/profile/profile-req-update";
 import { Router } from "@angular/router";
+import { convertLocalDateToUTCISO } from "projects/base-area/src/app/utils/dateutil";
 
 const countryService= require('countrycitystatejson')
 
@@ -75,18 +76,21 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         statusMemberId : [""],
         fullname : [""],
         email : [""],
+        walletId : [""],
         userBalance : [0],
         statusMember : [""],
         accountName : [""],
 	    accountNumber :[""],
         phoneNumber : [""],
         dob : [new Date()],
+        dobUtc : [new Date()],
         country : [""],
         province : [""],
         city : [""],
         postalCode : [""],
         company : [""],
         imageId : [""],
+        imageVer : [0],
         file : this.fb.group({
             fileContent : [""],
             extension : [""]
@@ -151,28 +155,37 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         }
     }
 
-    // onUpdateProfile() : void {
-    //     const data : ProfileReqUpdate = {
-    //         profileId : this.editProfile.value.profileId!,
-    //         fullname : this.editProfile.value.fullname!,
-    //         company : this.editProfile.value.company!,
-    //         country : this.editProfile.value.country!,
-    //         province : this.editProfile.value.province!,
-    //         city : this.editProfile.value.city!,
-    //         dob : this.editProfile.value.dob!,
-    //         // walletId : this.editProfile.value.
-    //         postalCode : this.editProfile.value.postalCode!,
-    //         industryId : this.editProfile.value.industryId!,
-    //         positionId : this.editProfile.value.positionId!,
-    //         phoneNumber : this.editProfile.value.phoneNumber!,
-    //         // file : this.editProfile.value.file!
-    //     }
+    onUpdateProfile() : void {
 
-    //     this.profile$ = this.profileService.updateProfile(data).subscribe(res=>{
-    //         this.router.navigateByUrl('/profile')
-    //     })
+        const data : ProfileReqUpdate = {
+            profileId : this.editProfile.value.profileId!,
+            fullname : this.editProfile.value.fullname!,
+            company : this.editProfile.value.company!,
+            country : this.editProfile.value.country!,
+            province : this.editProfile.value.province!,
+            city : this.editProfile.value.city!,
+            dob : this.editProfile.value.dob!,
+            walletId : this.editProfile.value.walletId!,
+            postalCode : this.editProfile.value.postalCode!,
+            industryId : this.editProfile.value.industryId!,
+            positionId : this.editProfile.value.positionId!,
+            phoneNumber : this.editProfile.value.phoneNumber!,
+            file : {
+                fileId : this.editProfile.value.imageId!,
+                fileContent: this.editProfile.value.file?.fileContent!,
+                extension: this.editProfile.value.file?.extension!,
+                ver : Number(this.editProfile.value.imageVer!),
+                isActive : true
+            },
+            ver : Number(this.editProfile.value.ver!),
+	        isActive : this.editProfile.value.isActive!
+        }
 
-    // }
+        this.profile$ = this.profileService.updateProfile(data).subscribe(res=>{
+            this.router.navigateByUrl('/profile')
+        })
+
+    }
 
     initPostion(){
         this.position$ = this.positionService.getAllPosition().subscribe(res => {
@@ -215,11 +228,19 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         })
     }
 
+    onChange(){
+        const res = convertLocalDateToUTCISO(this.editProfile.value.dobUtc)
+        this.editProfile.patchValue({
+            dob : new Date(res)
+        })
+    }
+
     initProfile(){
         this.profile$ = this.profileService.getProfileDetail().subscribe(res => {
             this.photoName = getInitials(res.fullname)
             this.editProfile.patchValue({
                 userId : res.userId,
+                profileId : res.profileId,
                 industryId : res.industryId,
                 positionId : res.positionId,
                 statusMemberId : res.statusMember,
@@ -228,13 +249,16 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
                 userBalance : res.userBalance,
                 statusMember : res.statusMember,
                 phoneNumber : res.phoneNumber,
+                walletId : res.walletId,
                 dob : new Date(res.dob),
+                dobUtc : new Date(res.dob),
                 country : res.country,
                 province : res.province,
                 city : res.city,
                 postalCode : res.postalCode,
                 company : res.company,
                 imageId : res.imageId,
+                imageVer : res.imageVer,
                 socialMediaList : [],
                 ver : res.ver,
                 isActive : res.isActive
