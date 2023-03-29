@@ -126,7 +126,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
         endDate: courseEndDate!,
         limitApplied: this.courseFb.value.limit!,
         voucherCode: this.courseFb.value.codeVoucher!,
-        expDate: this.courseFb.value.expiredDate!,
+        endAt: this.courseFb.value.expiredDate!,
         discountPercent: this.courseFb.value.discount!,
         file: {
           fileContent: this.courseFb.get('imageCover')?.value.contentFile!,

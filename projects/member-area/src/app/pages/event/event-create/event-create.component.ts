@@ -116,7 +116,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
             endDate: eventEndDate!,
             limitApplied: this.createEvents.value.limit!,
             voucherCode: this.createEvents.value.codeVoucher!,
-            expDate: this.createEvents.value.expiredDate!,
+            endAt: this.createEvents.value.expiredDate!,
             discountPercent: this.createEvents.value.discount!,
             file: {
                 fileContent: this.createEvents.get('imageCover')?.value.contentFile!,
