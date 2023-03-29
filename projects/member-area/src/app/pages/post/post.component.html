@@ -203,8 +203,31 @@
             <p-calendar [showIcon]="true" [minDate]="today" dateFormat="yy-mm-dd" formControlName="endAt"></p-calendar>
             <div class="flex flex-column mt-2 mb-4">
               <label for="question" class="text-xl font-medium text-800">Question</label>
-              <textarea class="w-full" formControlName="pollingTitle" [rows]="1" [cols]="1" pInputTextarea
-                [autoResize]="true"></textarea>
+
+              <p-editor formControlName="pollingTitle" [style]="{ height: '60px' }">
+                <ng-template pTemplate="header">
+                  <span class="ql-formats">
+                    <select class="ql-size">
+                      <option value="small">Small</option>
+                      <option selected></option>
+                      <option value="large">Large</option>
+                      <option value="huge">XLarge</option>
+                    </select>
+                  </span>
+                  <span class="ql-formats">
+                    <button type="button" class="ql-bold" aria-label="Bold"></button>
+                    <button type="button" class="ql-italic" aria-label="Italic"></button>
+                    <button type="button" class="ql-underline" aria-label="Underline"></button>
+                    <button type="button" class="ql-list" aria-label="List" value='ordered'></button>
+                    <button type="button" class="ql-list" aria-label="Bullet" value='bullet'></button>
+                    <button type="button" class="ql-blockquote" aria-label="blockquote">
+                    </button>
+                  </span>
+                </ng-template>
+              </p-editor>
+
+              <!-- <textarea class="w-full" formControlName="pollingTitle" [rows]="1" [cols]="1" pInputTextarea
+                [autoResize]="true"></textarea> -->
               <!-- <textarea formControlName="pollingTitle" [rows]="5" [cols]="30" pInputTextarea
                 [autoResize]="true"></textarea> -->
               <!-- <input type="text" id="question" pInputText formControlName="pollingTitle" /> -->

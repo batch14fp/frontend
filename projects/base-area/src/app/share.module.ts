@@ -35,6 +35,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { BottomNavbarModule } from './components/bottom-navbar/buttom-navbar.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { WordLimitPipe } from './utils/word-limit.pipe';
+import { TieredMenuCustomComponent } from './components/tiered-menu/tiered-menu.component';
+import { AutoFocusModule } from 'primeng/autofocus';
 import { DividerModule } from 'primeng/divider';
 
 
@@ -51,7 +53,8 @@ import { DividerModule } from 'primeng/divider';
      CountdownModule, FontAwesomeModule, InputTextareaModule, FileUploadModule, HttpClientModule,TableModule,
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
      ,DialogModule, InputSwitchModule, ConfirmDialogModule, AnimateModule
-     ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule, BottomNavbarModule, TooltipModule, DividerModule
+     ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule, BottomNavbarModule, TooltipModule,
+     TieredMenuCustomComponent,AutoFocusModule, DividerModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
@@ -59,8 +62,8 @@ import { DividerModule } from 'primeng/divider';
     CountdownModule, FontAwesomeModule, InputTextareaModule,FileUploadModule, HttpClientModule,TableModule,
     ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
     ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule, AnimateModule
-    ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule,DividerModule,
-    BottomNavbarModule, TooltipModule, WordLimitPipe
+    ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule,
+    BottomNavbarModule, TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule
   ]
 
 })

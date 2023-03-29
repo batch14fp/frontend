@@ -125,8 +125,18 @@
           <button class="bg-red-600 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
             style="height: 30px !important;">Upgrade</button>
         </ng-container>
-        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
-          style="width: 32px;" alt="Avatar" />
+        <div *ngIf="!imageIdProfile"
+          class="border-circle  align-self-center bg-blue-400 flex justify-content-center align-content-center"
+          style="width: 38px;height: 38px">
+          <p class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+            {{fotoName(fullNameLogin)}}</p>
+        </div>
+        <div *ngIf="imageIdProfile" class="ImageProfile">
+          <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
+            style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;" alt="Avatar" />
+        </div>
+        <!-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
+          style="width: 32px;" alt="Avatar" /> -->
       </div>
       <div class="w-12 flex">
         <div class="flex mt-4 w-12 md:w-9 justify-content-center align-self-start">
@@ -135,8 +145,18 @@
               <div class=" mb-2 w-12 pb-4 border-bottom-1 border-gray-400 align-self-center">
                 <div class="flex w-full flex-column bg-white p-3 border-round-xl">
                   <div class="flex gap-4">
-                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
-                      style="width: 42px;" alt="Avatar" />
+                    <div *ngIf="!imageIdProfile"
+                      class="border-circle align-self-center bg-blue-400 flex justify-content-center align-content-center"
+                      style="width: 38px;height: 38px">
+                      <p class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                        {{fotoName(fullNameLogin)}}</p>
+                    </div>
+                    <div *ngIf="imageIdProfile" class="ImageProfile">
+                      <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
+                        style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;" alt="Avatar" />
+                    </div>
+                    <!-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
+                      style="width: 42px;" alt="Avatar" /> -->
                     <div routerLink="/post"
                       class="hover:bg-gray-100 border-1 border-gray-400 border-round-3xl w-full flex cursor-pointer">
                       <p class="text-sm text-gray-600 font-medium align-self-center pl-4 cursor-pointer">Start a post
@@ -197,27 +217,34 @@
                   <div *ngFor="let post of posts; let i = index" class="">
                     <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
                       <div class="flex flex-column">
-                        <div class="flex flex-column relative">
-                          <div (click)="onShowOption(post.id)" enterClass="option" enterActiveClass="slidedown"
+                        <div class="flex justify-content-end">
+                          <app-tiered-menu [model]="post.userId === userIdlogin ? optionMenuDelete : optionMenuSave">
+                            <ng-template #content>
+                              <i (click)="onOptionPost(post.id, i)"
+                                class="pi pi-ellipsis-v hover:bg-gray-200 cursor-pointer mb-2 p-2 border-circle"></i>
+                            </ng-template>
+                          </app-tiered-menu>
+                          <!-- <div (click)="onShowOption(post.id,i)" enterClass="option" enterActiveClass="slidedown"
                             pStyleClass=".box" leaveActiveClass="slideup" leaveToClass="option"
                             class="flex align-self-end justify-content-end mb-2 cursor-pointer hover:bg-gray-200 w-2rem h-2rem border-circle">
                             <i class="pi pi-ellipsis-h px-2 py-2 align-self-center relative text-800"
                               style="font-size: 16px;">
                             </i>
-                          </div>
-                          <div *ngIf="showPostOption && postIdToDelete=== post.id"
+                          </div> -->
+
+                          <!-- <div *ngIf="post.showPostOption"
                             class="bg-white shadow-4 absolute top-0 border-round-lg p-2 right-0 mt-4 w-14rem flex flex-column gap-2 cursor-pointer  animation-duration-500 option box">
-                            <div (click)="confirmDelete()"
+                            <div *ngIf="post.userId === userIdlogin" (click)="confirmDelete(i)"
                               class="flex hover:bg-gray-200 py-2 gap-2 px-2 border-round-lg cursor-pointer">
                               <i class="pi pi-trash align-self-center relative"></i>
                               <p>Delete</p>
                             </div>
-                            <div (click)="onInsertBookmark(post.id)"
+                            <div (click)="onInsertBookmark(post.id, i)"
                               class="flex hover:bg-gray-200 py-2 gap-2 px-2 border-round-lg cursor-pointer">
                               <i class="pi pi-bookmark align-self-center relative"></i>
                               <p>Save</p>
                             </div>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="flex gap-3 justify-content-between">
                           <div class="flex gap-2">
@@ -271,13 +298,13 @@
                         <p [innerHtml]="post.content"></p>
                       </div>
                       <div *ngIf="post.typeCode === 'PPOL'"
-                        class="mt-2 border-1 border-gray-400 border-round-md px-3 py-3">
+                        class="mt-2 border-1 border-gray-400 border-round-md px-3 py-3 overflow-hidden">
                         <p class="font-medium mb-2" [innerHtml]="post.titlePolling | wordLimit:60"></p>
                         <div class="flex flex-column gap-2">
                           <ng-container *ngIf="!post.isVote">
                             <ng-container *ngFor="let polling of post.pollingOption">
-                              <p (click)="onVote(polling.pollingOptionId, i)"
-                                class="bg-blue-100 hover:bg-blue-200 hover:text-blue-800 text-blue-600 border-1 border-round-md py-1 text-center cursor-pointer">
+                              <p (click)="onVote(polling.pollingOptionId, i, post.id)"
+                                class="bg-blue-100 fadeinleft animation-duration-500 animation-iteration-1 hover:bg-blue-200 hover:text-blue-800 text-blue-600 border-1 border-round-md py-1 text-center cursor-pointer">
                                 {{polling.pollingContent}}</p>
                             </ng-container>
                           </ng-container>
@@ -291,7 +318,8 @@
                                 <div class="flex z-2 w-12 justify-content-between px-2 absolute top-0 py-1">
                                   <p class="text-gray-800 font-medium">{{polling.pollingContent}}</p>
                                   <p class="text-gray-800 font-medium">
-                                    {{getPercent(polling.count, post.pollingRespon.totalRespondents)}}%</p>
+                                    {{getPercent(polling.count, post.pollingRespon.totalRespondents) | number : '1.0-1'}}%
+                                  </p>
                                 </div>
                               </div>
                               <!-- <p (click)="onVote(polling.pollingOptionId)"
@@ -304,8 +332,9 @@
                           <p class="text-md text-light text-gray-600">{{post.pollingRespon.totalRespondents}} votes</p>
                           <p class="text-md text-light text-gray-600">•</p>
                           <p class="text-md text-light text-gray-600">{{calculateDiff(post.endAt)}} days left</p>
-                          <p class="text-md text-light text-gray-600">•</p>
-                          <p *ngIf="post.isVote" class="text-md text-light text-blue-600 font-medium cursor-pointer">
+                          <p class="text-md text-light text-gray-600" *ngIf="post.isVote">•</p>
+                          <p (click)="onUnvote(post.pollingResponId, post.id)" *ngIf="post.isVote"
+                            class="text-md text-light text-blue-600 font-medium cursor-pointer">
                             Undo</p>
                         </div>
                       </div>
@@ -365,43 +394,132 @@
                         <!-- <ng-container *ngIf="postIdToComment === post.id"> -->
                         <ng-container *ngIf="postIdToComment === post.id">
                           <div class="flex align-content-center gap-3">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
-                              class="border-circle align-self-center" style="width: 42px;" alt="Avatar" />
+                            <div *ngIf="!imageIdProfile"
+                              class="border-circle  align-self-center bg-blue-400 flex justify-content-center align-content-center"
+                              style="width: 38px;height: 38px">
+                              <p
+                                class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                                {{fotoName(fullNameLogin)}}</p>
+                            </div>
+                            <div *ngIf="imageIdProfile" class="ImageProfile">
+                              <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
+                                style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;"
+                                alt="Avatar" />
+                            </div>
+                            <!-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
+                              class="border-circle align-self-center" style="width: 42px;" alt="Avatar" /> -->
                             <div class="w-12">
                               <form class="flex flex-column w-12 gap-2" [formGroup]="commentFb"
                                 (ngSubmit)="onComment(post.id)">
                                 <textarea formControlName="contentComment" class="w-full " [rows]="1" [cols]="1"
                                   pInputTextarea [autoResize]="true"></textarea>
-                                <button type="submit"
+                                <button *ngIf="commentFb.value.contentComment" type="submit"
                                   class="bg-blue-100 hover:bg-blue-300 hover:text-blue-800 cursor-pointer w-fit px-3 text-blue-600 border-none border-round-md">Post</button>
                               </form>
                             </div>
                           </div>
                           <ng-container *ngIf="commentPost">
                             <div class="flex-column">
-                              <div *ngFor="let comment of commentPost" class="mt-2 flex align-content-center gap-3">
-                                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
-                                  class="border-circle align-self-center" style="width: 42px;" alt="Avatar" />
+                              <div *ngFor="let comment of commentPost, let idx = index"
+                                class="mt-2 flex align-content-center gap-3">
+                                <div *ngIf="!comment.imageProfileId"
+                                  class="border-circle  align-self-center bg-blue-400 flex justify-content-center align-content-center"
+                                  style="width: 38px;height: 38px">
+                                  <p
+                                    class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                                    {{fotoName(comment.fullname)}}</p>
+                                </div>
+                                <div *ngIf="comment.imageProfileId" class="ImageProfile">
+                                  <img src="http://localhost:2121/files/{{comment.imageProfileId}}"
+                                    class=" align-self-center"
+                                    style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;"
+                                    alt="Avatar" />
+                                </div>
+                                <!-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
+                                  class="border-circle align-self-center" style="width: 42px;" alt="Avatar" /> -->
                                 <div class="w-12 bg-gray-100 p-2 border-round-md flex flex-column gap-2">
                                   <div class="flex justify-content-between">
                                     <div class="flex gap-3">
-                                      <p class="font-medium text-sm align-self-center">{{comment.fullname}}</p>
-                                      <p *ngIf="comment.userId === post.userId"
-                                        class="bg-bluegray-600 text-sm text-white px-2 border-round-md font-medium">
-                                        Author
-                                      </p>
+                                      <div class="flex flex-column justify-content-start">
+                                        <div class="flex gap-3">
+                                          <div class="flex gap-2">
+                                            <p class="font-medium text-sm align-self-start">{{comment.fullname}}</p>
+                                            <p *ngIf="comment.userId === post.userId"
+                                              class="bg-bluegray-600 text-sm text-white px-2 border-round-md font-medium">
+                                              Author
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <p class="text-xs text-gray-800 font-light">{{comment.position}}</p>
+                                      </div>
                                     </div>
-                                    <div class="flex gap-2">
-                                      <p class="text-xs font-light text-xs text-gray-600">
-                                        {{comment.createdAt | timeAgo}}
-                                      </p>
-                                      <i *ngIf="comment.userId === userIdlogin"
-                                        class="pi pi-trash cursor-pointer align-self-center relative text-600 hover:text-800"></i>
+                                    <div class="flex gap-2 justify-content-center align-content-center">
+                                      <div class="flex gap-1 justify-content-center align-content-center">
+                                        <p class="text-xs font-light text-xs text-gray-600">
+                                          {{comment.createdAt | timeAgo}}
+                                        </p>
+                                      </div>
+                                      <app-tiered-menu class="align-self-center"
+                                        [model]="comment.userId === userIdlogin ? optionCommentDelete : optionCommentSave">
+                                        <ng-template #content>
+                                          <i (click)="onShowEditComment(idx)"
+                                            class="pi pi-ellipsis-v hover:bg-gray-200 cursor-pointer mb-2 p-2 border-circle"></i>
+                                        </ng-template>
+                                      </app-tiered-menu>
+
+                                      <!-- <div *ngIf="comment.userId === userIdlogin" class="flex flex-column relative">
+                                        <div (click)="onShowOption(post.id,i)" enterClass="option"
+                                          enterActiveClass="slidedown" pStyleClass=".box" leaveActiveClass="slideup"
+                                          leaveToClass="option"
+                                          class="flex align-self-end justify-content-end mb-2 cursor-pointer hover:bg-gray-200 w-2rem h-2rem border-circle">
+                                          <i class="pi pi-ellipsis-h px-2 py-2 align-self-center relative text-800"
+                                            style="font-size: 16px;">
+                                          </i>
+                                        </div>
+                                        <div *ngIf="showPostOption && postIdToDelete=== post.id"
+                                          class="bg-white shadow-4 absolute top-0 border-round-lg p-2 right-0 mt-4 w-14rem flex flex-column gap-2 cursor-pointer  animation-duration-500 option box">
+                                          <div (click)="onInsertBookmark(post.id)"
+                                            class="flex hover:bg-gray-200 py-2 gap-2 px-2 border-round-lg cursor-pointer">
+                                            <i class="pi pi-pencil align-self-center relative"></i>
+                                            <p>Edit</p>
+                                          </div>
+                                          <div (click)="confirmDelete()"
+                                            class="flex hover:bg-gray-200 py-2 gap-2 px-2 border-round-lg cursor-pointer">
+                                            <i class="pi pi-trash align-self-center relative"></i>
+                                            <p>Delete</p>
+                                          </div>
+                                        </div>
+                                      </div> -->
+
+                                      <!-- <i *ngIf="comment.userId === userIdlogin"
+                                        (click)="onDeleteComment(comment.postCommentId, post.id)"
+                                        class="pi pi-trash cursor-pointer align-self-center relative text-600 hover:text-800"></i> -->
                                     </div>
                                   </div>
-                                  <p class="text-sm text-800">
+                                  <p class="text-sm text-800" *ngIf="idx !== commentIdx">
                                     {{comment.contentComment}}
                                   </p>
+                                  <!-- <input class="bg-transparent border-none border-0" autofocus type="text"
+                                    *ngIf="commentIdEdit === comment.postCommentId"> -->
+
+                                  <form [formGroup]="editCommentFb" *ngIf="idx  === commentIdx">
+                                    <textarea bg-none border-0 [autofocus]="true" autofocus
+                                      formControlName="contentComment"
+                                      class="w-full bg-transparent border-none border-0"
+                                      style="box-shadow: none !important;" disableRipple="true" [rows]="1" [cols]="1"
+                                      pInputTextarea [autoResize]="true"></textarea>
+                                    <div class="flex gap-2">
+                                      <button *ngIf="editCommentFb.value.contentComment === comment.contentComment"
+                                        style="cursor: not-allowed;"
+                                        class="border-round-xl border-none px-2 bg-gray-300 text-gray-600 text-sm">Save
+                                        Changes</button>
+                                      <button *ngIf="editCommentFb.value.contentComment !== comment.contentComment"
+                                        class="border-round-xl cursor-pointer border-none px-2 bg-blue-600 text-white text-sm">Save
+                                        Changes</button>
+                                      <button (click)="onCancelEdit()"
+                                        class="border-round-xl cursor-pointer border-1 hover:border-4 hover:bg-gray-400 text-sm border-gray-600 px-2 bg-transparent text-gray-600">Cancel</button>
+                                    </div>
+                                  </form>
                                 </div>
                               </div>
                               <p *ngIf="isMoreComments" infinite-scroll (click)=" onLoadMoreComment(postIdToComment)"
