@@ -69,7 +69,8 @@ export const memberRoutes: Routes = [
     },
     {
         path : 'subscription',
-        component : SubscriptionComponent
+        // component : SubscriptionComponent
+        loadChildren: () => import("./pages/subscription/subscription.module").then(s => s.SubscriptionModule)
     },
     {
         path: '',
@@ -103,7 +104,7 @@ export const memberRoutes: Routes = [
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent,SubscriptionComponent
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
@@ -117,7 +118,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent,SubscriptionComponent
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent
     ]
 })
 
