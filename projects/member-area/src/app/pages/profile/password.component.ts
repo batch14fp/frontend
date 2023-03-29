@@ -44,6 +44,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy{
         const data : PasswordReqUpdate = {
             oldPassword : this.formPass.value.oldPassword!,
             newPassword : this.formPass.value.newPassword!,
+            ver : this.formPass.value.ver!
         }
 
         this.profile$ = this.profileService.updatePass(data).subscribe(res=>{

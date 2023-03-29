@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { UserService } from '@service/user.service';
 import { CategoryService } from '@service/category.service';
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup,faPenToSquare, faGlobe} from '@fortawesome/free-solid-svg-icons';
+import { ArticlesService } from '@service/articles.service';
 
 
 @Component({
@@ -16,6 +17,8 @@ import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup,faPenToSquare, f
 
 export class ArticleComponent{
 
+  // allArticle : 
+
   faHeart = faHeart
   faComment = faComment
     faBook = faBook
@@ -24,12 +27,12 @@ export class ArticleComponent{
     faPenToSquare = faPenToSquare
     faGlobe = faGlobe
 
-  constructor(private title: Title, private fb: FormBuilder,
-    private userService: UserService,  private router: Router,private categoryService: CategoryService){
+  constructor(
+    private title: Title,
+    private articleService: ArticlesService){
       this.title.setTitle("Artikel")
     }
 
-    private category$?: Subscription
 
 
 }

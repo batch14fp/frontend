@@ -11,6 +11,11 @@ export interface ProfileResDetail{
 	userBalance : number
 	statusMember : string
 	phoneNumber : string
+	walletId : string
+	walletVer : string
+	bankPaymentId : string
+	accountName : string
+	accountNumber :string
 	dob : string
 	country : string
 	province : string

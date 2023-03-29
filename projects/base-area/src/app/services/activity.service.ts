@@ -6,6 +6,7 @@ import { UpdateRes } from "@dto/res-update";
 import { ActivityVoucherRes } from "@dto/voucher/activity-voucher-res";
 import { VoucherAppliedRes } from "@dto/voucher/voucher-applied-res";
 import { VoucherAppliedReq } from "@dto/voucher/vourcher-applied-req";
+import { CountMemberRes } from "@dto/report/count-member-res";
 import { Observable } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 import { ActivityReq } from "../dto/activity/activity-req";
@@ -44,6 +45,7 @@ export class ActivityService{
         return this.http.delete<res>(`${BASE_URL}/activities/${id}`)
     }
 
+
     updateActivity(data:ActivityUpdateReq):Observable<UpdateRes>{
         return this.http.put<UpdateRes>(`${BASE_URL}/activities`,data)
     }
@@ -58,5 +60,10 @@ export class ActivityService{
 
     setVoucherCode(data:VoucherAppliedReq):Observable<VoucherAppliedRes>{
         return this.http.post<VoucherAppliedRes>(`${BASE_URL}/activities/voucher/applied`, data)
+
+
+    getDataActivity() : Observable<CountMemberRes>{
+        return this.http.get<CountMemberRes>(`${BASE_URL}/activities/total`)
+
     }
 }

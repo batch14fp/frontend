@@ -13,6 +13,7 @@ import { LoginAdminComponent } from "./page/login/login.component";
 import { MembershipComponent } from "./page/membership/membership.component";
 import { PositionComponent } from "./page/position/position.component";
 import { PostTypeComponent } from "./page/posttype/posttype.component";
+import { ReportAdminComponent } from "./page/report/report-adm.component";
 import { SalesSettingComponent } from "./page/sales-setting/salesseting.component";
 import { SocmedComponent } from "./page/socmed/socmed.component";
 import { UserComponent } from "./page/user/user-list/user.component";
@@ -63,6 +64,10 @@ export const adminRoutes: Routes = [
                 path : 'sales-setting',
                 component : SalesSettingComponent
             },
+            {
+                path : 'report',
+                component : ReportAdminComponent
+            }
 
         ]
     },
@@ -81,7 +86,7 @@ export const adminRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent,SalesSettingComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent
     ],
     imports: [
         RouterModule.forRoot(adminRoutes),
@@ -89,7 +94,7 @@ export const adminRoutes: Routes = [
     ],
     exports: [
         RouterModule,
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent,SalesSettingComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent
     ]
 })
 
