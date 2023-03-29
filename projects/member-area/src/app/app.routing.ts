@@ -24,6 +24,8 @@ import { ProfileModule } from "./pages/profile/profile.module";
 import { ThreadComponent } from "./pages/thread/thread.component";
 import { ArticleComponent } from "./pages/article/article.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { ReportComponent } from "./pages/report/report.component";
+import { SubscriptionComponent } from "./pages/subscription/subscription.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -47,6 +49,11 @@ export const memberRoutes: Routes = [
         component:NavbarComponent
     },
     {
+        path:'events',
+        loadChildren:()=>import("./pages/event/event.module").then(e=>e.EventModule),
+        component:NavbarComponent
+    },
+    {
         path: 'profile',
         loadChildren: () => import("./pages/profile/profile.module").then(p => p.ProfileModule),
         // component: NavbarComponent
@@ -55,6 +62,15 @@ export const memberRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
+    },
+    {
+        path : 'report',
+        component : ReportComponent
+    },
+    {
+        path : 'subscription',
+        // component : SubscriptionComponent
+        loadChildren: () => import("./pages/subscription/subscription.module").then(s => s.SubscriptionModule)
     },
     {
         path: '',
@@ -74,7 +90,7 @@ export const memberRoutes: Routes = [
             {
                 path: 'post',
                 component: PostComponent
-            }
+            },
         ]
     },
     {
@@ -88,7 +104,7 @@ export const memberRoutes: Routes = [
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent, InvoiceComponent,PostComponent
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
@@ -102,7 +118,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent
     ]
 })
 

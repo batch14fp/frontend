@@ -95,65 +95,32 @@
         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
           style="width: 32px;" alt="Avatar" />
       </div>
-      <!-- <form >
-          <div class="w-12 flex">
-          <div class="flex my-4 w-full justify-content-center">
-              <div class="w-full flex align-content-center justify-content-center">
-              <div class="w-11 flex flex-column">
-                  <div class="flex w-full flex-column bg-white p-3 border-round-xl">
-                      <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
-                          <div class="flex">
-                              <h2>Change Password</h2>
-                          </div>
-                          <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
-                              <i class="pi pi-user-edit align-self-center cursor-pointer hover:bg-gray-100 "></i>
-                          </div>
-                      </div>
-                      <div class="flex">
-                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe ipsa temporibus expedita excepturi perspiciatis obcaecati nam! Delectus ducimus dolor eaque laborum ipsa autem, molestiae beatae aspernatur culpa exercitationem consequatur cupiditate. </p>
-                      </div>
-                      <div class=" my-2 flex flex-column">
-                          <div class="mb-3 ">
-                              <label for="oldPassword" class="font-medium col-form-label">Old Password</label>
-                              <input type="text" class="mt-2 w-full" style="border-radius: 10px;" pInputText id="oldPassword" placeholder="ex.budi doremi" name="oldPassword " >
-                          </div>
-                          <div class="mb-3 ">
-                              <label for="newPassword" class="font-medium col-form-label">New Password</label>
-                              <input type="text" class="mt-2 w-full" style="border-radius: 10px;" pInputText id="newPassword" placeholder="ex.budi doremi" name="newPassword " >
-                          </div>
-                          <div class="mb-3 ">
-                              <label for="confirmNewPassword" class="font-medium col-form-label">Confirm New Password</label>
-                              <input type="text" class="mt-2 w-full" style="border-radius: 10px;" pInputText id="confirmNewPassword" placeholder="ex.budi doremi" name="confirmNewPassword " >
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              </div>
-          </div>
-      </div>
-      <div class="flex mx-4 justify-content-end">
-          <app-button-primary label="Save" class="m-3" icon="pi pi-save"></app-button-primary>
-      </div>
-      </form> -->
-      <div class="grid mx-6 mt-6 flex justify-content-between">
-        <div class="col-8">
+      <div class="grid mx-3 mt-3 flex justify-content-start">
+        <div class="w-10">
           <div class="article-populer">
             <div class="title">
               <p class="text-xl font-semibold text-indigo-800"> Artikel Populer</p>
               <hr class="border-2 border-indigo-400 w-3rem">
             </div>
-            <div class="flex flex-column md:flex-row gap-4">
-              <div *ngFor="let item of [].constructor(4)" class="col-4 overflow-hidden">
-                <div>
-                  <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt="">
+            <div class="flex md:flex-row gap-3 flex-wrap">
+              <div *ngFor=" let item of [].constructor(5)"
+                  class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4">
+                  <div class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-12 justify-content-start flex p-3 border-round-md">
+                    <div class="flex flex-column w-full h-full">
+                      <p class="text-md font-semibold text-indigo-300">HR Digital</p>
+                      <div class="flex flex-column w-full h-full overflow-hidden">
+                        <div class="p-3">
+                          <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-l font-semibold text-indigo-800">Hati-hati dalam mencari pekerjaan di jakarta, terutama...</p>
+                    <div class="flex justify-content-between mt-2">
+                      <p class="text-sm font-light text-indigo-800">Budi</p>
+                      <p class="text-sm font-light text-indigo-800">19 Februari 2023</p>
+                    </div>
+                  </div>
                 </div>
-                <p class="text-indigo-600 font-medium">HR Digital</p>
-                <p class="text-xl font-semibold text-indigo-800">Hati-hati dalam mencari pekerjaan di jakarta, terutama...</p>
-                <div class="flex justify-content-between mt-2">
-                  <p class="text-sm font-light text-indigo-800">Budi</p>
-                  <p class="text-sm font-light text-indigo-800">19 Februari 2023</p>
-                </div>
-              </div>
             </div>
           </div>
       
@@ -162,8 +129,8 @@
               <p class="text-xl font-semibold text-indigo-800"> Artikel Terbaru</p>
               <hr class="border-2 border-indigo-400 w-3rem">
             </div>
-            <div class="flex gap-4">
-              <div *ngFor="let item of [].constructor(4)" class="col-4 overflow-hidden">
+            <div class="flex gap-4 flex-wrap">
+              <div *ngFor="let item of [].constructor(4)" class="col-3 overflow-hidden">
                 <div>
                   <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt="">
                 </div>
@@ -177,9 +144,9 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-3 flex justify-content-between align-self-center ">
-          <div class="col-6 flex justify-content-between flex-column h-30rem border-indigo-400 border-1 shadow-2
-          border-bottom-2 align-items-center">
+        <div class="col-2 flex align-self-start  ">
+          <div class="col-8 flex justify-content-between flex-column h-30rem border-indigo-400 border-1 shadow-2
+          border-bottom-2 align-items-center sticky top-0">
             <p class="text-xl font-semibold text-indigo-600 ">Upgrade your skill and explore all feature without limitation
             </p>
             <div class="flex flex-column">
@@ -190,7 +157,7 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

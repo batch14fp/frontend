@@ -37,6 +37,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { WordLimitPipe } from './utils/word-limit.pipe';
 import { TieredMenuCustomComponent } from './components/tiered-menu/tiered-menu.component';
 import { AutoFocusModule } from 'primeng/autofocus';
+import { DividerModule } from 'primeng/divider';
+
 
 
 
@@ -52,7 +54,7 @@ import { AutoFocusModule } from 'primeng/autofocus';
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
      ,DialogModule, InputSwitchModule, ConfirmDialogModule, AnimateModule
      ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule, BottomNavbarModule, TooltipModule,
-     TieredMenuCustomComponent,AutoFocusModule
+     TieredMenuCustomComponent,AutoFocusModule, DividerModule
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,

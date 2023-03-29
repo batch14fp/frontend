@@ -1,25 +1,25 @@
+import { FileUpdateReq } from "@dto/file/file-update-req"
 import { SocialMediaGetRes } from "@dto/socialmedia/social-media-res"
 
 export interface ProfileReqUpdate{
-    userId : string
-	industryId : string
-	positionId : string
-	statusMemberId : string
+    profileId : string
 	fullname : string
-	userBalance : number
-	statusMember : string
-	phoneNumber : string
-	dob : string
+	company : string
 	country : string
 	province : string
 	city : string
+	dob : string | Date
 	postalCode : string
-	company : string
-	imageId : string
-	socialMediaList : SocialMediaGetRes[]
+	industryId : string
+	positionId : string
+	phoneNumber : string
+	walletId : string
+	bankPaymentId? : string
+	accountName? : string
+	accountNumber? :string
+	file : FileUpdateReq
+	socialMediaList? : SocialMediaGetRes[]
 	ver : number
 	isActive : boolean
 }
 
-// imageContent;
-// imageExtension;

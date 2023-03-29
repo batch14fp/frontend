@@ -2,6 +2,7 @@ import { SocialMediaGetRes } from "@dto/socialmedia/social-media-res"
 
 export interface ProfileResDetail{
 	userId : string
+	profileId : string
 	industryId : string
 	positionId : string
 	statusMemberId : string
@@ -10,6 +11,11 @@ export interface ProfileResDetail{
 	userBalance : number
 	statusMember : string
 	phoneNumber : string
+	walletId : string
+	walletVer : string
+	bankPaymentId : string
+	accountName : string
+	accountNumber :string
 	dob : string
 	country : string
 	province : string
@@ -17,7 +23,11 @@ export interface ProfileResDetail{
 	postalCode : string
 	company : string
 	imageId : string
+	imageVer : number
+	startDateMember : string
+	endDateMember : string	
 	socialMediaList : SocialMediaGetRes[]
-	ver : number
 	isActive : boolean
+	ver : number
+
 }
