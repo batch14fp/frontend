@@ -177,7 +177,7 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
                 ver : Number(this.editProfile.value.imageVer!),
                 isActive : true
             },
-            ver : Number(this.editProfile.value.ver!),
+            ver : this.editProfile.value.ver!,
 	        isActive : this.editProfile.value.isActive!
         }
 
