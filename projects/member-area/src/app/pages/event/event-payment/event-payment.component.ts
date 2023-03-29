@@ -83,6 +83,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
                     startDate:res.startDate,
                     endDate: res.endDate,
                 })
+                // this.uploadTransactions.value.paymentId = res.
             })
         })
     }
