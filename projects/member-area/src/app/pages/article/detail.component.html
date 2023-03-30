@@ -95,48 +95,42 @@
           <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
             style="width: 32px;" alt="Avatar" />
         </div>
-            <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
-                <div class="text-900 font-bold text-6xl mb-4 text-center">Pricing Plans</div>
-                <div class="text-700 text-xl mb-6 text-center line-height-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.</div>
-              <pre>
-                {{memberStatus|json}}
-              </pre>
-                <div class="grid justify-content-center">
-                    <div class="col-12 lg:col-4 hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl cursor-pointer" *ngFor="let member of memberStatus" >
-                        <div class="p-3 h-full">
-                            <div class="shadow-2 p-3 h-full flex flex-column surface-card" style="border-radius: 6px">
-                                <div class="text-900 font-medium text-xl mb-2">{{member.statusName}}</div>
-                                <div class="text-600"> {{member.periodDay}} day periode</div>
-                                <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
-                                <div class="flex align-items-center">
-                                    <span class="font-bold text-2xl text-900">Rp {{member.price}}</span>
-                                    <span class="ml-2 font-medium text-600">per periode</span>
-                                </div>
-                                <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
-                                <ul class="list-none p-0 m-0 flex-grow-1">
-                                    <li class="flex align-items-center mb-3">
-                                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
-                                        <span class="text-900">Arcu vitae elementum</span>
-                                    </li>
-                                    <li class="flex align-items-center mb-3">
-                                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
-                                        <span class="text-900">Dui faucibus in ornare</span>
-                                    </li>
-                                    <li class="flex align-items-center mb-3">
-                                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
-                                        <span class="text-900">Morbi tincidunt augue</span>
-                                    </li>
-                                </ul>
-                                <!-- <hr class="mb-3 mx-0 border-top-1 border-none surface-border mt-auto" /> -->
-                                <!-- <button pButton label="Buy Now" class="p-3 w-full mt-auto hover:bg-indigo-500"></button> -->
-                                <!-- <button type="submit" class="bg-blue-600 w-full border-none border-round-md cursor-pointer px-4 hover:bg-indigo-800 py-2 text-white" routerLink="/subscription/payment/{{member.memberStatusId}}">Buy Now</button> -->
-                                <button type="button"
-                                  class="bg-blue-600 w-full border-none border-round-md cursor-pointer px-4 hover:bg-indigo-800 py-2 text-white" (click)="onBuy(member.memberStatusId)" routerLink="/subscription/payment/{{member.memberStatusId}}">Buy Now</button>
+       <pre>
+        {{detailArticle | json}}
+       </pre>
+            <div class="w-12 flex">
+            <div class="flex my-4 w-full justify-content-center">
+                <div class="w-full flex align-content-center justify-content-center">
+                  <div class="w-11 flex flex-column">
+                      <div class="flex w-full flex-column bg-white p-3 border-round-xl">
+                        
+                        <div class="flex flex-column w-full h-full border-bottom-1 border-gray-300">
+                            <div class="text-900 font-bold text-5xl mb-3">{{detailArticle.title}}</div>
+                            <div class="text-500 font-light">{{detailArticle.nameUser}}</div>
+                            <div class="text-500 font-light">{{detailArticle.createdAt | date}}</div>
+                            <div class="text-500 font-light">
+                                <i class="pi pi-eye"></i> {{detailArticle.viewers}}
+                                <span>view</span>
                             </div>
+
                         </div>
-                    </div>
+                        <div class="flex flex-column w-full h-full mt-3 ">
+                            <img class="imgBanner" src="http://localhost:2121/files/{{detailArticle.fileId}}"
+                              alt="banner">
+                            <!-- <img class="imgBanner p-3"src="./../../../assets/images/banner-course.png" alt="banner"> -->
+                        </div>
+
+                        <p [innerHtml]="detailArticle.content" class="mt-4"></p>
+
+                      </div>
+                  </div>
                 </div>
             </div>
+        </div>
+        <!-- <div class="flex mx-4 justify-content-end">
+            <app-button-primary label="Save" class="m-3" icon="pi pi-save"></app-button-primary>
+        </div> -->
+    
       </div>
     </div>
   </main>
