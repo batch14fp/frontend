@@ -9,7 +9,7 @@ const subsRoutes : Routes = [
         component : SubscriptionComponent
     },
     {
-        path : 'payment',
+        path : 'payment/:id',
         component : SubsPayComponent
     }
 ] 

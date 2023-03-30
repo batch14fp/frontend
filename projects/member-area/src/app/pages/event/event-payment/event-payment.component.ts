@@ -53,7 +53,6 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
         provider:[""],
         discountNum:[0],
         isActive:[true],
-
         ver:[0]
     })
     

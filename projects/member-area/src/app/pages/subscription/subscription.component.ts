@@ -41,20 +41,23 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
         })
     }
 
+
+
     onBuy(memberStatusId : string){
         const data : MembershipPaymentReq = {
             membershipId : memberStatusId
         }
         console.log(data);
         this.buyMember$ = this.memberStatusService.subscribtionMembership(data).subscribe(res => {
-            this.router.navigate(['payment'])
+            console.log(res);
+            this.router.navigateByUrl(`subscription/payment/${res.invoiceId}`)
         })
     }
 
     ngOnInit(): void {
         this.initMember()
     }
-    
+
     ngOnDestroy(): void {
        this.member$?.unsubscribe()
     }

@@ -83,6 +83,10 @@ export class NavbarComponent{
             {
                 label : 'Report',
                 routerLink : '/report'
+            },
+            {
+                label : 'Payment Approval',
+                routerLink : '/approval-payment'
             }
         ];
 

@@ -4,6 +4,7 @@ import { CustomButtonModule } from "projects/base-area/src/app/components/button
 import { NavbarComponent } from "projects/base-area/src/app/components/navbar/navbar.component";
 import { ShareModule } from "projects/base-area/src/app/share.module";
 import { ActivityTypeComponent } from "./page/activitytype/activitytype.component";
+import { ApprovalComponent } from "./page/approval/approval.component";
 import { ArticleModule } from "./page/article/article.module";
 import { BankPaymentComponent } from "./page/bankpayment/bankpayment.component";
 import { CategoryComponent } from "./page/category/category.component";
@@ -67,6 +68,10 @@ export const adminRoutes: Routes = [
             {
                 path : 'report',
                 component : ReportAdminComponent
+            },
+            {
+                path : 'approval-payment',
+                component : ApprovalComponent
             }
 
         ]
@@ -86,7 +91,7 @@ export const adminRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent,ApprovalComponent
     ],
     imports: [
         RouterModule.forRoot(adminRoutes),
@@ -94,7 +99,7 @@ export const adminRoutes: Routes = [
     ],
     exports: [
         RouterModule,
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent,ApprovalComponent
     ]
 })
 
