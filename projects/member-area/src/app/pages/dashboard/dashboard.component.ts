@@ -21,6 +21,8 @@ import { PostCommentReqUpdate } from '../../../../../base-area/src/app/dto/post/
 import { Router } from '@angular/router';
 import { FileResPost } from '../../../../../base-area/src/app/dto/file/file-res';
 import { Title } from '@angular/platform-browser';
+import { ActivityUpcomingAllRes } from '../../../../../base-area/src/app/dto/activity/activity-upcoming-all-res';
+import { ActivityService } from '../../../../../base-area/src/app/services/activity.service';
 
 
 @Component({
@@ -31,6 +33,7 @@ import { Title } from '@angular/platform-browser';
 
 export class DashboardComponent implements OnInit, OnDestroy{
   private posts$?: Subscription
+  private upcomingEvents$?: Subscription
   private singlePost$?: Subscription
   private like$?: Subscription
   private postDelete$?: Subscription
@@ -48,6 +51,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
     items!: MenuItem[];
     posts!:AllPostRes[]
+    upcomingEvents!:ActivityUpcomingAllRes
     myBookmarks!:AllPostRes[]
     commentPost!: PostCommentRes[]
     showPostOption = false
@@ -134,13 +138,14 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
     constructor(private postService: PostService, private confirmationService: ConfirmationService,
       private messageService: MessageService, private pollingsService: PollingsService,
-      private fb: FormBuilder, private userService: UserService, private router: Router, private title: Title){
+      private fb: FormBuilder, private userService: UserService, private router: Router,
+      private title: Title, private activityService:ActivityService){
         title.setTitle("Dashboard")
       }
 
 
       COMMENT_POST_LIMIT =5
-      commentPostPage = 0
+      commentPostPage = 1
       isMoreComments = false
       loadedComment = 0
       commentPostLength = 0
@@ -243,8 +248,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
           if(result.length) {
             this.commentPost = [...this.commentPost, ...result]
             this.loadedComment += this.COMMENT_POST_LIMIT
+            this.isMoreComments = true
           } else {
             this.commentPost = result
+            this.isMoreComments = false
           }
           // this.posts.map(p => {
           //   p.showComment = false
@@ -277,8 +284,13 @@ export class DashboardComponent implements OnInit, OnDestroy{
     initComment(postId: string){
       this.getComment$  = this.postService.getAllCommentByPostId(postId, this.commentPostPage, this.COMMENT_POST_LIMIT).subscribe(res => {
         this.commentPost = res
+        if(res.length){
+          this.isMoreComments = true
+        }else{
+          this.isMoreComments = false
+        }
         // this.commentPostLength = this.commentPost.length
-        this.isMoreComments = this.commentPost.length >= this.COMMENT_POST_LIMIT
+
       })
     }
 
@@ -521,9 +533,17 @@ export class DashboardComponent implements OnInit, OnDestroy{
     })
   }
 
+  initUpcomingEvents(){
+    this.upcomingEvents$ = this.activityService.getUpcomingEvent(0,3).subscribe(res =>{
+      this.upcomingEvents = res
+      console.log(res)
+    })
+  }
+
     ngOnInit() {
       this.initPosts()
       this.initBookmarks()
+      this.initUpcomingEvents()
         this.items = [
             {label: 'Thread', routerLink: ['thread']},
             {label: 'Calendar'}
