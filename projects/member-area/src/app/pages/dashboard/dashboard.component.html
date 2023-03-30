@@ -299,10 +299,17 @@
                         class="mt-2 border-1 border-gray-400 border-round-md px-3 py-3 overflow-hidden">
                         <p class="font-medium mb-2" [innerHtml]="post.titlePolling | wordLimit:60"></p>
                         <div class="flex flex-column gap-2">
-                          <ng-container *ngIf="!post.isVote">
+                          <ng-container *ngIf="!post.isVote && calculateDiff(post.endAt) >= 1">
                             <ng-container *ngFor="let polling of post.pollingOption">
                               <p (click)="onVote(polling.pollingOptionId, i, post.id)"
                                 class="bg-blue-100 fadeinleft animation-duration-500 animation-iteration-1 hover:bg-blue-200 hover:text-blue-800 text-blue-600 border-1 border-round-md py-1 text-center cursor-pointer">
+                                {{polling.pollingContent}}</p>
+                            </ng-container>
+                          </ng-container>
+                          <ng-container *ngIf="!post.isVote && calculateDiff(post.endAt) <= 0">
+                            <ng-container *ngFor="let polling of post.pollingOption">
+                              <p style="cursor: not-allowed;" pTooltip="This polling has ended !"
+                                class="bg-blue-100 fadeinleft animation-duration-500 animation-iteration-1 hover:bg-blue-200 hover:text-blue-800 text-blue-600 border-1 border-round-md py-1 text-center">
                                 {{polling.pollingContent}}</p>
                             </ng-container>
                           </ng-container>
@@ -331,8 +338,12 @@
                           <p class="text-md text-light text-gray-600">•</p>
                           <p class="text-md text-light text-gray-600">{{calculateDiff(post.endAt)}} days left</p>
                           <p class="text-md text-light text-gray-600" *ngIf="post.isVote">•</p>
-                          <p (click)="onUnvote(post.pollingResponId, post.id)" *ngIf="post.isVote"
+                          <p (click)="onUnvote(post.pollingResponId, post.id)"
+                            *ngIf="post.isVote && calculateDiff(post.endAt) !== 0"
                             class="text-md text-light text-blue-600 font-medium cursor-pointer">
+                            Undo</p>
+                          <p *ngIf="post.isVote && calculateDiff(post.endAt) === 0" style="cursor: not-allowed;"
+                            pTooltip="This polling has ended !" class="text-md text-light text-blue-600 font-medium">
                             Undo</p>
                         </div>
                       </div>
@@ -586,7 +597,8 @@
                                   </form>
                                 </div>
                               </div>
-                              <p *ngIf="isMoreComments" infinite-scroll (click)=" onLoadMoreComment(postIdToComment)"
+                              <p *ngIf="post.countPostComment !== commentPost.length" infinite-scroll
+                                (click)=" onLoadMoreComment(postIdToComment)"
                                 class="text-sm mt-2 font-medium text-bluegray-600 cursor-pointer border-round-md hover:bg-gray-200 w-fit px-2 py-1">
                                 Load more comments
                               </p>
