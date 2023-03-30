@@ -1,3 +1,4 @@
+<pre>{{uploadTransactions.value|json}}</pre>
 <main>
   <div class="w-12 flex sm:flex-column lg:flex-row relative">
     <div class="w-2 sm:hidden md:hidden lg:block pt-4 px-4 top-0">
@@ -167,11 +168,11 @@
                 </div>
               </div>
               <div class="md:w-4 sm:w-9 flex flex-column ml-2">
-                <div *ngIf="!paymentDetail.isPaid"
+                <div *ngIf="!paymentDetail?.isPaid"
                   class="flex mb-2 bg-red-100 w-12 justify-content-center py-1 border-round-md">
                   <p class="text-red-600 font-medium">Unpaid</p>
                 </div>
-                <div *ngIf="paymentDetail.isPaid"
+                <div *ngIf="paymentDetail?.isPaid"
                   class="flex mb-2 bg-green-100 w-12 justify-content-center py-1 border-round-md">
                   <p class="text-green-600 font-medium">Paid</p>
                 </div>
@@ -208,11 +209,40 @@
                     </div>
                   </div>
                 </form>
+
                 <div class="bg-white border-round-md p-3 mt-2 flex flex-column justify-content-between w-12 gap-3"
                   style="object-fit: cover !important;">
                   <form [formGroup]="uploadTransactions" class="flex flex-column">
-                    <pre>{{uploadTransactions.value|json}}</pre>
-                    <label for="voucher" class="text-medium font-medium">Upload Transaction</label>
+                    <div class="flex flex-column border-1 border-gray-200 border-round-md p-2 pb-4">
+                      <label for="voucher" class="text-medium font-medium mt-4">Bank Transfer</label>
+                      <p-dropdown formControlName="bankPayment" [options]="bankPayments" optionLabel="bankPaymentName"
+                        [filter]="false" filterBy="bankPaymentName" [showClear]="true" placeholder="Select Bank">
+                        <ng-template pTemplate="selectedItem">
+                          <div class="category-item category-item-value p-0 w-full" *ngIf="uploadTransactions.value">
+                            <div class="">{{uploadTransactions.value.bankPayment!['bankPaymentName']}}</div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-bankPayment pTemplate="item">
+                          <div class="category-item p-0 ">
+                            <div class="p-0">{{bankPayment.bankPaymentName}}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                      <ng-container *ngIf="uploadTransactions.value.bankPayment!['bankPaymentName']">
+                        <div class="flex flex-column justify-content-center align-content-center my-3">
+                          <p class="text-xs text-center font-light text-800">Account Name</p>
+                          <p class="text-md text-center font-medium text-800">
+                            {{uploadTransactions.value.bankPayment!['accountName']}}</p>
+                        </div>
+                        <div class="flex flex-column justify-content-between">
+                          <p class="text-xs text-center font-light text-800">Account Number</p>
+                          <p class="text-md text-center font-medium text-800">
+                            {{uploadTransactions.value.bankPayment!['accountNumber']}}</p>
+                        </div>
+                      </ng-container>
+
+                    </div>
+                    <label for="voucher" class="text-medium font-medium mt-4">Upload Transaction</label>
                     <input type="file" #file class="hidden" (change)="onUpload($event)">
                     <img *ngIf="this.uploadTransactions.value.imgCover!['fileContent']" [src]="imageSource"
                       class="mt-2 max-h-16rem" alt="Image Source">
@@ -229,7 +259,10 @@
 
                 </div>
                 <div class="sm:hidden md:flex col-3 my-2 w-12">
-                  <app-button-primary class="w-full" label="Continue"></app-button-primary>
+                  <!-- <app-button-primary (clickButton)="onBuyActivity()" class="w-full" label="Continue">
+                  </app-button-primary> -->
+                  <button class="w-full py-2 border-none border-round-md bg-blue-600 hover:bg-blue-800 text-white"
+                    (click)="onBuyActivity()">Continue</button>
                 </div>
               </div>
             </div>
