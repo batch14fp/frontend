@@ -11,6 +11,8 @@ import { SalesSettingService } from "@service/salessetting.service";
 import { Subscription } from "rxjs";
 import {taxAmount, discountAmount, totalPay} from "../../../../../../base-area/src/app/utils/paymentFormula"
 import { PaymentDetailRes } from '../../../../../../base-area/src/app/dto/payment/payment-detail-res';
+import { BankPaymentRes } from '../../../../../../base-area/src/app/dto/bankpayment/bank-payment-res';
+import { BankPaymentService } from '../../../../../../base-area/src/app/services/bankpayment.service';
 
 @Component({
     selector : 'app-payment-event',
@@ -22,6 +24,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     private paymentDetail$?:Subscription
     private salesSetting$?:Subscription
     private buyActivity$?:Subscription
+    private bankPayments$?:Subscription
 
     faHeart = faHeart
     faBook = faBook
@@ -32,12 +35,13 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     taxAmount!:number
     imageSource!: SafeResourceUrl
     paymentDetail!:PaymentDetailRes
+    bankPayments:BankPaymentRes[] = []
 
 
 
     constructor(private fb:FormBuilder, private title:Title, private invoiceService:InvoiceService, private activityService:ActivityService,
         private router:Router, private activatedRouter:ActivatedRoute, private salesSettingService:SalesSettingService,
-        private _sanitizer: DomSanitizer){
+        private _sanitizer: DomSanitizer, private bankPaymentService: BankPaymentService){
         this.title.setTitle('Payment')
     }
 
@@ -113,7 +117,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
 
     uploadTransactions = this.fb.group({
         paymentId:[""],
-        bankPaymentId:[""],
+        bankPayment:[{}],
         imgCover:this.fb.group({
             fileName:[""],
             fileExtension:[""],
@@ -163,8 +167,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     onBuyActivity(){
         const data:UserPaymentReqUpdate={
             paymentId:this.uploadTransactions.value.paymentId!,
-            bankPaymentId:this.uploadTransactions.value.bankPaymentId!,
-            fileName:this.uploadTransactions.value.imgCover?.fileName!,
+            bankPaymentId:this.uploadTransactions.value.bankPayment!['bankPaymentId'],
             fileContent:this.uploadTransactions.value.imgCover?.fileContent!,
             fileExtension:this.uploadTransactions.value.imgCover?.fileExtension!,
             ver:this.uploadTransactions.value.ver!
@@ -181,9 +184,6 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     initPaymentDetail(){
       this.paymentDetail$ = this.activityService.getDetailPayment(this.invoiceId).subscribe(res =>{
         this.paymentDetail = res
-        // this.uploadTransactions.value.paymentId = res.paymentId
-        // this.uploadTransactions.value.bankPaymentId = res.bankPaymetId
-        // this.uploadTransactions.value.ver = res.ver
         this.uploadTransactions.patchValue({
           paymentId : res.paymentId,
           ver : res.ver
@@ -193,10 +193,17 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
       })
     }
 
+    initBankPayments(){
+      this.bankPayments$ = this.bankPaymentService.getAdminBankPayment().subscribe(res => this.bankPayments = res)
+    }
+
+
+
     ngOnDestroy(): void {
        this.eventPayment$?.unsubscribe()
     }
     ngOnInit(): void {
+      this.initBankPayments()
         this.initInvoiceDetail()
         this.initSalesSetting()
         this.activatedRouter.params.subscribe(res=>{

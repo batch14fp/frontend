@@ -21,9 +21,13 @@ export class BankPaymentService{
         return this.http.get<BankPaymentRes[]>(`${BASE_URL}/bank-payments`)
     }
 
+    getAdminBankPayment() : Observable<BankPaymentRes[]>{
+        return this.http.get<BankPaymentRes[]>(`${BASE_URL}/admin/bank-payments`)
+    }
+
     insertBankPayment(data : BankPaymentReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/bank-payments`,data)
-    } 
+    }
 
     updateBankPayment(data : BankPaymentUpdateReq) : Observable<UpdateRes>{
         return this.http.put<UpdateRes>(`${BASE_URL}/bank-payments`,data)
