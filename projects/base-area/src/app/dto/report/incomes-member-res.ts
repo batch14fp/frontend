@@ -1,5 +1,6 @@
+import { ReportIncomeMemberRes } from "./report-income-member-res";
+
 export interface  IncomesMemberRes {
-    type : string
-	title : string
-	totalIncomes : number
+  dataIncomeReport:ReportIncomeMemberRes[],
+  total: number
 }
