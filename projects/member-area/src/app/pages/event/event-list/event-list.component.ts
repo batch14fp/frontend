@@ -49,7 +49,7 @@ export class EventListComponent implements OnInit, OnDestroy {
     }
 
     initEvent(){
-        this.event$ = this.activityService.getAllActivity(1,5, ACTIVITY_TYPE.EVENT).subscribe( res => {
+        this.event$ = this.activityService.getAllActivity(1,10, ACTIVITY_TYPE.EVENT).subscribe( res => {
           this.allActivity = res
         })
     }
@@ -63,13 +63,13 @@ export class EventListComponent implements OnInit, OnDestroy {
         this.categoriesList.get('category')?.valueChanges.subscribe(res=>{
           const temp = res as any
           if(!temp.length){
-            this.event$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.EVENT).subscribe(res=>{
+            this.event$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.EVENT).subscribe(res=>{
               this.allActivity =res
             })
           }
           else{
             
-            this.event$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.EVENT,temp).subscribe(res=>{
+            this.event$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.EVENT,temp).subscribe(res=>{
               this.allActivity =res
             })
           }

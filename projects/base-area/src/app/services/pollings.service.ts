@@ -29,6 +29,10 @@ export class PollingsService {
         return this.http.delete<res>(`${BASE_URL}/pollings/${id}`)
     }
 
+    unvotePolling(id : string) : Observable<res>{
+      return this.http.delete<res>(`${BASE_URL}/posts/unvote/${id}`)
+  }
+
 
     insertVote(data : PollingVoteReqInsert) : Observable<ResInsert>{
       return this.http.post<ResInsert>(`${BASE_URL}/pollings/vote`,data)

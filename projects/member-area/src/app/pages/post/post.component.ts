@@ -16,6 +16,8 @@ import { AttachmentPostInsertReq } from '../../../../../base-area/src/app/dto/po
 import { PollingInsertReq } from '@dto/post/polling-insert-req';
 import { PollingOptionRes } from '../../../../../base-area/src/app/dto/post/polling-option-res';
 import { convertLocalDateToUTCISO, convertUTCToLocalDateISO } from 'projects/base-area/src/app/utils/dateutil';
+import { MEMBER_STATUS } from '../../../../../base-area/src/app/constant/member-status';
+import { UserService } from '../../../../../base-area/src/app/services/user.service';
 
 @Component({
     selector : 'app-post-member',
@@ -35,7 +37,8 @@ export class PostComponent implements OnInit{
 
 
   constructor(private fb: FormBuilder, private _sanitizer: DomSanitizer,  private categoryService: CategoryService,
-    private postTypeService: PostTypeService, private postService: PostService){}
+    private postTypeService: PostTypeService, private postService: PostService,
+    private userService: UserService){}
 
 
   postFb = this.fb.group({
@@ -206,7 +209,21 @@ onClear() {
   }
 
   initPostType(){
-    this.postTypes$ = this.postTypeService.getAllPostType().subscribe(res => this.postTypes = res)
+    this.postTypes$ = this.postTypeService.getAllPostType().subscribe(res => {
+      // this.postTypes = res
+
+      const updatedPostType = []
+      for (const rsp of res) {
+        if(MEMBER_STATUS.REGULAR !== this.userService.getMemberCode()){
+          updatedPostType.push(rsp)
+        }else{
+          if(rsp.postTypeCode !== 'PPRM'){
+            updatedPostType.push(rsp)
+          }
+        }
+        this.postTypes = updatedPostType
+      }
+    })
   }
 
   ngOnInit(): void {

@@ -15,6 +15,7 @@ export interface AllPostRes{
 	typeName:string,
 	imgPostId:string,
   isVote: boolean,
+  pollingResponId:string,
   endAt: string,
   pollingRespon: PollingResponRes
 	categoryCode:string,
@@ -28,4 +29,5 @@ export interface AllPostRes{
 	pollingOptionId:string,
 	pollingOption:PollingOptionReq[],
   showInsertComment: boolean
+  showPostOption: boolean
 }

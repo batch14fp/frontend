@@ -117,86 +117,113 @@
         <p class="align-self-center">Article</p>
       </div>
     </div>
-    
+
     <div class="lg:w-10 sm:mb-6 md:mb-0 sm:w-12 bg-gray-100 border-round-bottom-xl">
       <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem">
         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
           style="width: 32px;" alt="Avatar" />
       </div>
       <div>
-        <form [formGroup]="detailActivity" class="w-12 flex justify-content-center mt-4">
+        <form [formGroup]="invoiceDetail" class="w-12 flex justify-content-center mt-4">
           <div class="sm:w-12 md:w-11 flex flex-column">
             <div class="w-full bg-white border-round-md w-full py-2 mt-2">
-              <p class="font-medium text-xl text-center">Invoice</p>
+              <p class="font-medium text-xl ml-5">Payment - #{{invoiceDetail.value.invoiceCode}}</p>
             </div>
             <div class="flex sm:flex-column md:flex-row  my-2 gap-6">
               <div class="md:w-12 sm:w-12  gap-3">
                 <div class="flex flex-column bg-white w-full px-3 py-3 border-round-md flex flex-column">
-                  <img class="imgBanner" src="http://localhost:2121/files/{{detailActivity.value.imgActivityId}}"
-                    alt="banner">
-                  <p class="text-xl font-semibold text-indigo-300 mt-3 mb-3">{{detailActivity.value.title}}</p>
+                  <img class="imgBanner" src="http://localhost:2121/files/{{invoiceDetail.value.imageId}}" alt="banner">
+                  <p class="text-xl font-semibold text-indigo-300 mt-3 mb-3">{{invoiceDetail.value.activityTitle}}</p>
                   <div class="grid">
                     <div class="col">
-                      <label for="providers" class="text-sm font-medium mb-2">Providers</label>
-                      <p><i class="pi pi-building pr-2"></i> {{detailActivity.value.providers}}</p>
-                    </div>
-                    <div class="col">
                       <label for="location" class="text-sm font-medium mb-2">Location</label>
-                      <p><i class="pi pi-map-marker pr-2"></i> {{detailActivity.value.location}}</p>
+                      <p><i class="pi pi-map-marker pr-2"></i> {{invoiceDetail.value.location}}</p>
                     </div>
                     <div class="col">
-                      <label for="category" class="text-sm font-medium mb-2">Category</label>
-                      <p><i class="pi pi-tag pr-2"></i> {{detailActivity.value.categoryName}}</p>
+                      <label for="location" class="text-sm font-medium mb-2">Provider</label>
+                      <p><i class="pi pi-building pr-2"></i> {{invoiceDetail.value.provider}}</p>
                     </div>
+                    <!-- <div class="col">
+                        <label for="category" class="text-sm font-medium mb-2">Category</label>
+                        <p><i class="pi pi-tag pr-2"></i> {{detailActivity.value.categoryName}}</p>
+                      </div> -->
                     <div class="col">
                       <label for="price" class="text-sm font-medium mb-2">Price</label>
-                      <p><i class="pi pi-money-bill pr-2"></i> Rp. {{detailActivity.value.price}}</p>
+                      <p><i class="pi pi-money-bill pr-2"></i>{{invoiceDetail.value.price|currency:'Rp ' :
+                        'symbol':'1.0-0'}}</p>
                     </div>
                   </div>
                   <p-divider></p-divider>
                   <div class="grid">
                     <div class="col">
                       <label for="startDate" class="text-sm font-medium mb-2">Start Date</label>
-                      <p><i class="pi pi-calendar pr-2"></i> {{detailActivity.value.startDate | date: 'medium'}}</p>
+                      <p><i class="pi pi-calendar pr-2"></i> {{invoiceDetail.value.startDate | date: 'medium'}}</p>
                     </div>
                     <div class="col">
                       <label for="endDate" class="text-sm font-medium mb-2">End Date</label>
-                      <p><i class="pi pi-calendar pr-2"></i> {{detailActivity.value.endDate | date: 'medium'}}</p>
+                      <p><i class="pi pi-calendar pr-2"></i> {{invoiceDetail.value.endDate | date: 'medium'}}</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="md:w-4 sm:w-9 flex flex-column ml-2">
-                <form [formGroup]="walletMember">
+                <div class="flex mb-2 bg-red-100 w-12 justify-content-center py-1 border-round-md">
+                  <p class="text-red-600 font-medium">Unpaid</p>
+                </div>
+                <form>
                   <div class="bg-white border-round-md p-3 flex flex-column justify-content-between w-12 gap-3">
-                    <p class="font-medium text-xl text-center">Payment Method</p>
                     <div class="flex flex-column w-full">
-                      <div class="card flex flex-column justify-content-center mt-2"
-                        *ngFor="let bankPay of bankPayment">
-                        <p-accordion [activeIndex]="0">
-                          <p-accordionTab header="{{bankPay.bankPaymentName}}">
-                            <p>{{bankPay.accountName}}</p>
-                            <p><b>{{bankPay.accountNumber}}</b></p>
-                          </p-accordionTab>
-                        </p-accordion>
+                      <div class="flex flex-row gap-3 mb-2 justify-content-between w-12">
+                        <label for="price" class="text-sm font-medium w-4">Price </label>
+                        <p class="w-8">: {{invoiceDetail.value.price|currency:'Rp ' : 'symbol':'1.0-0'}}</p>
+                      </div>
+                      <div class="flex flex-row gap-3 mb-2 justify-content-between w-12">
+                        <label for="voucherCode" class="text-sm font-medium w-4">Voucher</label>
+                        <p class="w-8">: {{invoiceDetail.value.voucherCode}}</p>
+                      </div>
+                      <div class="flex flex-row gap-3 mb-2 justify-content-between w-12">
+                        <label for="voucherCode" class="text-sm font-medium w-4">Discount</label>
+                        <p class="w-8">: {{invoiceDetail.value.discountNum}} % <span
+                            class="text-green-600 text-xs font-medium">( - {{calculateDiscount()|currency:'Rp ' :
+                            'symbol':'1.0-0'}})</span></p>
+                        <!-- <p>: </p> -->
+                      </div>
+                      <div class="flex flex-row gap-3 mb-2 justify-content-between w-12">
+                        <label for="voucherCode" class="text-sm font-medium w-4">Tax</label>
+                        <p class="w-8">: {{taxAmount*100}} % <span
+                            class="text-red-600 text-xs font-medium">({{calculateTax()|currency:'Rp ' :
+                            'symbol':'1.0-0'}})</span></p>
+                        <!-- <p class="text-red-600">- {{calculateTax()|currency:'Rp ' : 'symbol':'1.0-0'}}</p> -->
+                      </div>
+                      <p-divider></p-divider>
+                      <div class="flex flex-row gap-3">
+                        <label for="voucherCode" class="text-2xl font-semibold">Total </label>
+                        <p class="text-2xl font-semibold">: {{calculateTotalPay()|currency:'Rp ' : 'symbol':'1.0-0'}}
+                        </p>
                       </div>
                     </div>
                   </div>
                 </form>
                 <div class="bg-white border-round-md p-3 mt-2 flex flex-column justify-content-between w-12 gap-3">
-                  <!-- <pre>{{detailActivity.value |json}}</pre> -->
-                  <label for="voucher" class="text-sm font-medium">Voucher</label>
-                  <p-divider></p-divider>
-                  <input type="text" id="voucher" formControlName="voucherCode" pInputText />
-                  <div class="sm:hidden md:flex col-2 my-2 w-12 flex-column">
-                    <!-- <p *ngIf="voucherValid" class="text-md font-medium text-green-800">Voucher Applied</p>
-                    <p *ngIf="voucherInvalid" class="text-md font-medium text-red-800">Voucher Not Valid</p> -->
-                    <app-button-primary class="w-full" label="Apply" (click)="onVoucherApplied()"></app-button-primary>
-                   
+                  <form [formGroup]="uploadTransactions">
+                    <pre>{{uploadTransactions.value|json}}</pre>
+                    <label for="voucher" class="text-medium font-medium">Upload Transaction</label>
+                    <input type="file" #file class="hidden" (change)="onUpload($event)">
+                  <img *ngIf="this.uploadTransactions.value.imgCover!['fileContent']" [src]="imageSource" class="mt-2"
+                    alt="Image Source">
+                  <button *ngIf="this.uploadTransactions.value.imgCover!['fileContent']" (click)="onRemoveImageCover()"
+                    class="bg-red-600 mt-4 cursor-pointer hover:bg-red-700  text-white border-round-md font-medium  text-sm py-2 border-1 border-red-600 border-none">Remove</button>
+                  <div *ngIf="!imageSource" (click)="file.click()" class="w-full border-round-md border-dashed border-gray-500 surface-overlay mt-2 border-1 h-4rem
+                  flex justify-content-center align-content-center cursor-pointer hover:bg-gray-100">
+                    <i class="pi pi-camera px-2 py-2 align-self-center relative text-800" style="font-size: 16px;">
+                    </i>
                   </div>
+                  </form>
+
+
                 </div>
                 <div class="sm:hidden md:flex col-3 my-2 w-12">
-                  <app-button-primary (click)="onCreateInvoice()" class="w-full" label="Continue"></app-button-primary>
+                  <app-button-primary class="w-full" label="Continue"></app-button-primary>
                 </div>
               </div>
             </div>
