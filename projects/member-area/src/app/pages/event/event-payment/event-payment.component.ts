@@ -36,6 +36,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     imageSource!: SafeResourceUrl
     paymentDetail!:PaymentDetailRes
     bankPayments:BankPaymentRes[] = []
+    updateComplete!:boolean
 
 
 
@@ -175,7 +176,11 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
         }
 
         this.buyActivity$ = this.activityService.getPayment(data).subscribe(res=>{
-            this.router.navigateByUrl('events')
+          this.updateComplete = true
+          setTimeout(() => {
+            this.updateComplete = false
+            this.router.navigateByUrl('/dashboard')
+          }, 5000);
         })
     }
 

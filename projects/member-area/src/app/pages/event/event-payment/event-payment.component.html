@@ -271,6 +271,32 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="updateComplete" class="flex z-5 min-h-screen max-h-screen min-w-screen max-w-screen flex-column">
+    <div class="flex flex-column w-6 align-self-center ">
+      <div class="flex flex-column">
+        <app-transaction-complete class="max-h-26rem min-h-26rem max-w-26rem min-w-26rem align-self-center">
+        </app-transaction-complete>
+        <p class="text-center font-medium text-xl">Thank You</p>
+        <p class="text-center font-medium text-sm">Your order will be process.We usually receive your payment within 2
+          to
+          3
+          business days from the date your bank releases the funds. If your payment has not been marked as received by
+          WeCommunity, please request a proof of payment (bank receipt) from your bank and
+          send
+          it to support@wecommunity.com referring to your Payment ID in the subject line. We will investigate this for
+          you
+        </p>
+        <p class="text-sm mt-6 font-medium text-center">Please <span routerLink="/dashboard"
+            class="text-blue-600 text-sm hover:text-blue-800 font-medium cursor-pointer">click here</span> if you are
+          not
+          redirected within a
+          few seconds</p>
+      </div>
+    </div>
+  </div>
+
+
   <p-confirmDialog header="Confirmation" [style]="{width: '50vw'}" [baseZIndex]="10000"
     acceptButtonStyleClass="p-button-text" defaultFocus="reject"></p-confirmDialog>
 </main>
