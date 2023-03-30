@@ -125,18 +125,21 @@
           <button class="bg-red-600 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
             style="height: 30px !important;">Upgrade</button>
         </ng-container>
-        <div *ngIf="!imageIdProfile"
-          class="border-circle  align-self-center bg-blue-400 flex justify-content-center align-content-center"
-          style="width: 38px;height: 38px">
-          <p class=" text-white font-medium text-xl align-self-center align-content-center text-center">
-            {{fotoName(fullNameLogin)}}</p>
-        </div>
-        <div *ngIf="imageIdProfile" class="ImageProfile">
-          <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
-            style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;" alt="Avatar" />
-        </div>
-        <!-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
-          style="width: 32px;" alt="Avatar" /> -->
+
+        <app-tiered-menu [model]="accountMenu">
+          <ng-template #content>
+            <div *ngIf="!imageIdProfile"
+              class="border-circle cursor-pointer align-self-center bg-blue-400 flex justify-content-center align-content-center"
+              style="width: 38px;height: 38px">
+              <p class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                {{fotoName(fullNameLogin)}}</p>
+            </div>
+            <div *ngIf="imageIdProfile" class="ImageProfile">
+              <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
+                style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;" alt="Avatar" />
+            </div>
+          </ng-template>
+        </app-tiered-menu>
       </div>
       <div class="w-12 flex">
         <div class="flex mt-4 w-12 md:w-9 justify-content-center align-self-start">
@@ -169,11 +172,6 @@
                         <i class="pi pi-calendar px-2 align-self-center text-blue-600"></i>
                         <p>Event</p>
                       </div>
-                      <div routerLink="/post"
-                        class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
-                        <i class="pi pi-calendar px-2 align-self-center text-yellow-600"></i>
-                        <p>Polling</p>
-                      </div>
                       <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
                         <i class="pi pi-calendar px-2 align-self-center text-green-600"></i>
                         <p>Create Course</p>
@@ -187,7 +185,7 @@
                 </div>
               </div>
               <div infinite-scroll (scrolled)="onScroll()">
-                <div class="mt-4 flex flex-column gap-4">
+                <div class="mt-4 flex flex-column gap-4 overflow-auto">
                   <ng-container *ngIf="isLoading">
                     <div *ngFor="let item of [].constructor(5)"
                       class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
@@ -343,19 +341,84 @@
                         <p class="text-sm font-light" [innerHtml]="post.content | wordLimit:20">
                           <!-- <span class="cursor-pointer text-gray-400 ">...see more</span> -->
                         </p>
-                        <div class="flex w-full justify-content-between">
-                          <img class="w-3 max-h-16rem hover:bg-gray-100" style="object-fit: cover !important;"
-                            src="https://picsum.photos/600" alt="">
-                          <img class="w-3 max-h-16rem" style="object-fit: cover !important;"
-                            src="https://picsum.photos/700" alt="">
-                          <img class="w-3 max-h-16rem" style="object-fit: cover !important;"
-                            src="https://picsum.photos/800" alt="">
-                          <div class="w-3 max-h-16rem relative cursor-pointer">
+
+                        <!-- <p-galleria class="flex flex-column justify-content-between" [value]="images"
+                          [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions"
+                          [containerStyle]="{ 'max-width': '100%' }" [numVisible]="9" [circular]="true"
+                          [fullScreen]="true" [showItemNavigators]="true">
+                          <ng-template pTemplate="item" let-item>
+                            <img src="http://localhost:2121/files/{{item.fileId}}"
+                              style="width: 50%; display: block;" />
+                          </ng-template>
+                          <ng-template pTemplate="thumbnail" let-item>
+                            <div class="grid grid-nogutter justify-content-center">
+                              <img src="http://localhost:2121/files/{{item.fileId}}"
+                                style="display: block; width: 30%;" />
+                            </div>
+                          </ng-template>
+                        </p-galleria> -->
+
+
+                        <p-galleria [value]="images" [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions"
+                          [containerStyle]="{ 'max-width': '50%' }" [numVisible]="9" [circular]="true"
+                          [fullScreen]="true" [showItemNavigators]="true">
+                          <ng-template pTemplate="item" let-item>
+                            <img src="http://localhost:2121/files/{{item.fileId}}"
+                              style="width: 80%; display: block;" />
+                          </ng-template>
+                          <ng-template pTemplate="thumbnail" let-item>
+                            <div class="grid grid-nogutter justify-content-center">
+                              <img src="http://localhost:2121/files/{{item.fileId}}"
+                                style="display: block;width: 30%" />
+                            </div>
+                          </ng-template>
+                        </p-galleria>
+
+
+
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 1"
+                          class="flex w-full justify-content-between">
+                          <img class="w-12 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                            style="object-fit: cover !important;"
+                            src="http://localhost:2121/files/{{post.data[0].fileId}}" alt="">
+                        </div>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 2"
+                          class="flex w-full justify-content-between">
+                          <img *ngFor="let item of post.data" class="w-6 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                            style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
+                            alt="">
+                        </div>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 3"
+                          class="flex w-full justify-content-between">
+                          <img *ngFor="let item of post.data" class="w-4 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                            style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
+                            alt="">
+                        </div>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 4"
+                          class="flex w-full justify-content-between">
+                          <img *ngFor="let item of post.data" class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                            style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
+                            alt="">
+                        </div>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length >= 5"
+                          class="flex w-full justify-content-between">
+                          <img class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
+                            style="object-fit: cover !important;"
+                            src="http://localhost:2121/files/{{post.data[0].fileId}}" alt="">
+                          <img class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
+                            style="object-fit: cover !important;"
+                            src="http://localhost:2121/files/{{post.data[1].fileId}}" alt="">
+                          <img class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
+                            style="object-fit: cover !important;"
+                            src="http://localhost:2121/files/{{post.data[2].fileId}}" alt="">
+                          <div
+                            class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer relative cursor-pointer">
                             <div class="bg-gray-200 opacity-10">
                               <img class="w-full h-full" style="object-fit: contain !important;"
-                                src="https://picsum.photos/900" alt="">
+                                src="http://localhost:2121/files/{{post.data[3].fileId}}" alt="">
                             </div>
-                            <p class="absolute top-50 right-50 text-800 opacity-100 text-md font-medium">+5</p>
+                            <p class="absolute top-50 right-50 text-800 opacity-100 text-md font-medium">
+                              +{{post.data.length-4}}</p>
                           </div>
                         </div>
                       </div>
@@ -514,6 +577,7 @@
                                         class="border-round-xl border-none px-2 bg-gray-300 text-gray-600 text-sm">Save
                                         Changes</button>
                                       <button *ngIf="editCommentFb.value.contentComment !== comment.contentComment"
+                                        (click)="onSaveEditComment(comment, post.id)"
                                         class="border-round-xl cursor-pointer border-none px-2 bg-blue-600 text-white text-sm">Save
                                         Changes</button>
                                       <button (click)="onCancelEdit()"
@@ -534,6 +598,7 @@
                   </div>
                 </div>
               </div>
+              <p-scrollTop></p-scrollTop>
               <!-- <div class="mt-4 flex flex-column gap-3">
                 <div class="">
                   <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
@@ -691,31 +756,46 @@
         </div>
         <div class="hidden md:block md:w-3 mt-2">
           <div class="w-10">
-            <div class="flex mb-2 bg-red-100 w-4 justify-content-center py-1 border-round-md">
-              <i class="pi pi-heart-fill pr-2 align-self-center" style="color: red;"></i>
-              <p class="text-red-600">Like</p>
+            <div class="flex mb-2 bg-blue-100 w-full justify-content-center py-1 border-round-md">
+              <i class="pi pi-bookmark-fill pr-2 align-self-center text-blue-600"></i>
+              <p class="text-blue-600">My Bookmarks</p>
             </div>
             <div class="flex flex-column gap-3">
-              <div class="bg-white border-round-lg" *ngFor="let item of [].constructor(2)">
+              <div class="bg-white border-round-lg" *ngFor="let item of myBookmarks">
                 <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
                   <div class="flex gap-3">
                     <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border-circle align-self-center"
                       style="width: 32px;" alt="Avatar" />
                     <div class="flex flex-column">
-                      <p class="font-medium text-sm">John Doe</p>
-                      <p class="text-xs font-light text-xs text-gray-400">1 Hours ago</p>
+                      <p class="font-medium text-sm">{{item.fullname}}</p>
+                      <p class="text-xs font-light text-xs text-gray-400">{{item.timeAgo | timeAgo}}</p>
+                    </div>
+                    <div class="flex flex-column gap-1">
+                      <p *ngIf="item.typeCode === 'PPOL'"
+                        class="text-xs font-medium border-round-md text-purple-600 bg-purple-100 w-fit px-2 py-1 align-self-end">
+                        POLLING
+                      </p>
+                      <p *ngIf="item.typeCode === 'PREG'"
+                        class="text-sm font-medium border-round-md text-gray-600 bg-gray-100 w-fit px-2 py-1 align-self-end">
+                        FREE
+                      </p>
+                      <p *ngIf="item.typeCode === 'PPRM'"
+                        class="text-sm font-medium border-round-md text-indigo-600 bg-indigo-100 w-fit px-2 py-1 align-self-end">
+                        PREMIUM
+                      </p>
                     </div>
                   </div>
                   <div class="mt-2">
-                    <p class="text-md font-medium">How to make a cupcake</p>
-                    <p class="text-sm font-light">Jujubes candy canes dessert pudding cupcake jelly cake danish candy
-                      canes. Pastry ice cream
-                      liquorice chocolate muffin oat cake dragée sugar pl <span
-                        class="cursor-pointer text-gray-400 ">...see more</span></p>
+                    <p class="text-md font-medium">{{item.title}}</p>
+                    <p class="text-sm font-light" [innerHtml]="item.content | wordLimit:10">
+                      <span class="cursor-pointer text-gray-400 ">...see more</span></p>
                   </div>
                 </div>
               </div>
             </div>
+            <ng-container>
+              <p class="text-blue-600 font-medium cursor-pointer hover:text-blue-800 mt-2">Show All</p>
+            </ng-container>
           </div>
         </div>
       </div>

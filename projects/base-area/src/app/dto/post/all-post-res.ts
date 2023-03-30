@@ -1,6 +1,7 @@
 import { PollingOptionRes } from "./polling-option-res";
 import { PollingOptionReq } from './polling-option-req';
 import { PollingResponRes } from './polling-response-res';
+import { FileResPost } from '../file/file-res';
 
 export interface AllPostRes{
   id:string,
@@ -28,6 +29,7 @@ export interface AllPostRes{
   ver: number,
 	pollingOptionId:string,
 	pollingOption:PollingOptionReq[],
-  showInsertComment: boolean
+  data: FileResPost[],
+  showInsertComment: boolean,
   showPostOption: boolean
 }
