@@ -1,3 +1,4 @@
+import { ACTIVITY_TYPE } from './../constant/activity-type';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ActivityUpdateReq } from "@dto/activity/activity-update-req";
@@ -13,8 +14,11 @@ import { ActivityReq } from "../dto/activity/activity-req";
 import { ActivityRes } from "../dto/activity/activity-res";
 import { res } from "../dto/res";
 import { ResInsert } from "../dto/res-insert";
+import { PaymentDetailRes } from '../dto/payment/payment-detail-res';
+import { ActivityUpcomingAllRes } from '../dto/activity/activity-upcoming-all-res';
 import { ActivityMemberRes } from "@dto/report/activity-member-res";
 import { ActivityAdminRes } from "@dto/report/activity-admin-res";
+
 
 @Injectable({
     providedIn : 'root'
@@ -46,6 +50,10 @@ export class ActivityService{
         return this.http.get<ActivityRes>(`${BASE_URL}/activities/${id}`)
     }
 
+    getUpcomingEvent(page:number, size:number) : Observable<ActivityUpcomingAllRes>{
+        return this.http.get<ActivityUpcomingAllRes>(`${BASE_URL}/activities/upcoming?page=${page}&size=${size}&typeCode=${ACTIVITY_TYPE.EVENT}`)
+    }
+
 
     insertActivity(data : ActivityReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/activities/`,data)
@@ -74,8 +82,13 @@ export class ActivityService{
     }
     getDataActivity() : Observable<CountMemberRes>{
         return this.http.get<CountMemberRes>(`${BASE_URL}/activities/total`)
-
     }
+
+
+    getDetailPayment(invoiceId:string) : Observable<PaymentDetailRes>{
+      return this.http.get<PaymentDetailRes>(`${BASE_URL}/activities/${invoiceId}/payment/detail-payment`)
+  }
+
 
     getMemberReportIncome(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
@@ -110,4 +123,5 @@ export class ActivityService{
     getDownloadReport(id:string,startDate?:string,endDate?:string){
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
+
 }

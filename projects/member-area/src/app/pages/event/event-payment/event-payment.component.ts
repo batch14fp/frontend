@@ -10,6 +10,7 @@ import { InvoiceService } from "@service/invoice.service";
 import { SalesSettingService } from "@service/salessetting.service";
 import { Subscription } from "rxjs";
 import {taxAmount, discountAmount, totalPay} from "../../../../../../base-area/src/app/utils/paymentFormula"
+import { PaymentDetailRes } from '../../../../../../base-area/src/app/dto/payment/payment-detail-res';
 
 @Component({
     selector : 'app-payment-event',
@@ -18,6 +19,7 @@ import {taxAmount, discountAmount, totalPay} from "../../../../../../base-area/s
 
 export class EventPaymentComponent implements OnInit, OnDestroy{
     private eventPayment$?:Subscription
+    private paymentDetail$?:Subscription
     private salesSetting$?:Subscription
     private buyActivity$?:Subscription
 
@@ -29,11 +31,13 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     invoiceId!:string
     taxAmount!:number
     imageSource!: SafeResourceUrl
+    paymentDetail!:PaymentDetailRes
 
 
 
     constructor(private fb:FormBuilder, private title:Title, private invoiceService:InvoiceService, private activityService:ActivityService,
-        private router:Router, private activatedRouter:ActivatedRoute, private salesSettingService:SalesSettingService, private _sanitizer: DomSanitizer){
+        private router:Router, private activatedRouter:ActivatedRoute, private salesSettingService:SalesSettingService,
+        private _sanitizer: DomSanitizer){
         this.title.setTitle('Payment')
     }
 
@@ -99,8 +103,6 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     }
 
     calculateTax(){
-        console.log(this.taxAmount)
-        console.log(this.invoiceDetail.value.price!)
         return taxAmount(this.taxAmount,this.invoiceDetail.value.price!)
     }
 
@@ -173,6 +175,23 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
         })
     }
 
+
+
+    initPaymentDetail(){
+      this.paymentDetail$ = this.activityService.getDetailPayment(this.invoiceId).subscribe(res =>{
+        this.paymentDetail = res
+        // this.uploadTransactions.value.paymentId = res.paymentId
+        // this.uploadTransactions.value.bankPaymentId = res.bankPaymetId
+        // this.uploadTransactions.value.ver = res.ver
+        this.uploadTransactions.patchValue({
+          paymentId : res.paymentId,
+          ver : res.ver
+        })
+        console.log("payment detail: ")
+        console.log(res)
+      })
+    }
+
     ngOnDestroy(): void {
        this.eventPayment$?.unsubscribe()
     }
@@ -183,6 +202,9 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
             const params = res as any
             this.uploadTransactions.value.paymentId = params.paymentId
             console.log(params.paymentId)
+            console.log(params.invoiceId)
         })
+        this.initPaymentDetail()
+
     }
 }
