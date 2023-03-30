@@ -13,6 +13,7 @@ import { CourseModule } from "./pages/course/course.module";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 // import { ProfileComponent } from "./pages/profile/profile.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
+import { MyCourseComponent } from './pages/my-course/my-course.component';
 import { PostComponent } from './pages/post/post.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 // =======
@@ -73,6 +74,10 @@ export const memberRoutes: Routes = [
         component: ReportInvoiceComponent
     },
     {
+        path : 'my-course',
+        component : MyCourseComponent
+    },
+    {
         path : 'subscription',
         // component : SubscriptionComponent
         loadChildren: () => import("./pages/subscription/subscription.module").then(s => s.SubscriptionModule)
@@ -109,7 +114,7 @@ export const memberRoutes: Routes = [
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
@@ -123,7 +128,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
     ]
 })
 

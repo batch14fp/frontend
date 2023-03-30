@@ -29,8 +29,8 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     invoiceId!:string
     taxAmount!:number
     imageSource!: SafeResourceUrl
-    
-    
+
+
 
     constructor(private fb:FormBuilder, private title:Title, private invoiceService:InvoiceService, private activityService:ActivityService,
         private router:Router, private activatedRouter:ActivatedRoute, private salesSettingService:SalesSettingService, private _sanitizer: DomSanitizer){
@@ -56,7 +56,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
 
         ver:[0]
     })
-    
+
     initInvoiceDetail():void{
         this.activatedRouter.params.subscribe(res=>{
             const params = res as any
@@ -96,15 +96,15 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
 
     calculateDiscount(){
        return discountAmount(this.invoiceDetail.value.discountNum!, this.invoiceDetail.value.price!)
-    
+
     }
 
     calculateTax(){
         console.log(this.taxAmount)
         console.log(this.invoiceDetail.value.price!)
-        return taxAmount(this.taxAmount,this.invoiceDetail.value.price!) 
+        return taxAmount(this.taxAmount,this.invoiceDetail.value.price!)
     }
-   
+
     calculateTotalPay(){
         return totalPay(this.invoiceDetail.value.price!,this.calculateDiscount(),this.calculateTax())
     }
@@ -118,11 +118,12 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
             fileContent:[""],
         }),
         ver:[0]
-    }) 
+    })
 
     onRemoveImageCover() {
         this.imageSource = ""
-        this.uploadTransactions.get('imageCover')?.reset()
+        this.uploadTransactions.get('imgCover')?.reset()
+
     }
 
     addFiles(fileContent: string, fileExtension: string){
@@ -152,7 +153,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
                 this.addFiles(resultBase64, resultExtension)
 
                 this.imageSource = this._sanitizer.bypassSecurityTrustResourceUrl(`data:image/${resultExtension};base64, ${resultBase64}`);
-               
+
             })
         }
     }
@@ -165,7 +166,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
             fileContent:this.uploadTransactions.value.imgCover?.fileContent!,
             fileExtension:this.uploadTransactions.value.imgCover?.fileExtension!,
             ver:this.uploadTransactions.value.ver!
-            
+
         }
 
         this.buyActivity$ = this.activityService.getPayment(data).subscribe(res=>{
