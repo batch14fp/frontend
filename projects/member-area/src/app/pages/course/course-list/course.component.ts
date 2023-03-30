@@ -41,9 +41,11 @@ export class CourseComponent implements OnInit, OnDestroy{
     // query?: string
     // loading: boolean = true
 
-    categoriesList =this.fb.group({
-      category:[[]]
-    })
+    // categoriesList =this.fb.group({
+    //   category:[[]]
+    // })
+
+    categoriesList:string[] = []
 
     categories: CategoryRes[] = []
     dateSearch!:Date
@@ -66,20 +68,22 @@ export class CourseComponent implements OnInit, OnDestroy{
     ngOnInit(): void {
       this.initCategory()
       this.initCourse()
-      this.categoriesList.get('category')?.valueChanges.subscribe(res=>{
-        const temp = res as any
-        if(!temp.length){
-          this.course$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.COURSE).subscribe(res=>{
-            this.allActivity =res
-          })
-        }
-        else{
-          this.course$ = this.activityService.getAllActivity(1,5,ACTIVITY_TYPE.COURSE).subscribe(res=>{
-            this.allActivity =res
-          })
-        }
-      })
+      
     }
+
+    categoryFilter(){
+      if(!this.categoriesList.length){
+        this.course$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.COURSE).subscribe(res=>{
+          this.allActivity =res
+        })
+      }
+      else{
+        this.course$ = this.activityService.getAllActivityByCategories(1,10,ACTIVITY_TYPE.COURSE,this.categoriesList).subscribe(res=>{
+          this.allActivity =res
+        })
+      }
+    
+  }
 
     ngOnDestroy(): void {
      this.category$?.unsubscribe()

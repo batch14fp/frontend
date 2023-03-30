@@ -1,8 +1,6 @@
+import { ReportActivityAdminRes } from "./report-activity-admin-res";
+
 export interface ActivityAdminRes{
-    no : number
-	memberName : string
-	providerName : string
-	type : string
-	title : string
-	startDate : string
+	dataActivityReport: ReportActivityAdminRes[],
+	total: number
 }

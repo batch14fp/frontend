@@ -16,6 +16,9 @@ import { res } from "../dto/res";
 import { ResInsert } from "../dto/res-insert";
 import { PaymentDetailRes } from '../dto/payment/payment-detail-res';
 import { ActivityUpcomingAllRes } from '../dto/activity/activity-upcoming-all-res';
+import { ActivityMemberRes } from "@dto/report/activity-member-res";
+import { ActivityAdminRes } from "@dto/report/activity-admin-res";
+
 
 @Injectable({
     providedIn : 'root'
@@ -33,6 +36,14 @@ export class ActivityService{
         }else{
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}&categoryCode=${categories}`)
         }
+    }
+
+    getAllActivityByCategories(page: number, size: number, activityTypes?:string, categories?:string[]):Observable<ActivityRes[]>{
+        let categoryCode:string = ''
+        for(let i = 0; i<categories?.length!; i++){
+            categoryCode = categoryCode + '&categoryCodes=' +categories![i] 
+        }
+        return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/by-category-List?typeCode=${activityTypes}&page=${page}&size=${size}${categoryCode}`)
     }
 
     getActivity(id: string) : Observable<ActivityRes>{
@@ -73,8 +84,44 @@ export class ActivityService{
         return this.http.get<CountMemberRes>(`${BASE_URL}/activities/total`)
     }
 
+
     getDetailPayment(invoiceId:string) : Observable<PaymentDetailRes>{
       return this.http.get<PaymentDetailRes>(`${BASE_URL}/activities/${invoiceId}/payment/detail-payment`)
   }
+
+
+    getMemberReportIncome(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
+        if(!startDate && !endDate  && !typeCode){
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}`)
+        }else if(!typeCode){
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+        }else{
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+        }
+    }
+
+    getReportAllByDateRange(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
+        if(!startDate && !endDate  && !typeCode){
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}`)
+        }else if(!typeCode){
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+        }else{
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+        }
+    }
+
+    getReportAllByDateRangeAdmin(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
+        if(!startDate && !endDate  && !typeCode){
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report?limit=${limit}&offset=${offset}`)
+        }else if(!typeCode){
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+        }else{
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+        }
+    }
+
+    getDownloadReport(id:string,startDate?:string,endDate?:string){
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
+    }
 
 }

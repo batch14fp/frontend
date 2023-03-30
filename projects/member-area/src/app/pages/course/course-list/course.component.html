@@ -123,7 +123,6 @@
     </div>
   </div> -->
 <!-- <pre>{{allActivity|json}}</pre> -->
-<pre>{{categoriesList.value|json}}</pre>
 <main>
   <div class="w-12 h-full flex relative">
     <div class="w-2 pt-4 px-4 top-0">
@@ -292,36 +291,13 @@
               <p>Schedule</p>
               <p-calendar [(ngModel)]="dateSearch" [showIcon]="true" inputId="icon"></p-calendar>
             </div>
-            <div class="category mt-4" [formGroup]="categoriesList">
+            <div class="category mt-4">
               <p class="text-xl">Category</p>
               <div class="field-checkbox mt-2" *ngFor="let cat of categories">
-                <p-checkbox name="group1" formControlName="category" value="{{cat.categoryCode}}" inputId="hr">
+                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="categoryFilter()" value="{{cat.categoryCode}}" inputId="hr">
                 </p-checkbox>
-                <label for="hr">{{cat.categoryName}}</label>
+                <label>{{cat.categoryName}}</label>
               </div>
-              <!-- <div class="field-checkbox">
-                <p-checkbox name="group1" value="Performance & Dev" [(ngModel)]="selectedCategory" inputId="pd">
-                </p-checkbox>
-                <label for="pd">Performance & Dev</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Planning & Recruit" [(ngModel)]="selectedCategory" inputId="pr">
-                </p-checkbox>
-                <label for="pr">Planning & Recruit</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Tax Legal" [(ngModel)]="selectedCategory" inputId="tl"></p-checkbox>
-                <label for="tl">Tax Legal</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Career & Succession" [(ngModel)]="selectedCategory" inputId="cs">
-                </p-checkbox>
-                <label for="cs">Career & Succession</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="HR Digital" [(ngModel)]="selectedCategory" inputId="hd"></p-checkbox>
-                <label for="hd">HR Digital</label>
-              </div> -->
             </div>
             <div class="category mt-4">
               <p class="text-xl">Sort</p>
