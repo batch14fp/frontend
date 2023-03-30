@@ -36,6 +36,10 @@ export class PostService{
         return this.http.get<PostCommentRes[]>(`${BASE_URL}/posts/${id}/comment?page=${page}&size=${size}`)
     }
 
+    getMyBookmarks(page:number, size:number): Observable<AllPostRes[]>{
+        return this.http.get<AllPostRes[]>(`${BASE_URL}/posts/all?page=${page}&size=${size}&criteria=bookmark`)
+    }
+
     getActivity(id:number): Observable<AllPostByTypeRes[]>{
         return this.http.get<AllPostByTypeRes[]>(`${BASE_URL}/posts/${id}`)
     }
