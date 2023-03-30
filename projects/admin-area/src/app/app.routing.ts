@@ -66,7 +66,7 @@ export const adminRoutes: Routes = [
                 component : SalesSettingComponent
             },
             {
-                path : 'report',
+                path : 'admin/report',
                 component : ReportAdminComponent
             },
             {

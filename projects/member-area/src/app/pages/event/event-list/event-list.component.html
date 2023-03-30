@@ -1,4 +1,3 @@
-<pre>{{categoriesList.value|json}}</pre>
 <main>
   <div class="w-12 h-full flex relative">
     <div class="w-2 pt-4 px-4 top-0">
@@ -162,10 +161,10 @@
               <p>Schedule</p>
               <p-calendar [(ngModel)]="dateSearch" [showIcon]="true" inputId="icon"></p-calendar>
             </div>
-            <div class="category mt-4" [formGroup]="categoriesList">
+            <div class="category mt-4">
               <p class="text-xl">Category</p>
               <div class="field-checkbox mt-2" *ngFor="let cat of categories">
-                <p-checkbox name="group1" formControlName="category" value="{{cat.categoryCode}}" inputId="hr">
+                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="categoryFilter()" value="{{cat.categoryCode}}" inputId="hr">
                 </p-checkbox>
                 <label for="hr">{{cat.categoryName}}</label>
               </div>

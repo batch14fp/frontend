@@ -17,6 +17,10 @@ import { PostCommentRes } from '@dto/post/all-post-comment-res';
 import { UserService } from '../../../../../base-area/src/app/services/user.service';
 import { PostBookmarkReq } from '../../../../../base-area/src/app/dto/post/post-bookmark-req';
 import { MEMBER_STATUS } from '../../../../../base-area/src/app/constant/member-status';
+import { PostCommentReqUpdate } from '../../../../../base-area/src/app/dto/post/post-comment-req-update';
+import { Router } from '@angular/router';
+import { FileResPost } from '../../../../../base-area/src/app/dto/file/file-res';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -33,17 +37,19 @@ export class DashboardComponent implements OnInit, OnDestroy{
   private vote$?: Subscription
   private unVote$?: Subscription
   private insertComment$?: Subscription
+  private editComment$?: Subscription
   private deleteComment$?: Subscription
   private getComment$?: Subscription
   private insertBookmark$?: Subscription
+  private myBookmark$?: Subscription
 
 
-
+    images!: FileResPost[];
 
     items!: MenuItem[];
     posts!:AllPostRes[]
+    myBookmarks!:AllPostRes[]
     commentPost!: PostCommentRes[]
-    userIdlogin:string = this.userService.getIdLogin().toString()
     showPostOption = false
     showCommentOption = false
     showInsertComment = false
@@ -51,12 +57,57 @@ export class DashboardComponent implements OnInit, OnDestroy{
     postIdToComment = ""
     isLoading = false
     memberStatus!: string
+    userIdlogin:string = this.userService.getIdLogin().toString()
     memberReguler = MEMBER_STATUS.REGULAR
     imageIdProfile= ""
     fullNameLogin=""
 
     // commentIdSelected =""
     commentIdxEdit!: number
+
+    displayBasic!: boolean
+
+    onShowGallery(data:FileResPost[]){
+      console.log("show")
+      this.images = data
+
+      this.responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 3
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1
+        }
+    ]
+
+      this.displayBasic = true
+    }
+
+    responsiveOptions: any[] = [
+      {
+          breakpoint: '1500px',
+          numVisible: 5
+      },
+      {
+          breakpoint: '1024px',
+          numVisible: 3
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 2
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1
+      }
+  ];
+
 
     optionPost = {
       postId: "",
@@ -83,7 +134,9 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
     constructor(private postService: PostService, private confirmationService: ConfirmationService,
       private messageService: MessageService, private pollingsService: PollingsService,
-      private fb: FormBuilder, private userService: UserService){}
+      private fb: FormBuilder, private userService: UserService, private router: Router, private title: Title){
+        title.setTitle("Dashboard")
+      }
 
 
       COMMENT_POST_LIMIT =5
@@ -92,6 +145,19 @@ export class DashboardComponent implements OnInit, OnDestroy{
       loadedComment = 0
       commentPostLength = 0
       editComment = false
+
+
+    accountMenu: MenuItem[] = [
+        { label: 'Profile', icon: 'pi pi-fw pi-user', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'Report', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'Change Password', icon: 'pi pi-fw pi-lock', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
+      ];
+
 
 
       optionMenuDelete: MenuItem[] = [
@@ -134,6 +200,19 @@ export class DashboardComponent implements OnInit, OnDestroy{
       //  this.commentIdEdit = this.commentIdSelected
       }
 
+      onSaveEditComment(comment:PostCommentRes, postId:string){
+        const data:PostCommentReqUpdate = {
+          contentComment: this.editCommentFb.value.contentComment!,
+          ver:comment.ver,
+          postCommentId: comment.postCommentId
+        }
+        this.editComment$ = this.postService.updateComment(data).subscribe(res => {
+          this.commentIdx = -1
+          this.initComment(postId)
+        })
+
+      }
+
 
       POST_LIMIT = 3
       postPage = 1
@@ -161,9 +240,9 @@ export class DashboardComponent implements OnInit, OnDestroy{
       onLoadMoreComment(postId: string) : void {
         console.log("scrolled")
         this.posts$ = this.postService.getAllCommentByPostId(postId, ++this.commentPostPage, this.COMMENT_POST_LIMIT).subscribe(result => {
-          if(this.posts.length) {
+          if(result.length) {
             this.commentPost = [...this.commentPost, ...result]
-        this.loadedComment += this.COMMENT_POST_LIMIT
+            this.loadedComment += this.COMMENT_POST_LIMIT
           } else {
             this.commentPost = result
           }
@@ -268,6 +347,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
         postId
       }
       this.insertBookmark$ = this.postService.insertPostBookmark(dataInsert).subscribe(res => {
+        this.initBookmarks()
         this.posts.map(p => {
           if(p.id === postId){
             if(p.bookmark){
@@ -429,10 +509,21 @@ export class DashboardComponent implements OnInit, OnDestroy{
       });
   }
 
+  onLogOut(){
+    localStorage.clear()
+    this.router.navigateByUrl("/")
+  }
 
+  initBookmarks(){
+    this.myBookmark$ = this.postService.getMyBookmarks(1,3).subscribe(res =>{
+      this.myBookmarks = res
+      console.log(res)
+    })
+  }
 
     ngOnInit() {
       this.initPosts()
+      this.initBookmarks()
         this.items = [
             {label: 'Thread', routerLink: ['thread']},
             {label: 'Calendar'}

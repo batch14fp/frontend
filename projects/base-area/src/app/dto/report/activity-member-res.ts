@@ -1,7 +1,6 @@
+import { ReportActivityMemberRes } from "./report-activity-member-res";
+
 export interface ActivityMemberRes{
-    no : number
-	title : string
-	type : string
-	startDate : string
-	totalParticipants : number
+  dataActivityReport: ReportActivityMemberRes[],
+  total: number
 }

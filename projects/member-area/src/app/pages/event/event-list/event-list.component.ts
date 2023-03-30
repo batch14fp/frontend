@@ -19,6 +19,7 @@ import { Subscription } from "rxjs";
 export class EventListComponent implements OnInit, OnDestroy {
     private event$?: Subscription
     private category$?: Subscription
+    private eventCategory$?:Subscription
 
     allActivity: ActivityRes[] = []
 
@@ -32,9 +33,13 @@ export class EventListComponent implements OnInit, OnDestroy {
         this.title.setTitle("Event")
     }
 
-    categoriesList = this.fb.group({
-        category: [[]]
-    })
+    // categoriesList = this.fb.group({
+    //     category: [[]]
+    // })
+
+    categoriesList:string[] = []
+
+    
 
     categories: CategoryRes[] = []
     dateSearch!: Date
@@ -60,20 +65,20 @@ export class EventListComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.initCategory()
         this.initEvent()
-        this.categoriesList.get('category')?.valueChanges.subscribe(res=>{
-          const temp = res as any
-          if(!temp.length){
-            this.event$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.EVENT).subscribe(res=>{
-              this.allActivity =res
-            })
-          }
-          else{
-            
-            this.event$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.EVENT,temp).subscribe(res=>{
-              this.allActivity =res
-            })
-          }
-        })
+        
+    }
+    categoryFilter(){
+        if(!this.categoriesList.length){
+          this.event$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.EVENT).subscribe(res=>{
+            this.allActivity =res
+          })
+        }
+        else{
+          this.event$ = this.activityService.getAllActivityByCategories(1,10,ACTIVITY_TYPE.EVENT,this.categoriesList).subscribe(res=>{
+            this.allActivity =res
+          })
+        }
+      
     }
 
 }
