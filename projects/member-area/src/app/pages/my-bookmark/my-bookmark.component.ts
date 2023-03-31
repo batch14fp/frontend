@@ -27,12 +27,12 @@ import { truncateString } from '../../../../../base-area/src/app/utils/turncateS
 
 
 @Component({
-    selector : 'app-dashboard-user',
-    templateUrl : './dashboard.component.html',
+    selector : 'app-mybookmark',
+    templateUrl : './my-bookmark.component.html',
     providers: [MessageService]
 })
 
-export class DashboardComponent implements OnInit, OnDestroy{
+export class MyBookmarkComponent implements OnInit, OnDestroy{
   private posts$?: Subscription
   private upcomingEvents$?: Subscription
   private singlePost$?: Subscription
@@ -544,7 +544,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   }
 
   initBookmarks(){
-    this.myBookmark$ = this.postService.getMyBookmarks(1,3).subscribe(res =>{
+    this.myBookmark$ = this.postService.getMyBookmarks(1,5).subscribe(res =>{
       this.myBookmarks = res
       console.log(res)
     })
