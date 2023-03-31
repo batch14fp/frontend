@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { InvoiceRes } from "@dto/invoice/invoice-res";
+import { MemberPremiumRes } from "@dto/memberstatus/member-premium-res";
 import { MemberStatusRes } from "@dto/memberstatus/member-status-res";
 import { MembershipPaymentReq } from "@dto/payment/member-pay-req";
 import { Observable } from "rxjs";
@@ -36,5 +37,9 @@ export class MemberStatusService{
 
     subscribtionMembership(data : MembershipPaymentReq) : Observable<InvoiceRes>{
         return this.http.post<InvoiceRes>(`${BASE_URL}/members/status/subscription`,data)
+    }
+
+    getIsPremiumMemberStatus() : Observable<MemberPremiumRes>{
+        return this.http.get<MemberPremiumRes>(`${BASE_URL}/members/is-premium`)
     }
 }

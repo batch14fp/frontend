@@ -31,5 +31,6 @@ export interface AllPostRes{
 	pollingOption:PollingOptionReq[],
   data: FileResPost[],
   showInsertComment: boolean,
-  showPostOption: boolean
+  showPostOption: boolean,
+  isMoreContent:boolean
 }

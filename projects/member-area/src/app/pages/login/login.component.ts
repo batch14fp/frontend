@@ -16,6 +16,8 @@ import { ROLE } from "projects/base-area/src/app/constant/role.service";
 })
 
 export class LoginComponent implements OnDestroy{
+  isLoading = false
+
   constructor(private title: Title, private fb: FormBuilder,
     private userService: UserService,  private router: Router){
       this.title.setTitle("Login")
@@ -31,6 +33,7 @@ export class LoginComponent implements OnDestroy{
 
 
   onLogin(){
+    this.isLoading = true
     if(this.login.valid){
       const data: LoginReq = {
         email: this.login.value.email!,
@@ -40,6 +43,7 @@ export class LoginComponent implements OnDestroy{
       this.login$ = this.userService.login(data).subscribe(result => {
         this.userService.saveDataLogin(result)
         const roleCode = this.userService.roleCode
+        this.isLoading = true
         if(roleCode == ROLE.MMBR){
           this.router.navigateByUrl("/dashboard")
         }

@@ -22,6 +22,20 @@ export class ArticlesService {
         return this.http.get<ArticleRes[]>(`${BASE_URL}/articles?page=${startPage}&size=${maxPage}`)
     }
 
+    // member 
+    getAllByMostViewer(startPage: number, maxPage : number, query?: string) : Observable<ArticleResData[]>{
+        return this.http.get<ArticleResData[]>(`${BASE_URL}/articles/most-viewer?page=${startPage}&size=${maxPage}`)
+    }
+
+    getArticleIdForMember(id : string) : Observable<ArticleResData>{
+        return this.http.get<ArticleResData>(`${BASE_URL}/articles/member/${id}`)
+    }
+
+    getAll(startPage: number, maxPage : number, query?: string) : Observable<ArticleResData[]>{
+        return this.http.get<ArticleResData[]>(`${BASE_URL}/articles/member/all?page=${startPage}&size=${maxPage}`)
+    }
+    // 
+
     insertArticle(data : ArticleReq) : Observable<ResInsert>{
         return this.http.post<ResInsert>(`${BASE_URL}/articles`, data)
     }

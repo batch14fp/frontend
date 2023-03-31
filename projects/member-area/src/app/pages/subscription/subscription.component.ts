@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
+import { Router } from "@angular/router";
 import { MemberStatusRes } from "@dto/memberstatus/member-status-res";
+import { MembershipPaymentReq } from "@dto/payment/member-pay-req";
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup,faPenToSquare, faGlobe} from '@fortawesome/free-solid-svg-icons';
 import { MemberStatusService } from "@service/member.service";
 import { Subscription } from "rxjs";
@@ -15,6 +17,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
     memberStatus : MemberStatusRes[] = []
 
     member$? : Subscription
+    buyMember$? : Subscription
 
     faHeart = faHeart
     faComment = faComment
@@ -26,7 +29,8 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
 
     constructor(
         private memberStatusService : MemberStatusService,
-        private title : Title)
+        private title : Title,
+        private router : Router)
         {
             this.title.setTitle('Subscription')
     }
@@ -37,9 +41,23 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
         })
     }
 
+
+
+    onBuy(memberStatusId : string){
+        const data : MembershipPaymentReq = {
+            membershipId : memberStatusId
+        }
+        console.log(data);
+        this.buyMember$ = this.memberStatusService.subscribtionMembership(data).subscribe(res => {
+            console.log(res);
+            this.router.navigateByUrl(`subscription/payment/${res.invoiceId}`)
+        })
+    }
+
     ngOnInit(): void {
         this.initMember()
     }
+
     ngOnDestroy(): void {
        this.member$?.unsubscribe()
     }

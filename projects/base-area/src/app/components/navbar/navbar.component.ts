@@ -92,7 +92,10 @@ export class NavbarComponent{
                         routerLink:'/admin/report-income'
                     }
                 ]
-                
+            },
+            {
+                label : 'Payment Approval',
+                routerLink : '/approval-payment'
             }
         ];
 
