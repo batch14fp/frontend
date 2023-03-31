@@ -203,8 +203,8 @@
                     </div>
                   </form>
                 </div>
-                <pre>{{incomeMember |json}}</pre>
-                <p-table [value]="incomeMember" [lazy]="true" (onLazyLoad)="loadData($event)"
+                <pre>{{incomeAdmin |json}}</pre>
+                <p-table [value]="incomeAdmin" [lazy]="true" (onLazyLoad)="loadData($event)"
                   responsiveLayout="scroll" [paginator]="true" [rows]="limit" [totalRecords]="totalData"
                   [loading]="loading" [rowsPerPageOptions]="[3, 5]" tyleClass="p-datatable-gridlines"
                   [globalFilterFields]="['id']" [tableStyle]="{'min-width': '50rem'}">
@@ -212,7 +212,7 @@
                     <tr>
                       <th>No</th>
                       <th>Type</th>
-                      <th>Title</th>
+                      <th>Member Name</th>
                       <th>Total Incomes</th>
                     </tr>
                   </ng-template>
@@ -220,10 +220,10 @@
                     <tr>
                       <td>{{i+1}}</td>
                       <td>
-                        <p>{{report.title}}</p>
+                        <p>{{report.type}}</p>
                       </td>
                       <td>
-                        <p>{{report.type}}</p>
+                        <p>{{report.memberName}}</p>
                       </td>
                       <td>
                         <p>{{report.totalIncomes |currency:'Rp ' : 'symbol':'1.0-0'}}</p>

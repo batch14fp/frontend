@@ -18,6 +18,8 @@ import { PaymentDetailRes } from '../dto/payment/payment-detail-res';
 import { ActivityUpcomingAllRes } from '../dto/activity/activity-upcoming-all-res';
 import { ActivityMemberRes } from "@dto/report/activity-member-res";
 import { ActivityAdminRes } from "@dto/report/activity-admin-res";
+import { IncomesMemberRes } from '@dto/report/incomes-member-res';
+import { IncomesAdminRes } from '@dto/report/incomes-admin-res';
 
 
 @Injectable({
@@ -92,11 +94,21 @@ export class ActivityService{
 
     getMemberReportIncome(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/activities/member/report/incomes?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/activities/member/report/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/activities/member/report/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+        }
+    }
+
+    getAdminReportIncome(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
+        if(!startDate && !endDate  && !typeCode){
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes?limit=${limit}&offset=${offset}`)
+        }else if(!typeCode){
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+        }else{
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
