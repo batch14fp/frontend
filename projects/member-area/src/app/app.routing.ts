@@ -87,7 +87,8 @@ export const memberRoutes: Routes = [
         children: [
             {
                 path: 'member/article',
-                component: ArticleComponent,
+                loadChildren: () => import("./pages/article/article.module").then(a => a.ArticleModule)
+                // component: ArticleComponent,
             },
             {
                 path: 'thread',
@@ -113,7 +114,7 @@ export const memberRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
+        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
         NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
     ],
     imports: [
@@ -127,7 +128,7 @@ export const memberRoutes: Routes = [
     ],
     exports: [
         RouterModule,
-        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
+        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
         NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
     ]
 })

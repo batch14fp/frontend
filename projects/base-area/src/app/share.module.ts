@@ -38,6 +38,7 @@ import { WordLimitPipe } from './utils/word-limit.pipe';
 import { TieredMenuCustomComponent } from './components/tiered-menu/tiered-menu.component';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { DividerModule } from 'primeng/divider';
+import { TagModule } from 'primeng/tag';
 import { GalleriaModule } from 'primeng/galleria';
 import { ScrollTopModule } from 'primeng/scrolltop';
 
@@ -57,6 +58,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
      ,DialogModule, InputSwitchModule, ConfirmDialogModule, AnimateModule
      ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule, BottomNavbarModule, TooltipModule,
      TieredMenuCustomComponent,AutoFocusModule, DividerModule, GalleriaModule, ScrollTopModule
+
   ],
   exports:[
     CustomButtonModule, CustomSkeletonModule, LoadingModule, InputTextModule, PasswordModule,
@@ -66,7 +68,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule, AnimateModule
     ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule,
     BottomNavbarModule, TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule,
-    DividerModule, GalleriaModule, ScrollTopModule
+    DividerModule, GalleriaModule, ScrollTopModule,
+    TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule, DividerModule,TagModule
   ]
 
 })
