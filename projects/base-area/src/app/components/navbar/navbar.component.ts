@@ -82,7 +82,17 @@ export class NavbarComponent{
             },
             {
                 label : 'Report',
-                routerLink : '/report/admin'
+                items:[
+                    {
+                        label:'Report Activity',
+                        routerLink:'/admin/report-activity'
+                    },
+                    {
+                        label:'Report Income',
+                        routerLink:'/admin/report-income'
+                    }
+                ]
+                
             }
         ];
 

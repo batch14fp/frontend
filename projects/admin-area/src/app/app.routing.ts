@@ -13,6 +13,7 @@ import { LoginAdminComponent } from "./page/login/login.component";
 import { MembershipComponent } from "./page/membership/membership.component";
 import { PositionComponent } from "./page/position/position.component";
 import { PostTypeComponent } from "./page/posttype/posttype.component";
+import { ReportInvoiceAdminComponent } from "./page/report-income-admin/report-income-admin.component";
 import { ReportAdminComponent } from "./page/report/report-adm.component";
 import { SalesSettingComponent } from "./page/sales-setting/salesseting.component";
 import { SocmedComponent } from "./page/socmed/socmed.component";
@@ -65,8 +66,12 @@ export const adminRoutes: Routes = [
                 component : SalesSettingComponent
             },
             {
-                path : 'admin/report',
+                path : 'admin/report-activity',
                 component : ReportAdminComponent
+            },
+            {
+                path:'admin/report-income',
+                component: ReportInvoiceAdminComponent
             }
 
         ]
@@ -86,7 +91,8 @@ export const adminRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent,
+        ReportInvoiceAdminComponent
     ],
     imports: [
         RouterModule.forRoot(adminRoutes),
@@ -94,7 +100,8 @@ export const adminRoutes: Routes = [
     ],
     exports: [
         RouterModule,
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent,
+        ReportInvoiceAdminComponent
     ]
 })
 

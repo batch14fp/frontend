@@ -19,6 +19,8 @@ export class DetailComponent implements OnInit, OnDestroy{
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
 
+    activityId!:string
+
     constructor(private fb:FormBuilder, private title:Title, private activityService:ActivityService, private router: Router, private activatedRouter:ActivatedRoute){
         this.title.setTitle('Course')
     }
@@ -39,6 +41,7 @@ export class DetailComponent implements OnInit, OnDestroy{
     ngOnInit(): void {
         this.activatedRouter.params.subscribe(res=>{
             const params = res as any
+            this.activityId = params.id
             this.detailActivity.patchValue({
                 activityId:params.activityId
             })
