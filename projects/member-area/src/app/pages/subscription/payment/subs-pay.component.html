@@ -129,30 +129,33 @@
         </pre>
         <form [formGroup]="invoiceDetail" class="w-12 flex justify-content-center mt-4">
           <div class="sm:w-12 md:w-11 flex flex-column">
+            <pre>
+              {{invoice|json}}
+            </pre>
             <div class="w-full bg-white border-round-md w-full py-2 mt-2">
-              <p class="font-medium text-xl ml-5">Payment - #09878</p>
+              <p class="font-medium text-xl ml-5">Payment - #{{invoiceDetail.value.invoiceCode}}</p>
             </div>
             <div class="flex sm:flex-column md:flex-row  my-2 gap-6">
               <div class="md:w-12 sm:w-12  gap-3">
                 <div class="flex flex-column bg-white w-full px-3 py-3 border-round-md flex flex-column">
                   <!-- <img class="imgBanner" src="http://localhost:2121/files/{{invoiceDetail.value.imageId}}" alt="banner"> -->
-                  <p class="text-xl font-semibold text-indigo-300 mt-3 mb-3">course</p>
+                  <div class="text-900 font-bold text-6xl mb-4 text-center">{{invoiceDetail.value.statusName}}</div>
                   <div class="grid">
                     <div class="col">
-                      <label for="location" class="text-sm font-medium mb-2">Location</label>
-                      <p><i class="pi pi-map-marker pr-2"></i> online</p>
+                      <label for="location" class="text-sm font-medium mb-2">Periode</label>
+                      <p><i class="pi pi-map-marker pr-2"></i> {{invoiceDetail.value.periodDay}}</p>
                     </div>
                     <div class="col">
-                      <label for="location" class="text-sm font-medium mb-2">Provider</label>
-                      <p><i class="pi pi-building pr-2"></i> net</p>
+                      <label for="location" class="text-sm font-medium mb-2">Exp</label>
+                      <p><i class="pi pi-building pr-2"></i> {{invoiceDetail.value.paymentExpired | date: 'medium'}}</p>
                     </div>
                     <div class="col">
                       <label for="price" class="text-sm font-medium mb-2">Price</label>
-                      <p><i class="pi pi-money-bill pr-2"></i>2000</p>
+                      <p><i class="pi pi-money-bill pr-2"></i>{{invoiceDetail.value.priceMemberShip}}</p>
                     </div>
                   </div>
-                  <p-divider></p-divider>
-                  <div class="grid">
+                  <!-- <p-divider></p-divider> -->
+                  <!-- <div class="grid">
                     <div class="col">
                       <label for="startDate" class="text-sm font-medium mb-2">Start Date</label>
                       <p><i class="pi pi-calendar pr-2"></i> tgl</p>
@@ -161,7 +164,7 @@
                       <label for="endDate" class="text-sm font-medium mb-2">End Date</label>
                       <p><i class="pi pi-calendar pr-2"></i> tgl</p>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="md:w-4 sm:w-9 flex flex-column ml-2">
@@ -173,38 +176,41 @@
                     <div class="flex flex-column w-full">
                       <div class="flex flex-row gap-3 mb-2 justify-content-between w-12">
                         <label for="price" class="text-sm font-medium w-4">Price </label>
-                        <p class="w-8">: {{invoiceDetail.value.price|currency:'Rp ' : 'symbol':'1.0-0'}}</p>
+                        <p class="w-8">: {{invoiceDetail.value.priceMemberShip|currency:'Rp ' : 'symbol':'1.0-0'}}</p>
                       </div>
                       <div class="flex flex-row gap-3 mb-2 justify-content-between w-12">
                         <label for="voucherCode" class="text-sm font-medium w-4">Tax</label>
-                        <p class="w-8">: {{taxAmount*100}} % <span
-                            class="text-red-600 text-xs font-medium">({{calculateTax()|currency:'Rp ' :
+                        <p class="w-8">: {{taxAmmount*100}} % <span
+                            class="text-red-600 text-xs font-medium">({{invoiceDetail.value.taxAmmount|currency:'Rp ' :
                             'symbol':'1.0-0'}})</span></p>
                         <!-- <p class="text-red-600">- {{calculateTax()|currency:'Rp ' : 'symbol':'1.0-0'}}</p> -->
                       </div>
                       <p-divider></p-divider>
                       <div class="flex flex-row gap-3">
                         <label for="voucherCode" class="text-2xl font-semibold">Total </label>
-                        <p class="text-2xl font-semibold">: {{calculateTotalPay()|currency:'Rp ' : 'symbol':'1.0-0'}}
+                        <!-- <p class="text-2xl font-semibold">: {{calculateTotalPay()|currency:'Rp ' : 'symbol':'1.0-0'}} -->
+                        <p class="text-2xl font-semibold">: {{invoiceDetail.value.total}}
                         </p>
                       </div>
                     </div>
                   </div>
                 </form>
-                <div class="bg-white border-round-md p-3 mt-2 flex flex-column justify-content-between w-12 gap-3">
-                  <form [formGroup]="uploadTransactions">
+                <div class="bg-white border-round-md p-3 mt-2 flex flex-column justify-content-between w-12 gap-3"
+                  style="object-fit: cover !important;">
+                  <form [formGroup]="uploadTransactions" class="flex flex-column">
                     <pre>{{uploadTransactions.value|json}}</pre>
                     <label for="voucher" class="text-medium font-medium">Upload Transaction</label>
                     <input type="file" #file class="hidden" (change)="onUpload($event)">
-                  <img *ngIf="this.uploadTransactions.value.imgCover!['fileContent']" [src]="imageSource" class="mt-2"
-                    alt="Image Source">
-                  <button *ngIf="this.uploadTransactions.value.imgCover!['fileContent']" (click)="onRemoveImageCover()"
-                    class="bg-red-600 mt-4 cursor-pointer hover:bg-red-700  text-white border-round-md font-medium  text-sm py-2 border-1 border-red-600 border-none">Remove</button>
-                  <div *ngIf="!imageSource" (click)="file.click()" class="w-full border-round-md border-dashed border-gray-500 surface-overlay mt-2 border-1 h-4rem
+                    <img *ngIf="this.uploadTransactions.value.imgCover!['fileContent']" [src]="imageSource"
+                      class="mt-2 max-h-16rem" alt="Image Source">
+                    <button *ngIf="this.uploadTransactions.value.imgCover!['fileContent']"
+                      (click)="onRemoveImageCover()"
+                      class="bg-red-600 mt-4 cursor-pointer hover:bg-red-700  text-white border-round-md font-medium  text-sm py-2 border-1 border-red-600 border-none">Remove</button>
+                    <div *ngIf="!imageSource" (click)="file.click()" class="w-full border-round-md border-dashed border-gray-500 surface-overlay mt-2 border-1 h-4rem
                   flex justify-content-center align-content-center cursor-pointer hover:bg-gray-100">
-                    <i class="pi pi-camera px-2 py-2 align-self-center relative text-800" style="font-size: 16px;">
-                    </i>
-                  </div>
+                      <i class="pi pi-camera px-2 py-2 align-self-center relative text-800" style="font-size: 16px;">
+                      </i>
+                    </div>
                   </form>
 
 

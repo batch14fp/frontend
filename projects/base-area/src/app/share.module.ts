@@ -68,7 +68,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     ,DialogModule, InputSwitchModule, TimeAgoPipe, ConfirmDialogModule, AnimateModule
     ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule,
     BottomNavbarModule, TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule,
-    DividerModule, GalleriaModule, ScrollTopModule
+    DividerModule, GalleriaModule, ScrollTopModule,
     TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule, DividerModule,TagModule
   ]
 

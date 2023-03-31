@@ -5,8 +5,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { InvoiceRes } from "@dto/invoice/invoice-res";
 import { MembershipPaymentReq } from "@dto/payment/member-pay-req";
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup,faPenToSquare, faGlobe} from '@fortawesome/free-solid-svg-icons';
+import { ActivityService } from "@service/activity.service";
 import { InvoiceService } from "@service/invoice.service";
 import { MemberStatusService } from "@service/member.service";
+import { SalesSettingService } from "@service/salessetting.service";
 import { Subscription } from "rxjs";
 import {taxAmount, discountAmount, totalPay} from "../../../../../../base-area/src/app/utils/paymentFormula"
 
@@ -34,9 +36,10 @@ export class SubsPayComponent implements OnInit, OnDestroy{
     buyMember$? : Subscription
     subsPayment$? : Subscription
     invoice$? : Subscription
+    salesSetting$? : Subscription
 
     subsId! : string
-    taxAmount!:number
+    taxAmmount!:number
     imageSource!: SafeResourceUrl
 
     constructor(
@@ -46,6 +49,8 @@ export class SubsPayComponent implements OnInit, OnDestroy{
         private activatedRouter:ActivatedRoute,
         private memberStatus : MemberStatusService,
         private invoiceService : InvoiceService,
+        private activityService : ActivityService,
+        private salesSettingService: SalesSettingService,
         private _sanitizer: DomSanitizer
         ){
         this.title.setTitle('Subscription')
@@ -74,6 +79,12 @@ export class SubsPayComponent implements OnInit, OnDestroy{
         imageId:[""],
         activityTitle:[""],
         price:[0],
+        statusName: [""],
+        paymentExpired : [""],
+        periodDay: [0],
+        taxAmmount: [0],
+        priceMemberShip: [0],
+        total:[0],
         startDate:[""],
         endDate:[""],
         location:[""],
@@ -95,18 +106,18 @@ export class SubsPayComponent implements OnInit, OnDestroy{
     }) 
     
     calculateDiscount(){
-        return discountAmount(this.invoiceDetail.value.discountNum!, this.invoiceDetail.value.price!)
+        return discountAmount(this.invoiceDetail.value.discountNum!, this.invoiceDetail.value.priceMemberShip!)
      
     }
  
     calculateTax(){
-         console.log(this.taxAmount)
-         console.log(this.invoiceDetail.value.price!)
-         return taxAmount(this.taxAmount,this.invoiceDetail.value.price!) 
+         console.log(this.taxAmmount)
+         console.log(this.invoiceDetail.value.priceMemberShip!)
+         return taxAmount(this.taxAmmount,this.invoiceDetail.value.priceMemberShip!) 
     }
     
     calculateTotalPay(){
-         return totalPay(this.invoiceDetail.value.price!,this.calculateDiscount(),this.calculateTax())
+         return totalPay(this.invoiceDetail.value.priceMemberShip!,this.calculateDiscount(),this.calculateTax())
     }
  
     onRemoveImageCover() {
@@ -146,35 +157,39 @@ export class SubsPayComponent implements OnInit, OnDestroy{
         }
     }
 
+    initSalesSetting():void{
+        this.salesSetting$ = this.salesSettingService.getSalesSetting().subscribe(res=>{
+            this.taxAmmount = res.tax
+        })
+    }
+
     initInvoice(){
-        // this.activatedRouter.params.subscribe(res => {
-        //     const params = res as any
-        //     this.subsId = params.id
-        //     this.invoiceDetail.patchValue({
-        //         activityId:params.activityId,
-        //         invoiceId:params.invoiceId
-        //     })
-        //     this.invoice$ = this.invoiceService.getInvoiceId(params.id).subscribe(res=>{
-        //         this.invoiceDetail.patchValue({
-        //             invoiceId:res.invoiceId,
-        //             activityId:res.activityId,
-        //             voucherId:res.voucherId,
-        //             membershipId:res.membershipId,
-        //             imageId:res.imageId,
-        //             voucherCode:res.voucherCode,
-        //             invoiceCode:res.invoiceCode,
-        //             activityTitle:res.activityTitle,
-        //             price:res.price,
-        //             provider:res.provider,
-        //             location:res.location,
-        //             discountNum:res.discountNum,
-        //             startDate:res.startDate,
-        //             endDate: res.endDate,
-        //         })
+        this.activatedRouter.params.subscribe(res => {
+
+            // const params = res as any
+            // this.subsId = params.id
+            // this.invoiceDetail.patchValue({
+            //     activityId:params.activityId,
+            //     invoiceId:params.invoiceId
+            // })
+            this.invoice$ = this.activityService.getDetailPayment(res['id']).subscribe(res=>{
+                this.invoiceDetail.patchValue({
+                    invoiceId:res.invoiceId,
+                    activityId:res.activityId,
+                    statusName : res.statusName,
+                    invoiceCode:res.invoiceCode,
+                    paymentExpired: res.paymentExpired,
+                    periodDay: res.periodDay,
+                    taxAmmount: res.taxAmmount,
+                    priceMemberShip: res.priceMemberShip,
+                    total: res.total,
+                    startDate:res.startDate,
+                    endDate: res.endDate,
+                })
                 
-        //     })
+            })
             
-        // })
+        })
     }
 
     ngOnInit(): void {

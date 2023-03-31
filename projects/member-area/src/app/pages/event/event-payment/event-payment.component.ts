@@ -181,7 +181,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
       this.paymentDetail$ = this.activityService.getDetailPayment(this.invoiceId).subscribe(res =>{
         this.paymentDetail = res
         // this.uploadTransactions.value.paymentId = res.paymentId
-        // this.uploadTransactions.value.bankPaymentId = res.bankPaymetId
+        // this.uploadTransactions.value.bankPaymentId = res.bankPaymetIdc
         // this.uploadTransactions.value.ver = res.ver
         this.uploadTransactions.patchValue({
           paymentId : res.paymentId,

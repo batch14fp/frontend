@@ -114,7 +114,7 @@ export const memberRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
+        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
         NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
     ],
     imports: [
@@ -128,7 +128,7 @@ export const memberRoutes: Routes = [
     ],
     exports: [
         RouterModule,
-        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
+        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
         NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
     ]
 })
