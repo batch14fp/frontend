@@ -7,6 +7,8 @@ import { EmailSendAnimationComponent } from './email-send/email-sendcomponent';
 import { SearchDataComponent } from './search-data/search-data.componenet';
 import { LoadingDotComponent } from './loading-dot/loading-dot.component';
 import { LikeComponent } from './like/like.component';
+import { TransactionCompleteComponent } from './transaction-complete/transaction-complete.component';
+import { LoadingFullscreenComponent } from './loading-fullscreen/loading-fullscreen.component';
 
 
 
@@ -16,13 +18,15 @@ export function playerFactory(): any {
 
 @NgModule({
     declarations: [
-      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent, LikeComponent
+      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent, LikeComponent,
+      TransactionCompleteComponent, LoadingFullscreenComponent
     ],
     imports: [
      LottieModule.forRoot({ player: playerFactory }),
     ],
     exports:[
-      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent, LikeComponent
+      EmailSendAnimationComponent, SearchDataComponent, LoadingDotComponent, WelcomeComponent, LikeComponent,
+      TransactionCompleteComponent, LoadingFullscreenComponent
     ]
 })
 
