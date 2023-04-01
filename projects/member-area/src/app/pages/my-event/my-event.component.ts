@@ -36,14 +36,14 @@ export class MyEventsComponent implements OnInit, OnDestroy{
 
 
     initEvent(){
-      this.event$ = this.activityService.getMyActivity(1,5, ACTIVITY_TYPE.EVENT).subscribe( res => {
+      this.event$ = this.activityService.getMyActivity(1,5,"", ACTIVITY_TYPE.EVENT).subscribe( res => {
         this.myActivity = res
       })
     }
 
     ngOnInit(): void {
       this.initEvent()
-      
+
     }
 
     ngOnDestroy(): void {

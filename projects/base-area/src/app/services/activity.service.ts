@@ -51,7 +51,7 @@ export class ActivityService{
         let categoryCode:string = ''
        
         for(let i = 0; i<categories?.length!; i++){
-            categoryCode = categoryCode + '&categoryCodes=' +categories![i] 
+            categoryCode = categoryCode + '&categoryCodes=' +categories![i]
         }
    if(sortType ==null){
         return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/by-category-List?typeCode=${activityTypes}&page=${page}&size=${size}${categoryCode}`)
@@ -150,6 +150,7 @@ else{
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
 
+
     getDownloadIncomesReport(id:string,startDate?:string,endDate?:string){
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/incomes/file?userId=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
@@ -161,12 +162,19 @@ else{
     }
 
 
+
+
     getMyActivity(page: number, size: number, categories?:string,  typeCode?:string){
         if(typeCode == null){
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}`)
         }else if(categories == null){
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}`)
-        }else{
+
+        }else if(typeCode){
+          return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}`)
+        }
+        else{
+
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}&categoryCode=${categories}`)
         }
     }
