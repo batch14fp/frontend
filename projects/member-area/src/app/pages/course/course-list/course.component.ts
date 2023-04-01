@@ -10,73 +10,213 @@ import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-s
 import { ActivityService } from '@service/activity.service';
 import { ActivityRes } from '@dto/activity/activity-res';
 import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
-
+import { SORT_TYPE } from 'projects/base-area/src/app/constant/sort_type';
 
 
 @Component({
-    selector:'app-course',
-    templateUrl: './course.component.html'
+  selector: 'app-course',
+  templateUrl: './course.component.html'
 })
 
-export class CourseComponent implements OnInit, OnDestroy{
+export class CourseComponent implements OnInit, OnDestroy {
 
   constructor(private title: Title, private fb: FormBuilder,
-    private userService: UserService,  private router: Router,private categoryService: CategoryService, private activityService:ActivityService){
-      this.title.setTitle("Course")
+    private userService: UserService, private router: Router, private categoryService: CategoryService, private activityService: ActivityService) {
+    this.title.setTitle("Course")
   }
 
-    private category$?: Subscription
-    private course$?: Subscription
+  private category$?: Subscription
+  private course$?: Subscription
 
-    allActivity: ActivityRes[] = []
+  allActivity: ActivityRes[] = []
 
-    faHeart = faHeart
-    faBook = faBook
-    faNewspaper = faNewspaper
-    faPeopleGroup = faPeopleGroup
+  faHeart = faHeart
+  faBook = faBook
+  faNewspaper = faNewspaper
+  faPeopleGroup = faPeopleGroup
 
-    categoriesList:string[] = []
+  categoriesList: string[] = []
 
-    categories: CategoryRes[] = []
-    dateSearch!:Date
+  categories?: CategoryRes[] = []
+  dateSearch!: Date
 
-    selectedCategory: string[] = []
+  choose!: number
 
-    initCategory(){
-      this.category$ = this.categoryService.getAllCategory().subscribe(res => {
+  sortTypeBuilder = this.fb.group({
+    choose: ['1']
+  })
+
+
+
+  selectedCategory?: string[] = []
+
+  initCategory() {
+    this.category$ = this.categoryService.getAllCategory()?.subscribe(res => {
+      if (res != null ) {
         this.categories = res;
-      })
+      }
+    })
 
-    }
+  }
 
-    initCourse(){
-      this.course$ = this.activityService.getAllActivity(1,5, ACTIVITY_TYPE.COURSE).subscribe( res => {
-        this.allActivity = res
-      })
-    }
-
-    ngOnInit(): void {
-      this.initCategory()
-      this.initCourse()
-      
-    }
-
-    categoryFilter(){
-      if(!this.categoriesList.length){
-        this.course$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.COURSE).subscribe(res=>{
-          this.allActivity =res
-        })
+  initCourse() {
+    this.course$ = this.activityService.getAllActivity(1, 5, ACTIVITY_TYPE.COURSE,SORT_TYPE.NEWEST)?.subscribe(res => {
+      if (res != null ) {
+        this.allActivity = res;
       }
       else{
-        this.course$ = this.activityService.getAllActivityByCategories(1,10,ACTIVITY_TYPE.COURSE,this.categoriesList).subscribe(res=>{
-          this.allActivity =res
-        })
+        this.allActivity =[]
       }
+    })
+  }
+
+  ngOnInit(): void {
+    this.initCategory()
+    this.initCourse()
+
+  }
+  sortFilter() {
+    const selectedValue = this.sortTypeBuilder.get('choose')?.value;
+    if (selectedValue === '2') {
+      if (this.categoriesList.length) {
+        this.course$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.HIGHEST,this.categoriesList )?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }
+          else{
+            this.allActivity =[]
+          }
+        });
+      }
+      else{
+        this.course$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.HIGHEST)?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }
+        });
+      }
+    } else if (selectedValue === '3') {
+      if (this.categoriesList.length) {
+        this.course$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.LOWEST,this.categoriesList )?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+            
+          }
+          else{
+            this.allActivity =[]
+          }
+        });
+      }
+      else{
+        this.course$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.LOWEST)?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }
+          else{
+            this.allActivity =[]
+          }
+        });
+      }
+    } else if (selectedValue === '1') {
+      if (this.categoriesList.length) {
+        this.course$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.NEWEST,this.categoriesList )?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }else{
+            this.allActivity =[]
+          }
+        });
+      }
+      else{
+        this.course$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.NEWEST)?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }else{
+            this.allActivity =[]
+          }
+        });
+      }
+    }
+  }
+  
+  
+  sortFilterCategory() {
+    const selectedValue = this.sortTypeBuilder.get('choose')?.value;
+    if (selectedValue === '2') {
+      if (this.categoriesList.length) {
+        this.course$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.HIGHEST,this.categoriesList )?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }
+          else{
+            this.allActivity =[]
+          }
+        });
+      }
+      else{
+        this.course$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.HIGHEST)?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }
+        });
+      }
+    } else if (selectedValue === '3') {
+      if (this.categoriesList.length) {
+        this.course$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.LOWEST,this.categoriesList )?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+            
+          }
+          else{
+            this.allActivity =[]
+          }
+        });
+      }
+      else{
+        this.course$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.LOWEST)?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }
+          else{
+            this.allActivity =[]
+          }
+        });
+      }
+    } else if (selectedValue === '1') {
+      if (this.categoriesList.length) {
+        this.course$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.NEWEST,this.categoriesList )?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }else{
+            this.allActivity =[]
+          }
+        });
+      }
+      else{
+        this.course$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.NEWEST)?.subscribe(res => {
+          if (res != null ) {
+            this.allActivity = res;
+          }else{
+            this.allActivity =[]
+          }
+        });
+      }
+    }
     
   }
 
-    ngOnDestroy(): void {
-     this.category$?.unsubscribe()
-    }
 
+
+
+ 
+
+ 
+
+
+  ngOnDestroy(): void {
+    if (this.course$) {
+      this.course$.unsubscribe();
+    }
+    this.category$?.unsubscribe();
+  }
 }

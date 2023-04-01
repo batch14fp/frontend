@@ -43,30 +43,30 @@
             <label for="hd">HR Digital</label>
           </div>
         </div>
-        <div class="category mt-4">
-          <p class="text-xl">Sort</p>
-          <div class="field-checkbox mt-2">
-            <p-checkbox name="group1" value="Paling Sesuai" [(ngModel)]="selectedCategory" inputId="ps"></p-checkbox>
-            <label for="ny">Paling Sesuai</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="Terbaru" [(ngModel)]="selectedCategory" inputId="tb"></p-checkbox>
-            <label for="ny">Terbaru</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="Harga Tertinggi" [(ngModel)]="selectedCategory" inputId="ht"></p-checkbox>
-            <label for="ny">Harga Tertinggi</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="Harga Terendah" [(ngModel)]="selectedCategory" inputId="hr"></p-checkbox>
-            <label for="ny">Harga Terendah</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="Ulasan" [(ngModel)]="selectedCategory" inputId="ul"></p-checkbox>
-            <label for="ny">Ulasan</label>
-          </div>
-        </div>
-      </div>
+       <div class="category mt-4">
+  <p class="text-xl">Sort</p>
+  <div class="field-radio mt-2">
+    <input type="radio" name="category" value="Paling Sesuai" [(ngModel)]="selectedCategory" id="ps">
+    <label for="ps">Paling Sesuai</label>
+  </div>
+  <div class="field-radio">
+    <input type="radio" name="category" value="Terbaru" [(ngModel)]="selectedCategory" id="tb">
+    <label for="tb">Terbaru</label>
+  </div>
+  <div class="field-radio">
+    <input type="radio" name="category" value="Harga Tertinggi" [(ngModel)]="selectedCategory" id="ht">
+    <label for="ht">Harga Tertinggi</label>
+  </div>
+  <div class="field-radio">
+    <input type="radio" name="category" value="Harga Terendah" [(ngModel)]="selectedCategory" id="hr">
+    <label for="hr">Harga Terendah</label>
+  </div>
+  <div class="field-radio">
+    <input type="radio" name="category" value="Ulasan" [(ngModel)]="selectedCategory" id="ul">
+    <label for="ul">Ulasan</label>
+  </div>
+</div>
+
       <div class="col-9 flex justify-content-between flex-wrap  ">
         <div *ngFor=" let item of [].constructor(10)"
           class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4">
@@ -235,7 +235,7 @@
               <div>
                 <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
               </div>
-              <div class="col-12 flex justify-content-start flex-wrap  ">
+              <div *ngIf="allActivity.length > 0" class="col-12 flex justify-content-start flex-wrap" >
                 <div *ngFor=" let course of allActivity"
                   class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4"
                   routerLink="/course/detail/{{course.activityId}}">
@@ -294,37 +294,29 @@
             <div class="category mt-4">
               <p class="text-xl">Category</p>
               <div class="field-checkbox mt-2" *ngFor="let cat of categories">
-                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="categoryFilter()" value="{{cat.categoryCode}}" inputId="hr">
+                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="sortFilterCategory()"
+                  value="{{cat.categoryCode}}" inputId="hr">
                 </p-checkbox>
                 <label>{{cat.categoryName}}</label>
               </div>
             </div>
-            <div class="category mt-4">
+            <div class="choose mt-4" [formGroup]="sortTypeBuilder">
               <p class="text-xl">Sort</p>
-              <div class="field-checkbox mt-2">
-                <p-checkbox name="group1" value="Paling Sesuai" [(ngModel)]="selectedCategory" inputId="ps">
-                </p-checkbox>
-                <label for="ny">Paling Sesuai</label>
+              <div class="field-radio mt-2">
+                <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()" >
+                <label for="tb">Terbaru</label>
               </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Terbaru" [(ngModel)]="selectedCategory" inputId="tb"></p-checkbox>
-                <label for="ny">Terbaru</label>
+              <div class="field-radio mt-2">
+                <input type="radio" id="ht" name="choose" value="2" formControlName="choose" (change)="sortFilter()">
+                <label for="ht">Harga Tertinggi</label>
               </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Harga Tertinggi" [(ngModel)]="selectedCategory" inputId="ht">
-                </p-checkbox>
-                <label for="ny">Harga Tertinggi</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Harga Terendah" [(ngModel)]="selectedCategory" inputId="hr">
-                </p-checkbox>
-                <label for="ny">Harga Terendah</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Ulasan" [(ngModel)]="selectedCategory" inputId="ul"></p-checkbox>
-                <label for="ny">Ulasan</label>
+              <div class="field-radio mt-2">
+                <input type="radio" id="hr" name="choose" value="3" formControlName="choose" (change)="sortFilter()">
+                <label for="hr">Harga Terendah</label>
               </div>
             </div>
+            
+           
           </div>
         </div>
       </div>

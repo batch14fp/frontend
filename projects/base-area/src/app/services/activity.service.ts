@@ -30,22 +30,36 @@ export class ActivityService{
 
     constructor(private http : HttpClient){}
 
-    getAllActivity(page: number, size: number, activityTypes?:string, categories?:string) : Observable<ActivityRes[]>{
-        if(activityTypes == null){
+    getAllActivity(page: number, size: number, activityTypes?:string, sortType?:string, categories?:string) : Observable<ActivityRes[]>{
+        if(activityTypes == null&& sortType ==null){
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities?page=${page}&size=${size}`)
-        }else if(categories == null){
+        }else if(categories == null && sortType ==null){
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}`)
-        }else{
-            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}&categoryCode=${categories}`)
+        }
+        else if(activityTypes == null){
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities?page=${page}&size=${size}&sortType=${sortType}`)
+        }
+        else if(categories == null){
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}&sortType=${sortType}`)
+        }
+        else{
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/filter?page=${page}&size=${size}&typeCode=${activityTypes}&categoryCode=${categories}&sortType=${sortType}`)
         }
     }
 
-    getAllActivityByCategories(page: number, size: number, activityTypes?:string, categories?:string[]):Observable<ActivityRes[]>{
+    getAllActivityByCategories(page: number, size: number, activityTypes?:string,sortType?:string, categories?:string[]):Observable<ActivityRes[]>{
         let categoryCode:string = ''
+       
         for(let i = 0; i<categories?.length!; i++){
             categoryCode = categoryCode + '&categoryCodes=' +categories![i] 
         }
+   if(sortType ==null){
         return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/by-category-List?typeCode=${activityTypes}&page=${page}&size=${size}${categoryCode}`)
+   }
+else{
+    return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/by-category-List?typeCode=${activityTypes}&page=${page}&size=${size}${categoryCode}&sortType=${sortType}`)
+}
+
     }
 
     getActivity(id: string) : Observable<ActivityRes>{
@@ -135,7 +149,7 @@ export class ActivityService{
     getDownloadReport(id:string,startDate?:string,endDate?:string){
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
-<<<<<<< HEAD
+
     getDownloadIncomesReport(id:string,startDate?:string,endDate?:string){
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/incomes/file?userId=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
@@ -145,7 +159,7 @@ export class ActivityService{
     getDownloadIncomesReportAdmin(startDate?:string,endDate?:string){
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes/file?startDate=${startDate}&endDate=${endDate}`)
     }
-=======
+
 
     getMyActivity(page: number, size: number, categories?:string,  typeCode?:string){
         if(typeCode == null){
@@ -157,5 +171,4 @@ export class ActivityService{
         }
     }
 
->>>>>>> af93530656ec5d9e51f05dcab5101d4764c58b9e
 }

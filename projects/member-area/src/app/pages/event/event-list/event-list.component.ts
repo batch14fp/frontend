@@ -43,6 +43,7 @@ export class EventListComponent implements OnInit, OnDestroy {
 
     categories: CategoryRes[] = []
     dateSearch!: Date
+    sortType?:string
 
     selectedCategory: string[] = []
 
@@ -74,7 +75,7 @@ export class EventListComponent implements OnInit, OnDestroy {
           })
         }
         else{
-          this.event$ = this.activityService.getAllActivityByCategories(1,10,ACTIVITY_TYPE.EVENT,this.categoriesList).subscribe(res=>{
+          this.event$ = this.activityService.getAllActivityByCategories(1,10,ACTIVITY_TYPE.EVENT,this.sortType, this.categoriesList).subscribe(res=>{
             this.allActivity =res
           })
         }
