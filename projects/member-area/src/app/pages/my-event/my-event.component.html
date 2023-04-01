@@ -87,7 +87,7 @@
             </div>
 
             <div class="sm:hidden md:flex col-3 my-2">
-              <app-button-primary label="Create course" routerLink="/course/create"></app-button-primary>
+              <app-button-primary label="Create event" routerLink="/event/create"></app-button-primary>
             </div>
           </div>
         </div>
@@ -111,40 +111,40 @@
                 <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
               </div>
               <div class="col-12 flex justify-content-start flex-wrap  ">
-                <div *ngFor=" let course of myActivity"
+                <div *ngFor=" let event of myActivity"
                   class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4"
-                  routerLink="/course/detail/{{course.activityId}}">
+                  routerLink="/event/detail/{{event.activityId}}">
                   <div
                     class="bg-white flex hover:shadow-2 cursor-pointer flex-column w-12 justify-content-start p-3 border-round-md ">
                     <div class="flex flex-column w-full h-full">
-                      <p class="text-md font-semibold text-indigo-300">{{course.categoryName}}</p>
+                      <p class="text-md font-semibold text-indigo-300">{{event.categoryName}}</p>
                       <div class="flex flex-column w-full h-full overflow-hidden">
                         <div>
-                          <img src="http://localhost:2121/files/{{course.imgActivityId}}" class=" align-self-center"
+                          <img src="http://localhost:2121/files/{{event.imgActivityId}}" class=" align-self-center"
                             style="width: 200px;height:160px; object-fit: contain;" alt="Avatar" />
                           <!-- <img style="object-fit: contain;" class="" src="https://loremflickr.com/320/240" alt=""> -->
                         </div>
                       </div>
                     </div>
                     <div class="flex justify-content-between align-content-center">
-                      <p class="align-self-center text-200 font-semibold text-l text-indigo-800">{{course.title}}
+                      <p class="align-self-center text-200 font-semibold text-l text-indigo-800">{{event.title}}
                       </p>
                     </div>
                     <div class="flex flex-column mt-3">
                       <div class="flex justify-content-between">
-                        <p class="text-800 text-md">{{course.providers}}</p>
+                        <p class="text-800 text-md">{{event.providers}}</p>
                         <p class="text-800 text-md"> <i class="pi pi-map-marker"></i> Online</p>
                       </div>
                       <div class=" flex justify-content-between">
                         <p class="text-800 text-xs text-400">Start Date </p>
-                        <p class="text-800 text-xs text-400">{{course.startDate | date: 'medium'}}</p>
+                        <p class="text-800 text-xs text-400">{{event.startDate | date: 'medium'}}</p>
                       </div>
                       <div class="flex justify-content-between">
                         <p class="text-800 text-xs text-400">End Date </p>
-                        <p class="text-800 text-xs text-400">{{course.endDate | date: 'medium'}}</p>
+                        <p class="text-800 text-xs text-400">{{event.endDate | date: 'medium'}}</p>
                       </div>
                       <div class="mt-2">
-                        <p class="font-medium text-xl">{{course.price | currency:'Rp' : 'symbol' : '1.0-0'}}</p>
+                        <p class="font-medium text-xl">{{event.price | currency:'Rp' : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
                   </div>

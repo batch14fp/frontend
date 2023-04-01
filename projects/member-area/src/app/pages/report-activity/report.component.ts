@@ -44,7 +44,7 @@ export class ReportComponent implements OnInit, OnDestroy{
     loadData(event: LazyLoadEvent) {
         console.log(event)
         // this.initActivity(event.first, event.rows, event.globalFilter)
-        this.onFilterReport()
+        this.onFilterReport(event.rows,event.first)
     }
 
     onDownload(){
@@ -53,7 +53,7 @@ export class ReportComponent implements OnInit, OnDestroy{
         })
     }
 
-    onFilterReport(){
+    onFilterReport(limit?:number, offset?:number){
         let startDate = undefined
         let endDate = undefined
 
@@ -62,7 +62,7 @@ export class ReportComponent implements OnInit, OnDestroy{
             endDate = convertUTCToLocalDateISO(this.activityFilter.get('endDate')?.value)
         }
 
-        this.activity$ = this.activityService.getReportAllByDateRange(this.limit,this.offset, startDate, endDate).subscribe(res=>{
+        this.activity$ = this.activityService.getReportAllByDateRange(limit, offset, startDate, endDate).subscribe(res=>{
             const resultData:any = res
             this.activityMember = resultData.data
             this.loading = false

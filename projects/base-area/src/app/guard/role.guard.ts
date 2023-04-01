@@ -23,5 +23,4 @@ export class AuthRoleGuard implements CanActivate {
             return false
         }
     }
-
 }

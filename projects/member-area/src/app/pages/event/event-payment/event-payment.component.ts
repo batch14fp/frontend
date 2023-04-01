@@ -10,9 +10,9 @@ import { InvoiceService } from "@service/invoice.service";
 import { SalesSettingService } from "@service/salessetting.service";
 import { Subscription } from "rxjs";
 import {taxAmount, discountAmount, totalPay} from "../../../../../../base-area/src/app/utils/paymentFormula"
-import { PaymentDetailRes } from '../../../../../../base-area/src/app/dto/payment/payment-detail-res';
 import { BankPaymentRes } from '../../../../../../base-area/src/app/dto/bankpayment/bank-payment-res';
 import { BankPaymentService } from '../../../../../../base-area/src/app/services/bankpayment.service';
+import { PaymentDetailRes } from "@dto/payment/payment-detail-res-data";
 
 @Component({
     selector : 'app-payment-event',

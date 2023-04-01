@@ -29,10 +29,16 @@ import { ReportComponent } from "./pages/report-activity/report.component";
 import { SubscriptionComponent } from "./pages/subscription/subscription.component";
 import { ReportInvoiceComponent } from "./pages/report-income/report-income.component";
 import { MyBookmarkComponent } from "./pages/my-bookmark/my-bookmark.component";
+
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { MyEventsComponent } from "./pages/my-event/my-event.component";
+
 import { ROLE } from "projects/base-area/src/app/constant/role.service";
 import { AuthRoleGuard } from "projects/base-area/src/app/guard/role.guard";
 import { AuthLoginGuard } from "projects/base-area/src/app/guard/auth-login.guard";
 import { AuthLoadGuard } from "projects/base-area/src/app/guard/authload.guard";
+
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -96,6 +102,10 @@ export const memberRoutes: Routes = [
         data:[ROLE.MMBR]
     },
     {
+        path : 'my-event',
+        component : MyEventsComponent
+    },
+    {
         path : 'my-bookmark',
         component : MyBookmarkComponent,
         canActivate:[AuthRoleGuard],
@@ -141,12 +151,14 @@ export const memberRoutes: Routes = [
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
-        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyBookmarkComponent
+
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyBookmarkComponent, MyEventsComponent
+
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
         InfiniteScrollModule,
-        ShareModule, CustomButtonModule, CardModule, DropdownModule, TabViewModule, NavbarModule, CourseModule, ProfileModule,
+        ShareModule, CustomButtonModule, CardModule, DropdownModule, TabViewModule, NavbarModule, CourseModule, ProfileModule,CommonModule,FormsModule,
         CodeInputModule.forRoot({
             codeLength: 6,
             isCharsCode: true,
@@ -155,7 +167,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyEventsComponent
     ]
 })
 

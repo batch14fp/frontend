@@ -42,7 +42,7 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
     loadData(event: LazyLoadEvent) {
         console.log(event)
         // this.initActivity(event.first, event.rows, event.globalFilter)
-        this.onFilterReport()
+        this.onFilterReport(event.rows,event.first)
     }
 
     onDownload(){
@@ -51,7 +51,7 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
         })
     }
 
-    onFilterReport(){
+    onFilterReport(limit?:number, offset?:number){
         let startDate = undefined
         let endDate = undefined
 

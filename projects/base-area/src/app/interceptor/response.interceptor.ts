@@ -28,7 +28,7 @@ export class ResponseInterceptor implements HttpInterceptor {
                 error : (event) => {
                     if(event instanceof HttpErrorResponse) {
                         if(event.status == 401) {
-                          this.messageService.add({severity:'error', summary: 'Error', detail: event.error});
+                          this.messageService.add({severity:'error', summary: 'Error', detail: "You haven't login yet !"});
                           localStorage.clear()
                             this.router.navigateByUrl('/member/login')
                         }

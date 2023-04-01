@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
     memberReguler = MEMBER_STATUS.REGULAR
     imageIdProfile= ""
     fullNameLogin=""
+    forbiddenAccess= false
 
     // commentIdSelected =""
     commentIdxEdit!: number
@@ -332,6 +333,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
     }
 
     onDeleteComment(commentId:string, postId: string){
+      console.log(commentId)
       this.deleteComment$ = this.postService.deletePostComment(commentId).subscribe(res =>{
         this.posts.map(p => {
           p.countPostComment--
@@ -533,11 +535,14 @@ export class DashboardComponent implements OnInit, OnDestroy{
       });
   }
 
+  visible!:boolean
+  blockedPanel:boolean = true
+
   onDetailPost(postId:string, idx: number){
-    let hasError = false
+
 
     this.singlePost$ = this.postService.getPostById(postId).subscribe({
-      error: (e) => hasError = true ,
+      error: (e) => this.visible =true ,
       next: (n) => {
         this.posts[idx].content = n.content
         this.posts[idx].isMoreContent = false
