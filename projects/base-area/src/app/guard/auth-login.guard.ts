@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from "@angular/router";
-import { Router } from "express";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
 import { UserService } from "../services/user.service";
 
@@ -16,6 +15,7 @@ export class AuthLoginGuard implements CanActivate{
 
        try {
         this.userService.getToken()
+        this.router.navigateByUrl('/dashboard')
         return false
        } catch (error) {
         return true

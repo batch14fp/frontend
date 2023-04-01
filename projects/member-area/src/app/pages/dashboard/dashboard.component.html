@@ -44,10 +44,10 @@
           <div class="flex justify-content-between mb-3">
             <p>Upcoming Event</p>
             <div class="bg-blue-100 text-blue-600 border-circle w-1 h-1 align-self-center flex justify-content-center">
-              <p class="font-semibold text-xs">{{upcomingEvents.total}}</p>
+              <p class="font-semibold text-xs">{{upcomingEvents?.total}}</p>
             </div>
           </div>
-          <div class="flex flex-column gap-4">
+          <div *ngIf="upcomingEvents" class="flex flex-column gap-4">
             <div *ngFor="let item of upcomingEvents.data" class="flex w-12 gap-4">
               <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
                 <p class="font-semibold">{{item.startDate | date:'d'}}</p>
@@ -61,7 +61,7 @@
                 </div>
               </div>
             </div>
-            <ng-container *ngIf="upcomingEvents.data.length > 3">
+            <ng-container *ngIf="upcomingEvents && upcomingEvents.data.length > 3">
               <p class="text-blue-600 font-medium cursor-pointer hover:text-blue-800 mt-2">Show All</p>
             </ng-container>
           </div>
@@ -334,11 +334,15 @@
                       </div>
                       <div *ngIf="post.typeCode !== 'PPOL'" class="mt-2 py-2">
                         <p class="text-md font-medium">{{post.title}}</p>
-                        <div class="flex flex-column justify-content-end">
-                          <p class="text-sm font-light post-content" [innerHtml]="post.content">
-                          </p>
-                          <span *ngIf="post.isMoreContent" class="cursor-pointer text-gray-400 btn-more">...see
-                            more</span>
+                        <div class="">
+                          <ng-container>
+                            <span class="text-sm font-light post-content" style="display: inline !important;"
+                              [innerHtml]="post.content">
+                            </span>
+                            <span (click)="onDetailPost(post.id, i)" *ngIf="post.isMoreContent"
+                              class="cursor-pointer text-gray-400 btn-more">...see
+                              more</span>
+                          </ng-container>
                         </div>
 
                         <!-- <p-galleria class="flex flex-column justify-content-between" [value]="images"
@@ -788,7 +792,7 @@
                 </div>
               </div>
             </div>
-            <ng-container *ngIf="myBookmarks.length > 3">
+            <ng-container *ngIf="myBookmarks && myBookmarks.length > 3">
               <p class="text-blue-600 font-medium cursor-pointer hover:text-blue-800 mt-2">Show All</p>
             </ng-container>
           </div>

@@ -26,11 +26,12 @@ export class ResponseInterceptor implements HttpInterceptor {
                     }
                 },
                 error : (event) => {
-                  this.messageService.add({severity:'error', summary: 'Error', detail: event.error});
                     if(event instanceof HttpErrorResponse) {
-                        // if(event.status == 401) {
-                        //     this.router.nav
-                        // }
+                        if(event.status == 401) {
+                          this.messageService.add({severity:'error', summary: 'Error', detail: event.error});
+                          localStorage.clear()
+                            this.router.navigateByUrl('/member/login')
+                        }
                         console.log(event.error)
                         // this.router.navigateByUrl("/login")
                         // localStorage.clear()
