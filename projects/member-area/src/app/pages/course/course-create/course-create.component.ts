@@ -3,14 +3,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { FormBuilder, Validators } from '@angular/forms';
-
-
-import { Subscription } from 'rxjs';
-
+import { Subscription, min } from 'rxjs';
 import { MenuItem } from 'primeng/api';
-
 import { convertUTCToLocalDateISO, convertUTCToLocalDateTimeISO } from 'projects/base-area/src/app/utils/dateutil';
-
+import { UserService } from '../../../../../../base-area/src/app/services/user.service';
 import { PostTypeService } from '@service/posttype.service';
 import { CategoryRes } from '@dto/category/category-res';
 import { ActivityService } from '@service/activity.service';
@@ -20,6 +16,7 @@ import { ActivityTypeService } from '@service/activitytype.service';
 import { ActivityReq } from '@dto/activity/activity-req';
 import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
 
+
 @Component({
     selector : 'app-create-course',
     templateUrl : './course-create.component.html'
@@ -28,7 +25,7 @@ import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type
 export class CreateCourseComponent implements OnInit, OnDestroy{
 
   courseFb = this.fb.group({
-    title: ["",  Validators.required],
+    title: ["",  [Validators.required, Validators.minLength(40)]],
     description: ["",  Validators.required],
     provider: ["",  Validators.required],
     location: ["",  Validators.required],
@@ -41,10 +38,10 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     category: [{},  Validators.required],
     startDateCourse:["",  Validators.required],
     endDateCourse:["",  Validators.required],
-    codeVoucher:["",  Validators.required],
-    limit:[0,  Validators.required],
-    expiredDate:["",  Validators.required],
-    discount:[0,  Validators.required],
+    codeVoucher:[""],
+    limit:[0],
+    expiredDate:[""],
+    discount:[0],
   })
 
 
@@ -62,13 +59,15 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
 
   constructor(private fb: FormBuilder, private _sanitizer: DomSanitizer,  private categoryService: CategoryService,
     private postTypeService: PostTypeService, private postService: PostService, private activityTypeService: ActivityTypeService,
-    private activityService: ActivityService){}
+    private activityService: ActivityService, private userService: UserService){}
 
 
     faHeart = faHeart
     faBook = faBook
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
+
+    memberStatus!: string
 
     initCategories(){
       this.categories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
@@ -126,7 +125,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
         endDate: courseEndDate!,
         limitApplied: this.courseFb.value.limit!,
         voucherCode: this.courseFb.value.codeVoucher!,
-        expDate: this.courseFb.value.expiredDate!,
+        endAt: this.courseFb.value.expiredDate!,
         discountPercent: this.courseFb.value.discount!,
         file: {
           fileContent: this.courseFb.get('imageCover')?.value.contentFile!,
@@ -159,7 +158,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     this.initCategories()
     this.courseFb.get("startDateCourse")?.valueChanges.subscribe(res => this.startDate = new Date(res!) )
     this.activity$ = this.activityTypeService.getActivityTypeByCode(ACTIVITY_TYPE.COURSE).subscribe(res => this.activityTypeId = res.activityTypeId)
-
+    this.memberStatus =  this.userService.getMemberCode()
   }
 
   ngOnDestroy(): void {

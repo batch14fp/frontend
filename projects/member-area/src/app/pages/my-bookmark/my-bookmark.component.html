@@ -1,0 +1,568 @@
+<!-- <pre>{{commentFb.value | json}}</pre> -->
+
+<main>
+  <div class="w-12 flex relative">
+    <div class="w-2 hidden lg:block pt-4 px-4 top-0">
+      <div class="w-6">
+        <img class="w-full w-0" style="object-fit: contain !important;"
+          src="../../../assets/images/wecommunity-logo.png" alt="logo wecommunity">
+      </div>
+      <div class="flex flex-column m-0 mt-6 gap-2">
+        <div class="text-blue-600 flex">
+          <button
+            class="text-blue-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-blue-50 cursor-pointer">
+            <i class="pi pi-home px-2"></i>
+            Home</button>
+        </div>
+        <div class="text-900 flex">
+          <button
+            class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <i class="pi pi-calendar px-2"></i>
+            Event</button>
+        </div>
+        <div class="text-900 flex hover:text-blue-600">
+          <button
+            class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
+            <i class="pi pi-book px-2"></i>
+            Course
+          </button>
+        </div>
+        <div class="text-600 flex">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <i class="pi pi-home px-2"></i>
+            Post</button>
+        </div>
+        <div class="text-600 flex border-bottom-1 border-gray-200 pb-4">
+          <button
+            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            <fa-icon class="text-gray-600 cursor-pointer px-2 hover:text-blue-600" [icon]="faNewspaper"></fa-icon>
+            Article
+          </button>
+        </div>
+        <div class="flex flex-column mt-4">
+          <div class="flex justify-content-between mb-3">
+            <p>Upcoming Event</p>
+            <div class="bg-blue-100 text-blue-600 border-circle w-1 h-1 align-self-center flex justify-content-center">
+              <p class="font-semibold text-xs">{{upcomingEvents.total}}</p>
+            </div>
+          </div>
+          <div class="flex flex-column gap-4">
+            <div *ngFor="let item of upcomingEvents.data" class="flex w-12 gap-4">
+              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
+                <p class="font-semibold">{{item.startDate | date:'d'}}</p>
+                <p class="font-light text-gray-600">{{item.startDate | date:'LLL'}}</p>
+              </div>
+              <div class="flex flex-column w-9">
+                <p class="cursor-pointer">{{turncate(item.title)}}</p>
+                <div class="flex">
+                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
+                  <p class="text-xs font-light text-gray-600">{{item.totalParticipant}} people going</p>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="upcomingEvents.data.length > 3">
+              <p class="text-blue-600 font-medium cursor-pointer hover:text-blue-800 mt-2">Show All</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div
+      class="flex bg-white pt-2 justify-content-between border-top-1 border-gray-200 w-12 gap-4 px-4 md:hidden fixed bottom-0 z-5 justify-content-center align-content-center align-self-center">
+      <div
+        class="text-blue-600  border-blue-600 border-bottom-3 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-home align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">
+          Home</p>
+      </div>
+      <div class="w-2 text-900 font-medium bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-calendar px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Event</p>
+      </div>
+      <div
+        class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center hover:text-blue-600">
+        <i class="pi pi-book px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Course</p>
+      </div>
+      <div class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <i class="pi pi-send px-2 align-self-center" style="font-size: x-large;"></i>
+        <p class="align-self-center">Post</p>
+      </div>
+      <div class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center">
+        <fa-icon class="text-gray-600 align-self-center cursor-pointer hover:text-blue-600" size="xl"
+          [icon]="faNewspaper"></fa-icon>
+        <p class="align-self-center">Article</p>
+      </div>
+    </div>
+    <div class="w-12 md:w-10 bg-gray-100 border-round-bottom-xl">
+      <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem align-content-center gap-4">
+        <ng-container *ngIf="memberStatus === memberReguler">
+          <button class="bg-red-600 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
+            style="height: 30px !important;">Upgrade</button>
+        </ng-container>
+
+        <app-tiered-menu [model]="accountMenu">
+          <ng-template #content>
+            <div *ngIf="!imageIdProfile"
+              class="border-circle cursor-pointer align-self-center bg-blue-400 flex justify-content-center align-content-center"
+              style="width: 38px;height: 38px">
+              <p class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                {{fotoName(fullNameLogin)}}</p>
+            </div>
+            <div *ngIf="imageIdProfile" class="ImageProfile">
+              <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
+                style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;" alt="Avatar" />
+            </div>
+          </ng-template>
+        </app-tiered-menu>
+      </div>
+      <div class="w-12 flex">
+        <div class="flex mt-4 w-12 md:w-9 justify-content-center align-self-start">
+          <div class="w-full flex align-content-center justify-content-center align-self-center">
+            <div class="w-11 flex flex-column">
+              <div class=" mb-2 w-12 pb-4 border-bottom-1 border-gray-400 align-self-center">
+                <div class="flex w-full flex-column bg-white p-3 border-round-xl">
+                  <div class="flex gap-4">
+                    <div *ngIf="!imageIdProfile"
+                      class="border-circle align-self-center bg-blue-400 flex justify-content-center align-content-center"
+                      style="width: 38px;height: 38px">
+                      <p class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                        {{fotoName(fullNameLogin)}}</p>
+                    </div>
+                    <div *ngIf="imageIdProfile" class="ImageProfile">
+                      <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
+                        style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;" alt="Avatar" />
+                    </div>
+                    <div routerLink="/post"
+                      class="hover:bg-gray-100 border-1 border-gray-400 border-round-3xl w-full flex cursor-pointer">
+                      <p class="text-sm text-gray-600 font-medium align-self-center pl-4 cursor-pointer">Start a post
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex mt-3 gap-2 justify-content-between">
+                    <div class="flex">
+                      <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-calendar px-2 align-self-center text-blue-600"></i>
+                        <p>Create Event</p>
+                      </div>
+                      <div class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                        <i class="pi pi-calendar px-2 align-self-center text-green-600"></i>
+                        <p>Create Course</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div infinite-scroll (scrolled)="onScroll()">
+                <div class="mt-4 flex flex-column gap-4 overflow-auto">
+                  <ng-container *ngIf="isLoading">
+                    <div *ngFor="let item of [].constructor(5)"
+                      class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
+                      <div class="flex gap-3 justify-content-between mt-2">
+                        <div class="flex gap-2">
+                          <p-skeleton shape="circle" size="3rem" styleClass="mr-2"></p-skeleton>
+                          <div class="flex flex-column gap-2">
+                            <p-skeleton width="12rem" height="1.2rem"></p-skeleton>
+                            <p-skeleton width="8rem" height="1.2rem"></p-skeleton>
+                          </div>
+                        </div>
+                        <div class="flex flex-column gap-2 justify-content-end">
+                          <p-skeleton width="4rem" height="1.2rem" class="align-self-end"></p-skeleton>
+                          <p-skeleton width="8rem" height="1.2rem"></p-skeleton>
+                        </div>
+                      </div>
+                      <div class="flex flex-column mt-4 gap-3">
+                        <p-skeleton width="20rem" height="1.6rem"></p-skeleton>
+                        <p-skeleton width="100%" height="150px"></p-skeleton>
+                      </div>
+                      <div class="flex justify-content-between mt-4">
+                        <p-skeleton width="6rem" height="1.6rem"></p-skeleton>
+                        <p-skeleton width="3rem" height="1.6rem"></p-skeleton>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <div *ngFor="let post of myBookmarks; let i = index" class="">
+                    <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
+                      <div class="flex flex-column">
+                        <div class="flex justify-content-end">
+                          <app-tiered-menu [model]="post.userId === userIdlogin ? optionMenuDelete : optionMenuSave">
+                            <ng-template #content>
+                              <i (click)="onOptionPost(post.id, i)"
+                                class="pi pi-ellipsis-v hover:bg-gray-200 cursor-pointer mb-2 p-2 border-circle"></i>
+                            </ng-template>
+                          </app-tiered-menu>
+                        </div>
+                        <div class="flex gap-3 justify-content-between">
+                          <div class="flex gap-2">
+                            <div *ngIf="!post.imageProfileId"
+                              class="border-circle align-self-center bg-blue-400 p-2 flex justify-content-center align-content-center">
+                              <p
+                                class="text-white font-medium text-xl align-self-center align-content-center text-center">
+                                {{fotoName(post.fullname)}}</p>
+                            </div>
+                            <div *ngIf="post.imageProfileId" class="postImageProfile">
+                              <img src="http://localhost:2121/files/{{post.imageProfileId}}" class=" align-self-center"
+                                style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;"
+                                alt="Avatar" />
+                            </div>
+                            <div class="flex flex-column">
+                              <div class="flex flex-column md:flex-row w-full align-content-center md:gap-2">
+                                <p class="font-medium text-md align-self-center">{{post.fullname}}</p>
+                                <div class="flex">
+                                  <i class="pi pi-clock px-2 align-self-center"
+                                    style="color: gray; font-size: 12px;"></i>
+                                  <p class="text-xs font-light text-xs text-gray-400 align-self-center">
+                                    {{post.timeAgo | timeAgo}}</p>
+                                </div>
+                              </div>
+                              <p class="text-xs font-light text-xs text-gray-400">{{post.position}}</p>
+                            </div>
+                          </div>
+                          <div class="flex flex-column gap-1">
+                            <p *ngIf="post.typeCode === 'PPOL'"
+                              class="text-xs font-medium border-round-md text-purple-600 bg-purple-100 w-fit px-2 py-1 align-self-end">
+                              POLLING
+                            </p>
+                            <p *ngIf="post.typeCode === 'PREG'"
+                              class="text-sm font-medium border-round-md text-gray-600 bg-gray-100 w-fit px-2 py-1 align-self-end">
+                              FREE
+                            </p>
+                            <p *ngIf="post.typeCode === 'PPRM'"
+                              class="text-sm font-medium border-round-md text-indigo-600 bg-indigo-100 w-fit px-2 py-1 align-self-end">
+                              PREMIUM
+                            </p>
+                            <p class="text-xs font-light border-round-md text-green-600 bg-green-100 px-2 py-1">
+                              {{post.categoryName}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="post.typeCode === 'PPOL'" class="mt-2">
+                        <p [innerHtml]="post.content"></p>
+                      </div>
+                      <div *ngIf="post.typeCode === 'PPOL'"
+                        class="mt-2 border-1 border-gray-400 border-round-md px-3 py-3 overflow-hidden">
+                        <p class="font-medium mb-2" [innerHtml]="post.titlePolling | wordLimit:60"></p>
+                        <div class="flex flex-column gap-2">
+                          <ng-container *ngIf="!post.isVote && calculateDiff(post.endAt) >= 1">
+                            <ng-container *ngFor="let polling of post.pollingOption">
+                              <p (click)="onVote(polling.pollingOptionId, i, post.id)"
+                                class="bg-blue-100 fadeinleft animation-duration-500 animation-iteration-1 hover:bg-blue-200 hover:text-blue-800 text-blue-600 border-1 border-round-md py-1 text-center cursor-pointer">
+                                {{polling.pollingContent}}</p>
+                            </ng-container>
+                          </ng-container>
+                          <ng-container *ngIf="!post.isVote && calculateDiff(post.endAt) <= 0">
+                            <ng-container *ngFor="let polling of post.pollingRespon.data">
+                              <div class="relative overflow-hidden">
+                                <div
+                                  class="bg-gray-200 py-3 border-round-md flex justify-content-between px-3 z-1 relative fadeinright animation-duration-500 animation-iteration-1"
+                                  [ngStyle]="{'width': getPercent(polling.count, post.pollingRespon.totalRespondents) + '%'}">
+                                </div>
+                                <div class="flex z-2 w-12 justify-content-between px-2 absolute top-0 py-1">
+                                  <p class="text-gray-800 font-medium">{{polling.pollingContent}}</p>
+                                  <p class="text-gray-800 font-medium">
+                                    {{getPercent(polling.count, post.pollingRespon.totalRespondents) | number : '1.0-1'}}%
+                                  </p>
+                                </div>
+                              </div>
+                            </ng-container>
+                          </ng-container>
+                          <ng-container *ngIf="post.isVote">
+                            <ng-container *ngFor="let polling of post.pollingRespon.data">
+                              <div class="relative overflow-hidden">
+                                <div
+                                  class="bg-gray-200 py-3 border-round-md flex justify-content-between px-3 z-1 relative fadeinright animation-duration-500 animation-iteration-1"
+                                  [ngStyle]="{'width': getPercent(polling.count, post.pollingRespon.totalRespondents) + '%'}">
+                                </div>
+                                <div class="flex z-2 w-12 justify-content-between px-2 absolute top-0 py-1">
+                                  <p class="text-gray-800 font-medium">{{polling.pollingContent}}</p>
+                                  <p class="text-gray-800 font-medium">
+                                    {{getPercent(polling.count, post.pollingRespon.totalRespondents) | number : '1.0-1'}}%
+                                  </p>
+                                </div>
+                              </div>
+                            </ng-container>
+                          </ng-container>
+                        </div>
+                        <div class="flex mt-3 gap-2">
+                          <p class="text-md text-light text-gray-600">{{post.pollingRespon.totalRespondents}} votes</p>
+                          <p class="text-md text-light text-gray-600">•</p>
+                          <p *ngIf="calculateDiff(post.endAt) > 0" class="text-md text-light text-gray-600">
+                            {{calculateDiff(post.endAt)}} days left</p>
+                          <p *ngIf="calculateDiff(post.endAt) <= 0" class="text-md text-light text-gray-600">
+                            Poll closed</p>
+                          <p class="text-md text-light text-gray-600" *ngIf="post.isVote">•</p>
+                          <p (click)="onUnvote(post.pollingResponId, post.id)"
+                            *ngIf="post.isVote && calculateDiff(post.endAt) !== 0"
+                            class="text-md text-light text-blue-600 font-medium cursor-pointer">
+                            Undo</p>
+                          <p *ngIf="post.isVote && calculateDiff(post.endAt) === 0" style="cursor: not-allowed;"
+                            pTooltip="This polling has ended !" class="text-md text-light text-blue-600 font-medium">
+                            Undo</p>
+                        </div>
+                      </div>
+                      <div *ngIf="post.typeCode !== 'PPOL'" class="mt-2 py-2">
+                        <p class="text-md font-medium">{{post.title}}</p>
+                        <div class="flex">
+                          <p class="text-sm font-light post-content" [innerHtml]="post.content | wordLimit:50">
+                            see more...
+                          </p>
+                        </div>
+                        <p-galleria [value]="images" [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions"
+                          [containerStyle]="{ 'max-width': '50%' }" [numVisible]="9" [circular]="true"
+                          [fullScreen]="true" [showItemNavigators]="true">
+                          <ng-template pTemplate="item" let-item>
+                            <img src="http://localhost:2121/files/{{item.fileId}}"
+                              style="width: 80%; display: block;" />
+                          </ng-template>
+                          <ng-template pTemplate="thumbnail" let-item>
+                            <div class="grid grid-nogutter justify-content-center">
+                              <img src="http://localhost:2121/files/{{item.fileId}}"
+                                style="display: block;width: 30%" />
+                            </div>
+                          </ng-template>
+                        </p-galleria>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 1"
+                          class="flex w-full justify-content-between">
+                          <img class="w-12 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                            style="object-fit: cover !important;"
+                            src="http://localhost:2121/files/{{post.data[0].fileId}}" alt="">
+                        </div>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 2"
+                          class="flex w-full justify-content-between">
+                          <img *ngFor="let item of post.data" class="w-6 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                            style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
+                            alt="">
+                        </div>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 3"
+                          class="flex w-full justify-content-between">
+                          <img *ngFor="let item of post.data" class="w-4 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                            style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
+                            alt="">
+                        </div>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 4"
+                          class="flex w-full justify-content-between">
+                          <img *ngFor="let item of post.data" class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                            style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
+                            alt="">
+                        </div>
+                        <div (click)="onShowGallery(post.data)" *ngIf="post.data.length >= 5"
+                          class="flex w-full justify-content-between">
+                          <img class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
+                            style="object-fit: cover !important;"
+                            src="http://localhost:2121/files/{{post.data[0].fileId}}" alt="">
+                          <img class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
+                            style="object-fit: cover !important;"
+                            src="http://localhost:2121/files/{{post.data[1].fileId}}" alt="">
+                          <img class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
+                            style="object-fit: cover !important;"
+                            src="http://localhost:2121/files/{{post.data[2].fileId}}" alt="">
+                          <div
+                            class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer relative cursor-pointer">
+                            <div class="bg-gray-200 opacity-10">
+                              <img class="w-full h-full" style="object-fit: contain !important;"
+                                src="http://localhost:2121/files/{{post.data[3].fileId}}" alt="">
+                            </div>
+                            <p class="absolute top-50 right-50 text-800 opacity-100 text-md font-medium">
+                              +{{post.data.length-4}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex mt-3 pt-2 gap-2 justify-content-between border-top-1 border-gray-300">
+                        <div class="flex">
+                          <div *ngIf="!post.countPostLike" (click)="onLike(post.id, post.like)"
+                            class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                            <i class="pi pi-heart px-2 align-self-center text-gray-400"></i>
+                          </div>
+                          <div *ngIf="post.countPostLike" (click)="onLike(post.id, post.like)"
+                            class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                            <i *ngIf="post.like && likeClick"
+                              class="pi pi-heart-fill px-2 align-self-center text-red-600"></i>
+                            <i *ngIf="post.like && !likeClick"
+                              class="pi pi-heart-fill px-2 align-self-center text-red-600"></i>
+                            <i *ngIf="!post.like"
+                              class="pi pi-heart px-2 align-self-center text-gray-400 scalein animation-duration-200 animation-iteration-1"></i>
+                            <p>{{post.countPostLike}} Like</p>
+                          </div>
+                          <div (click)="onShowInsertComment(post.id, i)"
+                            class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
+                            <i class="pi pi-comment px-2 align-self-center"></i>
+                            <p *ngIf="post.countPostComment">{{post.countPostComment}} Comment</p>
+                          </div>
+                        </div>
+                        <div (click)="onInsertBookmark(post.id)"
+                          class="flex align-content-center hover:bg-gray-100 p-2 border-round-md cursor-pointer">
+                          <i *ngIf="post.bookmark"
+                            class="pi pi-bookmark-fill px-2 align-self-center scalein animation-duration-200 animation-iteration-1"></i>
+                          <i *ngIf="!post.bookmark"
+                            class="pi pi-bookmark px-2 align-self-center scalein animation-duration-200 animation-iteration-1"></i>
+                        </div>
+                      </div>
+                      <div *ngIf="post.showInsertComment" class="mt-2 flex flex-column">
+                        <ng-container *ngIf="postIdToComment === post.id">
+                          <div class="flex align-content-center gap-3">
+                            <div *ngIf="!imageIdProfile"
+                              class="border-circle  align-self-center bg-blue-400 flex justify-content-center align-content-center"
+                              style="width: 38px;height: 38px">
+                              <p
+                                class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                                {{fotoName(fullNameLogin)}}</p>
+                            </div>
+                            <div *ngIf="imageIdProfile" class="ImageProfile">
+                              <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
+                                style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;"
+                                alt="Avatar" />
+                            </div>
+                            class="border-circle align-self-center" style="width: 42px;" alt="Avatar" /> -->
+                            <div class="w-12">
+                              <form class="flex flex-column w-12 gap-2" [formGroup]="commentFb"
+                                (ngSubmit)="onComment(post.id)">
+                                <textarea formControlName="contentComment" class="w-full " [rows]="1" [cols]="1"
+                                  pInputTextarea [autoResize]="true"></textarea>
+                                <button *ngIf="commentFb.value.contentComment" type="submit"
+                                  class="bg-blue-100 hover:bg-blue-300 hover:text-blue-800 cursor-pointer w-fit px-3 text-blue-600 border-none border-round-md">Post</button>
+                              </form>
+                            </div>
+                          </div>
+                          <ng-container *ngIf="commentPost">
+                            <div class="flex-column">
+                              <div *ngFor="let comment of commentPost, let idx = index"
+                                class="mt-2 flex align-content-center gap-3">
+                                <div *ngIf="!comment.imageProfileId"
+                                  class="border-circle  align-self-center bg-blue-400 flex justify-content-center align-content-center"
+                                  style="width: 38px;height: 38px">
+                                  <p
+                                    class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                                    {{fotoName(comment.fullname)}}</p>
+                                </div>
+                                <div *ngIf="comment.imageProfileId" class="ImageProfile">
+                                  <img src="http://localhost:2121/files/{{comment.imageProfileId}}"
+                                    class=" align-self-center"
+                                    style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;"
+                                    alt="Avatar" />
+                                </div>
+                                class="border-circle align-self-center" style="width: 42px;" alt="Avatar" /> -->
+                                <div class="w-12 bg-gray-100 p-2 border-round-md flex flex-column gap-2">
+                                  <div class="flex justify-content-between">
+                                    <div class="flex gap-3">
+                                      <div class="flex flex-column justify-content-start">
+                                        <div class="flex gap-3">
+                                          <div class="flex gap-2">
+                                            <p class="font-medium text-sm align-self-start">{{comment.fullname}}</p>
+                                            <p *ngIf="comment.userId === post.userId"
+                                              class="bg-bluegray-600 text-sm text-white px-2 border-round-md font-medium">
+                                              Author
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <p class="text-xs text-gray-800 font-light">{{comment.position}}</p>
+                                      </div>
+                                    </div>
+                                    <div class="flex gap-2 justify-content-center align-content-center">
+                                      <div class="flex gap-1 justify-content-center align-content-center">
+                                        <p class="text-xs font-light text-xs text-gray-600">
+                                          {{comment.createdAt | timeAgo}}
+                                        </p>
+                                      </div>
+                                      <app-tiered-menu class="align-self-center"
+                                        [model]="comment.userId === userIdlogin ? optionCommentDelete : optionCommentSave">
+                                        <ng-template #content>
+                                          <i (click)="onShowEditComment(idx)"
+                                            class="pi pi-ellipsis-v hover:bg-gray-200 cursor-pointer mb-2 p-2 border-circle"></i>
+                                        </ng-template>
+                                      </app-tiered-menu>
+                                    </div>
+                                  </div>
+                                  <p class="text-sm text-800" *ngIf="idx !== commentIdx">
+                                    {{comment.contentComment}}
+                                  </p>
+                                  <form [formGroup]="editCommentFb" *ngIf="idx  === commentIdx">
+                                    <textarea bg-none border-0 [autofocus]="true" autofocus
+                                      formControlName="contentComment"
+                                      class="w-full bg-transparent border-none border-0"
+                                      style="box-shadow: none !important;" disableRipple="true" [rows]="1" [cols]="1"
+                                      pInputTextarea [autoResize]="true"></textarea>
+                                    <div class="flex gap-2">
+                                      <button *ngIf="editCommentFb.value.contentComment === comment.contentComment"
+                                        style="cursor: not-allowed;"
+                                        class="border-round-xl border-none px-2 bg-gray-300 text-gray-600 text-sm">Save
+                                        Changes</button>
+                                      <button *ngIf="editCommentFb.value.contentComment !== comment.contentComment"
+                                        (click)="onSaveEditComment(comment, post.id)"
+                                        class="border-round-xl cursor-pointer border-none px-2 bg-blue-600 text-white text-sm">Save
+                                        Changes</button>
+                                      <button (click)="onCancelEdit()"
+                                        class="border-round-xl cursor-pointer border-1 hover:border-4 hover:bg-gray-400 text-sm border-gray-600 px-2 bg-transparent text-gray-600">Cancel</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                              <p *ngIf="post.countPostComment !== commentPost.length" infinite-scroll
+                                (click)=" onLoadMoreComment(postIdToComment)"
+                                class="text-sm mt-2 font-medium text-bluegray-600 cursor-pointer border-round-md hover:bg-gray-200 w-fit px-2 py-1">
+                                Load more comments
+                              </p>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p-scrollTop></p-scrollTop>
+
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block md:w-3 mt-2">
+          <div class="w-10">
+            <div class="flex mb-2 bg-blue-100 w-full justify-content-center py-1 border-round-md">
+              <i class="pi pi-bookmark-fill pr-2 align-self-center text-blue-600"></i>
+              <p class="text-blue-600">My Bookmarks</p>
+            </div>
+            <div class="flex flex-column gap-3">
+              <div class="bg-white border-round-lg" *ngFor="let item of myBookmarks">
+                <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                  <div class="flex gap-3">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border-circle align-self-center"
+                      style="width: 32px;" alt="Avatar" />
+                    <div class="flex flex-column">
+                      <p class="font-medium text-sm">{{item.fullname}}</p>
+                      <p class="text-xs font-light text-xs text-gray-400">{{item.timeAgo | timeAgo}}</p>
+                    </div>
+                    <div class="flex flex-column gap-1">
+                      <p *ngIf="item.typeCode === 'PPOL'"
+                        class="text-xs font-medium border-round-md text-purple-600 bg-purple-100 w-fit px-2 py-1 align-self-end">
+                        POLLING
+                      </p>
+                      <p *ngIf="item.typeCode === 'PREG'"
+                        class="text-sm font-medium border-round-md text-gray-600 bg-gray-100 w-fit px-2 py-1 align-self-end">
+                        FREE
+                      </p>
+                      <p *ngIf="item.typeCode === 'PPRM'"
+                        class="text-sm font-medium border-round-md text-indigo-600 bg-indigo-100 w-fit px-2 py-1 align-self-end">
+                        PREMIUM
+                      </p>
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    <p class="text-md font-medium">{{item.title}}</p>
+                    <p class="text-sm font-light" [innerHtml]="item.content | wordLimit:10">
+                      <span class="cursor-pointer text-gray-400 ">...see more</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="myBookmarks.length > 3">
+              <p class="text-blue-600 font-medium cursor-pointer hover:text-blue-800 mt-2">Show All</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-confirmDialog header="Confirmation" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    acceptButtonStyleClass="p-button-text" defaultFocus="reject"></p-confirmDialog>
+</main>

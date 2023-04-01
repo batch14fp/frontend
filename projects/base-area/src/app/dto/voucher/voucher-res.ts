@@ -1,4 +1,4 @@
-export interface  VoucherGetRes{
+export interface  VoucherRes{
     voucherId : string
     voucherName : string
     limitApplied : number  

@@ -13,6 +13,7 @@ import { CourseModule } from "./pages/course/course.module";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 // import { ProfileComponent } from "./pages/profile/profile.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
+import { MyCourseComponent } from './pages/my-course/my-course.component';
 import { PostComponent } from './pages/post/post.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 // =======
@@ -24,8 +25,14 @@ import { ProfileModule } from "./pages/profile/profile.module";
 import { ThreadComponent } from "./pages/thread/thread.component";
 import { ArticleComponent } from "./pages/article/article.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
-import { ReportComponent } from "./pages/report/report.component";
+import { ReportComponent } from "./pages/report-activity/report.component";
 import { SubscriptionComponent } from "./pages/subscription/subscription.component";
+import { ReportInvoiceComponent } from "./pages/report-income/report-income.component";
+import { MyBookmarkComponent } from "./pages/my-bookmark/my-bookmark.component";
+import { ROLE } from "projects/base-area/src/app/constant/role.service";
+import { AuthRoleGuard } from "projects/base-area/src/app/guard/role.guard";
+import { AuthLoginGuard } from "projects/base-area/src/app/guard/auth-login.guard";
+import { AuthLoadGuard } from "projects/base-area/src/app/guard/authload.guard";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -33,7 +40,8 @@ import { SubscriptionComponent } from "./pages/subscription/subscription.compone
 export const memberRoutes: Routes = [
     {
         path: 'member/login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate : [ AuthLoginGuard ],
     },
     {
         path: 'sign-up',
@@ -46,12 +54,16 @@ export const memberRoutes: Routes = [
     {
         path:'course',
         loadChildren:()=>import("./pages/course/course.module").then(c=>c.CourseModule),
-        component:NavbarComponent
+        component:NavbarComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path:'events',
         loadChildren:()=>import("./pages/event/event.module").then(e=>e.EventModule),
-        component:NavbarComponent
+        component:NavbarComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path: 'profile',
@@ -62,22 +74,47 @@ export const memberRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
-        path : 'report',
-        component : ReportComponent
+        path : 'report-activity',
+        component : ReportComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
+    },
+    {
+        path:'report-income',
+        component: ReportInvoiceComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
+    },
+    {
+        path : 'my-course',
+        component : MyCourseComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
+    },
+    {
+        path : 'my-bookmark',
+        component : MyBookmarkComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path : 'subscription',
         // component : SubscriptionComponent
-        loadChildren: () => import("./pages/subscription/subscription.module").then(s => s.SubscriptionModule)
+        loadChildren: () => import("./pages/subscription/subscription.module").then(s => s.SubscriptionModule),
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path: '',
         children: [
             {
                 path: 'member/article',
-                component: ArticleComponent,
+                loadChildren: () => import("./pages/article/article.module").then(a => a.ArticleModule)
+                // component: ArticleComponent,
             },
             {
                 path: 'thread',
@@ -103,8 +140,8 @@ export const memberRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent
+        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyBookmarkComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
@@ -117,8 +154,8 @@ export const memberRoutes: Routes = [
     ],
     exports: [
         RouterModule,
-        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent
+        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
     ]
 })
 

@@ -1,5 +1,8 @@
 <!-- {{login.value | json}} -->
-<div class="w-full flex flex-column md:flex-row h-screen">
+<ng-container *ngIf="isLoading">
+  <app-loading-fullscreen></app-loading-fullscreen>
+</ng-container>
+<div *ngIf="!isLoading" class="w-full flex flex-column md:flex-row h-screen">
   <div style="background-image: url('./../../../assets/images/login-illustration.png')"
     class="w-6 bg-blue-600 h-full hidden md:flex">
   </div>

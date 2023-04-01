@@ -7,6 +7,7 @@ import { EventCreateComponent } from "./event-create/event-create.component";
 import { EventDetailComponent } from "./event-detail/event-detail.component";
 import { EventInvoiceComponent } from "./event-invoice/event-invoice.component";
 import { EventListComponent } from "./event-list/event-list.component";
+import { EventPaymentComponent } from "./event-payment/event-payment.component";
 import { EventRouting } from "./event.routing";
 
 @NgModule({
@@ -14,7 +15,8 @@ import { EventRouting } from "./event.routing";
         EventCreateComponent,
         EventDetailComponent,
         EventListComponent,
-        EventInvoiceComponent
+        EventInvoiceComponent,
+        EventPaymentComponent
     ],
     imports:[
         EventRouting,ShareModule, ReactiveFormsModule,HttpClientModule, CommonModule,FormsModule

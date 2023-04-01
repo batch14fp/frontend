@@ -32,7 +32,7 @@
     </div>                      
   </div> -->
 
-  
+
 <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
     <div class="grid">
         <div class="col-12 md:col-6 lg:col-3">
@@ -42,7 +42,8 @@
                         <span class="block text-500 font-medium mb-3">Course</span>
                         <div class="text-900 font-medium text-xl">152</div>
                     </div>
-                    <div class="flex align-items-center justify-content-center border-round" style="width:2.5rem;height:2.5rem">
+                    <div class="flex align-items-center justify-content-center border-round"
+                        style="width:2.5rem;height:2.5rem">
                         <i class="pi pi-book text-blue-500 text-xl"></i>
                     </div>
                 </div>
@@ -57,7 +58,8 @@
                         <span class="block text-500 font-medium mb-3">Event</span>
                         <div class="text-900 font-medium text-xl">210</div>
                     </div>
-                    <div class="flex align-items-center justify-content-center border-round" style="width:2.5rem;height:2.5rem">
+                    <div class="flex align-items-center justify-content-center border-round"
+                        style="width:2.5rem;height:2.5rem">
                         <i class="pi pi-calendar text-orange-500 text-xl"></i>
                     </div>
                 </div>
@@ -71,9 +73,10 @@
                     <div>
                         <span class="block text-500 font-medium mb-3">Total Participant</span>
                         <div class="text-900 font-medium text-xl">362</div>
-                        
+
                     </div>
-                    <div class="flex align-items-center justify-content-center border-round" style="width:2.5rem;height:2.5rem">
+                    <div class="flex align-items-center justify-content-center border-round"
+                        style="width:2.5rem;height:2.5rem">
                         <i class="pi pi-user text-cyan-500 text-xl"></i>
                     </div>
                 </div>
@@ -88,7 +91,8 @@
                         <span class="block text-500 font-medium mb-3">Incomes</span>
                         <div class="text-900 font-medium text-xl">Rp 2.000.000</div>
                     </div>
-                    <div class="flex align-items-center justify-content-center border-round" style="width:2.5rem;height:2.5rem">
+                    <div class="flex align-items-center justify-content-center border-round"
+                        style="width:2.5rem;height:2.5rem">
                         <i class="pi pi-wallet text-purple-500 text-xl"></i>
                     </div>
                 </div>
@@ -98,23 +102,38 @@
         </div>
     </div>
     <div class="flex w-full flex-column bg-white p-3 mt-3 border-round-xl">
-        <div class="flex md:flex-row flex-column gap-2 mb-2 justify-content-between border-gray-300  align-content-center border-bottom-2 p-3">
-            
-            <div class="flex align-content-center p-2 border-round-md gap-4">
+        <div
+            class="flex md:flex-row flex-column gap-2 mb-2 justify-content-between border-gray-300  align-content-center border-bottom-2 p-3">
+
+            <div
+            class="flex gap-2 mb-2 justify-content-between border-gray-300  align-content-center border-bottom-2 p-3">
+            <form [formGroup]="activityFilter">
+              <div class="flex align-content-center p-2 border-round-md gap-4">
                 <div class="flex flex-column">
-                    <p>From</p>
-                    <p-calendar [showIcon]="true"></p-calendar>
+                  <p>From</p>
+                  <p-calendar [showIcon]="true" formControlName="startDate"></p-calendar>
                 </div>
                 <div class="flex flex-column">
-                    <p>To</p>
-                    <p-calendar [showIcon]="true"></p-calendar>
+                  <p>To</p>
+                  <p-calendar [showIcon]="true" formControlName="endDate"></p-calendar>
                 </div>
-            </div>
-            <div class="flex justify-content-end">
+                <div class="flex flex-column">
+                  <app-button-primary (click)="onFilterReport()" label="filter"></app-button-primary>
+                </div>
+              </div>
+
+
+              <div class="flex justify-content-end">
                 <app-button-primary label="Export" class="m-3" icon="pi pi-file-export"></app-button-primary>
-            </div>
+              </div>
+            </form>
+          </div>
         </div>
-        <p-table [tableStyle]="{'min-width': '50rem'}">
+        <p-table [value]="activityAdmin" [lazy]="true" (onLazyLoad)="loadData($event)" responsiveLayout="scroll"
+            [paginator]="true" [rows]="limit" [totalRecords]="totalData" [loading]="loading"
+            [rowsPerPageOptions]="[3, 5]" tyleClass="p-datatable-gridlines" [globalFilterFields]="['id']"
+            [tableStyle]="{'min-width': '50rem'}">
+
             <ng-template pTemplate="header">
                 <tr>
                     <th>No</th>
@@ -125,24 +144,26 @@
                     <th>Start Date</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-settings let-i="rowIndex">
+            <ng-template pTemplate="body" let-report let-i="rowIndex">
                 <tr>
-                    <td>1</td>
-                    <td><p>Hidayat</p></td>
-                    <td><p>Netf</p></td>
+                    <td>{{i+1}}</td>
                     <td>
-                        <button>Course</button>
+                        <p>{{report.memberName}}</p>
                     </td>
-                   
-                    <td class="flex gap-2">
-    
-                        <app-button-icon ></app-button-icon>
-                        
-                        <app-button-danger ></app-button-danger>
+                    <td>
+                        <p>{{report.providerName}}</p>
+                    </td>
+                    <td>
+                        <p>{{report.type}}</p>
+                    </td>
+                    <td>
+                        <p>{{report.title}}</p>
+                    </td>
+                    <td>
+                        <p>{{report.startDate | date:'medium'}}</p>
                     </td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
 </div>
-
