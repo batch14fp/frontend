@@ -35,14 +35,14 @@ export class MyCourseComponent implements OnInit, OnDestroy{
 
 
     initCourse(){
-      this.course$ = this.activityService.getMyActivity(1,5, ACTIVITY_TYPE.COURSE).subscribe( res => {
+      this.course$ = this.activityService.getMyActivity(1,5,"", ACTIVITY_TYPE.COURSE).subscribe( res => {
         this.myActivity = res
       })
     }
 
     ngOnInit(): void {
       this.initCourse()
-      
+
     }
 
     ngOnDestroy(): void {

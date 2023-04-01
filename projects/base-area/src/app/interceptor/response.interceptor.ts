@@ -32,9 +32,12 @@ export class ResponseInterceptor implements HttpInterceptor {
                           localStorage.clear()
                             this.router.navigateByUrl('/member/login')
                         }
+                        if(event.status == 403) {
+                          this.messageService.add({severity:'error', summary: 'Error',detail:event.error.message});
+                          localStorage.clear()
+                            this.router.navigateByUrl('/member/login')
+                        }
                         console.log(event.error)
-                        // this.router.navigateByUrl("/login")
-                        // localStorage.clear()
                     }
                 },
                 complete : () => {},

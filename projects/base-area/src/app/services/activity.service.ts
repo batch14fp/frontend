@@ -43,7 +43,7 @@ export class ActivityService{
     getAllActivityByCategories(page: number, size: number, activityTypes?:string, categories?:string[]):Observable<ActivityRes[]>{
         let categoryCode:string = ''
         for(let i = 0; i<categories?.length!; i++){
-            categoryCode = categoryCode + '&categoryCodes=' +categories![i] 
+            categoryCode = categoryCode + '&categoryCodes=' +categories![i]
         }
         return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/by-category-List?typeCode=${activityTypes}&page=${page}&size=${size}${categoryCode}`)
     }
@@ -151,7 +151,10 @@ export class ActivityService{
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}`)
         }else if(categories == null){
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}`)
-        }else{
+        }else if(typeCode){
+          return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}`)
+        }
+        else{
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}&categoryCode=${categories}`)
         }
     }

@@ -14,26 +14,20 @@
             <i class="pi pi-home px-2"></i>
             Home</button>
         </div>
-        <div class="text-900 flex">
+        <div class="text-900 flex" routerLink="/events">
           <button
             class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
             <i class="pi pi-calendar px-2"></i>
             Event</button>
         </div>
-        <div class="text-900 flex hover:text-blue-600">
+        <div class="text-900 flex hover:text-blue-600" routerLink="/course">
           <button
             class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
             <i class="pi pi-book px-2"></i>
             Course
           </button>
         </div>
-        <div class="text-600 flex">
-          <button
-            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-            <i class="pi pi-home px-2"></i>
-            Post</button>
-        </div>
-        <div class="text-600 flex border-bottom-1 border-gray-200 pb-4">
+        <div class="text-600 flex border-bottom-1 border-gray-200 pb-4" routerLink="/article">
           <button
             class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
             <fa-icon class="text-gray-600 cursor-pointer px-2 hover:text-blue-600" [icon]="faNewspaper"></fa-icon>
@@ -372,25 +366,28 @@
                         </p-galleria>
                         <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 1"
                           class="flex w-full justify-content-between">
-                          <img class="w-12 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                          <img class="w-12 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
                             style="object-fit: cover !important;"
                             src="http://localhost:2121/files/{{post.data[0].fileId}}" alt="">
                         </div>
                         <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 2"
                           class="flex w-full justify-content-between">
-                          <img *ngFor="let item of post.data" class="w-6 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                          <img *ngFor="let item of post.data"
+                            class="w-6 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
                             style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
                             alt="">
                         </div>
                         <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 3"
                           class="flex w-full justify-content-between">
-                          <img *ngFor="let item of post.data" class="w-4 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                          <img *ngFor="let item of post.data"
+                            class="w-4 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
                             style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
                             alt="">
                         </div>
                         <div (click)="onShowGallery(post.data)" *ngIf="post.data.length === 4"
                           class="flex w-full justify-content-between">
-                          <img *ngFor="let item of post.data" class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100"
+                          <img *ngFor="let item of post.data"
+                            class="w-3 min-h-20rem  max-h-30rem hover:bg-gray-100 cursor-pointer"
                             style="object-fit: cover !important;" src="http://localhost:2121/files/{{item.fileId}}"
                             alt="">
                         </div>
@@ -516,10 +513,10 @@
                                           {{comment.createdAt | timeAgo}}
                                         </p>
                                       </div>
-                                      <app-tiered-menu class="align-self-center"
-                                        [model]="comment.userId === userIdlogin ? optionCommentDelete : optionCommentSave">
+                                      <app-tiered-menu *ngIf="comment.userId === userIdlogin" class="align-self-center"
+                                        [model]=" optionCommentDelete">
                                         <ng-template #content>
-                                          <i (click)="onShowEditComment(idx)"
+                                          <i (click)="onShowEditComment(idx,i)"
                                             class="pi pi-ellipsis-v hover:bg-gray-200 cursor-pointer mb-2 p-2 border-circle"></i>
                                         </ng-template>
                                       </app-tiered-menu>
