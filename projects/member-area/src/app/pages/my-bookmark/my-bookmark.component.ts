@@ -52,7 +52,7 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
 
     items!: MenuItem[];
     posts!:AllPostRes[]
-    upcomingEvents!:ActivityUpcomingAllRes
+    upcomingEvents?:ActivityUpcomingAllRes
     myBookmarks!:AllPostRes[]
     commentPost!: PostCommentRes[]
     showPostOption = false
@@ -66,6 +66,7 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
     memberReguler = MEMBER_STATUS.REGULAR
     imageIdProfile= ""
     fullNameLogin=""
+    forbiddenAccess= false
 
     // commentIdSelected =""
     commentIdxEdit!: number
@@ -119,7 +120,9 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
       idx: 0
     }
 
+
     onOptionPost(postId:string, idx:number){
+      this.postIdToDelete = postId
       this.optionPost.postId = postId
       this.optionPost.idx =idx
     }
@@ -140,18 +143,11 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
     constructor(private postService: PostService, private confirmationService: ConfirmationService,
       private messageService: MessageService, private pollingsService: PollingsService,
       private fb: FormBuilder, private userService: UserService, private router: Router,
-      private title: Title, private activityService:ActivityService, private renderer:Renderer2){
+      private title: Title, private activityService:ActivityService){
         title.setTitle("Dashboard")
       }
 
-      @ViewChild('post-content', { static: false }) d1!: ElementRef;
 
-      ngAfterViewInit() {
-        const span = this.renderer.createElement('span');
-        const text = this.renderer.createText('See More');
-        this.renderer.appendChild(span, text);
-        this.renderer.appendChild(this.d1.nativeElement, span);
-      }
 
       COMMENT_POST_LIMIT =5
       commentPostPage = 1
@@ -159,16 +155,18 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
       loadedComment = 0
       commentPostLength = 0
       editComment = false
+      commentPostIdx = -1
 
 
     accountMenu: MenuItem[] = [
         { label: 'Profile', icon: 'pi pi-fw pi-user', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'Report', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'Change Password', icon: 'pi pi-fw pi-lock', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/my-transaction") },
+        { label: 'Report Acivity', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/report-activity") },
+        { label: 'Report Income', icon: 'pi pi-fw pi-dollar', command: e=> this.router.navigateByUrl("/report-activity") },
+        { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
+        { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
+        { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
+        { label: 'Change Password', icon: 'pi pi-fw pi-lock', command: e=> this.router.navigateByUrl("/change-password") },
         { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
       ];
 
@@ -183,12 +181,8 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
       ];
 
       optionCommentDelete: MenuItem[] = [
-        { label: 'Delete', icon: 'pi pi-fw pi-trash', command: e=> this.confirmDelete(this.optionPost.idx) },
+        { label: 'Delete', icon: 'pi pi-fw pi-trash', command: e=> this.confirmDeleteComment(this.commentPostIdx) },
         { label: 'Edit', icon: 'pi pi-fw pi-pencil', command: e=> this.onEditComment() },
-        { label: 'Hide', icon: 'pi pi-fw pi-eye-slash', command: e=> this.onInsertBookmark(this.optionPost.postId, this.optionPost.idx) },
-      ];
-      optionCommentSave: MenuItem[] = [
-        { label: 'Hide', icon: 'pi pi-fw pi-eye-slash', command: e=> this.onInsertBookmark(this.optionPost.postId, this.optionPost.idx) }
       ];
 
 
@@ -197,8 +191,10 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
       }
 
       commentIdx!:number
-      onShowEditComment(idx:number){
+      postIdxDelete!:number
+      onShowEditComment(idx:number, postIdx:number){
         this.commentIdxEdit = idx
+        this.postIdxDelete = postIdx
         // this.commentIdSelected = postCommentId
         // console.log(this.commentPost[this.commentIdxEdit].contentComment)
       }
@@ -240,8 +236,6 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
             this.posts = result
           }
           console.log(this.posts)
-          // this.posts.map(p => {
-            // p.showComment = false
 
           // })
         })
@@ -270,8 +264,7 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
             this.commentPost = result
             this.isMoreComments = false
           }
-          // this.posts.map(p => {
-          //   p.showComment = false
+
           // })
         })
       }
@@ -318,7 +311,7 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
       }
       this.insertComment$ = this.postService.insertComment(dataInsert).subscribe(res => {
         // this.initPosts()
-        this.posts.map(p => {
+        this.myBookmarks.map(p => {
           p.countPostComment++
           this.commentFb.reset()
           // if(p.id === postId){
@@ -337,21 +330,12 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
       })
     }
 
-    onDeleteComment(commentId:string, postId: string){
-      this.deleteComment$ = this.postService.deletePostComment(commentId).subscribe(res =>{
-        this.posts.map(p => {
-          p.countPostComment--
-          this.commentFb.reset()
-        })
 
-        this.initComment(postId)
-      })
-    }
 
     onShowInsertComment(postId: string, idx:number){
       this.postIdToComment = postId
      this.initComment(postId)
-     this.posts[idx].showInsertComment = !this.posts[idx].showInsertComment
+     this.myBookmarks[idx].showInsertComment = !this.myBookmarks[idx].showInsertComment
       // this.showInsertComment = !this.showInsertComment
       // if(!this.showInsertComment){
       //   this.postIdToComment = ""
@@ -368,16 +352,12 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
         postUpdate.push(post)
       }
       this.posts = postUpdate
-    //  if(idx){
-    //   this.posts[idx].showPostOption = !this.posts[idx].showPostOption
-    //  }
-
       const dataInsert: PostBookmarkReq ={
         postId
       }
       this.insertBookmark$ = this.postService.insertPostBookmark(dataInsert).subscribe(res => {
         this.initBookmarks()
-        this.posts.map(p => {
+        this.myBookmarks.map(p => {
           if(p.id === postId){
             if(p.bookmark){
               p.bookmark = !p.bookmark
@@ -399,7 +379,7 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
       }
       this.like$ = this.postService.insertPostLike(data).subscribe(res=> {
         this.likedPostId = postId
-          this.posts.map(p => {
+          this.myBookmarks.map(p => {
             if(p.id === postId){
               if(p.like){
                 p.like = !p.like
@@ -427,14 +407,9 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
         postUpdate.push(post)
       }
       this.posts = postUpdate
-     this.posts[idx].showPostOption = !this.posts[idx].showPostOption
-      console.log(this.posts[idx])
-
-      // this.postIdToDelete = postId
-      // this.showPostOption = !this.showPostOption
-      // console.log(this.postIdToDelete)
-      // console.log(this.postIdToDelete)
-      // console.log(this.showPostOption)
+     this.myBookmarks[idx].showPostOption = !this.myBookmarks[idx].showPostOption
+      this.postIdToDelete = postId
+      console.log(this.postIdToDelete)
     }
 
     onHideOption(){
@@ -485,42 +460,20 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
           this.posts = []
           this.posts = [...postUpdate]
         })
-
-
-        // const postUpdate: AllPostRes[] = []
-        // for (const post of this.posts) {
-        //   for (const polling of post.pollingOption) {
-        //     if(polling.pollingOptionId === pollingOptionId){
-
-        //       post.isVote = !post.isVote
-        //         console.log("sama polling option id")
-        //     }
-        //   }
-        //   postUpdate.push(post)
-        // }
-        // this.posts = []
-        // this.posts = [...postUpdate]
-        // console.log(this.posts)
-
-    //     this.postIdToComment = postId
-    //  this.initComment(postId)
-    //  this.posts[idx].showInsertComment = !this.posts[idx].showInsertComment
-
-
-        // this.initPosts()
       })
 
     }
 
     confirmDelete(idx?:number) {
       if(idx){
-        this.posts[idx].showPostOption = !this.posts[idx].showPostOption
+        this.myBookmarks[idx].showPostOption = !this.myBookmarks[idx].showPostOption
       }
       this.confirmationService.confirm({
           message: 'Do you want to delete this post?',
           header: 'Delete Confirmation',
           icon: 'pi pi-info-circle',
           accept: () => {
+            console.log(this.postIdToDelete)
             this.postDelete$ = this.postService.deletePost(this.postIdToDelete).subscribe(res => this.initPosts())
               this.messageService.add({severity:'info', summary:'Confirmed', detail:'Record deleted'});
               this.postIdToDelete = ""
@@ -538,13 +491,68 @@ export class MyBookmarkComponent implements OnInit, OnDestroy{
       });
   }
 
+  onDeleteComment(commentId:string, postId: string){
+    console.log(commentId)
+    this.deleteComment$ = this.postService.deletePostComment(commentId).subscribe(res =>{
+      this.myBookmarks.map(p => {
+        p.countPostComment--
+        this.commentFb.reset()
+      })
+
+      this.initComment(postId)
+    })
+  }
+    confirmDeleteComment(idx?:number) {
+      this.confirmationService.confirm({
+          message: 'Do you want to delete this post?',
+          header: 'Delete Confirmation',
+          icon: 'pi pi-info-circle',
+          accept: () => {
+            console.log(this.postIdToDelete)
+            this.postDelete$ = this.postService.deletePostComment(this.commentPost[this.commentIdxEdit].postCommentId).subscribe(res => {
+              this.myBookmarks.map(p => {
+                p.countPostComment--
+                this.commentFb.reset()
+              })
+
+              this.initComment(this.myBookmarks[this.postIdxDelete].id)
+            })
+              this.messageService.add({severity:'info', summary:'Confirmed', detail:'Record deleted'});
+              this.postIdToDelete = ""
+          },
+          reject: (type: any) => {
+              switch(type) {
+                  case ConfirmEventType.REJECT:
+                      this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+                  break;
+                  case ConfirmEventType.CANCEL:
+                      this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+                  break;
+              }
+          }
+      });
+  }
+
+  visible!:boolean
+  blockedPanel:boolean = true
+
+  onDetailPost(postId:string, idx: number){
+    this.singlePost$ = this.postService.getPostById(postId).subscribe({
+      error: (e) => this.visible =true ,
+      next: (n) => {
+        this.myBookmarks[idx].content = n.content
+        this.myBookmarks[idx].isMoreContent = false
+      }
+    })
+  }
+
   onLogOut(){
     localStorage.clear()
     this.router.navigateByUrl("/")
   }
 
   initBookmarks(){
-    this.myBookmark$ = this.postService.getMyBookmarks(1,5).subscribe(res =>{
+    this.myBookmark$ = this.postService.getMyBookmarks(1,3).subscribe(res =>{
       this.myBookmarks = res
       console.log(res)
     })
