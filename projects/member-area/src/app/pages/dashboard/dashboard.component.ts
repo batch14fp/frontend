@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
     items!: MenuItem[];
     posts!:AllPostRes[]
-    upcomingEvents!:ActivityUpcomingAllRes
+    upcomingEvents?:ActivityUpcomingAllRes
     myBookmarks!:AllPostRes[]
     commentPost!: PostCommentRes[]
     showPostOption = false
@@ -120,6 +120,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
     }
 
     onOptionPost(postId:string, idx:number){
+      this.postIdToDelete = postId
       this.optionPost.postId = postId
       this.optionPost.idx =idx
     }
@@ -140,18 +141,11 @@ export class DashboardComponent implements OnInit, OnDestroy{
     constructor(private postService: PostService, private confirmationService: ConfirmationService,
       private messageService: MessageService, private pollingsService: PollingsService,
       private fb: FormBuilder, private userService: UserService, private router: Router,
-      private title: Title, private activityService:ActivityService, private renderer:Renderer2){
+      private title: Title, private activityService:ActivityService){
         title.setTitle("Dashboard")
       }
 
-      @ViewChild('post-content', { static: false }) d1!: ElementRef;
 
-      ngAfterViewInit() {
-        const span = this.renderer.createElement('span');
-        const text = this.renderer.createText('See More');
-        this.renderer.appendChild(span, text);
-        this.renderer.appendChild(this.d1.nativeElement, span);
-      }
 
       COMMENT_POST_LIMIT =5
       commentPostPage = 1
@@ -429,10 +423,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
       this.posts = postUpdate
      this.posts[idx].showPostOption = !this.posts[idx].showPostOption
       console.log(this.posts[idx])
+      this.postIdToDelete = postId
+      console.log(this.postIdToDelete)
 
-      // this.postIdToDelete = postId
       // this.showPostOption = !this.showPostOption
-      // console.log(this.postIdToDelete)
       // console.log(this.postIdToDelete)
       // console.log(this.showPostOption)
     }
@@ -521,6 +515,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
           header: 'Delete Confirmation',
           icon: 'pi pi-info-circle',
           accept: () => {
+            console.log(this.postIdToDelete)
             this.postDelete$ = this.postService.deletePost(this.postIdToDelete).subscribe(res => this.initPosts())
               this.messageService.add({severity:'info', summary:'Confirmed', detail:'Record deleted'});
               this.postIdToDelete = ""
@@ -536,6 +531,23 @@ export class DashboardComponent implements OnInit, OnDestroy{
               }
           }
       });
+  }
+
+  onDetailPost(postId:string, idx: number){
+    let hasError = false
+
+    this.singlePost$ = this.postService.getPostById(postId).subscribe({
+      error: (e) => hasError = true ,
+      next: (n) => {
+        this.posts[idx].content = n.content
+        this.posts[idx].isMoreContent = false
+      }
+    })
+
+
+    console.log('====================================');
+    console.log(postId);
+    console.log('====================================');
   }
 
   onLogOut(){

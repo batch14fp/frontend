@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, min } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { convertUTCToLocalDateISO, convertUTCToLocalDateTimeISO } from 'projects/base-area/src/app/utils/dateutil';
 import { UserService } from '../../../../../../base-area/src/app/services/user.service';
@@ -25,7 +25,7 @@ import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type
 export class CreateCourseComponent implements OnInit, OnDestroy{
 
   courseFb = this.fb.group({
-    title: ["",  Validators.required],
+    title: ["",  [Validators.required, Validators.minLength(40)]],
     description: ["",  Validators.required],
     provider: ["",  Validators.required],
     location: ["",  Validators.required],
@@ -38,10 +38,10 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     category: [{},  Validators.required],
     startDateCourse:["",  Validators.required],
     endDateCourse:["",  Validators.required],
-    codeVoucher:["",  Validators.required],
-    limit:[0,  Validators.required],
-    expiredDate:["",  Validators.required],
-    discount:[0,  Validators.required],
+    codeVoucher:[""],
+    limit:[0],
+    expiredDate:[""],
+    discount:[0],
   })
 
 
