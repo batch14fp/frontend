@@ -251,9 +251,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
         return truncateString(str, 20)
       }
 
-      postMoreContent(){
-
-      }
 
       onLoadMoreComment(postId: string) : void {
         console.log("scrolled")
@@ -542,7 +539,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
       //   this.commentPost[idx].showPostOption = !this.posts[idx].showPostOption
       // }
       this.confirmationService.confirm({
-          message: 'Do you want to delete this post?',
+          message: 'Do you want to delete this comment?',
           header: 'Delete Confirmation',
           icon: 'pi pi-info-circle',
           accept: () => {
@@ -575,8 +572,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
   blockedPanel:boolean = true
 
   onDetailPost(postId:string, idx: number){
-
-
     this.singlePost$ = this.postService.getPostById(postId).subscribe({
       error: (e) => this.visible =true ,
       next: (n) => {
@@ -584,11 +579,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
         this.posts[idx].isMoreContent = false
       }
     })
-
-
-    console.log('====================================');
-    console.log(postId);
-    console.log('====================================');
   }
 
   onLogOut(){
