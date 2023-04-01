@@ -9,6 +9,7 @@ import { LazyLoadEvent } from "primeng/api";
 import { Subscription } from "rxjs";
 import {convertUTCToLocalDateISO} from '../../../../../base-area/src/app/utils/dateutil'
 import{ACTIVITY_TYPE} from '../../../../../base-area/src/app/constant/activity-type'
+import { UserService } from "@service/user.service";
 
 @Component({
     selector : 'app-report',
@@ -19,6 +20,7 @@ export class ReportComponent implements OnInit, OnDestroy{
     private activityReport$?:Subscription
     private activity$?:Subscription
     private downloadReport$?:Subscription
+ 
 
     activityMember: ActivityMemberRes[] = []
     limit:number = 1
@@ -30,7 +32,7 @@ export class ReportComponent implements OnInit, OnDestroy{
     loading: boolean = true
     userId!:string
 
-    constructor(private fb:FormBuilder,private title:Title, private router:Router, private activityService:ActivityService, private activatedRoute:ActivatedRoute){
+    constructor(private fb:FormBuilder,private title:Title, private router:Router, private activityService:ActivityService, private activatedRoute:ActivatedRoute, private userService : UserService){
         this.title.setTitle("Report")
     }
 
@@ -70,7 +72,8 @@ export class ReportComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit(): void {
-        // this.initActivity()
+        this.userId = this.userService.getIdLogin().substring(0);
+        //this.initActivity();
     }
 
     ngOnDestroy(): void {

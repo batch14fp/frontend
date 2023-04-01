@@ -136,6 +136,16 @@ export class ActivityService{
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
 
+    getDownloadIncomesReport(id:string,startDate?:string,endDate?:string){
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/incomes/file?userId=${id}&startDate=${startDate}&endDate=${endDate}`)
+    }
+    getDownloadReportAdmin(startDate?:string,endDate?:string){
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report/file?startDate=${startDate}&endDate=${endDate}`)
+    }
+    getDownloadIncomesReportAdmin(startDate?:string,endDate?:string){
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes/file?startDate=${startDate}&endDate=${endDate}`)
+    }
+
     getMyActivity(page: number, size: number, categories?:string,  typeCode?:string){
         if(typeCode == null){
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}`)

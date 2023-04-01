@@ -46,7 +46,7 @@ export class ReportInvoiceAdminComponent implements OnInit, OnDestroy{
     }
 
     onDownload(){
-        this.downloadReport$ = this.activityService.getDownloadReport(this.userId, this.startDate, this.endDate).subscribe(res=>{
+        this.downloadReport$ = this.activityService.getDownloadIncomesReportAdmin(this.startDate, this.endDate).subscribe(res=>{
             
         })
     }
