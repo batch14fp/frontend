@@ -206,7 +206,7 @@
                 <pre>{{activityFilter.value |json}}</pre>
                 <p-table [value]="activityMember" [lazy]="true" (onLazyLoad)="loadData($event)"
                   responsiveLayout="scroll" [paginator]="true" [rows]="limit" [totalRecords]="totalData"
-                  [loading]="loading" [rowsPerPageOptions]="[3, 5]" tyleClass="p-datatable-gridlines"
+                  [loading]="loading" [rowsPerPageOptions]="[1, 5]" tyleClass="p-datatable-gridlines"
                   [globalFilterFields]="['id']" [tableStyle]="{'min-width': '50rem'}">
                   <ng-template pTemplate="header">
                     <tr>

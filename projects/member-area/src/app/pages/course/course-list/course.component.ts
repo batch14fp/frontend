@@ -35,16 +35,6 @@ export class CourseComponent implements OnInit, OnDestroy{
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
 
-    // startPage: number = 0
-    // maxPage: number = 5
-    // totalData: number = 0
-    // query?: string
-    // loading: boolean = true
-
-    // categoriesList =this.fb.group({
-    //   category:[[]]
-    // })
-
     categoriesList:string[] = []
 
     categories: CategoryRes[] = []

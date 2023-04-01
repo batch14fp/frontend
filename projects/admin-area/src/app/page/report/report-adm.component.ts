@@ -19,7 +19,7 @@ export class ReportAdminComponent implements OnInit, OnDestroy{
     private activity$?:Subscription
 
     activityAdmin: ActivityAdminRes[] = []
-    limit:number = 3
+    limit:number = 1
     offset:number = 0
     totalData:number = 0
     query?: string
@@ -39,11 +39,11 @@ export class ReportAdminComponent implements OnInit, OnDestroy{
     loadData(event: LazyLoadEvent) {
         console.log(event)
         // this.initActivity(event.first, event.rows, event.globalFilter)
-        this.onFilterReport()
+        this.onFilterReport(event.rows,event.first)
     }
 
 
-    onFilterReport(){
+    onFilterReport(limit?:number, offset?:number){
         let startDate = undefined
         let endDate = undefined
 

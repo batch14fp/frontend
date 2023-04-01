@@ -14,17 +14,18 @@ import { CategoryService } from '@service/category.service';
 import { CategoryRes } from '@dto/category/category-res';
 
 @Component({
-    selector : 'app-mycourse',
-    templateUrl : './my-course.component.html'
+    selector : 'app-myevent',
+    templateUrl : './my-event.component.html'
 })
 
-export class MyCourseComponent implements OnInit, OnDestroy{
+export class MyEventsComponent implements OnInit, OnDestroy{
 
   constructor(private title: Title, private fb: FormBuilder,
     private userService: UserService,  private router: Router,private categoryService: CategoryService, private activityService:ActivityService){
-      this.title.setTitle("Course")
+      this.title.setTitle("Event")
   }
-    private course$?: Subscription
+
+    private event$?: Subscription
 
     myActivity: ActivityRes[] = []
 
@@ -34,18 +35,18 @@ export class MyCourseComponent implements OnInit, OnDestroy{
     faPeopleGroup = faPeopleGroup
 
 
-    initCourse(){
-      this.course$ = this.activityService.getMyActivity(1,5, ACTIVITY_TYPE.COURSE).subscribe( res => {
+    initEvent(){
+      this.event$ = this.activityService.getMyActivity(1,5, ACTIVITY_TYPE.EVENT).subscribe( res => {
         this.myActivity = res
       })
     }
 
     ngOnInit(): void {
-      this.initCourse()
+      this.initEvent()
       
     }
 
     ngOnDestroy(): void {
-     this.course$?.unsubscribe()
+     this.event$?.unsubscribe()
     }
 }

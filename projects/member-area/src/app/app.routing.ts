@@ -29,6 +29,9 @@ import { ReportComponent } from "./pages/report-activity/report.component";
 import { SubscriptionComponent } from "./pages/subscription/subscription.component";
 import { ReportInvoiceComponent } from "./pages/report-income/report-income.component";
 import { MyBookmarkComponent } from "./pages/my-bookmark/my-bookmark.component";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { MyEventsComponent } from "./pages/my-event/my-event.component";
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -79,6 +82,10 @@ export const memberRoutes: Routes = [
         component : MyCourseComponent
     },
     {
+        path : 'my-event',
+        component : MyEventsComponent
+    },
+    {
         path : 'my-bookmark',
         component : MyBookmarkComponent
     },
@@ -119,13 +126,13 @@ export const memberRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent, ArticleComponent,
-        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyBookmarkComponent
+        DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyBookmarkComponent, MyEventsComponent
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),
         InfiniteScrollModule,
-        ShareModule, CustomButtonModule, CardModule, DropdownModule, TabViewModule, NavbarModule, CourseModule, ProfileModule,
+        ShareModule, CustomButtonModule, CardModule, DropdownModule, TabViewModule, NavbarModule, CourseModule, ProfileModule,CommonModule,FormsModule,
         CodeInputModule.forRoot({
             codeLength: 6,
             isCharsCode: true,
@@ -134,7 +141,7 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyEventsComponent
     ]
 })
 
