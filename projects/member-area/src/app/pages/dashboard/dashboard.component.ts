@@ -120,6 +120,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
       idx: 0
     }
 
+
     onOptionPost(postId:string, idx:number){
       this.postIdToDelete = postId
       this.optionPost.postId = postId
@@ -154,16 +155,18 @@ export class DashboardComponent implements OnInit, OnDestroy{
       loadedComment = 0
       commentPostLength = 0
       editComment = false
+      commentPostIdx = -1
 
 
     accountMenu: MenuItem[] = [
         { label: 'Profile', icon: 'pi pi-fw pi-user', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'Report', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/profile") },
-        { label: 'Change Password', icon: 'pi pi-fw pi-lock', command: e=> this.router.navigateByUrl("/profile") },
+        { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/my-transaction") },
+        { label: 'Report Acivity', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/report-activity") },
+        { label: 'Report Income', icon: 'pi pi-fw pi-dollar', command: e=> this.router.navigateByUrl("/report-activity") },
+        { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
+        { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
+        { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
+        { label: 'Change Password', icon: 'pi pi-fw pi-lock', command: e=> this.router.navigateByUrl("/change-password") },
         { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
       ];
 
@@ -178,12 +181,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
       ];
 
       optionCommentDelete: MenuItem[] = [
-        { label: 'Delete', icon: 'pi pi-fw pi-trash', command: e=> this.confirmDelete(this.optionPost.idx) },
+        { label: 'Delete', icon: 'pi pi-fw pi-trash', command: e=> this.confirmDeleteComment(this.commentPostIdx) },
         { label: 'Edit', icon: 'pi pi-fw pi-pencil', command: e=> this.onEditComment() },
-        { label: 'Hide', icon: 'pi pi-fw pi-eye-slash', command: e=> this.onInsertBookmark(this.optionPost.postId, this.optionPost.idx) },
-      ];
-      optionCommentSave: MenuItem[] = [
-        { label: 'Hide', icon: 'pi pi-fw pi-eye-slash', command: e=> this.onInsertBookmark(this.optionPost.postId, this.optionPost.idx) }
       ];
 
 
@@ -192,8 +191,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
       }
 
       commentIdx!:number
-      onShowEditComment(idx:number){
+      postIdxDelete!:number
+      onShowEditComment(idx:number, postIdx:number){
         this.commentIdxEdit = idx
+        this.postIdxDelete = postIdx
         // this.commentIdSelected = postCommentId
         // console.log(this.commentPost[this.commentIdxEdit].contentComment)
       }
@@ -332,17 +333,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
       })
     }
 
-    onDeleteComment(commentId:string, postId: string){
-      console.log(commentId)
-      this.deleteComment$ = this.postService.deletePostComment(commentId).subscribe(res =>{
-        this.posts.map(p => {
-          p.countPostComment--
-          this.commentFb.reset()
-        })
 
-        this.initComment(postId)
-      })
-    }
 
     onShowInsertComment(postId: string, idx:number){
       this.postIdToComment = postId
@@ -519,6 +510,51 @@ export class DashboardComponent implements OnInit, OnDestroy{
           accept: () => {
             console.log(this.postIdToDelete)
             this.postDelete$ = this.postService.deletePost(this.postIdToDelete).subscribe(res => this.initPosts())
+              this.messageService.add({severity:'info', summary:'Confirmed', detail:'Record deleted'});
+              this.postIdToDelete = ""
+          },
+          reject: (type: any) => {
+              switch(type) {
+                  case ConfirmEventType.REJECT:
+                      this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+                  break;
+                  case ConfirmEventType.CANCEL:
+                      this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+                  break;
+              }
+          }
+      });
+  }
+
+  onDeleteComment(commentId:string, postId: string){
+    console.log(commentId)
+    this.deleteComment$ = this.postService.deletePostComment(commentId).subscribe(res =>{
+      this.posts.map(p => {
+        p.countPostComment--
+        this.commentFb.reset()
+      })
+
+      this.initComment(postId)
+    })
+  }
+    confirmDeleteComment(idx?:number) {
+      // if(idx){
+      //   this.commentPost[idx].showPostOption = !this.posts[idx].showPostOption
+      // }
+      this.confirmationService.confirm({
+          message: 'Do you want to delete this post?',
+          header: 'Delete Confirmation',
+          icon: 'pi pi-info-circle',
+          accept: () => {
+            console.log(this.postIdToDelete)
+            this.postDelete$ = this.postService.deletePostComment(this.commentPost[this.commentIdxEdit].postCommentId).subscribe(res => {
+              this.posts.map(p => {
+                p.countPostComment--
+                this.commentFb.reset()
+              })
+
+              this.initComment(this.posts[this.postIdxDelete].id)
+            })
               this.messageService.add({severity:'info', summary:'Confirmed', detail:'Record deleted'});
               this.postIdToDelete = ""
           },
