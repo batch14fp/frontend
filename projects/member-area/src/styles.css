@@ -15,3 +15,15 @@ img {
 .postImageProfile {
   object-fit: cover !important;
 }
+
+span:nth-child(1) {
+  display: inline !important;
+}
+
+span:first-child {
+  display: inline !important;
+}
+
+.post-content>p {
+  display: inline !important;
+}

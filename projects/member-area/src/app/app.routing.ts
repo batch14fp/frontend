@@ -29,9 +29,16 @@ import { ReportComponent } from "./pages/report-activity/report.component";
 import { SubscriptionComponent } from "./pages/subscription/subscription.component";
 import { ReportInvoiceComponent } from "./pages/report-income/report-income.component";
 import { MyBookmarkComponent } from "./pages/my-bookmark/my-bookmark.component";
+
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { MyEventsComponent } from "./pages/my-event/my-event.component";
+
+import { ROLE } from "projects/base-area/src/app/constant/role.service";
+import { AuthRoleGuard } from "projects/base-area/src/app/guard/role.guard";
+import { AuthLoginGuard } from "projects/base-area/src/app/guard/auth-login.guard";
+import { AuthLoadGuard } from "projects/base-area/src/app/guard/authload.guard";
+
 // import { TreadComponent } from "./pages/thread/tread.component";
 
 
@@ -39,7 +46,8 @@ import { MyEventsComponent } from "./pages/my-event/my-event.component";
 export const memberRoutes: Routes = [
     {
         path: 'member/login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate : [ AuthLoginGuard ],
     },
     {
         path: 'sign-up',
@@ -52,12 +60,16 @@ export const memberRoutes: Routes = [
     {
         path:'course',
         loadChildren:()=>import("./pages/course/course.module").then(c=>c.CourseModule),
-        component:NavbarComponent
+        component:NavbarComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path:'events',
         loadChildren:()=>import("./pages/event/event.module").then(e=>e.EventModule),
-        component:NavbarComponent
+        component:NavbarComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path: 'profile',
@@ -68,18 +80,26 @@ export const memberRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path : 'report-activity',
-        component : ReportComponent
+        component : ReportComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path:'report-income',
-        component: ReportInvoiceComponent
+        component: ReportInvoiceComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path : 'my-course',
-        component : MyCourseComponent
+        component : MyCourseComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path : 'my-event',
@@ -87,12 +107,16 @@ export const memberRoutes: Routes = [
     },
     {
         path : 'my-bookmark',
-        component : MyBookmarkComponent
+        component : MyBookmarkComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path : 'subscription',
         // component : SubscriptionComponent
-        loadChildren: () => import("./pages/subscription/subscription.module").then(s => s.SubscriptionModule)
+        loadChildren: () => import("./pages/subscription/subscription.module").then(s => s.SubscriptionModule),
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
     },
     {
         path: '',
@@ -127,7 +151,9 @@ export const memberRoutes: Routes = [
 @NgModule({
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
+
         NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyBookmarkComponent, MyEventsComponent
+
     ],
     imports: [
         RouterModule.forRoot(memberRoutes),

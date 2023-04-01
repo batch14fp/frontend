@@ -1,4 +1,4 @@
-<!-- <pre>{{courseFb.value | json}}</pre> -->
+<pre>{{courseFb.value | json}}</pre>
 <main>
   <div class="w-12 flex sm:flex-column lg:flex-row relative">
     <div class="w-2 sm:hidden md:hidden lg:block pt-4 px-4 top-0">
@@ -140,35 +140,35 @@
                 <div class="flex flex-column">
                   <p class="text-sm font-medium">Upload Cover Image<span class="text-red-400"
                       pTooltip="This field is required">*</span></p>
-                  <!-- <p-fileUpload #file mode="basic" name="myfile[]" [showUploadButton]="false" [showCancelButton]="false"
-                    [multiple]="true" [maxFileSize]="1000000" id="formFileMultiple" (onSelect)="onUpload($event)"
-                    formArrayName="imageCover" class="" style="width: 100%;">
-                  </p-fileUpload> -->
-
-
                   <input type="file" #file class="hidden" (change)="onUpload($event)">
-
-                  <img *ngIf="this.courseFb.value.imageCover!['contentFile']" [src]="imageSource" class="mt-2"
-                    alt="Image Source">
-
+                  <img *ngIf="this.courseFb.value.imageCover!['contentFile']" [src]="imageSource"
+                    class="mt-2 max-h-10rem" alt="Image Source">
                   <button *ngIf="this.courseFb.value.imageCover!['contentFile']" (click)="onRemoveImageCover()"
                     class="bg-red-600 mt-4 cursor-pointer hover:bg-red-700  text-white border-round-md font-medium  text-sm py-2 border-1 border-red-600 border-none">Remove</button>
-
                   <div *ngIf="!imageSource" (click)="file.click()" class="w-full border-round-md border-dashed border-gray-500 surface-overlay mt-2 border-1 h-4rem
                   flex justify-content-center align-content-center cursor-pointer hover:bg-gray-100">
-
                     <i class="pi pi-camera px-2 py-2 align-self-center relative text-800" style="font-size: 16px;">
                     </i>
-                    
                   </div>
-
-
                 </div>
                 <div class="flex flex-column w-full">
                   <label for="title" class="text-sm font-medium">Title<span class="text-red-400"
                       pTooltip="This field is required">*</span></label>
                   <input formControlName="title" placeholder="ex: Build Microservice App" type="text" id="title"
+                    class="{{courseFb.get('title')!.invalid && (courseFb.get('title')!.dirty || courseFb.get('title')!.touched)}} ? 'ng-invalid ng-dirty' : '' }}"
                     pInputText />
+                  <div
+                    *ngIf="courseFb.get('title')!.invalid && (courseFb.get('title')!.dirty || courseFb.get('title')!.touched)"
+                    class="alert">
+                    <div *ngIf="courseFb.get('title')!.errors?.['required']" class="text-red-600 text-xs">
+                      Title is required.
+                    </div>
+                    <div *ngIf="courseFb.get('title')!.errors?.['minlength']" class="text-xs text-red-600">
+                      Name must be at least 40 characters long.
+                    </div>
+                  </div>
+
+
                 </div>
                 <div class="bg-white border-round-md flex justify-content-between w-12 gap-4">
                   <div class="flex flex-column w-6">
@@ -184,8 +184,6 @@
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
                   </div>
                 </div>
-
-
                 <div class="flex flex-column w-full">
                   <label for="title" class="text-sm font-medium">Price<span class="text-red-400"
                       pTooltip="This field is required">*</span></label>
@@ -216,7 +214,6 @@
                       </span>
                     </ng-template>
                   </p-editor>
-                  <!-- <p-editor formControlName="description" [style]="{'height':'320px'}"></p-editor> -->
                 </div>
               </div>
               <div class="w-6 md:w-6 sm:w-12 flex flex-column gap-3">
