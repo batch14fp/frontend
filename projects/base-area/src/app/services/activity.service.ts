@@ -46,4 +46,5 @@ export class ActivityService{
     getDataActivity() : Observable<CountMemberRes>{
         return this.http.get<CountMemberRes>(`${BASE_URL}/activities/total`)
     }
+
 }
