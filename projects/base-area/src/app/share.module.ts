@@ -41,7 +41,8 @@ import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
 import { GalleriaModule } from 'primeng/galleria';
 import { ScrollTopModule } from 'primeng/scrolltop';
-
+import { BlockUIModule } from 'primeng/blockui';
+import { PanelModule } from "primeng/panel";
 
 
 
@@ -57,7 +58,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
      ReactiveFormsModule, NotFoundModule, AccordionModule, EditorModule
      ,DialogModule, InputSwitchModule, ConfirmDialogModule, AnimateModule
      ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule, BottomNavbarModule, TooltipModule,
-     TieredMenuCustomComponent,AutoFocusModule, DividerModule, GalleriaModule, ScrollTopModule
+     TieredMenuCustomComponent,AutoFocusModule, DividerModule, GalleriaModule, ScrollTopModule, BlockUIModule,
+     PanelModule
 
   ],
   exports:[
@@ -69,7 +71,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     ,AvatarModule, SkeletonModule, InputMaskModule, InputNumberModule, TabMenuModule,
     BottomNavbarModule, TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule,
     DividerModule, GalleriaModule, ScrollTopModule,
-    TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule, DividerModule,TagModule
+    TooltipModule, WordLimitPipe, TieredMenuCustomComponent, AutoFocusModule, DividerModule,TagModule,
+    BlockUIModule, PanelModule
   ]
 
 })
