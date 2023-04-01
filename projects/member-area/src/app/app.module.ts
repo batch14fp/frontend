@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ConfirmationService, ConfirmEventType, MessageService} from 'primeng/api';
 import { ShareModule } from '../../../base-area/src/app/share.module';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { ShareModule } from '../../../base-area/src/app/share.module';
   ],
   imports: [
     BrowserModule, AppRouting,
-    HttpClientModule,FormsModule, ReactiveFormsModule, BrowserAnimationsModule, ShareModule
+    HttpClientModule, ReactiveFormsModule, BrowserAnimationsModule, ShareModule
   ],
   providers: [
     {

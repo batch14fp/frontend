@@ -14,12 +14,12 @@ import { ActivityReq } from "../dto/activity/activity-req";
 import { ActivityRes } from "../dto/activity/activity-res";
 import { res } from "../dto/res";
 import { ResInsert } from "../dto/res-insert";
-import { PaymentDetailRes } from '../dto/payment/payment-detail-res';
 import { ActivityUpcomingAllRes } from '../dto/activity/activity-upcoming-all-res';
 import { ActivityMemberRes } from "@dto/report/activity-member-res";
 import { ActivityAdminRes } from "@dto/report/activity-admin-res";
 import { IncomesMemberRes } from '@dto/report/incomes-member-res';
 import { IncomesAdminRes } from '@dto/report/incomes-admin-res';
+import { PaymentDetailRes } from '@dto/payment/payment-detail-res-data';
 
 
 @Injectable({
@@ -92,7 +92,7 @@ export class ActivityService{
   }
 
 
-    getMemberReportIncome(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
+    getMemberReportIncome(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
             return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/activities/member/report/incomes?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
@@ -102,7 +102,7 @@ export class ActivityService{
         }
     }
 
-    getAdminReportIncome(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
+    getAdminReportIncome(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
             return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
@@ -112,7 +112,7 @@ export class ActivityService{
         }
     }
 
-    getReportAllByDateRange(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
+    getReportAllByDateRange(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
             return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
@@ -122,7 +122,7 @@ export class ActivityService{
         }
     }
 
-    getReportAllByDateRangeAdmin(limit:number,offset:number,startDate?:string,endDate?:string, typeCode?:string){
+    getReportAllByDateRangeAdmin(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
             return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
@@ -135,6 +135,7 @@ export class ActivityService{
     getDownloadReport(id:string,startDate?:string,endDate?:string){
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
+
     getDownloadIncomesReport(id:string,startDate?:string,endDate?:string){
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/incomes/file?userId=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
@@ -144,4 +145,15 @@ export class ActivityService{
     getDownloadIncomesReportAdmin(startDate?:string,endDate?:string){
         return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes/file?startDate=${startDate}&endDate=${endDate}`)
     }
+
+    getMyActivity(page: number, size: number, categories?:string,  typeCode?:string){
+        if(typeCode == null){
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}`)
+        }else if(categories == null){
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}`)
+        }else{
+            return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}&categoryCode=${categories}`)
+        }
+    }
+
 }

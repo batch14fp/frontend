@@ -54,7 +54,7 @@
                 <p class="font-light text-gray-600">{{item.startDate | date:'LLL'}}</p>
               </div>
               <div class="flex flex-column w-9">
-                <p class="cursor-pointer">{{turncate(item.title)}}</p>
+                <p class="">{{turncate(item.title)}}</p>
                 <div class="flex">
                   <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
                   <p class="text-xs font-light text-gray-600">{{item.totalParticipant}} people going</p>
@@ -154,10 +154,6 @@
                         <p>Create Course</p>
                       </div>
                     </div>
-                    <!-- <div class="flex align-content-center">
-                      <button
-                        class="bg-blue-600 text-white border-none px-4 py-1 border-round-md cursor-pointer hover:bg-blue-700">Post</button>
-                    </div> -->
                   </div>
                 </div>
               </div>
@@ -324,10 +320,10 @@
                             Poll closed</p>
                           <p class="text-md text-light text-gray-600" *ngIf="post.isVote">•</p>
                           <p (click)="onUnvote(post.pollingResponId, post.id)"
-                            *ngIf="post.isVote && calculateDiff(post.endAt) !== 0"
+                            *ngIf="post.isVote && calculateDiff(post.endAt) > 0"
                             class="text-md text-light text-blue-600 font-medium cursor-pointer">
                             Undo</p>
-                          <p *ngIf="post.isVote && calculateDiff(post.endAt) === 0" style="cursor: not-allowed;"
+                          <p *ngIf="post.isVote && calculateDiff(post.endAt) < 0" style="cursor: not-allowed;"
                             pTooltip="This polling has ended !" class="text-md text-light text-blue-600 font-medium">
                             Undo</p>
                         </div>
@@ -802,4 +798,16 @@
   </div>
   <p-confirmDialog header="Confirmation" [style]="{width: '50vw'}" [baseZIndex]="10000"
     acceptButtonStyleClass="p-button-text" defaultFocus="reject"></p-confirmDialog>
+
+  <p-dialog header="Header" [(visible)]="visible" [style]="{ width: '30vw'}">
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">Become Premium</span>
+    </ng-template>
+    <p>
+      Upgrade your plan to premium to see full post.
+    </p>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="visible = false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+  </p-dialog>
 </main>
