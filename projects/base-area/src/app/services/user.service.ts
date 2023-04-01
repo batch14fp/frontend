@@ -39,7 +39,7 @@ export class UserService {
     throw new Error("MemberCode is empty")
   }
 
-  getIdLogin(): number {
+  getIdLogin(): String {
     const data = localStorage.getItem("dataLogin")
     if (data) {
       return JSON.parse(data).userId
@@ -95,6 +95,8 @@ export class UserService {
     }
     throw new Error("Role is empty")
   }
+
+
 
   get images(): string {
     const data = localStorage.getItem("dataLogin")
