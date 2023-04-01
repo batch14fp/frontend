@@ -38,6 +38,7 @@ import { ROLE } from "projects/base-area/src/app/constant/role.service";
 import { AuthRoleGuard } from "projects/base-area/src/app/guard/role.guard";
 import { AuthLoginGuard } from "projects/base-area/src/app/guard/auth-login.guard";
 import { AuthLoadGuard } from "projects/base-area/src/app/guard/authload.guard";
+import { MyTransactionComponent } from "./pages/my-transaction/my-transaction.component";
 
 // import { TreadComponent } from "./pages/thread/tread.component";
 
@@ -112,6 +113,12 @@ export const memberRoutes: Routes = [
         data:[ROLE.MMBR]
     },
     {
+        path: 'my-transaction',
+        component: MyTransactionComponent,
+        canActivate:[AuthRoleGuard],
+        data:[ROLE.MMBR]
+    },
+    {
         path : 'subscription',
         // component : SubscriptionComponent
         loadChildren: () => import("./pages/subscription/subscription.module").then(s => s.SubscriptionModule),
@@ -152,7 +159,8 @@ export const memberRoutes: Routes = [
     declarations: [
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
 
-        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyBookmarkComponent, MyEventsComponent
+        NotFoundComponent, InvoiceComponent,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyBookmarkComponent, MyEventsComponent,
+        MyTransactionComponent
 
     ],
     imports: [
@@ -167,7 +175,8 @@ export const memberRoutes: Routes = [
     exports: [
         RouterModule,
         DashboardComponent, LoginComponent, SignUpComponent, ForgetPassComponent, PostComponent,
-        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyEventsComponent
+        NotFoundComponent,CustomButtonModule,PostComponent,ReportComponent, ReportInvoiceComponent, MyCourseComponent, MyEventsComponent,
+        MyTransactionComponent
     ]
 })
 
