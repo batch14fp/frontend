@@ -20,6 +20,7 @@ import { ActivityAdminRes } from "@dto/report/activity-admin-res";
 import { IncomesMemberRes } from '@dto/report/incomes-member-res';
 import { IncomesAdminRes } from '@dto/report/incomes-admin-res';
 import { PaymentDetailRes } from '@dto/payment/payment-detail-res-data';
+import { PaymentDetailResData } from '@dto/payment/payment-detail-res';
 
 
 @Injectable({
@@ -156,6 +157,16 @@ export class ActivityService{
         }
         else{
             return this.http.get<ActivityRes[]>(`${BASE_URL}/activities/my-activity/filter?page=${page}&size=${size}&typeCode=${typeCode}&categoryCode=${categories}`)
+        }
+    }
+
+    getMyTransaction(limit?:number,offset?:number,isPaid?:boolean): Observable<PaymentDetailResData[]>{
+        if(isPaid == null){
+            return this.http.get<PaymentDetailResData[]>(`${BASE_URL}/activities/my-transactions?limit=${limit}&offset=${offset}`)
+        }else if(isPaid == true){
+            return this.http.get<PaymentDetailResData[]>(`${BASE_URL}/activities/my-transactions?isPaid=true&limit=${limit}&offset=${offset}`)
+        }else{
+            return this.http.get<PaymentDetailResData[]>(`${BASE_URL}/activities/my-transactions?isPaid=false&limit=${limit}&offset=${offset}`)
         }
     }
 
