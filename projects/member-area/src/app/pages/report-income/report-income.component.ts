@@ -8,6 +8,7 @@ import { LazyLoadEvent } from "primeng/api";
 import { Subscription } from "rxjs";
 import {convertUTCToLocalDateISO} from '../../../../../base-area/src/app/utils/dateutil'
 import { IncomesMemberRes } from "@dto/report/incomes-member-res";
+import { UserService } from "@service/user.service";
 
 @Component({
     selector : 'app-report-income',
@@ -29,7 +30,7 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
     loading: boolean = true
     userId!:string
 
-    constructor(private fb:FormBuilder,private title:Title, private router:Router, private activityService:ActivityService, private activatedRoute:ActivatedRoute){
+    constructor(private fb:FormBuilder,private title:Title, private router:Router, private activityService:ActivityService, private activatedRoute:ActivatedRoute, private userService:UserService){
         this.title.setTitle("Report")
     }
 
@@ -45,7 +46,7 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
     }
 
     onDownload(){
-        this.downloadReport$ = this.activityService.getDownloadReport(this.userId, this.startDate, this.endDate).subscribe(res=>{
+        this.downloadReport$ = this.activityService.getDownloadIncomesReport(this.userId, this.startDate, this.endDate).subscribe(res=>{
             
         })
     }
@@ -69,7 +70,8 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit(): void {
-        // this.initActivity()
+        this.userId = this.userService.getIdLogin().substring(0);
+        //this.initActivity();
     }
 
     ngOnDestroy(): void {

@@ -20,7 +20,7 @@ export class ReportComponent implements OnInit, OnDestroy{
     private activityReport$?:Subscription
     private activity$?:Subscription
     private downloadReport$?:Subscription
-    private user$?:Subscription
+ 
 
     activityMember: ActivityMemberRes[] = []
     limit:number = 1

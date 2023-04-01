@@ -17,6 +17,8 @@ import { Subscription } from "rxjs";
 export class ReportAdminComponent implements OnInit, OnDestroy{
     private activityReport$?:Subscription
     private activity$?:Subscription
+    private downloadReport$?:Subscription
+
 
     activityAdmin: ActivityAdminRes[] = []
     limit:number = 3
@@ -35,6 +37,12 @@ export class ReportAdminComponent implements OnInit, OnDestroy{
         startDate : [""],
         endDate:[""]
     })
+
+    onDownload(){
+        this.downloadReport$ = this.activityService.getDownloadReportAdmin(this.startDate, this.endDate).subscribe(res=>{
+            
+        })
+    }
 
     loadData(event: LazyLoadEvent) {
         console.log(event)
