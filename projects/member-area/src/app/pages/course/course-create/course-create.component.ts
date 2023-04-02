@@ -28,7 +28,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
 
   courseFb = this.fb.group({
     title: ["",  [Validators.required, Validators.minLength(40)]],
-    description: ["",  Validators.required, Validators.minLength(40)],
+    description: ["",  Validators.required],
     provider: ["",  Validators.required],
     location: ["",  Validators.required],
     price: [0,  [Validators.required, Validators.min(1)]],
@@ -72,7 +72,6 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
   imageIdProfile= ""
   fullNameLogin=""
   memberReguler = MEMBER_STATUS.REGULAR
-
   imageSource!:SafeResourceUrl
 
 
@@ -85,6 +84,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     faBook = faBook
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
+
 
     initCategories(){
       this.categories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
@@ -175,7 +175,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     ngOnInit(): void {
     this.initCategories()
     this.courseFb.get("startDateCourse")?.valueChanges.subscribe(res => this.startDate = new Date(res!) )
-    this.activity$ = this.activityService.getActivityTypeByCode(ACTIVITY_TYPE.COURSE).subscribe(res => this.activityTypeId = res.activityTypeId)
+    this.activity$ = this.activityTypeService.getActivityTypeByCode(ACTIVITY_TYPE.COURSE).subscribe(res => this.activityTypeId = res.activityTypeId)
     this.memberStatus =  this.userService.getMemberCode()
     this.initUpcomingEvents()
     this.memberStatus =  this.userService.getMemberCode()

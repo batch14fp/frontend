@@ -126,8 +126,6 @@ export class CourseComponent implements OnInit, OnDestroy {
 
 
 
-
-
   sortFilter() {
     const selectedValue = this.sortTypeBuilder.get('choose')?.value;
     if (selectedValue === '2') {
