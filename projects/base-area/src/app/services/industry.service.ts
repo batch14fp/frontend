@@ -18,21 +18,18 @@ export class IndustryService{
     constructor(private http : HttpClient){}
 
     getAllIndustry() : Observable<IndustryRes[]>{
-        return this.http.get<IndustryRes[]>(`${BASE_URL}/industries`, {
-          headers: {
-            skip: "true"
-          }
+        return this.http.get<IndustryRes[]>(`${BASE_URL}/admin/industries`, {
         })
     }
 
     insertIndustry(data : IndustryReq) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/industries`,data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/industries`,data)
     }
 
     updateIndustry(data:IndustryUpdateReq):Observable<UpdateRes>{
-        return this.http.put<UpdateRes>(`${BASE_URL}/industries`, data)
+        return this.http.put<UpdateRes>(`${BASE_URL}/admin/industries`, data)
     }
     deleteIndustry(id:string):Observable<res>{
-        return this.http.delete<res>(`${BASE_URL}/industries/${id}`)
+        return this.http.delete<res>(`${BASE_URL}/admin/industries/${id}`)
     }
 }

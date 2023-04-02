@@ -34,6 +34,7 @@ export class MembershipComponent implements OnInit, OnDestroy{
             codeStatus: membership.codeStatus,
             statusName:membership.statusName,
             periodDay:membership.periodDay,
+            price:membership.price,
             active: membership.isActive,
             ver: membership.ver
         })
@@ -53,7 +54,8 @@ export class MembershipComponent implements OnInit, OnDestroy{
     createMembership = this.fb.group({
         codeStatus: [""],
         statusName:[""],
-        periodDay:[0]
+        periodDay:[0],
+        price:[""]
     })
 
     updateMembership = this.fb.group({
@@ -61,6 +63,7 @@ export class MembershipComponent implements OnInit, OnDestroy{
         codeStatus: [""],
         statusName:[""],
         periodDay:[0],
+        price:[""],
         ver: [0],
         active: [true]
     })
@@ -70,6 +73,7 @@ export class MembershipComponent implements OnInit, OnDestroy{
             codeStatus: this.createMembership.value.codeStatus!,
             statusName:this.createMembership.value.statusName!,
             periodDay:this.createMembership.value.periodDay!,
+            price:this.createMembership.value.price!,
         }
         this.memberships$ = this.memberStatusService.insertMemberStatus(data).subscribe(res => {
             alert('Create member status success')
@@ -84,6 +88,7 @@ export class MembershipComponent implements OnInit, OnDestroy{
             codeStatus: this.updateMembership.value.codeStatus!,
             statusName:this.updateMembership.value.statusName!,
             periodDay:this.updateMembership.value.periodDay!,
+            price:this.updateMembership.value.price!,
             ver: this.updateMembership.value.ver!,
             isActive: this.updateMembership.value.active!
         }

@@ -17,22 +17,17 @@ export class ActivityTypeService{
     constructor(private http : HttpClient){}
 
     getAllActivityType() : Observable<ActivityTypeRes[]>{
-        return this.http.get<ActivityTypeRes[]>(`${BASE_URL}/activity-types`)
+        return this.http.get<ActivityTypeRes[]>(`${BASE_URL}/admin/activity-types`)
     }
-
-    getActivityTypeByCode(code: string) : Observable<ActivityTypeRes>{
-        return this.http.get<ActivityTypeRes>(`${BASE_URL}/activity-types/byCode?typeCode=${code}`)
-    }
-
     insertActivityType(data :ActivityTypeReq) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/activity-types`,data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/activity-types`,data)
     }
 
     updateActivityType(data : ActivityTypeUpdateReq) : Observable<UpdateRes>{
-        return this.http.put<UpdateRes>(`${BASE_URL}/activity-types`,data)
+        return this.http.put<UpdateRes>(`${BASE_URL}/admin/activity-types`,data)
     }
 
     deleteActivityType(id : string) : Observable<res>{
-        return this.http.delete<res>(`${BASE_URL}/activity-types/${id}`)
+        return this.http.delete<res>(`${BASE_URL}/admin/activity-types/${id}`)
     }
 }

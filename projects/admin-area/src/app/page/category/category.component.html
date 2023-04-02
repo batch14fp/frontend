@@ -1,4 +1,3 @@
-<pre>{{getAllCategory|json}}</pre>
 <div class="mx-6">
     <h1>category</h1>
     <div class="col-3 my-2">
@@ -46,11 +45,10 @@
                     <form [formGroup]="updateCategory">
                         <p-dialog header="Update Category" [(visible)]="displayUpdate" [breakpoints]="{'960px': '75vw'}"
                             [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-                            <pre>{{updateCategory.value|json}}</pre>
                             <div class="mb-3">
                                 <div class="mb-3 flex flex-column w-full">
                                     <label for="emailInput" class="font-medium col-form-label">Category Code</label>
-                                    <input type="text" class="w-full " [disabled]="disabled"
+                                    <input type="text" class="w-full "
                                         [value]="category.categoryCode" formControlName="categoryCode" pInputText
                                         id="categoryCode" name="categoryCode">
                                 </div>
