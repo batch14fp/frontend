@@ -18,7 +18,7 @@ import { CategoryService } from '@service/category.service';
 export class HomeComponent{
   constructor(private title: Title, private fb: FormBuilder,
     private userService: UserService,  private router: Router,private categoryService: CategoryService){
-      this.title.setTitle("Not Found")
+      this.title.setTitle("WeCommunity")
     }
 
     private category$?: Subscription

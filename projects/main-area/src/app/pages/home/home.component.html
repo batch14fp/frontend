@@ -1,12 +1,12 @@
-<main class="flex flex-column justify-content-center">
+<main class="flex flex-column justify-content-center mb-8">
   <div class="w-11 flex flex-column justify-content-center align-content-center ">
     <div class="flex justify-content-between h-2rem mt-3">
-      <img src="https://i.ibb.co/nLxz9PJ/unnamed-2.png" alt="wecommunity logo">
+      <img src="https://i.ibb.co/nLxz9PJ/unnamed-2.png" alt="wecommunity logo" style="object-fit: contain !important;">
       <div class="flex gap-3">
         <button routerLink="/member/login"
-          class="text-blue-800 cursor-pointer bg-white px-2 py-1 border-round-xl border-1 border-blue-800">Login</button>
+          class="text-blue-800 cursor-pointer bg-white hover:bg-blue-600 hover:text-white px-2 py-1 border-round-md border-1 border-blue-800">Login</button>
         <button routerLink="/sign-up"
-          class="text-white bg-blue-800 cursor-pointer px-3 py-1 border-none border-round-xl">Register</button>
+          class="text-white bg-blue-600 hover:bg-blue-800 cursor-pointer px-3 py-1 border-none border-round-md">Register</button>
       </div>
     </div>
     <div class="flex w-8 justify-content-between align-self-center align-content-center gap-4">
@@ -15,7 +15,7 @@
           <span class="text-4xl font-semibold text-blue-600">World</span> </h1>
         <p class="text-md font-800 font-medium mt-2">Turn your knowledge into an online course, make events or collect
           data from creating polling.</p>
-        <button
+        <button routerLink="/sign-up"
           class="mt-4 hover:bg-blue-900 text-white bg-blue-800 cursor-pointer px-3 py-2 border-none border-round-md">Register
           Now</button>
       </div>
@@ -23,16 +23,38 @@
         <img height="460px" src="https://i.ibb.co/TTSq61Z/mobile-8.png" alt="">
       </div>
     </div>
-    <div class="flex w-10 mt-4 justify-content-center align-self-center align-content-center">
+    <div class="flex w-10 mt-8 justify-content-center align-self-center align-content-center">
       <div class="w-6" style="object-fit: contain !important;">
         <img class="h-20rem" style="object-fit: contain !important;" src="https://i.ibb.co/L5J2v5z/mobile-9.png" alt="">
       </div>
       <div class="w-6 align-self-center">
-        <p class="text-2xl font-800 font-medium">Create Premium Post and Collect data from polling</p>
+        <p class="text-2xl font-800 font-medium">Create Premium Post and see respond from polling</p>
+        <div class="flex flex-column mt-3 gap-2">
+          <div class="flex gap-2">
+            <i class="pi pi-check-circle" style="color: slateblue"></i>
+            <div class="flex flex-column">
+              <p class="text-900 font-semibold text-sm">Create Polling</p>
+              <p>See others people opinion to your question on our platform anonymously</p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <i class="pi pi-check-circle" style="color: slateblue"></i>
+            <div class="flex flex-column">
+              <p class="text-900 font-semibold text-sm">Create Premium Post</p>
+              <p>Share your opinion, write interest topic to another premium user</p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <i class="pi pi-check-circle" style="color: slateblue"></i>
+            <div class="flex flex-column">
+              <p class="text-900 font-semibold text-sm">Create Event and Course</p>
+              <p>Turn your knowledge into an online or offline course/p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- <div class="hero-section w-12 h-18rem">
-  </div> -->
+
 </main>
