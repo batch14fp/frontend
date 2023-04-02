@@ -11,13 +11,13 @@ import { CategoryService } from "@service/category.service";
 import { UserService } from "@service/user.service";
 import { MenuItem } from "primeng/api";
 import { ACTIVITY_TYPE } from "projects/base-area/src/app/constant/activity-type";
-<<<<<<< HEAD
+
 import { SORT_TYPE } from "projects/base-area/src/app/constant/sort_type";
-=======
+
 import { MEMBER_STATUS } from "projects/base-area/src/app/constant/member-status";
 import { getInitials } from "projects/base-area/src/app/utils/getInitial";
 import { truncateString } from "projects/base-area/src/app/utils/turncateString";
->>>>>>> d8bc5e373bc1d9ea957f70312f4efa89aa712768
+
 import { Subscription } from "rxjs";
 
 @Component({
@@ -62,7 +62,7 @@ export class EventListComponent implements OnInit, OnDestroy {
         this.title.setTitle("Event")
     }
 
-<<<<<<< HEAD
+
     sortTypeBuilder = this.fb.group({
       choose: ['1']
     })
@@ -130,16 +130,13 @@ export class EventListComponent implements OnInit, OnDestroy {
       }
     }  
 
-=======
->>>>>>> d8bc5e373bc1d9ea957f70312f4efa89aa712768
     categoriesList:string[] = []
     categories: CategoryRes[] = []
     dateSearch!: Date
-<<<<<<< HEAD
+
     sortType?:string
 
-=======
->>>>>>> d8bc5e373bc1d9ea957f70312f4efa89aa712768
+
     selectedCategory: string[] = []
 
     fotoName(name: string){
@@ -207,7 +204,7 @@ export class EventListComponent implements OnInit, OnDestroy {
             }
           });
         }
-<<<<<<< HEAD
+
       } else if (selectedValue === '3') {
         if (this.categoriesList.length) {
           this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST,this.categoriesList )?.subscribe(res => {
@@ -251,9 +248,7 @@ export class EventListComponent implements OnInit, OnDestroy {
         }
       }
       
-=======
 
->>>>>>> d8bc5e373bc1d9ea957f70312f4efa89aa712768
     }
   
 

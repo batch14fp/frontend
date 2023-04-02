@@ -306,12 +306,7 @@
             <div class="category mt-4">
               <p class="text-xl">Category</p>
               <div class="field-checkbox mt-2" *ngFor="let cat of categories">
-<<<<<<< HEAD
-                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="sortFilterCategory()"
-=======
-                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="categoryFilter()"
->>>>>>> d8bc5e373bc1d9ea957f70312f4efa89aa712768
-                  value="{{cat.categoryCode}}" inputId="hr">
+                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="sortFilterCategory()" value="{{cat.categoryCode}}" inputId="hr">
                 </p-checkbox>
                 <label>{{cat.categoryName}}</label>
               </div>
