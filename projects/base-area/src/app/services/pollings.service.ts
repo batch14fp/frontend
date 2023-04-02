@@ -30,7 +30,7 @@ export class PollingsService {
     }
 
     unvotePolling(id : string) : Observable<res>{
-      return this.http.delete<res>(`${BASE_URL}/posts/unvote/${id}`)
+      return this.http.delete<res>(`${BASE_URL}/pollings/unvote/${id}`)
   }
 
 

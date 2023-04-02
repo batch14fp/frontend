@@ -21,6 +21,10 @@ import { IncomesMemberRes } from '@dto/report/incomes-member-res';
 import { IncomesAdminRes } from '@dto/report/incomes-admin-res';
 import { PaymentDetailRes } from '@dto/payment/payment-detail-res-data';
 import { PaymentDetailResData } from '@dto/payment/payment-detail-res';
+import { BankPaymentRes } from '@dto/bankpayment/bank-payment-res';
+import { ActivityTypeRes } from '@dto/activitytype/activity-type-res';
+import { MembershipPaymentReq } from '@dto/payment/member-pay-req';
+import { InvoiceRes } from '@dto/invoice/invoice-res';
 
 
 @Injectable({
@@ -109,57 +113,57 @@ else{
 
     getMemberReportIncome(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/activities/member/report/incomes?limit=${limit}&offset=${offset}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/report/member/incomes?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/activities/member/report/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/report/member/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/activities/member/report/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/report/member/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
     getAdminReportIncome(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes?limit=${limit}&offset=${offset}`)
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/report/admin/incomes?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/report/admin/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/report/admin/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
     getReportAllByDateRange(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}`)
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/report/member/activity?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/report/member/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/activities/member/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/report/member/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
     getReportAllByDateRangeAdmin(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report?limit=${limit}&offset=${offset}`)
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/activity?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
     getDownloadReport(id:string,startDate?:string,endDate?:string){
-        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/member/activity/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
 
 
     getDownloadIncomesReport(id:string,startDate?:string,endDate?:string){
-        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/member/report/incomes/file?userId=${id}&startDate=${startDate}&endDate=${endDate}`)
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/member/incomes/file?userId=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
     getDownloadReportAdmin(startDate?:string,endDate?:string){
-        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report/file?startDate=${startDate}&endDate=${endDate}`)
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/activity/file?startDate=${startDate}&endDate=${endDate}`)
     }
     getDownloadIncomesReportAdmin(startDate?:string,endDate?:string){
-        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/activities/admin/report/incomes/file?startDate=${startDate}&endDate=${endDate}`)
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/incomes/file?startDate=${startDate}&endDate=${endDate}`)
     }
 
 
@@ -189,5 +193,14 @@ else{
             return this.http.get<PaymentDetailResData[]>(`${BASE_URL}/activities/my-transactions?isPaid=false&limit=${limit}&offset=${offset}`)
         }
     }
+    getAllBankPayment() : Observable<BankPaymentRes[]>{
+        return this.http.get<BankPaymentRes[]>(`${BASE_URL}/activities/bank-payments`)
+    }
+    getActivityTypeByCode(code: string) : Observable<ActivityTypeRes>{
+        return this.http.get<ActivityTypeRes>(`${BASE_URL}/activities/activity-types/find?typeCode=${code}`)
+    }
+
+
+ 
 
 }

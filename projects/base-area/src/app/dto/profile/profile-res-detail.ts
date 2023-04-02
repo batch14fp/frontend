@@ -12,7 +12,7 @@ export interface ProfileResDetail{
 	statusMember : string
 	phoneNumber : string
 	walletId : string
-	walletVer : string
+	walletVer : number
 	bankPaymentId : string
 	accountName : string
 	accountNumber :string

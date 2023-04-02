@@ -3,6 +3,7 @@ export interface MemberStatusUpdateReq{
 	codeStatus : string
 	statusName : string
 	periodDay : number
+	price:string
 	isActive : boolean
 	ver : number
 }

@@ -38,7 +38,7 @@ export class SignUpComponent implements OnInit{
 
   signUp = this.fb.group({
     email: ["",  [Validators.required, Validators.email]],
-    password: ["", [Validators.required, Validators.minLength(4)]],
+    password: ["", [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")]],
   })
 
   accountDetail = this.fb.group({
@@ -57,7 +57,7 @@ export class SignUpComponent implements OnInit{
   showVerification = false
   isWrongCode = false
   susccessSignUp = false;
-  noLeftTime = false;
+  noLeftTime = true;
 
   config: CountdownConfig = {
     leftTime: 120,
@@ -71,7 +71,11 @@ export class SignUpComponent implements OnInit{
   };
 
   handleEvent(e: CountdownEvent) {
-    this.noLeftTime = !this.noLeftTime
+    console.log(e.status)
+    console.log(e.left)
+    if(e.left === 0){
+      this.noLeftTime = !this.noLeftTime
+    }
     // console.log(this.noLeftTime);
     // console.log('Actions', e);
   }
@@ -85,10 +89,10 @@ export class SignUpComponent implements OnInit{
     }
 
     initIndustries(){
-      this.industries$ = this.industryService.getAllIndustry().subscribe(res => this.industries =res)
+      this.industries$ = this.userService.getAllIndustryMember().subscribe(res => this.industries =res)
     }
     initPositions(){
-      this.industries$ = this.positionService.getAllPosition().subscribe(res => this.positions =res)
+      this.industries$ = this.userService.getAllPositionMember().subscribe(res => this.positions =res)
     }
 
 

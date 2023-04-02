@@ -2,10 +2,14 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { DomSanitizer, SafeResourceUrl, Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
+import { BankPaymentRes } from "@dto/bankpayment/bank-payment-res";
 import { InvoiceRes } from "@dto/invoice/invoice-res";
 import { MembershipPaymentReq } from "@dto/payment/member-pay-req";
+import { PaymentDetailRes } from "@dto/payment/payment-detail-res-data";
+import { UserPaymentReqUpdate } from "@dto/payment/user-payment-req-update";
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup,faPenToSquare, faGlobe} from '@fortawesome/free-solid-svg-icons';
 import { ActivityService } from "@service/activity.service";
+import { BankPaymentService } from "@service/bankpayment.service";
 import { InvoiceService } from "@service/invoice.service";
 import { MemberStatusService } from "@service/member.service";
 import { SalesSettingService } from "@service/salessetting.service";
@@ -30,14 +34,19 @@ export class SubsPayComponent implements OnInit, OnDestroy{
     
 
     invoice!: InvoiceRes[]
+    bankPayments : BankPaymentRes[] = []
+    paymentDetail! :PaymentDetailRes
 
-    // membershipId! : number
     memberStatusDetail$? : Subscription
     buyMember$? : Subscription
     subsPayment$? : Subscription
     invoice$? : Subscription
     salesSetting$? : Subscription
+    bankPaymnets$? : Subscription
+    paymentDetail$? : Subscription
 
+    updateComplete!:boolean
+    invoiceId! : string
     subsId! : string
     taxAmmount!:number
     imageSource!: SafeResourceUrl
@@ -51,6 +60,7 @@ export class SubsPayComponent implements OnInit, OnDestroy{
         private invoiceService : InvoiceService,
         private activityService : ActivityService,
         private salesSettingService: SalesSettingService,
+        private bankPaymentService : BankPaymentService,
         private _sanitizer: DomSanitizer
         ){
         this.title.setTitle('Subscription')
@@ -70,13 +80,11 @@ export class SubsPayComponent implements OnInit, OnDestroy{
     })
 
     invoiceDetail = this.fb.group({
+    
         invoiceId:[""],
-        activityId:[""],
-        voucherId:[""],
         membershipId:[""],
         voucherCode:[""],
         invoiceCode:[""],
-        imageId:[""],
         activityTitle:[""],
         price:[0],
         statusName: [""],
@@ -85,10 +93,6 @@ export class SubsPayComponent implements OnInit, OnDestroy{
         taxAmmount: [0],
         priceMemberShip: [0],
         total:[0],
-        startDate:[""],
-        endDate:[""],
-        location:[""],
-        provider:[""],
         discountNum:[0],
         isActive:[true],
         ver:[0]
@@ -96,7 +100,7 @@ export class SubsPayComponent implements OnInit, OnDestroy{
 
     uploadTransactions = this.fb.group({
         paymentId:[""],
-        bankPaymentId:[""],
+        bankPayment:[{}],
         imgCover:this.fb.group({
             fileName:[""],
             fileExtension:[""],
@@ -157,25 +161,54 @@ export class SubsPayComponent implements OnInit, OnDestroy{
         }
     }
 
+    onBuy(){
+        const data:UserPaymentReqUpdate={
+            paymentId:this.uploadTransactions.value.paymentId!,
+            bankPaymentId:this.uploadTransactions.value.bankPayment!['bankPaymentId'],
+            fileContent:this.uploadTransactions.value.imgCover?.fileContent!,
+            fileExtension:this.uploadTransactions.value.imgCover?.fileExtension!,
+            ver:this.uploadTransactions.value.ver!
+        }
+
+        this.buyMember$ = this.activityService.getPayment(data).subscribe(res => {
+            this.updateComplete = true
+            setTimeout(() => {
+                this.updateComplete = false
+                this.router.navigateByUrl('/dashboard')
+              }, 5000)
+
+        })
+    }
+
+    initBankPayments(){
+        this.bankPaymnets$ = this.bankPaymentService.getAdminBankPayment().subscribe(res =>{
+            this.bankPayments = res
+        })
+    }
+
     initSalesSetting():void{
         this.salesSetting$ = this.salesSettingService.getSalesSetting().subscribe(res=>{
             this.taxAmmount = res.tax
         })
     }
 
+    initPaymentDetail(){
+        this.paymentDetail$ = this.activityService.getDetailPayment(this.invoiceId).subscribe(res => {
+            this.uploadTransactions.patchValue({
+                paymentId: res.paymentId,
+                ver: res.ver
+            })
+        })
+    }
+
+
     initInvoice(){
         this.activatedRouter.params.subscribe(res => {
-
-            // const params = res as any
-            // this.subsId = params.id
-            // this.invoiceDetail.patchValue({
-            //     activityId:params.activityId,
-            //     invoiceId:params.invoiceId
-            // })
-            this.invoice$ = this.activityService.getDetailPayment(res['id']).subscribe(res=>{
+            const params = res as any
+            this.invoiceId = params.id
+            this.invoice$ = this.activityService.getDetailPayment(params.id).subscribe(res=>{
                 this.invoiceDetail.patchValue({
                     invoiceId:res.invoiceId,
-                    activityId:res.activityId,
                     statusName : res.statusName,
                     invoiceCode:res.invoiceCode,
                     paymentExpired: res.paymentExpired,
@@ -183,8 +216,6 @@ export class SubsPayComponent implements OnInit, OnDestroy{
                     taxAmmount: res.taxAmmount,
                     priceMemberShip: res.priceMemberShip,
                     total: res.total,
-                    startDate:res.startDate,
-                    endDate: res.endDate,
                 })
                 
             })
@@ -193,14 +224,10 @@ export class SubsPayComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit(): void {
-        // this.activatedRouter.params.subscribe(res=>{
-        //     const params = res as any
-        //     this.member.patchValue({
-        //         membershipId:params.membershipId
-        //     })
-        // })
+        this.initSalesSetting()
+        this.initBankPayments()
         this.initInvoice()
-        
+        this.initPaymentDetail()
     }
     ngOnDestroy(): void {
         this.memberStatusDetail$?.unsubscribe()

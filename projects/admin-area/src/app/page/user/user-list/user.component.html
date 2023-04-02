@@ -1,7 +1,7 @@
 <div class="mx-6">
     <h1>User</h1>
     <div class="col-3 my-2">
-        <app-button-primary label="Create User"></app-button-primary>
+        <app-button-primary label="Create User" routerLink="create"></app-button-primary>
     </div>
     <p-table [value]="allUsers" [lazy]="true" (onLazyLoad)="loadData($event)" responsiveLayout="scroll" [paginator]="true"
     [rows]="maxPage" [totalRecords]="totalData" [loading]="loading" [rowsPerPageOptions]="[3, 5]"
@@ -22,7 +22,7 @@
                     <td>{{users.email}}</td>
                     <td>{{users.roleName}}</td>
                     <td class="flex gap-2">
-                        <app-button-icon ></app-button-icon>
+                        <app-button-icon routerLink="/user/update/{{users.userId}}" ></app-button-icon>
                         <app-button-danger></app-button-danger>
                     </td>
                 </tr>

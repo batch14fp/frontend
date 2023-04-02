@@ -29,4 +29,6 @@ span:first-child {
 }
 
 
- 
+.input-password .ui-password {
+  width: 100% !important;
+}

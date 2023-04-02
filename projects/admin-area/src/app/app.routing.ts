@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CustomButtonModule } from "projects/base-area/src/app/components/button/button.module";
 import { NavbarComponent } from "projects/base-area/src/app/components/navbar/navbar.component";
+import { ROLE } from "projects/base-area/src/app/constant/role.service";
+import { AuthRoleGuard } from "projects/base-area/src/app/guard/role.guard";
 import { ShareModule } from "projects/base-area/src/app/share.module";
 import { ActivityTypeComponent } from "./page/activitytype/activitytype.component";
 import { ApprovalComponent } from "./page/approval/approval.component";
@@ -32,11 +34,15 @@ export const adminRoutes: Routes = [
         children: [
             {
                 path: 'category',
-                component: CategoryComponent
+                component: CategoryComponent,
+                canActivate: [AuthRoleGuard],
+                data: [ROLE.SPADM]
             },
             {
                 path: 'position',
-                component: PositionComponent
+                component: PositionComponent,
+                canActivate: [AuthRoleGuard],
+                data: [ROLE.SPADM]
             },
             {
                 path: 'industry',
@@ -47,36 +53,36 @@ export const adminRoutes: Routes = [
                 component: SocmedComponent
             },
             {
-                path : 'bankpayment',
-                component : BankPaymentComponent
+                path: 'bankpayment',
+                component: BankPaymentComponent
             },
             {
-                path : 'activitytype',
-                component : ActivityTypeComponent
+                path: 'activitytype',
+                component: ActivityTypeComponent
             },
             {
-                path : 'posttype',
-                component : PostTypeComponent
+                path: 'posttype',
+                component: PostTypeComponent
             },
             {
-                path : 'membership',
-                component : MembershipComponent
+                path: 'membership',
+                component: MembershipComponent
             },
             {
-                path : 'sales-setting',
-                component : SalesSettingComponent
+                path: 'sales-setting',
+                component: SalesSettingComponent
             },
             {
-                path : 'admin/report-activity',
-                component : ReportAdminComponent
+                path: 'admin/report-activity',
+                component: ReportAdminComponent
             },
             {
-                path:'admin/report-income',
+                path: 'admin/report-income',
                 component: ReportInvoiceAdminComponent
             },
             {
-                path : 'approval-payment',
-                component : ApprovalComponent
+                path: 'approval-payment',
+                component: ApprovalComponent
             }
 
         ]
@@ -87,9 +93,9 @@ export const adminRoutes: Routes = [
         component: NavbarComponent
     },
     {
-        path:'user',
-        loadChildren:()=>import("./page/user/user.module").then(u=>u.UserModule),
-        component:NavbarComponent
+        path: 'user',
+        loadChildren: () => import("./page/user/user.module").then(u => u.UserModule),
+        component: NavbarComponent
     }
 
 ]
@@ -97,8 +103,8 @@ export const adminRoutes: Routes = [
 @NgModule({
     declarations: [
 
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent,
-        ReportInvoiceAdminComponent,ApprovalComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent, PostTypeComponent, SalesSettingComponent, ReportAdminComponent,
+        ReportInvoiceAdminComponent, ApprovalComponent
 
 
     ],
@@ -109,8 +115,8 @@ export const adminRoutes: Routes = [
     exports: [
         RouterModule,
 
-        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent,ActivityTypeComponent,PostTypeComponent,SalesSettingComponent,ReportAdminComponent,
-        ReportInvoiceAdminComponent,ApprovalComponent
+        DashboardComponent, CategoryComponent, PositionComponent, IndustryComponent, SocmedComponent, LoginAdminComponent, MembershipComponent, BankPaymentComponent, ActivityTypeComponent, PostTypeComponent, SalesSettingComponent, ReportAdminComponent,
+        ReportInvoiceAdminComponent, ApprovalComponent
 
     ]
 })

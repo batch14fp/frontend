@@ -1,4 +1,3 @@
-// <<<<<<< HEAD
 import { formatDate } from "@angular/common";
 import { AfterContentChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
@@ -21,6 +20,11 @@ import { getInitials } from "projects/base-area/src/app/utils/getInitial";
 import { ProfileReqUpdate } from "@dto/profile/profile-req-update";
 import { Router } from "@angular/router";
 import { convertLocalDateToUTCISO } from "projects/base-area/src/app/utils/dateutil";
+import { ActivityUpcomingAllRes } from "@dto/activity/activity-upcoming-all-res";
+import { truncateString } from "projects/base-area/src/app/utils/turncateString";
+import { ActivityService } from "@service/activity.service";
+import { MEMBER_STATUS } from "projects/base-area/src/app/constant/member-status";
+import { MenuItem } from "primeng/api";
 
 const countryService= require('countrycitystatejson')
 
@@ -58,15 +62,39 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
     location$? : Subscription
     profile$? : Subscription
     socmed$? : Subscription
+    upcomingEvents$?: Subscription
+    upcomingEvents?:ActivityUpcomingAllRes
+
 
     // selectedPosition! : PositionRes
     // selectedIndustry! : IndustryRes
     selectedBank! : BankPaymentRes
     selectedContries! : string
 
+    memberStatus!: string
+    imageIdProfile= ""
+    fullNameLogin=""
+    memberReguler = MEMBER_STATUS.REGULAR
+
     imageSource!:SafeResourceUrl
 
     photoName = ""
+    accountName! : string
+	accountNumber! : string
+    bankPaymentName! : string
+    
+
+    accountMenu: MenuItem[] = [
+      { label: 'Profile', icon: 'pi pi-fw pi-user', command: e=> this.router.navigateByUrl("/profile") },
+      { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/my-transaction") },
+      { label: 'Report Activity', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/report-activity") },
+      { label: 'Report Income', icon: 'pi pi-fw pi-dollar', command: e=> this.router.navigateByUrl("/report-income") },
+      { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
+      { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
+      { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
+
+      { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
+    ];
 
     editProfile = this.fb.group({
         userId : [""],
@@ -77,10 +105,12 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         fullname : [""],
         email : [""],
         walletId : [""],
+        walletVer: [0],
         userBalance : [0],
         statusMember : [""],
-        accountName : [""],
-	    accountNumber :[""],
+        // accountName : [""],
+	    // accountNumber :[""],
+        // bankPaymentName: [""],
         phoneNumber : [""],
         dob : [new Date()],
         dobUtc : [new Date()],
@@ -91,6 +121,13 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         company : [""],
         imageId : [""],
         imageVer : [0],
+        bankUserAccount: this.fb.group({
+            bankPaymentId: [""],
+            bankPaymentName: [""],
+            accountNumber: [""],
+            accountName: [""],
+            ver: [0]
+        }),
         file : this.fb.group({
             fileContent : [""],
             extension : [""]
@@ -111,7 +148,8 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         private socialMediaService : SocmedService,
         private ref : ChangeDetectorRef,
         private _sanitizer: DomSanitizer,
-        private router : Router
+        private router : Router,
+        private activityService: ActivityService
     ){
         this.title.setTitle('Edit Profile')
     }
@@ -120,7 +158,7 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
        this.ref.detectChanges();
     }
 
-    get socialMediaList(){ 
+    get socialMediaList(){
         return this.editProfile.get('socialMediaList') as FormArray
     }
 
@@ -140,17 +178,17 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
           };
           reader.onerror = error => reject(error);
         });
-        
-  
+
+
         for (let file of event.target.files) {
           toBase64(file).then(result => {
             const resultBase64 = result.substring(result.indexOf(",") + 1, result.length)
             const resultExtension = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length)
-  
+
             this.addFiles(resultBase64, resultExtension)
-  
+
             this.imageSource = this._sanitizer.bypassSecurityTrustResourceUrl(`data:image/${resultExtension};base64, ${resultBase64}`);
-  
+
           })
         }
     }
@@ -165,11 +203,21 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
             province : this.editProfile.value.province!,
             city : this.editProfile.value.city!,
             dob : this.editProfile.value.dob!,
+            memberStatusId : this.editProfile.value.statusMember!,
             walletId : this.editProfile.value.walletId!,
             postalCode : this.editProfile.value.postalCode!,
             industryId : this.editProfile.value.industryId!,
             positionId : this.editProfile.value.positionId!,
             phoneNumber : this.editProfile.value.phoneNumber!,
+            walletVer : this.editProfile.value.walletVer!,
+            bankUserAccount : {
+                bankPaymentId: this.editProfile.value.walletId!,
+                bankPaymentName: this.editProfile.value.bankUserAccount!['bankPaymentName']!,
+                accountNumber: this.editProfile.value.bankUserAccount!['accountNumber']!,
+                accountName: this.editProfile.value.bankUserAccount!['accountName']!,
+                ver: Number(this.editProfile.value.walletVer!),
+                isActive : true
+            },
             file : {
                 fileId : this.editProfile.value.imageId!,
                 fileContent: this.editProfile.value.file?.fileContent!,
@@ -235,9 +283,27 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         })
     }
 
+    fotoName(name: string){
+      return getInitials(name)
+    }
+
+    turncate(str:string){
+      return truncateString(str, 20)
+    }
+
+    initUpcomingEvents(){
+      this.upcomingEvents$ = this.activityService.getUpcomingEvent(0,3).subscribe(res =>{
+        this.upcomingEvents = res
+        console.log(res)
+      })
+    }
+
     initProfile(){
         this.profile$ = this.profileService.getProfileDetail().subscribe(res => {
+            
             this.photoName = getInitials(res.fullname)
+            // this.accountName = res.accountName
+            // this.accountNumber = res.accountNumber
             this.editProfile.patchValue({
                 userId : res.userId,
                 profileId : res.profileId,
@@ -262,13 +328,22 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
                 socialMediaList : [],
                 ver : res.ver,
                 isActive : res.isActive
+                
             })
+
+            this.editProfile.get('bankUserAccount')?.patchValue({
+                bankPaymentId: res.walletId!,
+                bankPaymentName: res.bankPaymentId,
+                accountNumber: res.accountNumber,
+                accountName: res.accountName,
+                ver : res.walletVer
+            })
+            
 
             for(let i = 0; i < this.getSocmed.length ; i++ ){
                 // console.log(this.getSocmed[i].socialMediaId);
-                
+
                 this.socialMediaList?.push(this.fb.group({
-                    
                     profileSocialMediaId : this.getSocmed[i].profileSocialMediaId,
                     socialMediaId : this.getSocmed[i].socialMediaId,
                     platformName : this.getSocmed[i].platformName,
@@ -281,6 +356,11 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
 
     }
 
+    onLogOut(){
+      localStorage.clear()
+      this.router.navigateByUrl("/")
+    }
+
 
     ngOnInit(): void {
        this.initPostion()
@@ -289,6 +369,10 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
        this.selectedCountry()
        this.initProfile()
        this.initSocialMedia()
+       this.initUpcomingEvents()
+      this.memberStatus =  this.userService.getMemberCode()
+      this.imageIdProfile = this.userService.getIdFotoProfile()
+      this.fullNameLogin = this.userService.getFullName()
     }
 
     ngOnDestroy(): void {

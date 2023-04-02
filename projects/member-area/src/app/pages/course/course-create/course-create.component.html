@@ -1,41 +1,37 @@
 <pre>{{courseFb.value | json}}</pre>
 <main>
   <div class="w-12 flex sm:flex-column lg:flex-row relative">
-    <div class="w-2 sm:hidden md:hidden lg:block pt-4 px-4 top-0">
+    <div class="w-2 hidden lg:block pt-4 px-4 top-0">
       <div class="w-6">
         <img class="w-full w-0" style="object-fit: contain !important;"
           src="../../../assets/images/wecommunity-logo.png" alt="logo wecommunity">
       </div>
-      <div class="flex flex-column m-0 mt-6 gap-2">
-        <div class="text-blue-600 flex">
+      <div class="flex flex-column m-0 mt-6 gap-2" routerLink="/dashboard">
+        <div class="text-900 flex">
           <button
-            class="text-blue-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-blue-50 cursor-pointer">
+            class="text-900 px-1 py-2 border-round-md font-medium text-md border-none bg-white w-full text-left m-0 cursor-pointer">
             <i class="pi pi-home px-2"></i>
             Home</button>
         </div>
-        <div class="text-900 flex">
+        <div class="text-900 flex" routerLink="/events">
           <button
             class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
             <i class="pi pi-calendar px-2"></i>
             Event</button>
         </div>
-        <div class="text-900 flex hover:text-blue-600">
+        <div class="text-blue-600 flex hover:text-blue-600" routerLink="/course">
           <button
-            class="text-900 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer ">
+            class="text-blue-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-blue-50 hover:text-blue-600 cursor-pointer ">
             <i class="pi pi-book px-2"></i>
             Course
           </button>
         </div>
-        <div class="text-600 flex">
+        <div class="text-600 flex border-bottom-1 border-gray-200 pb-4  hover:text-blue-600"
+          routerLink="/member/article">
           <button
             class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-            <i class="pi pi-home px-2"></i>
-            Post</button>
-        </div>
-        <div class="text-600 flex border-bottom-1 border-gray-200 pb-4">
-          <button
-            class="text-600 px-1 py-2 border-round-md font-medium text-md border-none w-full text-left m-0 bg-white hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-            <fa-icon class="text-gray-600 cursor-pointer px-2 hover:text-blue-600" [icon]="faNewspaper"></fa-icon>
+            <fa-icon class="text-gray-600 cursor-pointer px-2 text-blue-600" [icon]="faNewspaper">
+            </fa-icon>
             Article
           </button>
         </div>
@@ -43,56 +39,34 @@
           <div class="flex justify-content-between mb-3">
             <p>Upcoming Event</p>
             <div class="bg-blue-100 text-blue-600 border-circle w-1 h-1 align-self-center flex justify-content-center">
-              <p class="font-semibold text-xs">3</p>
+              <p class="font-semibold text-xs">{{upcomingEvents?.total}}</p>
             </div>
           </div>
-          <div class="flex flex-column gap-4">
-            <div class="flex w-12 gap-4">
+          <div *ngIf="upcomingEvents" class="flex flex-column gap-4">
+            <div *ngFor="let item of upcomingEvents.data" class="flex w-12 gap-4">
               <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
-                <p class="font-semibold">20</p>
-                <p class="font-light text-gray-600">Mar</p>
+                <p class="font-semibold">{{item.startDate | date:'d'}}</p>
+                <p class="font-light text-gray-600">{{item.startDate | date:'LLL'}}</p>
               </div>
               <div class="flex flex-column w-9">
-                <p class="cursor-pointer">Modern Web...</p>
+                <p class="">{{turncate(item.title)}}</p>
                 <div class="flex">
                   <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
-                  <p class="text-xs font-light text-gray-600">100 people going</p>
+                  <p class="text-xs font-light text-gray-600">{{item.totalParticipant}} people going</p>
                 </div>
               </div>
             </div>
-            <div class="flex w-12 gap-4">
-              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
-                <p class="font-semibold">24</p>
-                <p class="font-light text-gray-600">Mar</p>
-              </div>
-              <div class="flex flex-column w-9">
-                <p class="cursor-pointer">Modern Web...</p>
-                <div class="flex">
-                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
-                  <p class="text-xs font-light text-gray-600">100 people going</p>
-                </div>
-              </div>
-            </div>
-            <div class="flex w-12 gap-4">
-              <div class="flex flex-column bg-blue-50 w-3 align-content-center text-center px-2 py-1 border-round-md">
-                <p class="font-semibold">4</p>
-                <p class="font-light text-gray-600">Apr</p>
-              </div>
-              <div class="flex flex-column w-9">
-                <p class="cursor-pointer">Modern Web...</p>
-                <div class="flex">
-                  <fa-icon class="text-xs font-light text-gray-600 mr-2" [icon]="faPeopleGroup"></fa-icon>
-                  <p class="text-xs font-light text-gray-600">100 people going</p>
-                </div>
-              </div>
-            </div>
+            <ng-container *ngIf="upcomingEvents && upcomingEvents.data.length > 3">
+              <p class="text-blue-600 font-medium cursor-pointer hover:text-blue-800 mt-2" routerLink="/events">Show All
+              </p>
+            </ng-container>
           </div>
         </div>
       </div>
     </div>
     <!-- Mobile Menu -->
     <div
-      class="sm:flex bg-white pt-2 justify-content-between border-top-1 border-gray-200 w-12 gap-4 px-4 md:hidden fixed bottom-0 z-5 justify-content-center align-content-center align-self-center">
+      class="flex bg-white pt-2 justify-content-between border-top-1 border-gray-200 w-12 gap-4 px-4 md:hidden fixed bottom-0 z-5 justify-content-center align-content-center align-self-center">
       <div
         class="text-blue-600  border-blue-600 border-bottom-3 w-2 bg-white flex flex-column justify-content-center align-content-center">
         <i class="pi pi-home align-self-center" style="font-size: x-large;"></i>
@@ -109,10 +83,6 @@
         <p class="align-self-center">Course</p>
       </div>
       <div class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center">
-        <i class="pi pi-home px-2 align-self-center" style="font-size: x-large;"></i>
-        <p class="align-self-center">Post</p>
-      </div>
-      <div class="text-900 w-2 bg-white flex flex-column justify-content-center align-content-center">
         <fa-icon class="text-gray-600 align-self-center cursor-pointer hover:text-blue-600" size="xl"
           [icon]="faNewspaper"></fa-icon>
         <p class="align-self-center">Article</p>
@@ -121,10 +91,28 @@
 
 
     <div class="lg:w-10 sm:mb-6 md:mb-0 sm:w-12 bg-gray-100 border-round-bottom-xl">
-      <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem">
-        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
-          style="width: 32px;" alt="Avatar" />
+      <div class="navbar pt-1 bg-white w-12 justify-content-end flex pr-4 h-3rem align-content-center gap-4">
+        <ng-container *ngIf="memberStatus === memberReguler">
+          <button
+            class="bg-red-600 hover:bg-red-700 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
+            style="height: 30px !important;">Upgrade</button>
+        </ng-container>
+        <app-tiered-menu [model]="accountMenu">
+          <ng-template #content>
+            <div *ngIf="!imageIdProfile"
+              class="border-circle cursor-pointer align-self-center bg-blue-400 hover:bg-blue-500 flex justify-content-center align-content-center"
+              style="width: 38px;height: 38px">
+              <p class=" text-white font-medium text-xl align-self-center align-content-center text-center">
+                {{fotoName(fullNameLogin)}}</p>
+            </div>
+            <div *ngIf="imageIdProfile" class="ImageProfile">
+              <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
+                style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;" alt="Avatar" />
+            </div>
+          </ng-template>
+        </app-tiered-menu>
       </div>
+
       <div>
         <form [formGroup]="courseFb" (ngSubmit)="onCreateCourse()" class="w-12 flex justify-content-center">
           <div class="sm:w-12 md:w-11 flex flex-column">
@@ -132,8 +120,10 @@
               <p class="font-medium text-xl text-center">Create New Course</p>
             </div>
             <div class="w-full border-round-md w-full py-2 mt-2 flex justify-content-end">
-              <button type="submit"
+              <button type="submit" *ngIf="courseFb.valid"
                 class="bg-blue-600 w-fit border-none border-round-md cursor-pointer px-4 hover:bg-blue-800 py-2 text-white">Save</button>
+              <button *ngIf="!courseFb.valid" class="bg-blue-600 w-fit border-none border-round-md px-4 py-2 text-white"
+                style="cursor: not-allowed;">Save</button>
             </div>
             <div class="flex sm:flex-column md:flex-row  my-2 gap-4">
               <div class="md:w-6 sm:w-12 bg-white px-3 py-3 border-round-md flex flex-column gap-3">
@@ -167,8 +157,6 @@
                       Name must be at least 40 characters long.
                     </div>
                   </div>
-
-
                 </div>
                 <div class="bg-white border-round-md flex justify-content-between w-12 gap-4">
                   <div class="flex flex-column w-6">
@@ -176,12 +164,26 @@
                         pTooltip="This field is required">*</span></label>
                     <p-calendar formControlName="startDateCourse" [showTime]="true" [minDate]="today"
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
+                    <div
+                      *ngIf="courseFb.get('startDateCourse')!.invalid && (courseFb.get('startDateCourse')!.dirty || courseFb.get('startDateCourse')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('startDateCourse')!.errors?.['required']" class="text-red-600 text-xs">
+                        start date is required.
+                      </div>
+                    </div>
                   </div>
                   <div class="flex flex-column w-6">
                     <label for="title" class="text-sm font-medium">End Date<span class="text-red-400"
                         pTooltip="This field is required">*</span></label>
                     <p-calendar formControlName="endDateCourse" [showTime]="true" [minDate]="startDate"
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
+                    <div
+                      *ngIf="courseFb.get('endDateCourse')!.invalid && (courseFb.get('endDateCourse')!.dirty || courseFb.get('endDateCourse')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('endDateCourse')!.errors?.['required']" class="text-red-600 text-xs">
+                        end date is required.
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="flex flex-column w-full">
@@ -189,6 +191,16 @@
                       pTooltip="This field is required">*</span></label>
                   <p-inputNumber formControlName="price" inputId="integeronly" mode="currency" currency="IDR"
                     locale="id-ID" styleClass="w-full"> </p-inputNumber>
+                  <div
+                    *ngIf="courseFb.get('price')!.invalid && (courseFb.get('price')!.dirty || courseFb.get('price')!.touched)"
+                    class="alert">
+                    <div *ngIf="courseFb.get('price')!.errors?.['required']" class="text-red-600 text-xs">
+                      price is required.
+                    </div>
+                    <div *ngIf="courseFb.get('price')!.errors?.['min']" class="text-red-600 text-xs">
+                      price cannot be 0.
+                    </div>
+                  </div>
                 </div>
                 <div class="flex flex-column w-full">
                   <label for="title" class="text-sm font-medium">Description<span class="text-red-400"
@@ -214,6 +226,13 @@
                       </span>
                     </ng-template>
                   </p-editor>
+                  <div
+                    *ngIf="courseFb.get('description')!.invalid && (courseFb.get('description')!.dirty || courseFb.get('description')!.touched)"
+                    class="alert">
+                    <div *ngIf="courseFb.get('description')!.errors?.['required']" class="text-red-600 text-xs">
+                      description is required.
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="w-6 md:w-6 sm:w-12 flex flex-column gap-3">
@@ -222,6 +241,13 @@
                     <label for="provider" class="text-sm font-medium">Provider<span class="text-red-400"
                         pTooltip="This field is required">*</span></label>
                     <input formControlName="provider" placeholder="ex: Google" type="text" id="title" pInputText />
+                    <div
+                      *ngIf="courseFb.get('provider')!.invalid && (courseFb.get('provider')!.dirty || courseFb.get('provider')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('provider')!.errors?.['required']" class="text-red-600 text-xs">
+                        provider is required.
+                      </div>
+                    </div>
                   </div>
                   <div class="flex flex-column w-full">
                     <label for="category" class="text-sm font-medium">Category<span class="text-red-400"
@@ -239,12 +265,26 @@
                         </div>
                       </ng-template>
                     </p-dropdown>
+                    <div
+                      *ngIf="courseFb.get('category')!.invalid && (courseFb.get('category')!.dirty || courseFb.get('category')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('category')!.errors?.['required']" class="text-red-600 text-xs">
+                        category is required.
+                      </div>
+                    </div>
                   </div>
                   <div class="flex flex-column w-full">
                     <label for="title" class="text-sm font-medium">Location<span class="text-red-400"
                         pTooltip="This field is required">*</span></label>
                     <textarea formControlName="location" placeholder="ex: Jl.Jendral Sudirman No.123" [rows]="5"
                       [cols]="30" pInputTextarea [autoResize]="true"></textarea>
+                    <div
+                      *ngIf="courseFb.get('location')!.invalid && (courseFb.get('location')!.dirty || courseFb.get('location')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('location')!.errors?.['required']" class="text-red-600 text-xs">
+                        location is required.
+                      </div>
+                    </div>
                   </div>
                   <div class="flex flex-column border-1 p-4 border-gray-200 border-round-md">
                     <div for="title" class="text-sm font-medium">Create Voucher <span

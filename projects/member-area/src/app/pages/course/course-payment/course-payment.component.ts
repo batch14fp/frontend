@@ -13,6 +13,12 @@ import {taxAmount, discountAmount, totalPay} from "../../../../../../base-area/s
 import { BankPaymentRes } from '../../../../../../base-area/src/app/dto/bankpayment/bank-payment-res';
 import { BankPaymentService } from '../../../../../../base-area/src/app/services/bankpayment.service';
 import { PaymentDetailRes } from "@dto/payment/payment-detail-res-data";
+import { ActivityUpcomingAllRes } from "@dto/activity/activity-upcoming-all-res";
+import { getInitials } from "projects/base-area/src/app/utils/getInitial";
+import { truncateString } from "projects/base-area/src/app/utils/turncateString";
+import { MEMBER_STATUS } from "projects/base-area/src/app/constant/member-status";
+import { MenuItem } from "primeng/api";
+import { UserService } from "@service/user.service";
 
 @Component({
     selector : 'app-payment-course',
@@ -25,6 +31,9 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
     private salesSetting$?:Subscription
     private buyActivity$?:Subscription
     private bankPayments$?:Subscription
+    private upcomingEvents$?: Subscription
+
+    upcomingEvents?:ActivityUpcomingAllRes
 
     faHeart = faHeart
     faBook = faBook
@@ -37,12 +46,16 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
     paymentDetail!:PaymentDetailRes
     bankPayments:BankPaymentRes[] = []
     updateComplete!:boolean
+    memberStatus!: string
+    imageIdProfile= ""
+    fullNameLogin=""
+    memberReguler = MEMBER_STATUS.REGULAR
 
 
 
     constructor(private fb:FormBuilder, private title:Title, private invoiceService:InvoiceService, private activityService:ActivityService,
         private router:Router, private activatedRouter:ActivatedRoute, private salesSettingService:SalesSettingService,
-        private _sanitizer: DomSanitizer, private bankPaymentService: BankPaymentService){
+        private _sanitizer: DomSanitizer, private bankPaymentService: BankPaymentService, private userService: UserService){
         this.title.setTitle('Payment')
     }
 
@@ -65,6 +78,19 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
 
         ver:[0]
     })
+
+    accountMenu: MenuItem[] = [
+      { label: 'Profile', icon: 'pi pi-fw pi-user', command: e=> this.router.navigateByUrl("/profile") },
+      { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/my-transaction") },
+      { label: 'Report Activity', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/report-activity") },
+      { label: 'Report Income', icon: 'pi pi-fw pi-dollar', command: e=> this.router.navigateByUrl("/report-income") },
+      { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
+      { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
+      { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
+
+      { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
+    ];
+
 
     initInvoiceDetail():void{
         this.activatedRouter.params.subscribe(res=>{
@@ -184,7 +210,10 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
         })
     }
 
-
+    onLogOut(){
+      localStorage.clear()
+      this.router.navigateByUrl("/")
+    }
 
     initPaymentDetail(){
       this.paymentDetail$ = this.activityService.getDetailPayment(this.invoiceId).subscribe(res =>{
@@ -202,12 +231,30 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
       this.bankPayments$ = this.bankPaymentService.getAdminBankPayment().subscribe(res => this.bankPayments = res)
     }
 
+    initUpcomingEvents(){
+      this.upcomingEvents$ = this.activityService.getUpcomingEvent(0,3).subscribe(res =>{
+        this.upcomingEvents = res
+        console.log(res)
+      })
+    }
+
+    fotoName(name: string){
+      return getInitials(name)
+    }
+
+    turncate(str:string){
+      return truncateString(str, 20)
+    }
 
 
     ngOnDestroy(): void {
        this.coursePayment$?.unsubscribe()
     }
     ngOnInit(): void {
+      this.initUpcomingEvents()
+      this.memberStatus =  this.userService.getMemberCode()
+      this.imageIdProfile = this.userService.getIdFotoProfile()
+      this.fullNameLogin = this.userService.getFullName()
       this.initBankPayments()
         this.initInvoiceDetail()
         this.initSalesSetting()
