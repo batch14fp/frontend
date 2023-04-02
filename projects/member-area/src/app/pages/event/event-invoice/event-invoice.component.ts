@@ -25,6 +25,9 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
     bankPayment:BankPaymentRes[] = []
     voucherValid!:boolean
     voucherInvalid!:boolean
+    isValid! :boolean
+    isClick = false;
+    voucherCode = ''; 
 
     faHeart = faHeart
     faBook = faBook
@@ -46,27 +49,21 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
         this.initBankPayment()
     }
 
-    onVoucherApplied():void{
-        const data:VoucherAppliedReq = {
-            activityId : this.detailActivity.value.activityId!,
-            voucherCode : this.detailActivity.value.voucherCode!
-        }
-        this.voucher$ = this.activityService.setVoucherCode(data).subscribe(res=>{
-            if(res.isAllowed){
-                this.voucherValid = true
-                this.voucherInvalid  = !this.voucherInvalid 
-                this.voucherId = res.voucherId
-            }else if(!res.isAllowed){
-                this.voucherInvalid = true
-                this.voucherValid = !this.voucherValid
-            }
-            if(!res){
-                this.voucherInvalid = false
-                this.voucherValid = false
-            }
-            
-        })
-    }
+    onVoucherApplied(): void {
+        this.isClick = true;
+        const data: VoucherAppliedReq = {
+          activityId: this.detailActivity.value.activityId!,
+          voucherCode: this.detailActivity.value.voucherCode!,
+        };
+        this.voucher$ = this.activityService
+          .setVoucherCode(data)
+          .subscribe((res) => {
+          
+          this.isValid =res.isAllowed
+            this.voucherCode = this.detailActivity.value.voucherCode!;
+          });
+         
+      }
 
     initBankPayment():void{
         this.bank$ = this.bankService.getAllBankPayment().subscribe(res=>{

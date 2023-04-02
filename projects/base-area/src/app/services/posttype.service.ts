@@ -18,19 +18,19 @@ export class PostTypeService{
     constructor(private http : HttpClient){}
 
     getAllPostType() : Observable<PostTypeGetRes[]>{
-        return this.http.get<PostTypeGetRes[]>(`${BASE_URL}/post-types`)
+        return this.http.get<PostTypeGetRes[]>(`${BASE_URL}/posts/post-types`)
     }
 
     insertPostType(data : PostTypeReq) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/post-types`,data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/post-types`,data)
     }
 
     updatePostType(data : PostTypeUpdateReq) : Observable<UpdateRes>{
-        return this.http.put<UpdateRes>(`${BASE_URL}/post-types`,data)
+        return this.http.put<UpdateRes>(`${BASE_URL}/admin/post-types`,data)
     }
 
     deletePostType(id : string) : Observable<res>{
-        return this.http.delete<res>(`${BASE_URL}/post-types/${id}`)
+        return this.http.delete<res>(`${BASE_URL}/admin/post-types/${id}`)
     }
 
 }

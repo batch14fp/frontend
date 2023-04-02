@@ -53,7 +53,7 @@ export class MyTransactionComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
-
+        this.initTransaction(this.limit , this.offset)
     }
 
     ngOnDestroy(): void {

@@ -31,9 +31,8 @@ export class PostService{
     getPostById(postId: string): Observable<AllPostRes>{
         return this.http.get<AllPostRes>(`${BASE_URL}/posts/${postId}`)
     }
-
     getAllCommentByPostId(id:string, page:number, size:number): Observable<PostCommentRes[]>{
-        return this.http.get<PostCommentRes[]>(`${BASE_URL}/posts/${id}/comment?page=${page}&size=${size}`)
+        return this.http.get<PostCommentRes[]>(`${BASE_URL}/posts/comment/${id}?page=${page}&size=${size}`)
     }
 
     getMyBookmarks(page:number, size:number): Observable<AllPostRes[]>{

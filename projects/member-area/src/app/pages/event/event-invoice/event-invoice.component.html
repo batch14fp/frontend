@@ -183,16 +183,17 @@
                     </div>
                   </div>
                 </form>
+
                 <div class="bg-white border-round-md p-3 mt-2 flex flex-column justify-content-between w-12 gap-3">
-                  <!-- <pre>{{detailActivity.value |json}}</pre> -->
                   <label for="voucher" class="text-sm font-medium">Voucher</label>
                   <p-divider></p-divider>
-                  <input type="text" id="voucher" formControlName="voucherCode" pInputText />
+                  <input *ngIf="!isClick" type="text" id="voucher" formControlName="voucherCode" pInputText />
+                  <i class="pi pi-check" *ngIf="isClick">{{detailActivity.value.voucherCode}}</i>
                   <div class="sm:hidden md:flex col-2 my-2 w-12 flex-column">
-                    <p *ngIf="voucherValid" class="text-md font-medium text-green-800">Voucher Applied</p>
-                    <!-- <p *ngIf="voucherInvalid" class="text-md font-medium text-red-800">Voucher Not Valid</p> -->
-                    <app-button-primary class="w-full" label="Apply" (click)="onVoucherApplied()"></app-button-primary>
-
+                    <div *ngIf="isClick">
+                      <p *ngIf="isValid" class="text-md font-medium text-green-800">Voucher Applied</p>
+                      <p *ngIf="!isValid" class="text-md font-medium text-red-800">Voucher is Invalid</p>
+                    </div>
                   </div>
                 </div>
                 <div class="sm:hidden md:flex col-3 my-2 w-12">

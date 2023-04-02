@@ -12,7 +12,10 @@ export class SalesSettingService{
 
     constructor(private http: HttpClient){}
 
+    getSalesSettingAdmin() : Observable<SalesSettingRes>{
+        return this.http.get<SalesSettingRes>(`${BASE_URL}/admin/sales-settings`)
+    } 
     getSalesSetting() : Observable<SalesSettingRes>{
-        return this.http.get<SalesSettingRes>(`${BASE_URL}/admin/sales-setting`)
+        return this.http.get<SalesSettingRes>(`${BASE_URL}/activities/sales-settings`)
     } 
 }
