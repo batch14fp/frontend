@@ -129,9 +129,6 @@
         </pre>
         <form [formGroup]="invoiceDetail" class="w-12 flex justify-content-center mt-4">
           <div class="sm:w-12 md:w-11 flex flex-column">
-            <pre>
-              {{invoice|json}}
-            </pre>
             <div class="w-full bg-white border-round-md w-full py-2 mt-2">
               <p class="font-medium text-xl ml-5">Payment - #{{invoiceDetail.value.invoiceCode}}</p>
             </div>
@@ -139,37 +136,31 @@
               <div class="md:w-12 sm:w-12  gap-3">
                 <div class="flex flex-column bg-white w-full px-3 py-3 border-round-md flex flex-column">
                   <!-- <img class="imgBanner" src="http://localhost:2121/files/{{invoiceDetail.value.imageId}}" alt="banner"> -->
-                  <div class="text-900 font-bold text-6xl mb-4 text-center">{{invoiceDetail.value.statusName}}</div>
+                  <div class="text-900 border-solid p-4 border-round border-yellow-500 font-bold text-6xl mb-4 text-center">{{invoiceDetail.value.statusName}}</div>
                   <div class="grid">
                     <div class="col">
                       <label for="location" class="text-sm font-medium mb-2">Periode</label>
-                      <p><i class="pi pi-map-marker pr-2"></i> {{invoiceDetail.value.periodDay}}</p>
+                      <p><i class="pi pi-calendar pr-2"></i> {{invoiceDetail.value.periodDay}}</p>
                     </div>
                     <div class="col">
                       <label for="location" class="text-sm font-medium mb-2">Exp</label>
-                      <p><i class="pi pi-building pr-2"></i> {{invoiceDetail.value.paymentExpired | date: 'medium'}}</p>
+                      <p><i class="pi pi-clock pr-2"></i> {{invoiceDetail.value.paymentExpired | date: 'medium'}}</p>
                     </div>
                     <div class="col">
                       <label for="price" class="text-sm font-medium mb-2">Price</label>
                       <p><i class="pi pi-money-bill pr-2"></i>{{invoiceDetail.value.priceMemberShip}}</p>
                     </div>
-                  </div>
-                  <!-- <p-divider></p-divider> -->
-                  <!-- <div class="grid">
-                    <div class="col">
-                      <label for="startDate" class="text-sm font-medium mb-2">Start Date</label>
-                      <p><i class="pi pi-calendar pr-2"></i> tgl</p>
-                    </div>
-                    <div class="col">
-                      <label for="endDate" class="text-sm font-medium mb-2">End Date</label>
-                      <p><i class="pi pi-calendar pr-2"></i> tgl</p>
-                    </div>
-                  </div> -->
+                  </div>   
                 </div>
               </div>
               <div class="md:w-4 sm:w-9 flex flex-column ml-2">
-                <div class="flex mb-2 bg-red-100 w-12 justify-content-center py-1 border-round-md">
+                <div *ngIf="!paymentDetail?.isPaid"
+                  class="flex mb-2 bg-red-100 w-12 justify-content-center py-1 border-round-md">
                   <p class="text-red-600 font-medium">Unpaid</p>
+                </div>
+                <div *ngIf="paymentDetail?.isPaid"
+                  class="flex mb-2 bg-green-100 w-12 justify-content-center py-1 border-round-md">
+                  <p class="text-green-600 font-medium">Paid</p>
                 </div>
                 <form>
                   <div class="bg-white border-round-md p-3 flex flex-column justify-content-between w-12 gap-3">
@@ -198,8 +189,39 @@
                 <div class="bg-white border-round-md p-3 mt-2 flex flex-column justify-content-between w-12 gap-3"
                   style="object-fit: cover !important;">
                   <form [formGroup]="uploadTransactions" class="flex flex-column">
-                    <pre>{{uploadTransactions.value|json}}</pre>
-                    <label for="voucher" class="text-medium font-medium">Upload Transaction</label>
+                    <pre>
+                      {{uploadTransactions.value | json}}
+                    </pre>
+                    <div class="flex flex-column border-1 border-gray-200 border-round-md p-2 pb-4">
+                      <label for="voucher" class="text-medium font-medium mt-4">Bank Transfer</label>
+                      <p-dropdown formControlName="bankPayment" [options]="bankPayments" optionLabel="bankPaymentName"
+                        [filter]="false" filterBy="bankPaymentName" [showClear]="true" placeholder="Select Bank">
+                        <ng-template pTemplate="selectedItem">
+                          <div class="category-item category-item-value p-0 w-full" *ngIf="uploadTransactions.value">
+                            <div class="">{{uploadTransactions.value.bankPayment!['bankPaymentName']}}</div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-bankPayment pTemplate="item">
+                          <div class="category-item p-0 ">
+                            <div class="p-0">{{bankPayment.bankPaymentName}}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                      <ng-container *ngIf="uploadTransactions.value.bankPayment!['bankPaymentName']">
+                        <div class="flex flex-column justify-content-center align-content-center my-3">
+                          <p class="text-xs text-center font-light text-800">Account Name</p>
+                          <p class="text-md text-center font-medium text-800">
+                            {{uploadTransactions.value.bankPayment!['accountName']}}</p>
+                        </div>
+                        <div class="flex flex-column justify-content-between">
+                          <p class="text-xs text-center font-light text-800">Account Number</p>
+                          <p class="text-md text-center font-medium text-800">
+                            {{uploadTransactions.value.bankPayment!['accountNumber']}}</p>
+                        </div>
+                      </ng-container>
+
+                    </div>
+                    <label for="voucher" class="text-medium font-medium mt-4">Upload Transaction</label>
                     <input type="file" #file class="hidden" (change)="onUpload($event)">
                     <img *ngIf="this.uploadTransactions.value.imgCover!['fileContent']" [src]="imageSource"
                       class="mt-2 max-h-16rem" alt="Image Source">
@@ -216,7 +238,9 @@
 
                 </div>
                 <div class="sm:hidden md:flex col-3 my-2 w-12">
-                  <app-button-primary class="w-full" label="Continue"></app-button-primary>
+                  <button
+                    class="w-full py-2 border-none border-round-md bg-blue-600 hover:bg-blue-800 text-white cursor-pointer"
+                    (click)="onBuy()">Buy</button>
                 </div>
               </div>
             </div>
@@ -225,6 +249,34 @@
       </div>
     </div>
   </div>
+
+
+  
+  <div *ngIf="updateComplete" class="flex z-5 min-h-screen max-h-screen min-w-screen max-w-screen flex-column">
+    <div class="flex flex-column w-6 align-self-center ">
+      <div class="flex flex-column">
+        <app-transaction-complete class="max-h-26rem min-h-26rem max-w-26rem min-w-26rem align-self-center">
+        </app-transaction-complete>
+        <p class="text-center font-medium text-xl">Thank You</p>
+        <p class="text-center font-medium text-sm">Your order will be process.We usually receive your payment within 2
+          to
+          3
+          business days from the date your bank releases the funds. If your payment has not been marked as received by
+          WeCommunity, please request a proof of payment (bank receipt) from your bank and
+          send
+          it to support@wecommunity.com referring to your Payment ID in the subject line. We will investigate this for
+          you
+        </p>
+        <p class="text-sm mt-6 font-medium text-center">Please <span routerLink="/dashboard"
+            class="text-blue-600 text-sm hover:text-blue-800 font-medium cursor-pointer">click here</span> if you are
+          not
+          redirected within a
+          few seconds</p>
+      </div>
+    </div>
+  </div>
+
+
   <p-confirmDialog header="Confirmation" [style]="{width: '50vw'}" [baseZIndex]="10000"
     acceptButtonStyleClass="p-button-text" defaultFocus="reject"></p-confirmDialog>
 </main>

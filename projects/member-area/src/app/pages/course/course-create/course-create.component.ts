@@ -86,7 +86,6 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
 
-
     initCategories(){
       this.categories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
     }
