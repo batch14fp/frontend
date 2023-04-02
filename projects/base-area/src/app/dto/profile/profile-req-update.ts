@@ -1,3 +1,4 @@
+import { BankPaymentUpdateReq } from "@dto/bankpayment/bank-payment-update-req"
 import { FileUpdateReq } from "@dto/file/file-update-req"
 import { SocialMediaGetRes } from "@dto/socialmedia/social-media-res"
 
@@ -9,16 +10,15 @@ export interface ProfileReqUpdate{
 	province : string
 	city : string
 	dob : string | Date
+	memberStatusId : string
+	walletId : string
 	postalCode : string
 	industryId : string
 	positionId : string
 	phoneNumber : string
-	walletId : string
-	bankPaymentId? : string
-	accountName? : string
-	accountNumber? :string
+	walletVer : number
+	bankUserAccount : BankPaymentUpdateReq
 	file : FileUpdateReq
-	socialMediaList? : SocialMediaGetRes[]
 	ver : number
 	isActive : boolean
 }
