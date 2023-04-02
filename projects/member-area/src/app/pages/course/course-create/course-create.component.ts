@@ -66,7 +66,6 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     faBook = faBook
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
-
     memberStatus!: string
 
     initCategories(){

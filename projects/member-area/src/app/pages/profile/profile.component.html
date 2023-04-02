@@ -123,10 +123,11 @@
                             
                             <img class="img" style="width: 100px; height: 100px; border-radius: 50%;" src="http://localhost:2121/files/{{editProfile.value.imageId}}"
                             alt="banner">
+                            <img  src="http://localhost:2121/files/{{editProfile.value.imageId}}">
 
                             <div class=" hover:bg-gray-100" *ngIf="!imageSource" (click)="file.click()" >
                               <p class="border-circle w-6rem h-6rem m-2 bg-indigo-500 text-white font-bold flex align-items-center justify-content-center ">{{photoName}}</p>
-                              
+
                               <fa-icon input type="file" class="absolute top-0 right-0" [icon]="faPenToSquare"></fa-icon>
 
                             </div>
@@ -219,7 +220,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="bg-white border-round-lg">
+                    <div class="bg-white border-round-lg" formGroupName="bankUserAccount">
                         <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
                             <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
                                 <div class="flex">
@@ -231,7 +232,7 @@
                             </div>
                           <div class="mb-3 flex flex-column ">
                             <label for="fullname" class="font-medium col-form-label">Bank</label>
-                            <p-dropdown styleClass="w-full"  formControlName="bankPaymentName" [options]="getBank"  optionLabel="name" [filter]="true"
+                            <p-dropdown styleClass="w-full"  formControlName="bankPaymentName" [options]="getBank" optionValue="name" optionLabel="name" [filter]="true"
                             filterBy="name"></p-dropdown>
                         </div>
                             <div class="mt-3 flex flex-column ">
