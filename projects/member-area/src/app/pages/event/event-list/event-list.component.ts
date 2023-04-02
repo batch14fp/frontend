@@ -11,9 +11,13 @@ import { CategoryService } from "@service/category.service";
 import { UserService } from "@service/user.service";
 import { MenuItem } from "primeng/api";
 import { ACTIVITY_TYPE } from "projects/base-area/src/app/constant/activity-type";
+
+import { SORT_TYPE } from "projects/base-area/src/app/constant/sort_type";
+
 import { MEMBER_STATUS } from "projects/base-area/src/app/constant/member-status";
 import { getInitials } from "projects/base-area/src/app/utils/getInitial";
 import { truncateString } from "projects/base-area/src/app/utils/turncateString";
+
 import { Subscription } from "rxjs";
 
 @Component({
@@ -58,9 +62,81 @@ export class EventListComponent implements OnInit, OnDestroy {
         this.title.setTitle("Event")
     }
 
+
+    sortTypeBuilder = this.fb.group({
+      choose: ['1']
+    })
+    sortFilter() {
+      const selectedValue = this.sortTypeBuilder.get('choose')?.value;
+      if (selectedValue === '2') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.HIGHEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.HIGHEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+          });
+        }
+      } else if (selectedValue === '3') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+              
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+      } else if (selectedValue === '1') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.NEWEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.NEWEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }else{
+              this.allActivity =[]
+            }
+          });
+        }
+      }
+    }  
+
     categoriesList:string[] = []
     categories: CategoryRes[] = []
     dateSearch!: Date
+
+    sortType?:string
+
+
     selectedCategory: string[] = []
 
     fotoName(name: string){
@@ -107,18 +183,73 @@ export class EventListComponent implements OnInit, OnDestroy {
         this.fullNameLogin = this.userService.getFullName()
 
     }
-    categoryFilter(){
-        if(!this.categoriesList.length){
-          this.event$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.EVENT).subscribe(res=>{
-            this.allActivity =res
-          })
+   
+    categoryFilter() {
+      const selectedValue = this.sortTypeBuilder.get('choose')?.value;
+      if (selectedValue === '2') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.HIGHEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
         }
         else{
-          this.event$ = this.activityService.getAllActivityByCategories(1,10,ACTIVITY_TYPE.EVENT,this.categoriesList).subscribe(res=>{
-            this.allActivity =res
-          })
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.HIGHEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+          });
         }
 
+      } else if (selectedValue === '3') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+              
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+      } else if (selectedValue === '1') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.NEWEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.NEWEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }else{
+              this.allActivity =[]
+            }
+          });
+        }
+      }
+      
+
     }
+  
 
 }

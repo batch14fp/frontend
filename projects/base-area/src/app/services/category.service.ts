@@ -17,18 +17,18 @@ export class CategoryService{
     constructor(private http: HttpClient){}
 
     getAllCategory(): Observable<CategoryRes[]>{
-        return this.http.get<CategoryRes[]>(`${BASE_URL}/categories`)
+        return this.http.get<CategoryRes[]>(`${BASE_URL}/admin/categories`)
     }
 
     insertCategory(data : CategoryReq) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/categories`,data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/categories`,data)
     }
 
     updateCategory(data:CategoryUpdateReq):Observable<UpdateRes>{
-        return this.http.put<UpdateRes>(`${BASE_URL}/categories`, data)
+        return this.http.put<UpdateRes>(`${BASE_URL}/admin/categories`, data)
     }
 
     deleteCategory(id:string):Observable<res>{
-        return this.http.delete<res>(`${BASE_URL}/categories/${id}`)
+        return this.http.delete<res>(`${BASE_URL}/admin/categories/${id}`)
     }
 }

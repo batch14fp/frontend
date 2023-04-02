@@ -20,26 +20,27 @@ export class MemberStatusService{
     constructor(private http : HttpClient ){}
 
     getAllMemberStatus():Observable<MemberStatusRes[]>{
-        return this.http.get<MemberStatusRes[]>(`${BASE_URL}/members/status`)
+        return this.http.get<MemberStatusRes[]>(`${BASE_URL}/admin/member-status`)
     }
 
     insertMemberStatus(data : MemberStatusReq) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/members/status`,data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/member-status`,data)
     }
 
     updateMemberStatus(data : MemberStatusReq) : Observable<UpdateRes>{
-        return this.http.put<UpdateRes>(`${BASE_URL}/members/status`,data)
+        return this.http.put<UpdateRes>(`${BASE_URL}/admin/member-status`,data)
     }
 
     deleteMemberStatus(id : string) : Observable<res>{
-        return this.http.delete<res>(`${BASE_URL}/members/status/${id}`)
+        return this.http.delete<res>(`${BASE_URL}/admin/member-status/${id}`)
     }
 
-    subscribtionMembership(data : MembershipPaymentReq) : Observable<InvoiceRes>{
-        return this.http.post<InvoiceRes>(`${BASE_URL}/members/status/subscription`,data)
-    }
 
     getIsPremiumMemberStatus() : Observable<MemberPremiumRes>{
-        return this.http.get<MemberPremiumRes>(`${BASE_URL}/members/is-premium`)
+        return this.http.get<MemberPremiumRes>(`${BASE_URL}/members/status/is-premium`)
+    }
+       
+    subscribtionMembership(data : MembershipPaymentReq) : Observable<InvoiceRes>{
+        return this.http.post<InvoiceRes>(`${BASE_URL}/members/status/subscription`,data)
     }
 }

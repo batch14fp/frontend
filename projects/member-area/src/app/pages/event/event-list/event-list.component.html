@@ -182,30 +182,19 @@
                 <label for="hr">{{cat.categoryName}}</label>
               </div>
             </div>
-            <div class="category mt-4">
+            <div class="choose mt-4" [formGroup]="sortTypeBuilder">
               <p class="text-xl">Sort</p>
-              <div class="field-checkbox mt-2">
-                <p-checkbox name="group1" value="Paling Sesuai" [(ngModel)]="selectedCategory" inputId="ps">
-                </p-checkbox>
-                <label for="ny">Paling Sesuai</label>
+              <div class="field-radio mt-2">
+                <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()" >
+                <label for="tb">Terbaru</label>
               </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Terbaru" [(ngModel)]="selectedCategory" inputId="tb"></p-checkbox>
-                <label for="ny">Terbaru</label>
+              <div class="field-radio mt-2">
+                <input type="radio" id="ht" name="choose" value="2" formControlName="choose" (change)="sortFilter()">
+                <label for="ht">Harga Tertinggi</label>
               </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Harga Tertinggi" [(ngModel)]="selectedCategory" inputId="ht">
-                </p-checkbox>
-                <label for="ny">Harga Tertinggi</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Harga Terendah" [(ngModel)]="selectedCategory" inputId="hr">
-                </p-checkbox>
-                <label for="ny">Harga Terendah</label>
-              </div>
-              <div class="field-checkbox">
-                <p-checkbox name="group1" value="Ulasan" [(ngModel)]="selectedCategory" inputId="ul"></p-checkbox>
-                <label for="ny">Ulasan</label>
+              <div class="field-radio mt-2">
+                <input type="radio" id="hr" name="choose" value="3" formControlName="choose" (change)="sortFilter()">
+                <label for="hr">Harga Terendah</label>
               </div>
             </div>
           </div>

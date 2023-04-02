@@ -5,7 +5,7 @@ import { SignUpReqInsert } from "@dto/user/sign-up-req-insert";
 import { PaymentDetailResData } from "@dto/payment/payment-detail-res";
 import { PaymentReqUpdate } from "@dto/payment/payment-req-update";
 import { UpdateRes } from "@dto/res-update";
-import { Observable } from "rxjs";
+import { Observable, ObservableNotification } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 
 @Injectable({
@@ -18,9 +18,8 @@ export class AdminService {
 
 
     insertUserAdmin(data : SignUpReqInsert) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/admin/user`, data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/users`, data)
     }
-    
     getAllTransaction(limit?:number,offset?:number,isPaid?:boolean): Observable<PaymentDetailResData[]>{
         if(isPaid == null){
             return this.http.get<PaymentDetailResData[]>(`${BASE_URL}/admin/payments?limit=${limit}&offset=${offset}`)
@@ -33,6 +32,9 @@ export class AdminService {
 
     updatePayment(data:PaymentReqUpdate):Observable<UpdateRes>{
         return this.http.put<UpdateRes>(`${BASE_URL}/admin/payments`, data)
+    }
+    getFileReceipt(fileId?:string){
+        return this.http.get<PaymentDetailResData[]>(`${BASE_URL}/files/${fileId}`)
     }
 
 }

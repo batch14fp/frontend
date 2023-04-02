@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { BankPaymentRes } from "@dto/bankpayment/bank-payment-res";
 import { InvoiceRes } from "@dto/invoice/invoice-res";
 import { MembershipPaymentReq } from "@dto/payment/member-pay-req";
-import { PaymentDetailRes } from "@dto/payment/payment-detail-res";
+import { PaymentDetailRes } from "@dto/payment/payment-detail-res-data";
 import { UserPaymentReqUpdate } from "@dto/payment/user-payment-req-update";
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup,faPenToSquare, faGlobe} from '@fortawesome/free-solid-svg-icons';
 import { ActivityService } from "@service/activity.service";

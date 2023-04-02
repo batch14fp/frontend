@@ -9,6 +9,8 @@ import { VerificationGetRes } from '../dto/verificationcode/verification-get-res
 import { SignUpReqInsert } from '../dto/user/sign-up-req-insert';
 import { VerificationCodeReqGet } from '../dto/verificationcode/verification-code-req-get';
 import { AllUserRes } from '@dto/user/all-user-res';
+import { IndustryRes } from '@dto/industry/industry-res';
+import { PositionRes } from '@dto/position/postion-res';
 
 @Injectable({
   providedIn: "root"
@@ -63,7 +65,7 @@ export class UserService {
     throw new Error("Role is empty")
   }
 
-  getFullName():string{
+  getFullName(): string {
     const data = localStorage.getItem("dataLogin")
     if (data) {
       return JSON.parse(data).fullname
@@ -74,6 +76,13 @@ export class UserService {
   saveDataLogin(data: LoginRes) {
     localStorage.setItem("dataLogin", JSON.stringify(data))
   }
+  insertVerification(data: VerificationCodeReq): Observable<VerificationCodeReq> {
+    return this.http.post<VerificationCodeReq>(`${BASE_URL}/users/sign-up/`, data, {
+      headers: {
+        skip: "true"
+      }
+    })
+  }
 
   getVerified(data: VerificationCodeReqGet): Observable<VerificationCodeReqGet> {
     return this.http.post<VerificationCodeReqGet>(`${BASE_URL}/users/sign-up/verify-code/`, data, {
@@ -83,17 +92,8 @@ export class UserService {
     })
   }
 
-
-  insertVerification(data: VerificationCodeReq): Observable<VerificationCodeReq> {
-    return this.http.post<VerificationCodeReq>(`${BASE_URL}/users/sign-up/`, data, {
-      headers: {
-        skip: "true"
-      }
-    })
-  }
-
   signUpMember(data: SignUpReqInsert): Observable<SignUpReqInsert> {
-    return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify/`, data, {
+    return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify-code/verified/`, data, {
       headers: {
         skip: "true"
       }
@@ -121,4 +121,20 @@ export class UserService {
   getAllUser(startPage: number, maxPage: number, query?: string): Observable<AllUserRes[]> {
     return this.http.get<AllUserRes[]>(`${BASE_URL}/users/all?page=${startPage}&size=${maxPage}`)
   }
+
+  getAllIndustryMember(): Observable<IndustryRes[]> {
+    return this.http.get<IndustryRes[]>(`${BASE_URL}/users/industries`, {
+      headers: {
+        skip: "true"
+      }
+    })
+  }
+
+  getAllPositionMember(): Observable<PositionRes[]>{
+    return this.http.get<PositionRes[]>(`${BASE_URL}/users/positions`, {
+      headers: {
+        skip: "true"
+      }
+    })
+}
 }
