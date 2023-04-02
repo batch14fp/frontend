@@ -132,8 +132,10 @@
               <p class="font-medium text-xl text-center">Create New Course</p>
             </div>
             <div class="w-full border-round-md w-full py-2 mt-2 flex justify-content-end">
-              <button type="submit"
+              <button type="submit" *ngIf="courseFb.valid"
                 class="bg-blue-600 w-fit border-none border-round-md cursor-pointer px-4 hover:bg-blue-800 py-2 text-white">Save</button>
+              <button *ngIf="!courseFb.valid" class="bg-blue-600 w-fit border-none border-round-md px-4 py-2 text-white"
+                style="cursor: not-allowed;">Save</button>
             </div>
             <div class="flex sm:flex-column md:flex-row  my-2 gap-4">
               <div class="md:w-6 sm:w-12 bg-white px-3 py-3 border-round-md flex flex-column gap-3">
@@ -167,8 +169,6 @@
                       Name must be at least 40 characters long.
                     </div>
                   </div>
-
-
                 </div>
                 <div class="bg-white border-round-md flex justify-content-between w-12 gap-4">
                   <div class="flex flex-column w-6">
@@ -176,12 +176,26 @@
                         pTooltip="This field is required">*</span></label>
                     <p-calendar formControlName="startDateCourse" [showTime]="true" [minDate]="today"
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
+                    <div
+                      *ngIf="courseFb.get('startDateCourse')!.invalid && (courseFb.get('startDateCourse')!.dirty || courseFb.get('startDateCourse')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('startDateCourse')!.errors?.['required']" class="text-red-600 text-xs">
+                        start date is required.
+                      </div>
+                    </div>
                   </div>
                   <div class="flex flex-column w-6">
                     <label for="title" class="text-sm font-medium">End Date<span class="text-red-400"
                         pTooltip="This field is required">*</span></label>
                     <p-calendar formControlName="endDateCourse" [showTime]="true" [minDate]="startDate"
                       styleClass="w-full" dateFormat="yy-mm-dd"></p-calendar>
+                    <div
+                      *ngIf="courseFb.get('endDateCourse')!.invalid && (courseFb.get('endDateCourse')!.dirty || courseFb.get('endDateCourse')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('endDateCourse')!.errors?.['required']" class="text-red-600 text-xs">
+                        end date is required.
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="flex flex-column w-full">
@@ -189,6 +203,16 @@
                       pTooltip="This field is required">*</span></label>
                   <p-inputNumber formControlName="price" inputId="integeronly" mode="currency" currency="IDR"
                     locale="id-ID" styleClass="w-full"> </p-inputNumber>
+                  <div
+                    *ngIf="courseFb.get('price')!.invalid && (courseFb.get('price')!.dirty || courseFb.get('price')!.touched)"
+                    class="alert">
+                    <div *ngIf="courseFb.get('price')!.errors?.['required']" class="text-red-600 text-xs">
+                      price is required.
+                    </div>
+                    <div *ngIf="courseFb.get('price')!.errors?.['min']" class="text-red-600 text-xs">
+                      price cannot be 0.
+                    </div>
+                  </div>
                 </div>
                 <div class="flex flex-column w-full">
                   <label for="title" class="text-sm font-medium">Description<span class="text-red-400"
@@ -214,6 +238,13 @@
                       </span>
                     </ng-template>
                   </p-editor>
+                  <div
+                    *ngIf="courseFb.get('description')!.invalid && (courseFb.get('description')!.dirty || courseFb.get('description')!.touched)"
+                    class="alert">
+                    <div *ngIf="courseFb.get('description')!.errors?.['required']" class="text-red-600 text-xs">
+                      description is required.
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="w-6 md:w-6 sm:w-12 flex flex-column gap-3">
@@ -222,6 +253,13 @@
                     <label for="provider" class="text-sm font-medium">Provider<span class="text-red-400"
                         pTooltip="This field is required">*</span></label>
                     <input formControlName="provider" placeholder="ex: Google" type="text" id="title" pInputText />
+                    <div
+                      *ngIf="courseFb.get('provider')!.invalid && (courseFb.get('provider')!.dirty || courseFb.get('provider')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('provider')!.errors?.['required']" class="text-red-600 text-xs">
+                        provider is required.
+                      </div>
+                    </div>
                   </div>
                   <div class="flex flex-column w-full">
                     <label for="category" class="text-sm font-medium">Category<span class="text-red-400"
@@ -239,12 +277,26 @@
                         </div>
                       </ng-template>
                     </p-dropdown>
+                    <div
+                      *ngIf="courseFb.get('category')!.invalid && (courseFb.get('category')!.dirty || courseFb.get('category')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('category')!.errors?.['required']" class="text-red-600 text-xs">
+                        category is required.
+                      </div>
+                    </div>
                   </div>
                   <div class="flex flex-column w-full">
                     <label for="title" class="text-sm font-medium">Location<span class="text-red-400"
                         pTooltip="This field is required">*</span></label>
                     <textarea formControlName="location" placeholder="ex: Jl.Jendral Sudirman No.123" [rows]="5"
                       [cols]="30" pInputTextarea [autoResize]="true"></textarea>
+                    <div
+                      *ngIf="courseFb.get('location')!.invalid && (courseFb.get('location')!.dirty || courseFb.get('location')!.touched)"
+                      class="alert">
+                      <div *ngIf="courseFb.get('location')!.errors?.['required']" class="text-red-600 text-xs">
+                        location is required.
+                      </div>
+                    </div>
                   </div>
                   <div class="flex flex-column border-1 p-4 border-gray-200 border-round-md">
                     <div for="title" class="text-sm font-medium">Create Voucher <span

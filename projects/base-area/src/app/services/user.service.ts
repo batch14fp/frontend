@@ -76,16 +76,28 @@ export class UserService {
   }
 
   getVerified(data: VerificationCodeReqGet): Observable<VerificationCodeReqGet> {
-    return this.http.post<VerificationCodeReqGet>(`${BASE_URL}/users/sign-up/verify-code/`, data)
+    return this.http.post<VerificationCodeReqGet>(`${BASE_URL}/users/sign-up/verify-code/`, data, {
+      headers: {
+        skip: "true"
+      }
+    })
   }
 
 
   insertVerification(data: VerificationCodeReq): Observable<VerificationCodeReq> {
-    return this.http.post<VerificationCodeReq>(`${BASE_URL}/users/sign-up/`, data)
+    return this.http.post<VerificationCodeReq>(`${BASE_URL}/users/sign-up/`, data, {
+      headers: {
+        skip: "true"
+      }
+    })
   }
 
   signUpMember(data: SignUpReqInsert): Observable<SignUpReqInsert> {
-    return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify/`, data)
+    return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify/`, data, {
+      headers: {
+        skip: "true"
+      }
+    })
   }
 
   get roleCode(): string {

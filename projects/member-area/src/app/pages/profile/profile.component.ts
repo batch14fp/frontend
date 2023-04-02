@@ -67,6 +67,10 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
     imageSource!:SafeResourceUrl
 
     photoName = ""
+    accountName! : string
+	accountNumber! : string
+    bankPaymentName! : string
+    
 
     editProfile = this.fb.group({
         userId : [""],
@@ -77,10 +81,12 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         fullname : [""],
         email : [""],
         walletId : [""],
+        walletVer: [0],
         userBalance : [0],
         statusMember : [""],
-        accountName : [""],
-	    accountNumber :[""],
+        // accountName : [""],
+	    // accountNumber :[""],
+        // bankPaymentName: [""],
         phoneNumber : [""],
         dob : [new Date()],
         dobUtc : [new Date()],
@@ -91,6 +97,13 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
         company : [""],
         imageId : [""],
         imageVer : [0],
+        bankUserAccount: this.fb.group({
+            bankPaymentId: [""],
+            bankPaymentName: [""],
+            accountNumber: [""],
+            accountName: [""],
+            ver: [0]
+        }),
         file : this.fb.group({
             fileContent : [""],
             extension : [""]
@@ -165,11 +178,21 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
             province : this.editProfile.value.province!,
             city : this.editProfile.value.city!,
             dob : this.editProfile.value.dob!,
+            memberStatusId : this.editProfile.value.statusMember!,
             walletId : this.editProfile.value.walletId!,
             postalCode : this.editProfile.value.postalCode!,
             industryId : this.editProfile.value.industryId!,
             positionId : this.editProfile.value.positionId!,
             phoneNumber : this.editProfile.value.phoneNumber!,
+            walletVer : this.editProfile.value.walletVer!,
+            bankUserAccount : {
+                bankPaymentId: this.editProfile.value.walletId!,
+                bankPaymentName: this.editProfile.value.bankUserAccount!['bankPaymentName']!,
+                accountNumber: this.editProfile.value.bankUserAccount!['accountNumber']!,
+                accountName: this.editProfile.value.bankUserAccount!['accountName']!,
+                ver: Number(this.editProfile.value.walletVer!),
+                isActive : true
+            },
             file : {
                 fileId : this.editProfile.value.imageId!,
                 fileContent: this.editProfile.value.file?.fileContent!,
@@ -237,7 +260,10 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
 
     initProfile(){
         this.profile$ = this.profileService.getProfileDetail().subscribe(res => {
+            
             this.photoName = getInitials(res.fullname)
+            // this.accountName = res.accountName
+            // this.accountNumber = res.accountNumber
             this.editProfile.patchValue({
                 userId : res.userId,
                 profileId : res.profileId,
@@ -262,13 +288,22 @@ export class ProfileComponent implements OnInit, OnDestroy , AfterContentChecked
                 socialMediaList : [],
                 ver : res.ver,
                 isActive : res.isActive
+                
             })
+
+            this.editProfile.get('bankUserAccount')?.patchValue({
+                bankPaymentId: res.walletId!,
+                bankPaymentName: res.bankPaymentId,
+                accountNumber: res.accountNumber,
+                accountName: res.accountName,
+                ver : res.walletVer
+            })
+            
 
             for(let i = 0; i < this.getSocmed.length ; i++ ){
                 // console.log(this.getSocmed[i].socialMediaId);
                 
                 this.socialMediaList?.push(this.fb.group({
-                    
                     profileSocialMediaId : this.getSocmed[i].profileSocialMediaId,
                     socialMediaId : this.getSocmed[i].socialMediaId,
                     platformName : this.getSocmed[i].platformName,

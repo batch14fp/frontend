@@ -18,7 +18,11 @@ export class PositionService{
     constructor(private http : HttpClient){}
 
     getAllPosition(): Observable<PositionRes[]>{
-        return this.http.get<PositionRes[]>(`${BASE_URL}/positions`)
+        return this.http.get<PositionRes[]>(`${BASE_URL}/positions`, {
+          headers: {
+            skip: "true"
+          }
+        })
     }
 
     insertPosition(data : PositionReq) : Observable<ResInsert>{

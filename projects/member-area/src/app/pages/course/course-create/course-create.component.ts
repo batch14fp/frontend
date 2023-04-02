@@ -29,7 +29,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     description: ["",  Validators.required, Validators.minLength(40)],
     provider: ["",  Validators.required],
     location: ["",  Validators.required],
-    price: [0,  Validators.required],
+    price: [0,  [Validators.required, Validators.min(1)]],
     imageCover: this.fb.group({
       fileTitle: [""],
       contentFile:[""],
@@ -66,7 +66,6 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     faBook = faBook
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
-
     memberStatus!: string
 
     initCategories(){
