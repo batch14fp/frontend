@@ -175,12 +175,14 @@
                   <label for="voucher" class="text-sm font-medium">Voucher</label>
                   <p-divider></p-divider>
                   <input *ngIf="!isClick" type="text" id="voucher" formControlName="voucherCode" pInputText />
-                  <i class="pi pi-check" *ngIf="isClick">{{detailActivity.value.voucherCode}}</i>
+                  <i class="pi pi-check" *ngIf="isClick" ce>{{detailActivity.value.voucherCode}}</i>
                   <div class="sm:hidden md:flex col-2 my-2 w-12 flex-column">
                     <div *ngIf="isClick">
                       <p *ngIf="isValid" class="text-md font-medium text-green-800">Voucher Applied</p>
-                      <p *ngIf="!isValid" class="text-md font-medium text-red-800">Voucher is Invalid</p>
+                    <p *ngIf="!isValid" class="text-md font-medium text-red-800">Voucher is Invalid</p>
                     </div>
+                    <app-button-primary *ngIf="!isClick" class="w-full" label="Apply" (click)="onVoucherApplied()"></app-button-primary>
+                    <app-button-primary *ngIf="isClick" class="w-full" label="Remove" (click)="onRemove()"></app-button-primary>
                   </div>
                 </div>
                 <div class="sm:hidden md:flex col-3 my-2 w-12">

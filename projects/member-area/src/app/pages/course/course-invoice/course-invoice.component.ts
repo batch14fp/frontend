@@ -64,7 +64,7 @@ export class CourseInvoiceComponent implements OnInit, OnDestroy{
         .setVoucherCode(data)
         .subscribe((res) => {
         
-        this.isValid =res.isAllowed
+            this.isValid =res.isAllowed
           this.voucherCode = this.detailActivity.value.voucherCode!;
         });
        

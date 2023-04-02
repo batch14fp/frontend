@@ -27,8 +27,6 @@ span:first-child {
 .post-content>p {
   display: inline !important;
 }
-
-
 .input-password .ui-password {
   width: 100% !important;
 }

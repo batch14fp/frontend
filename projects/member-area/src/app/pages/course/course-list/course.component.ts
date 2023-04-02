@@ -37,20 +37,14 @@ export class CourseComponent implements OnInit, OnDestroy {
   private course$?: Subscription
 
 
-<<<<<<< HEAD
+
   private upcomingEvents$?: Subscription
 
   upcomingEvents?: ActivityUpcomingAllRes
   memberStatus!: string
   imageIdProfile = ""
   fullNameLogin = ""
-=======
 
-    upcomingEvents?:ActivityUpcomingAllRes
-    memberStatus!: string
-  imageIdProfile= ""
-  fullNameLogin=""
->>>>>>> 3fdaf2394c2f859eede3f73be0faa71d9a906720
   memberReguler = MEMBER_STATUS.REGULAR
 
 
@@ -68,9 +62,9 @@ export class CourseComponent implements OnInit, OnDestroy {
   categories?: CategoryRes[] = []
   dateSearch!: Date
 
-<<<<<<< HEAD
+
   choose!: number
-=======
+
     accountMenu: MenuItem[] = [
       { label: 'Profile', icon: 'pi pi-fw pi-user', command: e=> this.router.navigateByUrl("/profile") },
       { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/my-transaction") },
@@ -87,7 +81,7 @@ export class CourseComponent implements OnInit, OnDestroy {
       localStorage.clear()
       this.router.navigateByUrl("/")
     }
->>>>>>> 3fdaf2394c2f859eede3f73be0faa71d9a906720
+
 
 
   sortTypeBuilder = this.fb.group({
@@ -100,22 +94,6 @@ export class CourseComponent implements OnInit, OnDestroy {
 
 
 
-  accountMenu: MenuItem[] = [
-    { label: 'Profile', icon: 'pi pi-fw pi-user', command: e => this.router.navigateByUrl("/profile") },
-    { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e => this.router.navigateByUrl("/my-transaction") },
-    { label: 'Report Acivity', icon: 'pi pi-fw pi-chart-bar', command: e => this.router.navigateByUrl("/report-activity") },
-    { label: 'Report Income', icon: 'pi pi-fw pi-dollar', command: e => this.router.navigateByUrl("/report-activity") },
-    { label: 'My Course', icon: 'pi pi-fw pi-book', command: e => this.router.navigateByUrl("/my-course") },
-    { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e => this.router.navigateByUrl("/my-event") },
-    { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e => this.router.navigateByUrl("/my-bookmark") },
-    { label: 'Change Password', icon: 'pi pi-fw pi-lock', command: e => this.router.navigateByUrl("/change-password") },
-    { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e => this.onLogOut() },
-  ];
-
-  onLogOut() {
-    localStorage.clear()
-    this.router.navigateByUrl("/")
-  }
 
 
   fotoName(name: string) {

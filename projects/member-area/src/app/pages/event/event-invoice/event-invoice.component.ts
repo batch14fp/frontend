@@ -34,11 +34,11 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
     bankPayment:BankPaymentRes[] = []
     voucherValid!:boolean
     voucherInvalid!:boolean
-<<<<<<< HEAD
+
     isValid! :boolean
     isClick = false;
     voucherCode = ''; 
-=======
+
     memberStatus!: string
     imageIdProfile= ""
     fullNameLogin=""
@@ -56,7 +56,6 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
       { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
     ];
 
->>>>>>> 3fdaf2394c2f859eede3f73be0faa71d9a906720
 
     faHeart = faHeart
     faBook = faBook
@@ -86,29 +85,8 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
           });
          
       }
+   
 
-    onVoucherApplied():void{
-        const data:VoucherAppliedReq = {
-            activityId : this.detailActivity.value.activityId!,
-            voucherCode : this.detailActivity.value.voucherCode!
-        }
-        this.voucher$ = this.activityService.setVoucherCode(data).subscribe(res=>{
-            if(res.isAllowed){
-                this.voucherValid = true
-                this.voucherInvalid  = !this.voucherInvalid
-                this.voucherId = res.voucherId
-            }else if(!res.isAllowed){
-                this.voucherInvalid = true
-                this.voucherValid = !this.voucherValid
-            }
-            if(!res){
-                this.voucherInvalid = false
-                this.voucherValid = false
-            }
-
-        })
-    }
->>>>>>> 3fdaf2394c2f859eede3f73be0faa71d9a906720
 
     initBankPayment():void{
         this.bank$ = this.bankService.getAllBankPayment().subscribe(res=>{
@@ -159,6 +137,12 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
         accountNumber : [""],
         accountName : [""]
     })
+    onRemove(): void {
+        this.isClick = false;
+        this.voucherCode = '';
+        this.isValid=false
+      }
+  
 
     onCreateInvoice(){
         const data:InvoiceReq={
