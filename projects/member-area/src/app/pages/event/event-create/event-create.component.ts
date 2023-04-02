@@ -102,6 +102,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     }
 
     onCreateEvents() {
+        
         const eventStartDate = this.createEvents.value.startDateEvent && convertUTCToLocalDateTimeISO(this.createEvents.value.startDateEvent)
         const eventEndDate = this.createEvents.value.startDateEvent && convertUTCToLocalDateTimeISO(this.createEvents.value.endDateEvent)
         const data: ActivityReq = {
