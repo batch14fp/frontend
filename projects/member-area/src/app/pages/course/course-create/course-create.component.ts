@@ -15,6 +15,11 @@ import { PostService } from '@service/post.service';
 import { ActivityTypeService } from '@service/activitytype.service';
 import { ActivityReq } from '@dto/activity/activity-req';
 import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
+import { ActivityUpcomingAllRes } from '@dto/activity/activity-upcoming-all-res';
+import { getInitials } from 'projects/base-area/src/app/utils/getInitial';
+import { truncateString } from 'projects/base-area/src/app/utils/turncateString';
+import { MEMBER_STATUS } from 'projects/base-area/src/app/constant/member-status';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -44,29 +49,45 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     discount:[0],
   })
 
+  accountMenu: MenuItem[] = [
+    { label: 'Profile', icon: 'pi pi-fw pi-user', command: e=> this.router.navigateByUrl("/profile") },
+    { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/my-transaction") },
+    { label: 'Report Activity', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/report-activity") },
+    { label: 'Report Income', icon: 'pi pi-fw pi-dollar', command: e=> this.router.navigateByUrl("/report-income") },
+    { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
+    { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
+    { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
 
+    { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
+  ];
 
   private categories$?: Subscription
   private activity$?: Subscription
+  private upcomingEvents$?: Subscription
+
+  upcomingEvents?:ActivityUpcomingAllRes
 
   categories!: CategoryRes[]
   today = new Date()
   startDate = new Date()
   activityTypeId!: string
+  memberStatus!: string
+  imageIdProfile= ""
+  fullNameLogin=""
+  memberReguler = MEMBER_STATUS.REGULAR
 
   imageSource!:SafeResourceUrl
 
 
   constructor(private fb: FormBuilder, private _sanitizer: DomSanitizer,  private categoryService: CategoryService,
     private postTypeService: PostTypeService, private postService: PostService, private activityTypeService: ActivityTypeService,
-    private activityService: ActivityService, private userService: UserService){}
+    private activityService: ActivityService, private userService: UserService, private router:Router){}
 
 
     faHeart = faHeart
     faBook = faBook
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
-    memberStatus!: string
 
     initCategories(){
       this.categories$ = this.categoryService.getAllCategory().subscribe(res => this.categories = res)
@@ -139,25 +160,36 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     }
 
 
-    // onCreateArticle(){
-    //   const data:ArticleReq={
-    //     title:this.createArticle.value.title!,
-    //     content:this.createArticle.value.content!
-    //   }
-    //   const files = this.createArticle.value.imageArticle
-    //     data.fileContent = files?.contentFile!
-    //     data.extensions = files?.fileExt!
-    //   this.createArticle$ = this.articleService.insertArticle(data).subscribe(res=>{
-    //     alert('create article success')
-    //     this.router.navigateByUrl('admin/article')
-    //   })
-    // }
+    initUpcomingEvents(){
+      this.upcomingEvents$ = this.activityService.getUpcomingEvent(0,3).subscribe(res =>{
+        this.upcomingEvents = res
+        console.log(res)
+      })
+    }
+
+    fotoName(name: string){
+      return getInitials(name)
+    }
+
+    turncate(str:string){
+      return truncateString(str, 20)
+    }
+
+    onLogOut(){
+      localStorage.clear()
+      this.router.navigateByUrl("/")
+    }
 
     ngOnInit(): void {
     this.initCategories()
     this.courseFb.get("startDateCourse")?.valueChanges.subscribe(res => this.startDate = new Date(res!) )
     this.activity$ = this.activityTypeService.getActivityTypeByCode(ACTIVITY_TYPE.COURSE).subscribe(res => this.activityTypeId = res.activityTypeId)
     this.memberStatus =  this.userService.getMemberCode()
+    this.initUpcomingEvents()
+    this.memberStatus =  this.userService.getMemberCode()
+    this.imageIdProfile = this.userService.getIdFotoProfile()
+    this.fullNameLogin = this.userService.getFullName()
+
   }
 
   ngOnDestroy(): void {
