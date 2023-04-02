@@ -1,8 +1,5 @@
-<pre>
-    {{getPostType | json}}
-</pre>
 <div class="mx-6">
-    <h1>Bank Payment</h1>
+    <h1>Post Type</h1>
     <div class="col-3 my-2">
         <app-button-primary label="Create Post Type" id="create" (click)="showResponsiveDialog()" ></app-button-primary>
 
@@ -48,7 +45,6 @@
                         <form [formGroup]="updatePostType">
                             <p-dialog header="Update Post Type" [(visible)]="displayUpdate" [breakpoints]="{'960px': '75vw'}"
                                 [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-                                <pre>{{updatePostType.value|json}}</pre>
                                 <div class="mb-3">
                                     <div class="mb-3 flex flex-column w-full">
                                         <label for="postTypeCode" class="font-medium col-form-label">Post Type Code</label>

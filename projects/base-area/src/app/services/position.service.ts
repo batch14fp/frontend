@@ -19,9 +19,6 @@ export class PositionService{
 
     getAllPosition(): Observable<PositionRes[]>{
         return this.http.get<PositionRes[]>(`${BASE_URL}/admin/positions`, {
-          headers: {
-            skip: "true"
-          }
         })
     }
     insertPosition(data : PositionReq) : Observable<ResInsert>{

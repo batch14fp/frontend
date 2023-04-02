@@ -19,9 +19,6 @@ export class IndustryService{
 
     getAllIndustry() : Observable<IndustryRes[]>{
         return this.http.get<IndustryRes[]>(`${BASE_URL}/admin/industries`, {
-          headers: {
-            skip: "true"
-          }
         })
     }
 
