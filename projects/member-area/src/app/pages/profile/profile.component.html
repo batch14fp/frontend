@@ -134,17 +134,16 @@
 
                     <div class="flex flex-column relative hover:bg-grey-700">
 
-                      <input type="file" #file class="hidden" (change)="onUpload($event)">
+                            <input type="file" #file class="hidden" (change)="onUpload($event)">
+                            
+                            <img class="img" style="width: 100px; height: 100px; border-radius: 50%;" src="http://localhost:2121/files/{{editProfile.value.imageId}}"
+                            alt="banner">
+                            <img  src="http://localhost:2121/files/{{editProfile.value.imageId}}">
 
-                      <img class="img" style="width: 100px; height: 100px; border-radius: 50%;"
-                        src="http://localhost:2121/files/{{editProfile.value.imageId}}" alt="banner">
+                            <div class=" hover:bg-gray-100" *ngIf="!imageSource" (click)="file.click()" >
+                              <p class="border-circle w-6rem h-6rem m-2 bg-indigo-500 text-white font-bold flex align-items-center justify-content-center ">{{photoName}}</p>
 
-                      <div class=" hover:bg-gray-100" *ngIf="!imageSource" (click)="file.click()">
-                        <p
-                          class="border-circle w-6rem h-6rem m-2 bg-indigo-500 text-white font-bold flex align-items-center justify-content-center ">
-                          {{photoName}}</p>
-
-                        <fa-icon input type="file" class="absolute top-0 right-0" [icon]="faPenToSquare"></fa-icon>
+                              <fa-icon input type="file" class="absolute top-0 right-0" [icon]="faPenToSquare"></fa-icon>
 
                       </div>
 
@@ -236,6 +235,36 @@
                       <label for="position" class="font-medium col-form-label">Position</label>
                       <p-dropdown styleClass="w-full" [options]="getPosition" optionValue="positionId"
                         formControlName="positionId" optionLabel="positionName"></p-dropdown>
+                    <div class="bg-white border-round-lg" formGroupName="bankUserAccount">
+                        <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                            <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
+                                <div class="flex">
+                                    <h2>Wallet</h2>
+                                </div>
+                                <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
+                                    <i class="pi pi-wallet align-self-center"></i>
+                                </div>
+                            </div>
+                          <div class="mb-3 flex flex-column ">
+                            <label for="fullname" class="font-medium col-form-label">Bank</label>
+                            <p-dropdown styleClass="w-full"  formControlName="bankPaymentName" [options]="getBank" optionValue="name" optionLabel="name" [filter]="true"
+                            filterBy="name"></p-dropdown>
+                        </div>
+                            <div class="mt-3 flex flex-column ">
+                                <label for="industry" class="font-medium col-form-label">Account Number</label>
+                                <input type="text" class="mt-2 disable" formControlName="accountNumber" style="border-radius: 10px;" pInputText id="industry"
+                                    name=" industry">
+                            </div>
+                            <div class="mt-3 flex flex-column ">
+                                <label for="industry" class="font-medium col-form-label">Account Name</label>
+                                <input type="text" class="mt-2 disable" formControlName="accountName" style="border-radius: 10px;" pInputText id="industry"
+                                    name=" industry">
+                            </div>
+                            <div class="mt-3 grid border-top-1 p-3 border-gray-300 justify-content-between">
+                                <label for="industry" class="font-medium col-form-label">Balance</label>
+                                <p >{{editProfile.value.userBalance}}</p>
+                            </div>
+                        </div>
                     </div>
                   </div>
                 </div>
