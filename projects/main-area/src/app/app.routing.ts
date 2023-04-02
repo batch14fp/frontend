@@ -13,7 +13,6 @@ const appRoutes: Routes = [
    },
     ...adminRoutes,
     ...memberRoutes,
-
 ]
 
 @NgModule({
