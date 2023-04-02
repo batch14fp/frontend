@@ -40,10 +40,12 @@ export class CourseComponent implements OnInit, OnDestroy {
 
   private upcomingEvents$?: Subscription
 
+
   upcomingEvents?: ActivityUpcomingAllRes
   memberStatus!: string
   imageIdProfile = ""
   fullNameLogin = ""
+
 
   memberReguler = MEMBER_STATUS.REGULAR
 
@@ -76,6 +78,7 @@ export class CourseComponent implements OnInit, OnDestroy {
 
       { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
     ];
+
 
     onLogOut(){
       localStorage.clear()

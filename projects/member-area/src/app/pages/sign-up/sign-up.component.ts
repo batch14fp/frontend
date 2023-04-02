@@ -89,10 +89,10 @@ export class SignUpComponent implements OnInit{
     }
 
     initIndustries(){
-      this.industries$ = this.industryService.getAllIndustry().subscribe(res => this.industries =res)
+      this.industries$ = this.userService.getAllIndustryMember().subscribe(res => this.industries =res)
     }
     initPositions(){
-      this.industries$ = this.positionService.getAllPosition().subscribe(res => this.positions =res)
+      this.industries$ = this.userService.getAllPositionMember().subscribe(res => this.positions =res)
     }
 
 
