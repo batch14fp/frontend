@@ -29,7 +29,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
     description: ["",  Validators.required],
     provider: ["",  Validators.required],
     location: ["",  Validators.required],
-    price: [0,  Validators.required],
+    price: [0,  [Validators.required, Validators.min(1)]],
     imageCover: this.fb.group({
       fileTitle: [""],
       contentFile:[""],
