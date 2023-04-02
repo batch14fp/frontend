@@ -18,7 +18,11 @@ export class IndustryService{
     constructor(private http : HttpClient){}
 
     getAllIndustry() : Observable<IndustryRes[]>{
-        return this.http.get<IndustryRes[]>(`${BASE_URL}/industries`)
+        return this.http.get<IndustryRes[]>(`${BASE_URL}/industries`, {
+          headers: {
+            skip: "true"
+          }
+        })
     }
 
     insertIndustry(data : IndustryReq) : Observable<ResInsert>{
