@@ -18,9 +18,8 @@ export class AdminService {
 
 
     insertUserAdmin(data : SignUpReqInsert) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/admin/user`, data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/users`, data)
     }
-    
     getAllTransaction(limit?:number,offset?:number,isPaid?:boolean): Observable<PaymentDetailResData[]>{
         if(isPaid == null){
             return this.http.get<PaymentDetailResData[]>(`${BASE_URL}/admin/payments?limit=${limit}&offset=${offset}`)

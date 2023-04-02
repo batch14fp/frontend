@@ -137,7 +137,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.initCategories()
         this.createEvents.get("startDateEvent")?.valueChanges.subscribe(res => this.startDate = new Date(res!))
-        this.activity$ = this.activityTypeService.getActivityTypeByCode(ACTIVITY_TYPE.EVENT).subscribe(res => this.activityTypeId = res.activityTypeId)
+        this.activity$ = this.activityService.getActivityTypeByCode(ACTIVITY_TYPE.EVENT).subscribe(res => this.activityTypeId = res.activityTypeId)
     }
 
 }

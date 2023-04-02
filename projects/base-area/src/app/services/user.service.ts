@@ -74,6 +74,13 @@ export class UserService {
   saveDataLogin(data: LoginRes) {
     localStorage.setItem("dataLogin", JSON.stringify(data))
   }
+  insertVerification(data: VerificationCodeReq): Observable<VerificationCodeReq> {
+    return this.http.post<VerificationCodeReq>(`${BASE_URL}/users/sign-up/`, data, {
+      headers: {
+        skip: "true"
+      }
+    })
+  }
 
   getVerified(data: VerificationCodeReqGet): Observable<VerificationCodeReqGet> {
     return this.http.post<VerificationCodeReqGet>(`${BASE_URL}/users/sign-up/verify-code/`, data, {
@@ -83,17 +90,8 @@ export class UserService {
     })
   }
 
-
-  insertVerification(data: VerificationCodeReq): Observable<VerificationCodeReq> {
-    return this.http.post<VerificationCodeReq>(`${BASE_URL}/users/sign-up/`, data, {
-      headers: {
-        skip: "true"
-      }
-    })
-  }
-
   signUpMember(data: SignUpReqInsert): Observable<SignUpReqInsert> {
-    return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify/`, data, {
+    return this.http.post<SignUpReqInsert>(`${BASE_URL}/users/sign-up/verify-code/verified/`, data, {
       headers: {
         skip: "true"
       }

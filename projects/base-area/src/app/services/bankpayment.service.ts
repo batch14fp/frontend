@@ -16,24 +16,25 @@ import { UpdateRes } from "../dto/res-update";
 export class BankPaymentService{
 
     constructor(private http : HttpClient){}
-
-    getAllBankPayment() : Observable<BankPaymentRes[]>{
-        return this.http.get<BankPaymentRes[]>(`${BASE_URL}/bank-payments`)
-    }
-
     getAdminBankPayment() : Observable<BankPaymentRes[]>{
         return this.http.get<BankPaymentRes[]>(`${BASE_URL}/admin/bank-payments`)
     }
 
+ 
     insertBankPayment(data : BankPaymentReq) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/bank-payments`,data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/bank-payments`,data)
     }
 
     updateBankPayment(data : BankPaymentUpdateReq) : Observable<UpdateRes>{
-        return this.http.put<UpdateRes>(`${BASE_URL}/bank-payments`,data)
+        return this.http.put<UpdateRes>(`${BASE_URL}/admin/bank-payments`,data)
     }
 
     deleteBankPayment(id : string) : Observable<res>{
-        return this.http.delete<res>(`${BASE_URL}/bank-payments/${id}`)
+        return this.http.delete<res>(`${BASE_URL}/admin/bank-payments/${id}`)
     }
+    getAllBankPayment() : Observable<BankPaymentRes[]>{
+        return this.http.get<BankPaymentRes[]>(`${BASE_URL}/activities/bank-payments`)
+    }
+  
+
 }

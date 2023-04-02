@@ -18,21 +18,20 @@ export class PositionService{
     constructor(private http : HttpClient){}
 
     getAllPosition(): Observable<PositionRes[]>{
-        return this.http.get<PositionRes[]>(`${BASE_URL}/positions`, {
+        return this.http.get<PositionRes[]>(`${BASE_URL}/admin/positions`, {
           headers: {
             skip: "true"
           }
         })
     }
-
     insertPosition(data : PositionReq) : Observable<ResInsert>{
-        return this.http.post<ResInsert>(`${BASE_URL}/positions`,data)
+        return this.http.post<ResInsert>(`${BASE_URL}/admin/positions`,data)
     }
 
     updatePosition(data:PositionUpdateReq):Observable<UpdateRes>{
-        return this.http.put<UpdateRes>(`${BASE_URL}/positions`, data)
+        return this.http.put<UpdateRes>(`${BASE_URL}/admin/positions`, data)
     }
     deletePosition(id:string):Observable<res>{
-        return this.http.delete<res>(`${BASE_URL}/positions/${id}`)
+        return this.http.delete<res>(`${BASE_URL}/admin/positions/${id}`)
     }
 }
