@@ -87,6 +87,9 @@ export class MyTransactionComponent implements OnInit, OnDestroy {
         private userService: UserService, private router: Router, private activityService: ActivityService) {
         this.title.setTitle("Course")
     }
+    ngOnDestroy(): void {
+        throw new Error('Method not implemented.');
+    }
 
     initUpcomingEvents(){
       this.upcomingEvents$ = this.activityService.getUpcomingEvent(0,3).subscribe(res =>{
@@ -95,15 +98,16 @@ export class MyTransactionComponent implements OnInit, OnDestroy {
       })
     }
 
+
+
     ngOnInit(): void {
       this.initUpcomingEvents()
       this.memberStatus =  this.userService.getMemberCode()
       this.imageIdProfile = this.userService.getIdFotoProfile()
       this.fullNameLogin = this.userService.getFullName()
 
+
     }
 
-    ngOnDestroy(): void {
-        this.transaction$?.unsubscribe()
-    }
+
 }

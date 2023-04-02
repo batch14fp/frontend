@@ -70,7 +70,7 @@ export class EventListComponent implements OnInit, OnDestroy {
       const selectedValue = this.sortTypeBuilder.get('choose')?.value;
       if (selectedValue === '2') {
         if (this.categoriesList.length) {
-          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.HIGHEST,this.categoriesList )?.subscribe(res => {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.HIGHEST,this.categoriesList )?.subscribe(res => {
             if (res != null ) {
               this.allActivity = res;
             }

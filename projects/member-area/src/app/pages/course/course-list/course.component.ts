@@ -37,6 +37,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   private course$?: Subscription
 
 
+
   private upcomingEvents$?: Subscription
 
 
@@ -44,6 +45,8 @@ export class CourseComponent implements OnInit, OnDestroy {
   memberStatus!: string
   imageIdProfile = ""
   fullNameLogin = ""
+
+
   memberReguler = MEMBER_STATUS.REGULAR
 
 
@@ -77,6 +80,12 @@ export class CourseComponent implements OnInit, OnDestroy {
     ];
 
 
+    onLogOut(){
+      localStorage.clear()
+      this.router.navigateByUrl("/")
+    }
+
+
 
   sortTypeBuilder = this.fb.group({
     choose: ['1']
@@ -88,22 +97,6 @@ export class CourseComponent implements OnInit, OnDestroy {
 
 
 
-  accountMenu: MenuItem[] = [
-    { label: 'Profile', icon: 'pi pi-fw pi-user', command: e => this.router.navigateByUrl("/profile") },
-    { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e => this.router.navigateByUrl("/my-transaction") },
-    { label: 'Report Acivity', icon: 'pi pi-fw pi-chart-bar', command: e => this.router.navigateByUrl("/report-activity") },
-    { label: 'Report Income', icon: 'pi pi-fw pi-dollar', command: e => this.router.navigateByUrl("/report-activity") },
-    { label: 'My Course', icon: 'pi pi-fw pi-book', command: e => this.router.navigateByUrl("/my-course") },
-    { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e => this.router.navigateByUrl("/my-event") },
-    { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e => this.router.navigateByUrl("/my-bookmark") },
-    { label: 'Change Password', icon: 'pi pi-fw pi-lock', command: e => this.router.navigateByUrl("/change-password") },
-    { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e => this.onLogOut() },
-  ];
-
-  onLogOut() {
-    localStorage.clear()
-    this.router.navigateByUrl("/")
-  }
 
 
   fotoName(name: string) {
