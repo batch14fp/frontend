@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { PaymentDetailResData } from "@dto/payment/payment-detail-res";
 import { PaymentReqUpdate } from "@dto/payment/payment-req-update";
 import { UpdateRes } from "@dto/res-update";
-import { Observable } from "rxjs";
+import { Observable, ObservableNotification } from "rxjs";
 import { BASE_URL } from "../constant/base.service";
 
 @Injectable({
@@ -26,6 +26,9 @@ export class AdminService {
 
     updatePayment(data:PaymentReqUpdate):Observable<UpdateRes>{
         return this.http.put<UpdateRes>(`${BASE_URL}/admin/payments`, data)
+    }
+    getFileReceipt(fileId?:string){
+        return this.http.get<PaymentDetailResData[]>(`${BASE_URL}/files/${fileId}`)
     }
 
     

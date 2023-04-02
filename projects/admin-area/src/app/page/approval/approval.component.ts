@@ -10,59 +10,101 @@ import { LazyLoadEvent } from "primeng/api";
 import { Subscription } from "rxjs";
 
 @Component({
-    selector : 'app-approval',
-    templateUrl : 'approval.component.html'
+  selector: "app-approval",
+  templateUrl: "approval.component.html"
 })
+export class ApprovalComponent implements OnInit, OnDestroy {
+  private payment$?: Subscription;
+  private approvalPayment$?: Subscription;
+  private downloadReceipts$?: Subscription;
 
-export class ApprovalComponent  implements OnInit, OnDestroy{
-    private payment$?:Subscription
-    private approvalPayment$?:Subscription
+  listTransaction: PaymentDetailResData[] = [];
+  isPaid :any = null;
+  ver!: number;
+  limit = 5;
+  offset = 0;
+  totalData = 0;
+  loading = true;
+  paymentId!: string;
+  disable!: boolean;
+  desc!: string;
+  paid!: boolean;
 
-    listTransaction:PaymentDetailResData [] = []
-    isPaid:boolean = true
-    limit:number = 5
-    offset:number = 0
-    totalData:number = 0
-    loading: boolean = true
-    paymentId!:string
+  constructor(
+    private fb: FormBuilder,
+    private title: Title,
+    private router: Router,
+    private adminService: AdminService
+  ) {
+    this.title.setTitle("Approval");
+  }
 
-    loadData(event: LazyLoadEvent) {
-        console.log(event)
-        this.initTransaction(event.rows,event.first)
-    }
-
-    initTransaction(limit?:number, offset?:number,isPaid?:boolean){
-        this.payment$ = this.adminService.getAllTransaction(this.limit, this.offset,this.isPaid).subscribe(res=>{
-            const resultData:any = res
-            this.listTransaction = resultData.data
-            this.loading = false
-            this.totalData = resultData.total
-            console.log(resultData)
-        })
-    }
-
-    constructor(private fb:FormBuilder,private title:Title, private router:Router, private adminService:AdminService){
-        this.title.setTitle("Approval")
-    }
+  ngOnInit(): void {
+    this.initTransaction();
 
 
-    onUpdateTransaction(dataPayment:PaymentDetailRes){
-        const data:PaymentReqUpdate = {
-            paymentId:dataPayment.paymentId,
-            isPaid:true,
-            ver:dataPayment.ver,
+
+  }
+
+  ngOnDestroy(): void {
+    this.payment$?.unsubscribe();
+    this.approvalPayment$?.unsubscribe();
+  }
+
+  loadData(event: LazyLoadEvent) {
+    this.offset = event.first ?? 0;
+    this.limit = event.rows ?? 5;
+    this.initTransaction();
+  }
+
+  initTransaction() {
+    this.loading = true;
+
+    this.payment$ = this.adminService
+      .getAllTransaction(this.limit, this.offset, this.isPaid)
+      .subscribe(
+        res => {
+          const resultData: any = res;
+          this.listTransaction = resultData.data;
+          this.loading = false;
+          this.ver = resultData.dataPaymentDetail.ver;
+          this.paid = resultData.data.isPaid;
+          this.totalData = resultData.total;
+          this.disable = this.ver <= 1;
         }
-        this.approvalPayment$ = this.adminService.updatePayment(data).subscribe(res=>{
-            this.initTransaction()
-        })
-    }
+      );
+  }
 
-    ngOnInit(): void {
-        
-    }
-    ngOnDestroy(): void {
-        this.payment$?.unsubscribe()
-        this.approvalPayment$?.unsubscribe()
-    }
-   
+  onApproveTransaction(dataPayment: PaymentDetailRes) {
+    const data: PaymentReqUpdate = {
+      paymentId: dataPayment.paymentId,
+      isPaid: true,
+      ver: dataPayment.ver
+    };
+    this.approvalPayment$ = this.adminService.updatePayment(data).subscribe(
+        res => {
+          this.initTransaction();
+        })
+  }
+
+  onClickDownload(filePaymentId :string){
+
+    this.downloadReceipts$ = this.adminService.getFileReceipt(filePaymentId).subscribe(res=>{
+
+    })
+            
+
+  }
+  onDisapproveTransaction(dataPayment: PaymentDetailRes) {
+    const data: PaymentReqUpdate = {
+      paymentId: dataPayment.paymentId,
+      isPaid: false,
+      ver: dataPayment.ver
+    };
+    this.approvalPayment$ = this.adminService.updatePayment(data).subscribe(
+        res => {
+          this.initTransaction();
+        })
+  }
+
 }

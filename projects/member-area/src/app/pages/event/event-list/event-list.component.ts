@@ -9,6 +9,7 @@ import { ActivityService } from "@service/activity.service";
 import { CategoryService } from "@service/category.service";
 import { UserService } from "@service/user.service";
 import { ACTIVITY_TYPE } from "projects/base-area/src/app/constant/activity-type";
+import { SORT_TYPE } from "projects/base-area/src/app/constant/sort_type";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -33,9 +34,72 @@ export class EventListComponent implements OnInit, OnDestroy {
         this.title.setTitle("Event")
     }
 
-    // categoriesList = this.fb.group({
-    //     category: [[]]
-    // })
+    sortTypeBuilder = this.fb.group({
+      choose: ['1']
+    })
+    sortFilter() {
+      const selectedValue = this.sortTypeBuilder.get('choose')?.value;
+      if (selectedValue === '2') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.COURSE, SORT_TYPE.HIGHEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.HIGHEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+          });
+        }
+      } else if (selectedValue === '3') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+              
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+      } else if (selectedValue === '1') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.NEWEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.NEWEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }else{
+              this.allActivity =[]
+            }
+          });
+        }
+      }
+    }  
 
     categoriesList:string[] = []
 
@@ -68,18 +132,71 @@ export class EventListComponent implements OnInit, OnDestroy {
         this.initEvent()
         
     }
-    categoryFilter(){
-        if(!this.categoriesList.length){
-          this.event$ = this.activityService.getAllActivity(1,10,ACTIVITY_TYPE.EVENT).subscribe(res=>{
-            this.allActivity =res
-          })
+   
+    categoryFilter() {
+      const selectedValue = this.sortTypeBuilder.get('choose')?.value;
+      if (selectedValue === '2') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.HIGHEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
         }
         else{
-          this.event$ = this.activityService.getAllActivityByCategories(1,10,ACTIVITY_TYPE.EVENT,this.sortType, this.categoriesList).subscribe(res=>{
-            this.allActivity =res
-          })
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.HIGHEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+          });
         }
+      } else if (selectedValue === '3') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+              
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.LOWEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }
+            else{
+              this.allActivity =[]
+            }
+          });
+        }
+      } else if (selectedValue === '1') {
+        if (this.categoriesList.length) {
+          this.event$ = this.activityService?.getAllActivityByCategories(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.NEWEST,this.categoriesList )?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }else{
+              this.allActivity =[]
+            }
+          });
+        }
+        else{
+          this.event$ = this.activityService?.getAllActivity(1, 10, ACTIVITY_TYPE.EVENT, SORT_TYPE.NEWEST)?.subscribe(res => {
+            if (res != null ) {
+              this.allActivity = res;
+            }else{
+              this.allActivity =[]
+            }
+          });
+        }
+      }
       
     }
+  
 
 }
