@@ -20,14 +20,16 @@ import { truncateString } from 'projects/base-area/src/app/utils/turncateString'
 
 export class MyTransactionComponent implements OnInit, OnDestroy {
 
-    private transaction$?: Subscription
-    private upcomingEvents$?: Subscription
+    private transaction$!: Subscription
+    private upcomingEvents$!: Subscription
 
     upcomingEvents?:ActivityUpcomingAllRes
     memberStatus!: string
     imageIdProfile= ""
     fullNameLogin=""
     memberReguler = MEMBER_STATUS.REGULAR
+    isPaid?: any = true
+  
 
     faHeart = faHeart
     faBook = faBook
@@ -35,7 +37,7 @@ export class MyTransactionComponent implements OnInit, OnDestroy {
     faPeopleGroup = faPeopleGroup
 
     listTransaction: PaymentDetailResData[] = []
-    isPaid: boolean = true
+   
     limit: number = 5
     offset: number = 0
     totalData: number = 0
@@ -98,9 +100,17 @@ export class MyTransactionComponent implements OnInit, OnDestroy {
       })
     }
 
-
+    onPaidStatusChange(isPaid: boolean | null) {
+        if (isPaid === null) {
+          this.isPaid = null;
+        } else {
+          this.isPaid = isPaid;
+        }
+        this.initTransaction!(this.limit, this.offset, this.isPaid);
+      }
 
     ngOnInit(): void {
+    this.initTransaction(this.limit, this.offset, this.isPaid) 
       this.initUpcomingEvents()
       this.memberStatus =  this.userService.getMemberCode()
       this.imageIdProfile = this.userService.getIdFotoProfile()
