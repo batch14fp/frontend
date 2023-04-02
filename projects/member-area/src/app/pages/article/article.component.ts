@@ -59,7 +59,6 @@ export class ArticleComponent implements OnInit, OnDestroy{
     { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
     { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
     { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
-
     { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
   ];
 
@@ -69,11 +68,6 @@ export class ArticleComponent implements OnInit, OnDestroy{
     private articleService: ArticlesService, private userService:UserService){
       this.title.setTitle("Artikel")
     }
-
-    // loadData(event: LazyLoadEvent) {
-    //   console.log(event)
-    //   this.getData(event.first, event.rows, event.globalFilter)
-    // }
 
   ARTICLE_LIMIT = 3
   articlePage = 1
@@ -97,7 +91,6 @@ export class ArticleComponent implements OnInit, OnDestroy{
   initArticle(){
     this.isLoading = true
     this.article$ = this.articleService.getAll(this.articlePage, this.ARTICLE_LIMIT).subscribe(res => {
-      // this.isLoading = false
       this.allArticle = res
       this.isMoreArticle = this.allArticle.length >= this.ARTICLE_LIMIT
     })
@@ -133,7 +126,6 @@ export class ArticleComponent implements OnInit, OnDestroy{
  articlePopuler(){
   this.popArticle$ = this.articleService.getAllByMostViewer(this.articlePage, this.ARTICLE_LIMIT).subscribe(res => {
     this.populerArticle = res
-    // this.isMoreArticle
   })
  }
 
@@ -156,5 +148,7 @@ export class ArticleComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void {
     this.article$?.unsubscribe()
+    this.upcomingEvents$?.unsubscribe()
+    this.popArticle$?.unsubscribe()
   }
 }

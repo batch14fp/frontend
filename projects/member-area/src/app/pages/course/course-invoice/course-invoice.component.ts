@@ -46,7 +46,6 @@ export class CourseInvoiceComponent implements OnInit, OnDestroy{
       { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
       { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
       { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
-
       { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
     ];
 
@@ -65,7 +64,6 @@ export class CourseInvoiceComponent implements OnInit, OnDestroy{
   turncate(str:string){
     return truncateString(str, 20)
   }
-
 
     constructor(private fb:FormBuilder, private title:Title, private activityService:ActivityService, private router: Router, private activatedRouter:ActivatedRoute,
         private bankService:BankPaymentService, private invoiceService:InvoiceService,
@@ -92,7 +90,6 @@ export class CourseInvoiceComponent implements OnInit, OnDestroy{
                 this.voucherInvalid = false
                 this.voucherValid = false
             }
-
         })
     }
 
@@ -152,9 +149,8 @@ export class CourseInvoiceComponent implements OnInit, OnDestroy{
             voucherId:this.voucherId
         }
         this.createInvoice$ = this.invoiceService.insertInvoice(data).subscribe(res=>{
-             this.router.navigateByUrl(`/course/detail/${this.activityId}/invoice/${res.id}/payment`)
+        this.router.navigateByUrl(`/course/detail/${this.activityId}/invoice/${res.id}/payment`)
         })
-
     }
 
     initUpcomingEvents(){
@@ -171,6 +167,10 @@ export class CourseInvoiceComponent implements OnInit, OnDestroy{
 
     ngOnDestroy(): void {
         this.courseDetail$?.unsubscribe()
+        this.bank$?.unsubscribe()
+        this.voucher$?.unsubscribe()
+        this.createInvoice$?.unsubscribe()
+        this.upcomingEvents$?.unsubscribe()
     }
     ngOnInit(): void {
         this.initDetails()

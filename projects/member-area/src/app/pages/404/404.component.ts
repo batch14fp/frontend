@@ -20,7 +20,5 @@ export class NotFoundComponent{
       this.title.setTitle("Not Found")
     }
 
-    private category$?: Subscription
-
 
 }

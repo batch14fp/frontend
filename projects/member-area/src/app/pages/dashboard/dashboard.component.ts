@@ -49,7 +49,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
 
     images!: FileResPost[];
-
     items!: MenuItem[];
     posts!:AllPostRes[]
     upcomingEvents?:ActivityUpcomingAllRes
@@ -67,16 +66,14 @@ export class DashboardComponent implements OnInit, OnDestroy{
     imageIdProfile= ""
     fullNameLogin=""
     forbiddenAccess= false
-
-    // commentIdSelected =""
     commentIdxEdit!: number
-
     displayBasic!: boolean
+    postUpdate!: AllPostRes[]
+    visible!:boolean
+    blockedPanel:boolean = true
 
     onShowGallery(data:FileResPost[]){
-      console.log("show")
       this.images = data
-
       this.responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -91,7 +88,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
             numVisible: 1
         }
     ]
-
       this.displayBasic = true
     }
 
@@ -120,7 +116,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
       idx: 0
     }
 
-
     onOptionPost(postId:string, idx:number){
       this.postIdToDelete = postId
       this.optionPost.postId = postId
@@ -147,8 +142,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
         title.setTitle("Dashboard")
       }
 
-
-
       COMMENT_POST_LIMIT =5
       commentPostPage = 1
       isMoreComments = false
@@ -166,7 +159,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
         { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
         { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
         { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
-
         { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
       ];
 
@@ -185,7 +177,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
         { label: 'Edit', icon: 'pi pi-fw pi-pencil', command: e=> this.onEditComment() },
       ];
 
-
       onCancelEdit(){
         this.commentIdx = -1
       }
@@ -195,8 +186,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
       onShowEditComment(idx:number, postIdx:number){
         this.commentIdxEdit = idx
         this.postIdxDelete = postIdx
-        // this.commentIdSelected = postCommentId
-        // console.log(this.commentPost[this.commentIdxEdit].contentComment)
       }
 
       onEditComment(){
@@ -205,9 +194,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
         this.editCommentFb.patchValue({
           contentComment: this.commentPost[this.commentIdx].contentComment
         })
-        // this.editCommentFb.patchValue({contentComment: this.commentPost[this.commentIdx].contentComment })
-        // this.editCommentFb.value.contentComment = this.commentPost[this.commentIdx].contentComment
-      //  this.commentIdEdit = this.commentIdSelected
       }
 
       onSaveEditComment(comment:PostCommentRes, postId:string){
@@ -227,19 +213,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
       POST_LIMIT = 3
       postPage = 1
       onScroll() : void {
-        console.log("scrolled")
-        console.log(this.postPage)
         this.posts$ = this.postService.getAllPost(++this.postPage, this.POST_LIMIT).subscribe(result => {
           if(this.posts?.length) {
             this.posts = [...this.posts, ...result]
           } else {
             this.posts = result
           }
-          console.log(this.posts)
-          // this.posts.map(p => {
-            // p.showComment = false
-
-          // })
         })
       }
 
@@ -250,7 +229,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
       turncate(str:string){
         return truncateString(str, 20)
       }
-
 
       onLoadMoreComment(postId: string) : void {
         console.log("scrolled")
@@ -263,13 +241,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
             this.commentPost = result
             this.isMoreComments = false
           }
-          // this.posts.map(p => {
-          //   p.showComment = false
-          // })
         })
       }
 
-      postUpdate!: AllPostRes[]
+
     initPosts(){
       this.isLoading = true
       this.posts$ = this.postService.getAllPost(this.postPage, this.POST_LIMIT).subscribe(res => {
@@ -469,29 +444,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
           this.posts = []
           this.posts = [...postUpdate]
         })
-
-
-        // const postUpdate: AllPostRes[] = []
-        // for (const post of this.posts) {
-        //   for (const polling of post.pollingOption) {
-        //     if(polling.pollingOptionId === pollingOptionId){
-
-        //       post.isVote = !post.isVote
-        //         console.log("sama polling option id")
-        //     }
-        //   }
-        //   postUpdate.push(post)
-        // }
-        // this.posts = []
-        // this.posts = [...postUpdate]
-        // console.log(this.posts)
-
-    //     this.postIdToComment = postId
-    //  this.initComment(postId)
-    //  this.posts[idx].showInsertComment = !this.posts[idx].showInsertComment
-
-
-        // this.initPosts()
       })
 
     }
@@ -524,20 +476,15 @@ export class DashboardComponent implements OnInit, OnDestroy{
   }
 
   onDeleteComment(commentId:string, postId: string){
-    console.log(commentId)
     this.deleteComment$ = this.postService.deletePostComment(commentId).subscribe(res =>{
       this.posts.map(p => {
         p.countPostComment--
         this.commentFb.reset()
       })
-
       this.initComment(postId)
     })
   }
     confirmDeleteComment(idx?:number) {
-      // if(idx){
-      //   this.commentPost[idx].showPostOption = !this.posts[idx].showPostOption
-      // }
       this.confirmationService.confirm({
           message: 'Do you want to delete this comment?',
           header: 'Delete Confirmation',
@@ -549,7 +496,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
                 p.countPostComment--
                 this.commentFb.reset()
               })
-
               this.initComment(this.posts[this.postIdxDelete].id)
             })
               this.messageService.add({severity:'info', summary:'Confirmed', detail:'Record deleted'});
@@ -567,9 +513,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
           }
       });
   }
-
-  visible!:boolean
-  blockedPanel:boolean = true
 
   onDetailPost(postId:string, idx: number){
     this.singlePost$ = this.postService.getPostById(postId).subscribe({
@@ -589,14 +532,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
   initBookmarks(){
     this.myBookmark$ = this.postService.getMyBookmarks(1,3).subscribe(res =>{
       this.myBookmarks = res
-      console.log(res)
     })
   }
 
   initUpcomingEvents(){
     this.upcomingEvents$ = this.activityService.getUpcomingEvent(0,3).subscribe(res =>{
       this.upcomingEvents = res
-      console.log(res)
     })
   }
 

@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit} from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { DomSanitizer, SafeResourceUrl, Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
-import { FileReq } from "@dto/file/file-req";
 import { UserPaymentReqUpdate } from "@dto/payment/user-payment-req-update";
 import { faBook, faHeart, faNewspaper, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 import { ActivityService } from "@service/activity.service";
@@ -118,7 +117,6 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
                     startDate:res.startDate,
                     endDate: res.endDate,
                 })
-                // this.uploadTransactions.value.paymentId = res.
             })
         })
     }
@@ -131,7 +129,6 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
 
     calculateDiscount(){
        return discountAmount(this.invoiceDetail.value.discountNum!, this.invoiceDetail.value.price!)
-
     }
 
     calculateTax(){
@@ -156,7 +153,6 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
     onRemoveImageCover() {
         this.imageSource = ""
         this.uploadTransactions.get('imgCover')?.reset()
-
     }
 
     addFiles(fileContent: string, fileExtension: string){
@@ -164,7 +160,6 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
             fileName: (Date.now().toString()),
             fileContent: (fileContent),
             fileExtension: (fileExtension),
-
         })
     }
 
@@ -182,11 +177,8 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
             toBase64(file).then(result => {
                 const resultBase64 = result.substring(result.indexOf(",") + 1, result.length)
                 const resultExtension = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length)
-
                 this.addFiles(resultBase64, resultExtension)
-
                 this.imageSource = this._sanitizer.bypassSecurityTrustResourceUrl(`data:image/${resultExtension};base64, ${resultBase64}`);
-
             })
         }
     }
@@ -198,7 +190,6 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
             fileContent:this.uploadTransactions.value.imgCover?.fileContent!,
             fileExtension:this.uploadTransactions.value.imgCover?.fileExtension!,
             ver:this.uploadTransactions.value.ver!
-
         }
 
         this.buyActivity$ = this.activityService.getPayment(data).subscribe(res=>{
@@ -249,6 +240,11 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
 
     ngOnDestroy(): void {
        this.coursePayment$?.unsubscribe()
+       this.paymentDetail$?.unsubscribe()
+       this.salesSetting$?.unsubscribe()
+       this.bankPayments$?.unsubscribe()
+       this.upcomingEvents$?.unsubscribe()
+       this.buyActivity$?.unsubscribe()
     }
     ngOnInit(): void {
       this.initUpcomingEvents()
@@ -265,6 +261,5 @@ export class CoursePaymentComponent implements OnInit, OnDestroy{
             console.log(params.invoiceId)
         })
         this.initPaymentDetail()
-
     }
 }

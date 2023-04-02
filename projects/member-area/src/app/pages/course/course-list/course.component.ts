@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { Subscription } from "rxjs";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UserService } from '@service/user.service';
 import { CategoryService } from '@service/category.service';
@@ -34,15 +34,11 @@ export class CourseComponent implements OnInit, OnDestroy{
     private course$?: Subscription
     private upcomingEvents$?: Subscription
 
-
     upcomingEvents?:ActivityUpcomingAllRes
     memberStatus!: string
-  imageIdProfile= ""
-  fullNameLogin=""
-  memberReguler = MEMBER_STATUS.REGULAR
-
-
-
+    imageIdProfile= ""
+    fullNameLogin=""
+    memberReguler = MEMBER_STATUS.REGULAR
     allActivity: ActivityRes[] = []
 
     faHeart = faHeart
@@ -51,10 +47,8 @@ export class CourseComponent implements OnInit, OnDestroy{
     faPeopleGroup = faPeopleGroup
 
     categoriesList:string[] = []
-
     categories: CategoryRes[] = []
     dateSearch!:Date
-
     selectedCategory: string[] = []
 
     accountMenu: MenuItem[] = [
@@ -65,7 +59,6 @@ export class CourseComponent implements OnInit, OnDestroy{
       { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
       { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
       { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
-
       { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
     ];
 
@@ -73,7 +66,6 @@ export class CourseComponent implements OnInit, OnDestroy{
       localStorage.clear()
       this.router.navigateByUrl("/")
     }
-
 
     fotoName(name: string){
       return getInitials(name)
@@ -87,7 +79,6 @@ export class CourseComponent implements OnInit, OnDestroy{
       this.category$ = this.categoryService.getAllCategory().subscribe(res => {
         this.categories = res;
       })
-
     }
 
     initUpcomingEvents(){
@@ -128,6 +119,8 @@ export class CourseComponent implements OnInit, OnDestroy{
 
     ngOnDestroy(): void {
      this.category$?.unsubscribe()
+     this.course$?.unsubscribe()
+     this.upcomingEvents$?.unsubscribe()
     }
 
 }

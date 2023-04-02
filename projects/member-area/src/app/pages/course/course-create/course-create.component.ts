@@ -1,17 +1,14 @@
-import { AccordionModule } from 'primeng/accordion';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Subscription, min } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MenuItem } from 'primeng/api';
-import { convertUTCToLocalDateISO, convertUTCToLocalDateTimeISO } from 'projects/base-area/src/app/utils/dateutil';
+import { convertUTCToLocalDateTimeISO } from 'projects/base-area/src/app/utils/dateutil';
 import { UserService } from '../../../../../../base-area/src/app/services/user.service';
-import { PostTypeService } from '@service/posttype.service';
 import { CategoryRes } from '@dto/category/category-res';
 import { ActivityService } from '@service/activity.service';
 import { CategoryService } from '@service/category.service';
-import { PostService } from '@service/post.service';
 import { ActivityTypeService } from '@service/activitytype.service';
 import { ActivityReq } from '@dto/activity/activity-req';
 import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
@@ -80,7 +77,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
 
 
   constructor(private fb: FormBuilder, private _sanitizer: DomSanitizer,  private categoryService: CategoryService,
-    private postTypeService: PostTypeService, private postService: PostService, private activityTypeService: ActivityTypeService,
+    private activityTypeService: ActivityTypeService,
     private activityService: ActivityService, private userService: UserService, private router:Router){}
 
 
@@ -104,7 +101,6 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
         fileTitle: (Date.now().toString()),
         contentFile: (contentFile),
         fileExt: (fileExt),
-
       })
     }
 
@@ -122,11 +118,8 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
         toBase64(file).then(result => {
           const resultBase64 = result.substring(result.indexOf(",") + 1, result.length)
           const resultExtension = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length)
-
           this.addFiles(resultBase64, resultExtension)
-
           this.imageSource = this._sanitizer.bypassSecurityTrustResourceUrl(`data:image/${resultExtension};base64, ${resultBase64}`);
-
         })
       }
     }
@@ -157,7 +150,6 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
       this.activity$ = this.activityService.insertActivity(data).subscribe(res =>{
         console.log(res)
       })
-
     }
 
 
@@ -195,5 +187,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void {
     this.categories$?.unsubscribe()
+    this.activity$?.unsubscribe()
+    this.upcomingEvents$?.unsubscribe()
   }
 }

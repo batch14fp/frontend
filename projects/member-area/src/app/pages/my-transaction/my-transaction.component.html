@@ -128,7 +128,7 @@
               <div class="flex w-full flex-column bg-white p-3 border-round-xl mt-4">
                 <div
                   class="flex gap-2 mb-2 justify-content-between border-gray-300  align-content-center border-bottom-2 p-3">
-                  <p-table [value]="listTransaction" [lazy]="false" (onLazyLoad)="loadData($event)"
+                  <p-table [value]="listTransaction" [lazy]="true" (onLazyLoad)="loadData($event)"
                     responsiveLayout="scroll" [paginator]="true" [rows]="limit" [totalRecords]="totalData"
                     [loading]="loading" [rowsPerPageOptions]="[3, 5]" tyleClass="p-datatable-gridlines"
                     [globalFilterFields]="['id']" [tableStyle]="{'min-width': '50rem'}">
