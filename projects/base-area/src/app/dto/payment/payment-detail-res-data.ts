@@ -28,5 +28,6 @@ export interface PaymentDetailRes{
 	isPaid : boolean
 	invoiceCode : string
 	ver : number
+	statusTrans :string
   
 }
