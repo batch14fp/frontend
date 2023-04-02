@@ -85,8 +85,6 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
           });
          
       }
-   
-
 
     initBankPayment():void{
         this.bank$ = this.bankService.getAllBankPayment().subscribe(res=>{

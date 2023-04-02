@@ -99,7 +99,6 @@ export class MyTransactionComponent implements OnInit, OnDestroy {
     }
 
 
-     
 
     ngOnInit(): void {
       this.initUpcomingEvents()
