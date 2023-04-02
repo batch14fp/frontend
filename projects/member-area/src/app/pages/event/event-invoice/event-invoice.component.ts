@@ -71,7 +71,6 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
     }
 
 
-<<<<<<< HEAD
     onVoucherApplied(): void {
         this.isClick = true;
         const data: VoucherAppliedReq = {
@@ -87,7 +86,7 @@ export class EventInvoiceComponent implements OnInit, OnDestroy{
           });
          
       }
-=======
+
     onVoucherApplied():void{
         const data:VoucherAppliedReq = {
             activityId : this.detailActivity.value.activityId!,
