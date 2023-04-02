@@ -199,21 +199,21 @@
 
 
                     <div class="flex justify-content-end">
-                      <app-button-primary  (click)="onDownload()" label="Export" class="m-3" icon="pi pi-file-export"></app-button-primary>
+                      <app-button-primary (click)="onDownload()" label="Export" class="m-3" icon="pi pi-file-export"></app-button-primary>
                     </div>
                   </form>
                 </div>
-                <pre>{{activityFilter.value |json}}</pre>
-                <p-table [value]="activityMember" [lazy]="true" (onLazyLoad)="loadData($event)"
+                <pre>{{incomeAdmin |json}}</pre>
+                <p-table [value]="incomeAdmin" [lazy]="true" (onLazyLoad)="loadData($event)"
                   responsiveLayout="scroll" [paginator]="true" [rows]="limit" [totalRecords]="totalData"
-                  [loading]="loading" [rowsPerPageOptions]="[1, 5]" tyleClass="p-datatable-gridlines"
+                  [loading]="loading" [rowsPerPageOptions]="[3, 5]" tyleClass="p-datatable-gridlines"
                   [globalFilterFields]="['id']" [tableStyle]="{'min-width': '50rem'}">
                   <ng-template pTemplate="header">
                     <tr>
                       <th>No</th>
                       <th>Type</th>
-                      <th>Title</th>
-                      <th>Start Date</th>
+                      <th>Member Name</th>
+                      <th>Total Incomes</th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-report let-i="rowIndex">
@@ -223,10 +223,10 @@
                         <p>{{report.type}}</p>
                       </td>
                       <td>
-                        <p>{{report.title}}</p>
+                        <p>{{report.memberName}}</p>
                       </td>
                       <td>
-                        <p>{{report.startDate }}</p>
+                        <p>{{report.totalIncomes |currency:'Rp ' : 'symbol':'1.0-0'}}</p>
                       </td>
                     </tr>
                   </ng-template>

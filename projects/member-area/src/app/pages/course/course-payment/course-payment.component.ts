@@ -15,12 +15,12 @@ import { BankPaymentService } from '../../../../../../base-area/src/app/services
 import { PaymentDetailRes } from "@dto/payment/payment-detail-res-data";
 
 @Component({
-    selector : 'app-payment-event',
-    templateUrl : './event-payment.component.html'
+    selector : 'app-payment-course',
+    templateUrl : './course-payment.component.html'
 })
 
-export class EventPaymentComponent implements OnInit, OnDestroy{
-    private eventPayment$?:Subscription
+export class CoursePaymentComponent implements OnInit, OnDestroy{
+    private coursePayment$?:Subscription
     private paymentDetail$?:Subscription
     private salesSetting$?:Subscription
     private buyActivity$?:Subscription
@@ -62,6 +62,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
         provider:[""],
         discountNum:[0],
         isActive:[true],
+
         ver:[0]
     })
 
@@ -74,7 +75,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
                 activityId:params.activityId,
                 invoiceId:params.invoiceId
             })
-            this.eventPayment$ = this.invoiceService.getInvoiceId(params.id).subscribe(res=>{
+            this.coursePayment$ = this.invoiceService.getInvoiceId(params.id).subscribe(res=>{
                 this.invoiceDetail.patchValue({
                     invoiceId:res.invoiceId,
                     activityId:res.activityId,
@@ -188,11 +189,6 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
     initPaymentDetail(){
       this.paymentDetail$ = this.activityService.getDetailPayment(this.invoiceId).subscribe(res =>{
         this.paymentDetail = res
-
-        // this.uploadTransactions.value.paymentId = res.paymentId
-        // this.uploadTransactions.value.bankPaymentId = res.bankPaymetIdc
-        // this.uploadTransactions.value.ver = res.ver
-
         this.uploadTransactions.patchValue({
           paymentId : res.paymentId,
           ver : res.ver
@@ -209,7 +205,7 @@ export class EventPaymentComponent implements OnInit, OnDestroy{
 
 
     ngOnDestroy(): void {
-       this.eventPayment$?.unsubscribe()
+       this.coursePayment$?.unsubscribe()
     }
     ngOnInit(): void {
       this.initBankPayments()

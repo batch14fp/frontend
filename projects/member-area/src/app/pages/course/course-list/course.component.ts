@@ -10,6 +10,11 @@ import { faBook, faHeart, faNewspaper, faPeopleGroup } from '@fortawesome/free-s
 import { ActivityService } from '@service/activity.service';
 import { ActivityRes } from '@dto/activity/activity-res';
 import { ACTIVITY_TYPE } from 'projects/base-area/src/app/constant/activity-type';
+import { ActivityUpcomingAllRes } from '@dto/activity/activity-upcoming-all-res';
+import { getInitials } from 'projects/base-area/src/app/utils/getInitial';
+import { truncateString } from 'projects/base-area/src/app/utils/turncateString';
+import { MEMBER_STATUS } from 'projects/base-area/src/app/constant/member-status';
+import { MenuItem } from 'primeng/api';
 
 
 
@@ -27,6 +32,15 @@ export class CourseComponent implements OnInit, OnDestroy{
 
     private category$?: Subscription
     private course$?: Subscription
+    private upcomingEvents$?: Subscription
+
+    upcomingEvents?:ActivityUpcomingAllRes
+    memberStatus!: string
+  imageIdProfile= ""
+  fullNameLogin=""
+  memberReguler = MEMBER_STATUS.REGULAR
+
+
 
     allActivity: ActivityRes[] = []
 
@@ -35,16 +49,6 @@ export class CourseComponent implements OnInit, OnDestroy{
     faNewspaper = faNewspaper
     faPeopleGroup = faPeopleGroup
 
-    // startPage: number = 0
-    // maxPage: number = 5
-    // totalData: number = 0
-    // query?: string
-    // loading: boolean = true
-
-    // categoriesList =this.fb.group({
-    //   category:[[]]
-    // })
-
     categoriesList:string[] = []
 
     categories: CategoryRes[] = []
@@ -52,11 +56,44 @@ export class CourseComponent implements OnInit, OnDestroy{
 
     selectedCategory: string[] = []
 
+    accountMenu: MenuItem[] = [
+      { label: 'Profile', icon: 'pi pi-fw pi-user', command: e=> this.router.navigateByUrl("/profile") },
+      { label: 'My Transaction', icon: 'pi pi-fw pi-credit-card', command: e=> this.router.navigateByUrl("/my-transaction") },
+      { label: 'Report Acivity', icon: 'pi pi-fw pi-chart-bar', command: e=> this.router.navigateByUrl("/report-activity") },
+      { label: 'Report Income', icon: 'pi pi-fw pi-dollar', command: e=> this.router.navigateByUrl("/report-activity") },
+      { label: 'My Course', icon: 'pi pi-fw pi-book', command: e=> this.router.navigateByUrl("/my-course") },
+      { label: 'My Events', icon: 'pi pi-fw pi-calendar', command: e=> this.router.navigateByUrl("/my-event") },
+      { label: 'My Bookmark', icon: 'pi pi-fw pi-bookmark', command: e=> this.router.navigateByUrl("/my-bookmark") },
+      { label: 'Change Password', icon: 'pi pi-fw pi-lock', command: e=> this.router.navigateByUrl("/change-password") },
+      { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
+    ];
+
+    onLogOut(){
+      localStorage.clear()
+      this.router.navigateByUrl("/")
+    }
+
+
+    fotoName(name: string){
+      return getInitials(name)
+    }
+
+    turncate(str:string){
+      return truncateString(str, 20)
+    }
+
     initCategory(){
       this.category$ = this.categoryService.getAllCategory().subscribe(res => {
         this.categories = res;
       })
 
+    }
+
+    initUpcomingEvents(){
+      this.upcomingEvents$ = this.activityService.getUpcomingEvent(0,3).subscribe(res =>{
+        this.upcomingEvents = res
+        console.log(res)
+      })
     }
 
     initCourse(){
@@ -68,7 +105,10 @@ export class CourseComponent implements OnInit, OnDestroy{
     ngOnInit(): void {
       this.initCategory()
       this.initCourse()
-      
+      this.initUpcomingEvents()
+      this.memberStatus =  this.userService.getMemberCode()
+      this.imageIdProfile = this.userService.getIdFotoProfile()
+      this.fullNameLogin = this.userService.getFullName()
     }
 
     categoryFilter(){
@@ -82,7 +122,7 @@ export class CourseComponent implements OnInit, OnDestroy{
           this.allActivity =res
         })
       }
-    
+
   }
 
     ngOnDestroy(): void {

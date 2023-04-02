@@ -199,11 +199,11 @@
 
 
                     <div class="flex justify-content-end">
-                      <app-button-primary label="Export" class="m-3" icon="pi pi-file-export"></app-button-primary>
+                      <app-button-primary (click)="onDownload()" label="Export" class="m-3" icon="pi pi-file-export"></app-button-primary>
                     </div>
                   </form>
                 </div>
-                <pre>{{activityFilter.value |json}}</pre>
+                <pre>{{incomeMember |json}}</pre>
                 <p-table [value]="incomeMember" [lazy]="true" (onLazyLoad)="loadData($event)"
                   responsiveLayout="scroll" [paginator]="true" [rows]="limit" [totalRecords]="totalData"
                   [loading]="loading" [rowsPerPageOptions]="[3, 5]" tyleClass="p-datatable-gridlines"
@@ -220,13 +220,13 @@
                     <tr>
                       <td>{{i+1}}</td>
                       <td>
-                        <p>{{report.type}}</p>
-                      </td>
-                      <td>
                         <p>{{report.title}}</p>
                       </td>
                       <td>
-                        <p>{{report.totalIncomes}}</p>
+                        <p>{{report.type}}</p>
+                      </td>
+                      <td>
+                        <p>{{report.totalIncomes |currency:'Rp ' : 'symbol':'1.0-0'}}</p>
                       </td>
                     </tr>
                   </ng-template>

@@ -2,14 +2,13 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ActivityMemberRes } from "@dto/report/activity-member-res";
 import { faHeart, faComment, faBook, faNewspaper, faPeopleGroup,faPenToSquare, faGlobe} from '@fortawesome/free-solid-svg-icons';
 import { ActivityService } from "@service/activity.service";
 import { LazyLoadEvent } from "primeng/api";
 import { Subscription } from "rxjs";
 import {convertUTCToLocalDateISO} from '../../../../../base-area/src/app/utils/dateutil'
-import{ACTIVITY_TYPE} from '../../../../../base-area/src/app/constant/activity-type'
 import { IncomesMemberRes } from "@dto/report/incomes-member-res";
+import { UserService } from "@service/user.service";
 
 @Component({
     selector : 'app-report-income',
@@ -17,8 +16,8 @@ import { IncomesMemberRes } from "@dto/report/incomes-member-res";
 })
 
 export class ReportInvoiceComponent implements OnInit, OnDestroy{
-    private activityReport$?:Subscription
-    private activity$?:Subscription
+    private incomeReport$?:Subscription
+    private income$?:Subscription
     private downloadReport$?:Subscription
 
     incomeMember: IncomesMemberRes[] = []
@@ -31,7 +30,7 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
     loading: boolean = true
     userId!:string
 
-    constructor(private fb:FormBuilder,private title:Title, private router:Router, private activityService:ActivityService, private activatedRoute:ActivatedRoute){
+    constructor(private fb:FormBuilder,private title:Title, private router:Router, private activityService:ActivityService, private activatedRoute:ActivatedRoute, private userService:UserService){
         this.title.setTitle("Report")
     }
 
@@ -43,16 +42,16 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
     loadData(event: LazyLoadEvent) {
         console.log(event)
         // this.initActivity(event.first, event.rows, event.globalFilter)
-        this.onFilterReport()
+        this.onFilterReport(event.rows,event.first)
     }
 
     onDownload(){
-        this.downloadReport$ = this.activityService.getDownloadReport(this.userId, this.startDate, this.endDate).subscribe(res=>{
+        this.downloadReport$ = this.activityService.getDownloadIncomesReport(this.userId, this.startDate, this.endDate).subscribe(res=>{
             
         })
     }
 
-    onFilterReport(){
+    onFilterReport(limit?:number, offset?:number){
         let startDate = undefined
         let endDate = undefined
 
@@ -61,7 +60,7 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
             endDate = convertUTCToLocalDateISO(this.activityFilter.get('endDate')?.value)
         }
 
-        this.activity$ = this.activityService.getMemberReportIncome(this.limit,this.offset, startDate, endDate).subscribe(res=>{
+        this.income$ = this.activityService.getMemberReportIncome(this.limit,this.offset, startDate, endDate).subscribe(res=>{
             const resultData:any = res
             this.incomeMember = resultData.data
             this.loading = false
@@ -71,11 +70,12 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit(): void {
-        // this.initActivity()
+        this.userId = this.userService.getIdLogin().substring(0);
+        //this.initActivity();
     }
 
     ngOnDestroy(): void {
-       this.activityReport$?.unsubscribe()
+       this.incomeReport$?.unsubscribe()
     }
 
     faHeart = faHeart

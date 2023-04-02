@@ -1,31 +1,38 @@
 <div class="mx-6">
     <h1>Approval Paymnet</h1>
-    <p-table [value]="product"  [tableStyle]="{'min-width': '50rem'}">
+    <!-- {{listTransaction|json}} -->
+    <p-table [value]="listTransaction" [lazy]="true" (onLazyLoad)="loadData($event)" responsiveLayout="scroll"
+        [paginator]="true" [rows]="limit" [totalRecords]="totalData" [loading]="loading" [rowsPerPageOptions]="[3, 5]"
+        tyleClass="p-datatable-gridlines" [globalFilterFields]="['id']" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
                 <th>No</th>
-                <th>Mamber Name</th>
+                <th>Invoice Code</th>
                 <th>Name event</th>
+                <th>Created</th>
                 <th>Type</th>
+                <th>Category</th>
                 <th>Start Date</th>
-                <th>Transaction</th>
                 <th>Approve</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-transaction let-i="rowIndex">
             <tr>
-                <td>1</td>
-                <td>{{product.nMember}}</td>
-                <td>{{product.nEvent}}</td>
+                <td>{{i+1}}</td>
+                <td>{{transaction.invoiceCode}}</td>
+                <td>{{transaction.titleActivity}}</td>
+                <td>{{transaction.nameCreated}}</td>
                 <td>
-                    <p-tag [rounded]="true">{{product.type}}</p-tag></td>
-                <td>{{product.date}}</td>
-                <td>{{product.trans}}</td>
-                <td class="flex gap-2">
-                    <app-button-primary id="update" label="Approve"></app-button-primary>
-                    
+                    <p-tag [rounded]="true">{{transaction.type}}</p-tag>
+                </td>
+                <td>{{transaction.categoryName}}</td>
+                <td>{{transaction.startDate}}</td>
+                <td class="flex gap-2">  
+                        <app-button-primary id="update" (click)="onUpdateTransaction(transaction)" label="Approve"></app-button-primary>
+                        <app-button-primary id="update" label="Disapprove"></app-button-primary>
                 </td>
             </tr>
         </ng-template>
     </p-table>
+    <pre>{{onUpdateTransaction|json}}</pre>
 </div>

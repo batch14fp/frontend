@@ -27,12 +27,12 @@ import { truncateString } from '../../../../../base-area/src/app/utils/turncateS
 
 
 @Component({
-    selector : 'app-dashboard-user',
-    templateUrl : './dashboard.component.html',
+    selector : 'app-mybookmark',
+    templateUrl : './my-bookmark.component.html',
     providers: [MessageService]
 })
 
-export class DashboardComponent implements OnInit, OnDestroy{
+export class MyBookmarkComponent implements OnInit, OnDestroy{
   private posts$?: Subscription
   private upcomingEvents$?: Subscription
   private singlePost$?: Subscription
@@ -236,8 +236,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
             this.posts = result
           }
           console.log(this.posts)
-          // this.posts.map(p => {
-            // p.showComment = false
 
           // })
         })
@@ -251,6 +249,9 @@ export class DashboardComponent implements OnInit, OnDestroy{
         return truncateString(str, 20)
       }
 
+      postMoreContent(){
+
+      }
 
       onLoadMoreComment(postId: string) : void {
         console.log("scrolled")
@@ -263,8 +264,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
             this.commentPost = result
             this.isMoreComments = false
           }
-          // this.posts.map(p => {
-          //   p.showComment = false
+
           // })
         })
       }
@@ -311,7 +311,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
       }
       this.insertComment$ = this.postService.insertComment(dataInsert).subscribe(res => {
         // this.initPosts()
-        this.posts.map(p => {
+        this.myBookmarks.map(p => {
           p.countPostComment++
           this.commentFb.reset()
           // if(p.id === postId){
@@ -335,7 +335,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
     onShowInsertComment(postId: string, idx:number){
       this.postIdToComment = postId
      this.initComment(postId)
-     this.posts[idx].showInsertComment = !this.posts[idx].showInsertComment
+     this.myBookmarks[idx].showInsertComment = !this.myBookmarks[idx].showInsertComment
       // this.showInsertComment = !this.showInsertComment
       // if(!this.showInsertComment){
       //   this.postIdToComment = ""
@@ -352,16 +352,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
         postUpdate.push(post)
       }
       this.posts = postUpdate
-    //  if(idx){
-    //   this.posts[idx].showPostOption = !this.posts[idx].showPostOption
-    //  }
-
       const dataInsert: PostBookmarkReq ={
         postId
       }
       this.insertBookmark$ = this.postService.insertPostBookmark(dataInsert).subscribe(res => {
         this.initBookmarks()
-        this.posts.map(p => {
+        this.myBookmarks.map(p => {
           if(p.id === postId){
             if(p.bookmark){
               p.bookmark = !p.bookmark
@@ -383,7 +379,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
       }
       this.like$ = this.postService.insertPostLike(data).subscribe(res=> {
         this.likedPostId = postId
-          this.posts.map(p => {
+          this.myBookmarks.map(p => {
             if(p.id === postId){
               if(p.like){
                 p.like = !p.like
@@ -411,14 +407,9 @@ export class DashboardComponent implements OnInit, OnDestroy{
         postUpdate.push(post)
       }
       this.posts = postUpdate
-     this.posts[idx].showPostOption = !this.posts[idx].showPostOption
-      console.log(this.posts[idx])
+     this.myBookmarks[idx].showPostOption = !this.myBookmarks[idx].showPostOption
       this.postIdToDelete = postId
       console.log(this.postIdToDelete)
-
-      // this.showPostOption = !this.showPostOption
-      // console.log(this.postIdToDelete)
-      // console.log(this.showPostOption)
     }
 
     onHideOption(){
@@ -469,36 +460,13 @@ export class DashboardComponent implements OnInit, OnDestroy{
           this.posts = []
           this.posts = [...postUpdate]
         })
-
-
-        // const postUpdate: AllPostRes[] = []
-        // for (const post of this.posts) {
-        //   for (const polling of post.pollingOption) {
-        //     if(polling.pollingOptionId === pollingOptionId){
-
-        //       post.isVote = !post.isVote
-        //         console.log("sama polling option id")
-        //     }
-        //   }
-        //   postUpdate.push(post)
-        // }
-        // this.posts = []
-        // this.posts = [...postUpdate]
-        // console.log(this.posts)
-
-    //     this.postIdToComment = postId
-    //  this.initComment(postId)
-    //  this.posts[idx].showInsertComment = !this.posts[idx].showInsertComment
-
-
-        // this.initPosts()
       })
 
     }
 
     confirmDelete(idx?:number) {
       if(idx){
-        this.posts[idx].showPostOption = !this.posts[idx].showPostOption
+        this.myBookmarks[idx].showPostOption = !this.myBookmarks[idx].showPostOption
       }
       this.confirmationService.confirm({
           message: 'Do you want to delete this post?',
@@ -526,7 +494,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   onDeleteComment(commentId:string, postId: string){
     console.log(commentId)
     this.deleteComment$ = this.postService.deletePostComment(commentId).subscribe(res =>{
-      this.posts.map(p => {
+      this.myBookmarks.map(p => {
         p.countPostComment--
         this.commentFb.reset()
       })
@@ -535,22 +503,19 @@ export class DashboardComponent implements OnInit, OnDestroy{
     })
   }
     confirmDeleteComment(idx?:number) {
-      // if(idx){
-      //   this.commentPost[idx].showPostOption = !this.posts[idx].showPostOption
-      // }
       this.confirmationService.confirm({
-          message: 'Do you want to delete this comment?',
+          message: 'Do you want to delete this post?',
           header: 'Delete Confirmation',
           icon: 'pi pi-info-circle',
           accept: () => {
             console.log(this.postIdToDelete)
             this.postDelete$ = this.postService.deletePostComment(this.commentPost[this.commentIdxEdit].postCommentId).subscribe(res => {
-              this.posts.map(p => {
+              this.myBookmarks.map(p => {
                 p.countPostComment--
                 this.commentFb.reset()
               })
 
-              this.initComment(this.posts[this.postIdxDelete].id)
+              this.initComment(this.myBookmarks[this.postIdxDelete].id)
             })
               this.messageService.add({severity:'info', summary:'Confirmed', detail:'Record deleted'});
               this.postIdToDelete = ""
@@ -575,8 +540,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
     this.singlePost$ = this.postService.getPostById(postId).subscribe({
       error: (e) => this.visible =true ,
       next: (n) => {
-        this.posts[idx].content = n.content
-        this.posts[idx].isMoreContent = false
+        this.myBookmarks[idx].content = n.content
+        this.myBookmarks[idx].isMoreContent = false
       }
     })
   }

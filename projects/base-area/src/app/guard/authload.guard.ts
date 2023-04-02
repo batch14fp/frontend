@@ -16,8 +16,9 @@ export class AuthLoadGuard implements CanLoad{
         this.userService.getToken()
         return true
        } catch (error) {
+        this.router.navigateByUrl('/member/login')
         return false
        }
     }
-    
+
 }

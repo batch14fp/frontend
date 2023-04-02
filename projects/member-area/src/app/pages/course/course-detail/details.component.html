@@ -105,17 +105,17 @@
 
       </div>
     </div>
-    <div class="w-10 bg-gray-100 border-round-bottom-xl">
+    <div class="w-12 bg-gray-100 border-round-bottom-xl">
       <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem">
         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
           style="width: 32px;" alt="Avatar" />
       </div>
-      <div class="w-12 flex">
-        <div class="flex mt-4 w-12 justify-content-center">
+      <div class="flex w-full">
+        <div class="mt-4 w-12">
           <form [formGroup]="detailActivity">
-            <div class="w-full flex align-content-center justify-content-center align-self-center">
+            <div class="w-full align-content-center align-self-center p-3">
               <div
-                class="bg-white flex hover:shadow-2  flex-column align-self-center w-12 justify-content-start p-3 border-round-md ">
+                class="bg-white flex flex-column w-10 justify-content-start p-3 mb-3 border-round-md ">
                 <div class="flex flex-column w-full h-full">
                   <img class="imgBanner" src="http://localhost:2121/files/{{detailActivity.value.imgActivityId}}"
                     alt="banner">
@@ -130,12 +130,12 @@
                     <p><i class="pi pi-user pr-2"></i> {{detailActivity.value.providers}}</p>
                     <p><i class="pi pi-map-marker pr-2"></i> {{detailActivity.value.location}}</p>
                     <p><i class="pi pi-tag pr-2"></i> {{detailActivity.value.categoryName}}</p>
-                    <p><i class="pi pi-money-bill pr-2"></i> Rp. {{detailActivity.value.price}}</p>
+                    <p><i class="pi pi-money-bill pr-2"></i>{{detailActivity.value.price | currency:'Rp ' : 'symbol' : '1.0-0'}}</p>
                     <p><i class="pi pi-calendar pr-2"></i> {{detailActivity.value.startDate | date: 'medium'}}</p>
                     <p><i class="pi pi-calendar pr-2"></i> {{detailActivity.value.endDate | date: 'medium'}}</p>
                     <div class="mt-4">
                       <button
-                        class="border-none py-2 w-full border-round-md bg-blue-600 text-white cursor-pointer hover:bg-blue-800">Buy</button>
+                        class="border-none py-2 w-full border-round-md bg-blue-600 text-white cursor-pointer hover:bg-blue-800" routerLink="/course/detail/{{activityId}}/invoice">Buy</button>
                     </div>
                   </div>
                 </div>

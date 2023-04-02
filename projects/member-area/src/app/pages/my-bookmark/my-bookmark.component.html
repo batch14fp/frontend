@@ -1,3 +1,5 @@
+<!-- <pre>{{commentFb.value | json}}</pre> -->
+
 <main>
   <div class="w-12 min-h-screen flex relative">
     <div class="w-2 hidden lg:block pt-4 px-4 top-0">
@@ -56,8 +58,7 @@
               </div>
             </div>
             <ng-container *ngIf="upcomingEvents && upcomingEvents.data.length > 3">
-              <p class="text-blue-600 font-medium cursor-pointer hover:text-blue-800 mt-2" routerLink="/events">Show All
-              </p>
+              <p class="text-blue-600 font-medium cursor-pointer hover:text-blue-800 mt-2">Show All</p>
             </ng-container>
           </div>
         </div>
@@ -87,7 +88,7 @@
         <p class="align-self-center">Article</p>
       </div>
     </div>
-    <div class="w-12 mt-1 md:w-10 bg-gray-100 border-round-bottom-xl">
+    <div class="w-12 md:w-10 bg-gray-100 border-round-bottom-xl">
       <div class="navbar bg-white w-12 justify-content-end flex pr-4 h-3rem align-content-center gap-4">
         <ng-container *ngIf="memberStatus === memberReguler">
           <button
@@ -113,43 +114,6 @@
         <div class="flex mt-4 w-12 md:w-9 justify-content-center align-self-start">
           <div class="w-full flex align-content-center justify-content-center align-self-center">
             <div class="w-11 flex flex-column">
-              <div class=" mb-2 w-12 pb-4 border-bottom-1 border-gray-400 align-self-center">
-                <div class="flex w-full flex-column bg-white p-3 border-round-xl">
-                  <div class="flex gap-4">
-                    <div *ngIf="!imageIdProfile"
-                      class="border-circle align-self-center bg-blue-400 flex justify-content-center align-content-center"
-                      style="width: 38px;height: 38px">
-                      <p class=" text-white font-medium text-xl align-self-center align-content-center text-center">
-                        {{fotoName(fullNameLogin)}}</p>
-                    </div>
-                    <div *ngIf="imageIdProfile" class="ImageProfile">
-                      <img src="http://localhost:2121/files/{{imageIdProfile}}" class=" align-self-center"
-                        style="width: 42px;height: 42px; object-fit: contain;border-radius: 50%;" alt="Avatar" />
-                    </div>
-                    <!-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle align-self-center"
-                      style="width: 42px;" alt="Avatar" /> -->
-                    <div routerLink="/post"
-                      class="hover:bg-gray-100 border-1 border-gray-400 border-round-3xl w-full flex cursor-pointer">
-                      <p class="text-sm text-gray-600 font-medium align-self-center pl-4 cursor-pointer">Start a post
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex mt-3 gap-2 justify-content-between">
-                    <div class="flex">
-                      <div routerLink="/events/create"
-                        class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
-                        <i class="pi pi-calendar px-2 align-self-center text-blue-600"></i>
-                        <p>Create Event</p>
-                      </div>
-                      <div routerLink="/course/create"
-                        class="flex hover:bg-gray-100 align-content-center p-2 border-round-md cursor-pointer">
-                        <i class="pi pi-calendar px-2 align-self-center text-green-600"></i>
-                        <p>Create Course</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div infinite-scroll (scrolled)="onScroll()">
                 <div class="mt-4 flex flex-column gap-4 overflow-auto">
                   <ng-container *ngIf="isLoading">
@@ -178,7 +142,7 @@
                       </div>
                     </div>
                   </ng-container>
-                  <div *ngFor="let post of posts; let i = index" class="">
+                  <div *ngFor="let post of myBookmarks; let i = index" class="">
                     <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 pt-2 border-round-md">
                       <div class="flex flex-column">
                         <div class="flex justify-content-end">
@@ -794,7 +758,6 @@
   </div>
   <p-confirmDialog header="Confirmation" [style]="{width: '50vw'}" [baseZIndex]="10000"
     acceptButtonStyleClass="p-button-text" defaultFocus="reject"></p-confirmDialog>
-
   <p-dialog header="Header" [(visible)]="visible" [style]="{ width: '30vw'}">
     <ng-template pTemplate="header">
       <span class="text-xl font-bold">Become Premium</span>

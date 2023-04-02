@@ -26,14 +26,18 @@ export class ResponseInterceptor implements HttpInterceptor {
                     }
                 },
                 error : (event) => {
-                  this.messageService.add({severity:'error', summary: 'Error', detail: event.error});
                     if(event instanceof HttpErrorResponse) {
-                        // if(event.status == 401) {
-                        //     this.router.nav
-                        // }
+                        if(event.status == 401) {
+                          this.messageService.add({severity:'error', summary: 'Error', detail: "You haven't login yet !"});
+                          localStorage.clear()
+                            this.router.navigateByUrl('/member/login')
+                        }
+                        if(event.status == 403) {
+                          this.messageService.add({severity:'error', summary: 'Error',detail:event.error.message});
+                          localStorage.clear()
+                            this.router.navigateByUrl('/member/login')
+                        }
                         console.log(event.error)
-                        // this.router.navigateByUrl("/login")
-                        // localStorage.clear()
                     }
                 },
                 complete : () => {},
