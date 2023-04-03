@@ -92,7 +92,7 @@
         <ng-container *ngIf="memberStatus === memberReguler">
           <button
             class="bg-red-600 hover:bg-red-700 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
-            style="height: 30px !important;">Upgrade</button>
+            style="height: 30px!important;" routerLink="/subscription">Upgrade</button>
         </ng-container>
         <app-tiered-menu [model]="accountMenu">
           <ng-template #content>
@@ -134,16 +134,18 @@
 
                     <div class="flex flex-column relative hover:bg-grey-700">
 
-                            <input type="file" #file class="hidden" (change)="onUpload($event)">
-                            
-                            <img class="img" style="width: 100px; height: 100px; border-radius: 50%;" src="http://localhost:2121/files/{{editProfile.value.imageId}}"
-                            alt="banner">
-                            <img  src="http://localhost:2121/files/{{editProfile.value.imageId}}">
+                      <input type="file" #file class="hidden" (change)="onUpload($event)">
 
-                            <div class=" hover:bg-gray-100" *ngIf="!imageSource" (click)="file.click()" >
-                              <p class="border-circle w-6rem h-6rem m-2 bg-indigo-500 text-white font-bold flex align-items-center justify-content-center ">{{photoName}}</p>
+                      <img class="img" style="width: 100px; height: 100px; border-radius: 50%;"
+                        src="http://localhost:2121/files/{{editProfile.value.imageId}}" alt="banner">
+                      <img src="http://localhost:2121/files/{{editProfile.value.imageId}}">
 
-                              <fa-icon input type="file" class="absolute top-0 right-0" [icon]="faPenToSquare"></fa-icon>
+                      <div class=" hover:bg-gray-100" *ngIf="!imageSource" (click)="file.click()">
+                        <p
+                          class="border-circle w-6rem h-6rem m-2 bg-indigo-500 text-white font-bold flex align-items-center justify-content-center ">
+                          {{photoName}}</p>
+
+                        <fa-icon input type="file" class="absolute top-0 right-0" [icon]="faPenToSquare"></fa-icon>
 
                       </div>
 
@@ -235,86 +237,87 @@
                       <label for="position" class="font-medium col-form-label">Position</label>
                       <p-dropdown styleClass="w-full" [options]="getPosition" optionValue="positionId"
                         formControlName="positionId" optionLabel="positionName"></p-dropdown>
-                    <div class="bg-white border-round-lg" formGroupName="bankUserAccount">
+                      <div class="bg-white border-round-lg" formGroupName="bankUserAccount">
                         <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
-                            <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
-                                <div class="flex">
-                                    <h2>Wallet</h2>
-                                </div>
-                                <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
-                                    <i class="pi pi-wallet align-self-center"></i>
-                                </div>
+                          <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
+                            <div class="flex">
+                              <h2>Wallet</h2>
                             </div>
+                            <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
+                              <i class="pi pi-wallet align-self-center"></i>
+                            </div>
+                          </div>
                           <div class="mb-3 flex flex-column ">
                             <label for="fullname" class="font-medium col-form-label">Bank</label>
-                            <p-dropdown styleClass="w-full"  formControlName="bankPaymentName" [options]="getBank" optionValue="name" optionLabel="name" [filter]="true"
-                            filterBy="name"></p-dropdown>
+                            <p-dropdown styleClass="w-full" formControlName="bankPaymentName" [options]="getBank"
+                              optionValue="name" optionLabel="name" [filter]="true" filterBy="name"></p-dropdown>
+                          </div>
+                          <div class="mt-3 flex flex-column ">
+                            <label for="industry" class="font-medium col-form-label">Account Number</label>
+                            <input type="text" class="mt-2 disable" formControlName="accountNumber"
+                              style="border-radius: 10px;" pInputText id="industry" name=" industry">
+                          </div>
+                          <div class="mt-3 flex flex-column ">
+                            <label for="industry" class="font-medium col-form-label">Account Name</label>
+                            <input type="text" class="mt-2 disable" formControlName="accountName"
+                              style="border-radius: 10px;" pInputText id="industry" name=" industry">
+                          </div>
+                          <div class="mt-3 grid border-top-1 p-3 border-gray-300 justify-content-between">
+                            <label for="industry" class="font-medium col-form-label">Balance</label>
+                            <p>{{editProfile.value.userBalance}}</p>
+                          </div>
                         </div>
-                            <div class="mt-3 flex flex-column ">
-                                <label for="industry" class="font-medium col-form-label">Account Number</label>
-                                <input type="text" class="mt-2 disable" formControlName="accountNumber" style="border-radius: 10px;" pInputText id="industry"
-                                    name=" industry">
-                            </div>
-                            <div class="mt-3 flex flex-column ">
-                                <label for="industry" class="font-medium col-form-label">Account Name</label>
-                                <input type="text" class="mt-2 disable" formControlName="accountName" style="border-radius: 10px;" pInputText id="industry"
-                                    name=" industry">
-                            </div>
-                            <div class="mt-3 grid border-top-1 p-3 border-gray-300 justify-content-between">
-                                <label for="industry" class="font-medium col-form-label">Balance</label>
-                                <p >{{editProfile.value.userBalance}}</p>
-                            </div>
-                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="bg-white border-round-lg">
-                  <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
-                    <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
-                      <div class="flex">
-                        <h2>Wallet</h2>
+                  <div class="bg-white border-round-lg">
+                    <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                      <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
+                        <div class="flex">
+                          <h2>Wallet</h2>
+                        </div>
+                        <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
+                          <i class="pi pi-wallet align-self-center"></i>
+                        </div>
                       </div>
-                      <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
-                        <i class="pi pi-wallet align-self-center"></i>
+                      <div class="mb-3 flex flex-column ">
+                        <label for="fullname" class="font-medium col-form-label">Bank</label>
+                        <p-dropdown styleClass="w-full" formControlName="bankPaymentName" [options]="getBank"
+                          optionLabel="name" [filter]="true" filterBy="name"></p-dropdown>
                       </div>
-                    </div>
-                    <div class="mb-3 flex flex-column ">
-                      <label for="fullname" class="font-medium col-form-label">Bank</label>
-                      <p-dropdown styleClass="w-full" formControlName="bankPaymentName" [options]="getBank"
-                        optionLabel="name" [filter]="true" filterBy="name"></p-dropdown>
-                    </div>
-                    <div class="mt-3 flex flex-column ">
-                      <label for="industry" class="font-medium col-form-label">Account Number</label>
-                      <input type="text" class="mt-2 disable" formControlName="accountNumber"
-                        style="border-radius: 10px;" pInputText id="industry" name=" industry">
-                    </div>
-                    <div class="mt-3 flex flex-column ">
-                      <label for="industry" class="font-medium col-form-label">Account Name</label>
-                      <input type="text" class="mt-2 disable" formControlName="accountName" style="border-radius: 10px;"
-                        pInputText id="industry" name=" industry">
-                    </div>
-                    <div class="mt-3 grid border-top-1 p-3 border-gray-300 justify-content-between">
-                      <label for="industry" class="font-medium col-form-label">Balance</label>
-                      <p>{{editProfile.value.userBalance}}</p>
+                      <div class="mt-3 flex flex-column ">
+                        <label for="industry" class="font-medium col-form-label">Account Number</label>
+                        <input type="text" class="mt-2 disable" formControlName="accountNumber"
+                          style="border-radius: 10px;" pInputText id="industry" name=" industry">
+                      </div>
+                      <div class="mt-3 flex flex-column ">
+                        <label for="industry" class="font-medium col-form-label">Account Name</label>
+                        <input type="text" class="mt-2 disable" formControlName="accountName"
+                          style="border-radius: 10px;" pInputText id="industry" name=" industry">
+                      </div>
+                      <div class="mt-3 grid border-top-1 p-3 border-gray-300 justify-content-between">
+                        <label for="industry" class="font-medium col-form-label">Balance</label>
+                        <p>{{editProfile.value.userBalance}}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="bg-white border-round-lg">
-                  <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
-                    <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
-                      <div class="flex">
-                        <h2>Social Media</h2>
+                  <div class="bg-white border-round-lg">
+                    <div class="bg-white flex flex-column w-12 justify-content-start flex p-3 border-round-md">
+                      <div class="flex gap-2 mb-2 justify-content-between border-bottom-1 border-gray-300">
+                        <div class="flex">
+                          <h2>Social Media</h2>
+                        </div>
+                        <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
+                          <fa-icon class="px-2 " [icon]="faGlobe"></fa-icon>
+                        </div>
                       </div>
-                      <div class="flex align-content-center hover:bg-gray-100 p-2 border-round-md ">
-                        <fa-icon class="px-2 " [icon]="faGlobe"></fa-icon>
-                      </div>
-                    </div>
-                    <div class="mt-3" *ngFor="let sm of socialMediaList.controls; let i = index"
-                      formArrayName="socialMediaList">
-                      <div class="flex flex-column" [formGroupName]="i">
-                        <label for="Company" class="font-medium col-form-label">{{sm.value.platformName}}</label>
-                        <input type="text" class="mt-2" formControlName="url" style="border-radius: 10px;" pInputText
-                          id="Company" name=" Company">
+                      <div class="mt-3" *ngFor="let sm of socialMediaList.controls; let i = index"
+                        formArrayName="socialMediaList">
+                        <div class="flex flex-column" [formGroupName]="i">
+                          <label for="Company" class="font-medium col-form-label">{{sm.value.platformName}}</label>
+                          <input type="text" class="mt-2" formControlName="url" style="border-radius: 10px;" pInputText
+                            id="Company" name=" Company">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -322,7 +325,6 @@
               </div>
             </div>
           </div>
-        </div>
         </div>
       </form>
     </div>

@@ -1,4 +1,3 @@
-
 <!-- <div class="flex w-full h-full flex-column">
     <div class="w-full">
       <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
@@ -219,7 +218,7 @@
         <ng-container *ngIf="memberStatus === memberReguler">
           <button
             class="bg-red-600 hover:bg-red-700 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
-            style="height: 30px !important;">Upgrade</button>
+            style="height: 30px!important;" routerLink="/subscription">Upgrade</button>
         </ng-container>
         <app-tiered-menu [model]="accountMenu">
           <ng-template #content>
@@ -247,7 +246,7 @@
               <div>
                 <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
               </div>
-              <div *ngIf="allActivity.length > 0" class="col-12 flex justify-content-start flex-wrap" >
+              <div *ngIf="allActivity.length > 0" class="col-12 flex justify-content-start flex-wrap">
                 <div *ngFor=" let course of allActivity"
                   class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4"
                   routerLink="/course/detail/{{course.activityId}}">
@@ -306,7 +305,8 @@
             <div class="category mt-4">
               <p class="text-xl">Category</p>
               <div class="field-checkbox mt-2" *ngFor="let cat of categories">
-                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="sortFilterCategory()" value="{{cat.categoryCode}}" inputId="hr">
+                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="sortFilterCategory()"
+                  value="{{cat.categoryCode}}" inputId="hr">
                 </p-checkbox>
                 <label>{{cat.categoryName}}</label>
               </div>
@@ -314,7 +314,7 @@
             <div class="choose mt-4" [formGroup]="sortTypeBuilder">
               <p class="text-xl">Sort</p>
               <div class="field-radio mt-2">
-                <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()" >
+                <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()">
                 <label for="tb">Terbaru</label>
               </div>
               <div class="field-radio mt-2">
@@ -326,8 +326,8 @@
                 <label for="hr">Harga Terendah</label>
               </div>
             </div>
-            
-           
+
+
           </div>
         </div>
       </div>
