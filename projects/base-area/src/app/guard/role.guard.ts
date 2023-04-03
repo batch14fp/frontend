@@ -18,7 +18,7 @@ export class AuthRoleGuard implements CanActivate {
         if (dataTemp.includes(this.userService.roleCode)) {
             return true
         } else {
-            //forbiden pageyaaa
+          
             this.router.navigateByUrl('/forbiden')
             return false
         }
