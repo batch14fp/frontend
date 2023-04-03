@@ -97,6 +97,11 @@ export class CourseComponent implements OnInit, OnDestroy {
 
 
 
+  onLogOut() {
+    localStorage.clear()
+    this.router.navigateByUrl("/")
+  }
+
 
 
   fotoName(name: string) {

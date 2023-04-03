@@ -16,6 +16,7 @@ export class SalesSettingService{
         return this.http.get<SalesSettingRes>(`${BASE_URL}/admin/sales-settings`)
     } 
     getSalesSetting() : Observable<SalesSettingRes>{
-        return this.http.get<SalesSettingRes>(`${BASE_URL}/activities/sales-settings`)
+        return this.http.get<SalesSettingRes>(`${BASE_URL}/admin/sales-settings`)
     } 
+
 }
