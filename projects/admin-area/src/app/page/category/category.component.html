@@ -1,83 +1,81 @@
 <div class="mx-6">
-    <h1>category</h1>
-    <div class="col-3 my-2">
-        <app-button-primary label="Create category" id="create" (click)="showResponsiveDialog()"></app-button-primary>
-        <form [formGroup]="createCategory">
-            <p-dialog header="Create Category" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}"
-                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-                <pre>{{createCategory.value|json}}</pre>
-                <div class="mb-3">
-                    <div class="mb-3 flex flex-column w-full">
-                        <label for="emailInput" class="font-medium col-form-label">Category Code</label>
-                        <input type="text" class="w-full " formControlName="categoryCode" pInputText id="emailInput"
-                            name="categoryCode">
-                    </div>
-                    <div class="mb-3 flex flex-column w-full">
-                        <label for="cname" class="font-medium col-form-label">Category Name</label>
-                        <input type="text" class="w-full " formControlName="categoryName" pInputText id="cname"
-                            name="categoryName">
-                    </div>
+  <h1>category</h1>
+  <div class="col-3 my-2">
+    <app-button-primary label="Create category" id="create" (click)="showResponsiveDialog()"></app-button-primary>
+    <form [formGroup]="createCategory">
+      <p-dialog header="Create Category" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}"
+        [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+        <div class="mb-3">
+          <div class="mb-3 flex flex-column w-full">
+            <label for="emailInput" class="font-medium col-form-label">Category Code</label>
+            <input type="text" class="w-full " formControlName="categoryCode" pInputText id="emailInput"
+              name="categoryCode">
+          </div>
+          <div class="mb-3 flex flex-column w-full">
+            <label for="cname" class="font-medium col-form-label">Category Name</label>
+            <input type="text" class="w-full " formControlName="categoryName" pInputText id="cname" name="categoryName">
+          </div>
+        </div>
+        <ng-template pTemplate="footer">
+          <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
+          <p-button type="button" label="Create" styleClass="p-button-text" (click)="onCreateCategory()"
+            (click)="displayResponsive=false">
+          </p-button>
+        </ng-template>
+      </p-dialog>
+    </form>
+  </div>
+  <p-table [value]="getAllCategory" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>No</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-category let-i="rowIndex">
+      <tr>
+        <td>{{i + 1}}</td>
+        <td>{{category.categoryCode}}</td>
+        <td>{{category.categoryName}}</td>
+        <td class="flex gap-2">
+          <app-button-icon id="update" (click)="showUpdateDialog(category)"></app-button-icon>
+          <form [formGroup]="updateCategory">
+            <p-dialog header="Update Category" [(visible)]="displayUpdate" [breakpoints]="{'960px': '75vw'}"
+              [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+              <div class="mb-3">
+                <div class="mb-3 flex flex-column w-full">
+                  <label for="emailInput" class="font-medium col-form-label">Category Code</label>
+                  <input type="text" class="w-full " [value]="category.categoryCode" formControlName="categoryCode"
+                    pInputText id="categoryCode" name="categoryCode">
                 </div>
-                <ng-template pTemplate="footer">
-                    <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
-                    <p-button type="button" label="Create" styleClass="p-button-text" (click)="onCreateCategory()" (click)="displayResponsive=false">
-                    </p-button>
-                </ng-template>
+                <div class="mb-3 flex flex-column w-full">
+                  <label for="cname" class="font-medium col-form-label">Category Name</label>
+                  <input type="text" class="w-full " [value]="category.categoryName" formControlName="categoryName"
+                    pInputText id="categoryName" name="categoryName">
+                </div>
+              </div>
+              <ng-template pTemplate="footer">
+                <p-button (click)="displayUpdate=false" label="Cancel" styleClass="p-button-text">
+                </p-button>
+                <p-button type="button" label="Update" styleClass="p-button-text" (click)="onUpdateCategoryConfirm()"
+                  (click)="displayUpdate=false"></p-button>
+              </ng-template>
             </p-dialog>
-        </form>
-    </div>
-    <p-table [value]="getAllCategory" [tableStyle]="{'min-width': '50rem'}">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>No</th>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-category let-i="rowIndex">
-            <tr>
-                <td>{{i + 1}}</td>
-                <td>{{category.categoryCode}}</td>
-                <td>{{category.categoryName}}</td>
-                <td class="flex gap-2">
-                    <app-button-icon id="update" (click)="showUpdateDialog(category)"></app-button-icon>
-                    <form [formGroup]="updateCategory">
-                        <p-dialog header="Update Category" [(visible)]="displayUpdate" [breakpoints]="{'960px': '75vw'}"
-                            [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-                            <div class="mb-3">
-                                <div class="mb-3 flex flex-column w-full">
-                                    <label for="emailInput" class="font-medium col-form-label">Category Code</label>
-                                    <input type="text" class="w-full "
-                                        [value]="category.categoryCode" formControlName="categoryCode" pInputText
-                                        id="categoryCode" name="categoryCode">
-                                </div>
-                                <div class="mb-3 flex flex-column w-full">
-                                    <label for="cname" class="font-medium col-form-label">Category Name</label>
-                                    <input type="text" class="w-full " [value]="category.categoryName"
-                                        formControlName="categoryName" pInputText id="categoryName" name="categoryName">
-                                </div>
-                            </div>
-                            <ng-template pTemplate="footer">
-                                <p-button (click)="displayUpdate=false" label="Cancel" styleClass="p-button-text">
-                                </p-button>
-                                <p-button type="button" label="Update" styleClass="p-button-text"
-                                    (click)="onUpdateCategoryConfirm()" (click)="displayUpdate=false"></p-button>
-                            </ng-template>
-                        </p-dialog>
-                    </form>
-                    <app-button-danger id="delete" (click)="showDeleteDialog()"></app-button-danger>
-                    <p-dialog header="Delete Category" [(visible)]="displayDelete" [breakpoints]="{'960px': '75vw'}"
-                        [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-                        <h4>Are you sure delete this category?</h4>
-                        <ng-template pTemplate="footer">
-                            <p-button (click)="displayDelete=false" label="No" styleClass="p-button-text"></p-button>
-                            <p-button type="button" label="Yes" styleClass="p-button-text"
-                                (click)="onDeleteCategory(category)" (click)="displayDelete=false"></p-button>
-                        </ng-template>
-                    </p-dialog>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+          </form>
+          <app-button-danger id="delete" (click)="showDeleteDialog()"></app-button-danger>
+          <p-dialog header="Delete Category" [(visible)]="displayDelete" [breakpoints]="{'960px': '75vw'}"
+            [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+            <h4>Are you sure delete this category?</h4>
+            <ng-template pTemplate="footer">
+              <p-button (click)="displayDelete=false" label="No" styleClass="p-button-text"></p-button>
+              <p-button type="button" label="Yes" styleClass="p-button-text" (click)="onDeleteCategory(category)"
+                (click)="displayDelete=false"></p-button>
+            </ng-template>
+          </p-dialog>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

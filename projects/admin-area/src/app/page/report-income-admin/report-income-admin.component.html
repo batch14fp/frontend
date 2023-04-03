@@ -203,7 +203,6 @@
                     </div>
                   </form>
                 </div>
-                <pre>{{incomeAdmin |json}}</pre>
                 <p-table [value]="incomeAdmin" [lazy]="true" (onLazyLoad)="loadData($event)"
                   responsiveLayout="scroll" [paginator]="true" [rows]="limit" [totalRecords]="totalData"
                   [loading]="loading" [rowsPerPageOptions]="[3, 5]" tyleClass="p-datatable-gridlines"
