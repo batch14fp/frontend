@@ -37,10 +37,10 @@ export class MemberStatusService{
 
 
     getIsPremiumMemberStatus() : Observable<MemberPremiumRes>{
-        return this.http.get<MemberPremiumRes>(`${BASE_URL}/members/status/is-premium`)
+        return this.http.get<MemberPremiumRes>(`${BASE_URL}/members-status/is-premium`)
     }
        
     subscribtionMembership(data : MembershipPaymentReq) : Observable<InvoiceRes>{
-        return this.http.post<InvoiceRes>(`${BASE_URL}/members/status/subscription`,data)
+        return this.http.post<InvoiceRes>(`${BASE_URL}/members-status/subscription`,data)
     }
 }

@@ -97,12 +97,10 @@
         </div>
             <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
                 <div class="text-900 font-bold text-6xl mb-4 text-center">Pricing Plans</div>
-                <div class="text-700 text-xl mb-6 text-center line-height-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.</div>
-              <pre>
-                {{memberStatus|json}}
-              </pre>
+                <div class="text-700 text-xl mb-6 text-center line-height-3">Upgrade to premuim for all premium feature</div>
+             
                 <div class="grid justify-content-center">
-                    <div class="col-12 lg:col-4 hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl cursor-pointer" *ngFor="let member of memberStatus" >
+                    <div class="col-12 lg:col-4 hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl cursor-pointer" *ngFor="let member of memberStatus; let i =index" >
                         <div class="p-3 h-full">
                             <div class="shadow-2 p-3 h-full flex flex-column surface-card" style="border-radius: 6px">
                                 <div class="text-900 font-medium text-xl mb-2">{{member.statusName}}</div>
@@ -131,7 +129,9 @@
                                 <!-- <button pButton label="Buy Now" class="p-3 w-full mt-auto hover:bg-indigo-500"></button> -->
                                 <!-- <button type="submit" class="bg-blue-600 w-full border-none border-round-md cursor-pointer px-4 hover:bg-indigo-800 py-2 text-white" routerLink="/subscription/payment/{{member.memberStatusId}}">Buy Now</button> -->
                                 <button type="button"
-                                  class="bg-blue-600 w-full border-none border-round-md cursor-pointer px-4 hover:bg-indigo-800 py-2 text-white" (click)="onBuy(member.memberStatusId)" >Buy Now</button>
+                                  class="bg-blue-600 w-full border-none border-round-md cursor-pointer px-4 hover:bg-indigo-800 py-2 text-white" *ngIf="i!=0" (click)="onBuy(member.memberStatusId)" >Buy Now</button>
+                                  <button type="button"
+                                  class="bg-gray-600 w-full border-none border-round-md cursor-pointer px-4 py-2 text-white" style="cursor: not-allowed;" *ngIf="i==0" disable="true">FREE</button>
                             </div>
                         </div>
                     </div>

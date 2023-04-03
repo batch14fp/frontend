@@ -124,9 +124,7 @@
           style="width: 32px;" alt="Avatar" />
       </div>
       <div>
-        <pre>
-          {{invoiceDetail.value|json}}
-        </pre>
+      
         <form [formGroup]="invoiceDetail" class="w-12 flex justify-content-center mt-4">
           <div class="sm:w-12 md:w-11 flex flex-column">
             <div class="w-full bg-white border-round-md w-full py-2 mt-2">
@@ -189,9 +187,6 @@
                 <div class="bg-white border-round-md p-3 mt-2 flex flex-column justify-content-between w-12 gap-3"
                   style="object-fit: cover !important;">
                   <form [formGroup]="uploadTransactions" class="flex flex-column">
-                    <pre>
-                      {{uploadTransactions.value | json}}
-                    </pre>
                     <div class="flex flex-column border-1 border-gray-200 border-round-md p-2 pb-4">
                       <label for="voucher" class="text-medium font-medium mt-4">Bank Transfer</label>
                       <p-dropdown formControlName="bankPayment" [options]="bankPayments" optionLabel="bankPaymentName"

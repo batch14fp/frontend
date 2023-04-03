@@ -1,6 +1,5 @@
 <div class="mx-6">
     <h1>Approval Payment</h1>
-    <!-- {{listTransaction|json}} -->
     <p-table [value]="listTransaction" [lazy]="true" (onLazyLoad)="loadData($event)" responsiveLayout="scroll"
         [paginator]="true" [rows]="limit" [totalRecords]="totalData" [loading]="loading" [rowsPerPageOptions]="[3, 5]"
         tyleClass="p-datatable-gridlines" [globalFilterFields]="['id']" [tableStyle]="{'min-width': '50rem'}">
@@ -51,5 +50,4 @@
             </tr>
         </ng-template>
     </p-table>
-    <pre>{{onApproveTransaction|json}}</pre>
 </div>

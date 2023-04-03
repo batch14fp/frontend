@@ -217,7 +217,7 @@
                     </div>
                   </form>
                 </div>
-                <pre>{{activityFilter.value |json}}</pre>
+
                 <p-table [value]="activityMember" [lazy]="true" (onLazyLoad)="loadData($event)"
                   responsiveLayout="scroll" [paginator]="true" [rows]="limit" [totalRecords]="totalData"
                   [loading]="loading" [rowsPerPageOptions]="[1, 5]" tyleClass="p-datatable-gridlines"
