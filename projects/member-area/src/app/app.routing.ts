@@ -61,14 +61,12 @@ export const memberRoutes: Routes = [
     {
         path:'course',
         loadChildren:()=>import("./pages/course/course.module").then(c=>c.CourseModule),
-        component:NavbarComponent,
         canActivate:[AuthRoleGuard],
         data:[ROLE.MMBR]
     },
     {
         path:'events',
         loadChildren:()=>import("./pages/event/event.module").then(e=>e.EventModule),
-        component:NavbarComponent,
         canActivate:[AuthRoleGuard],
         data:[ROLE.MMBR]
     },
