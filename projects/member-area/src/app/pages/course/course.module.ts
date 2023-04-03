@@ -9,6 +9,7 @@ import { CourseRouting } from "./course.routing";
 import { CreateCourseComponent } from './course-create/course-create.component';
 import { CourseInvoiceComponent } from "./course-invoice/course-invoice.component";
 import { CoursePaymentComponent } from "./course-payment/course-payment.component";
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { CoursePaymentComponent } from "./course-payment/course-payment.componen
         CoursePaymentComponent
     ],
     imports:[
-        CourseRouting, ShareModule, ReactiveFormsModule, HttpClientModule, CommonModule,FormsModule
+        CourseRouting, ShareModule, ReactiveFormsModule, HttpClientModule, CommonModule,FormsModule, CheckboxModule
     ]
 })
 
