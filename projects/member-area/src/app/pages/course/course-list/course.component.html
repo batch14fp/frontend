@@ -1,128 +1,3 @@
-<!-- <div class="flex w-full h-full flex-column">
-    <div class="w-full">
-      <img class="imgBanner" src="./../../../assets/images/banner-course.png" alt="banner">
-    </div>
-    <div class="grid mx-6 h-full gap-2 flex mt-2">
-      <div class="sidebar col-2">
-        <div class="filter">
-          <p>filter</p>
-          <span class="p-input-icon-right">
-            <i class="pi pi-search"></i>
-            <input type="text" pInputText />
-          </span>
-        </div>
-        <div class="date-search mt-4">
-          <p>Schedule</p>
-          <p-calendar [(ngModel)]="dateSearch" [showIcon]="true" inputId="icon"></p-calendar>
-        </div>
-        <div class="category mt-4">
-          <p class="text-xl">Category</p>
-          <div class="field-checkbox mt-2">
-            <p-checkbox name="group1" value="HR Admin" [(ngModel)]="selectedCategory" inputId="hr"></p-checkbox>
-            <label for="hr">HR Admin</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="Performance & Dev" [(ngModel)]="selectedCategory" inputId="pd"></p-checkbox>
-            <label for="pd">Performance & Dev</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="Planning & Recruit" [(ngModel)]="selectedCategory" inputId="pr"></p-checkbox>
-            <label for="pr">Planning & Recruit</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="Tax Legal" [(ngModel)]="selectedCategory" inputId="tl"></p-checkbox>
-            <label for="tl">Tax Legal</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="Career & Succession" [(ngModel)]="selectedCategory" inputId="cs">
-            </p-checkbox>
-            <label for="cs">Career & Succession</label>
-          </div>
-          <div class="field-checkbox">
-            <p-checkbox name="group1" value="HR Digital" [(ngModel)]="selectedCategory" inputId="hd"></p-checkbox>
-            <label for="hd">HR Digital</label>
-          </div>
-        </div>
-       <div class="category mt-4">
-  <p class="text-xl">Sort</p>
-  <div class="field-radio mt-2">
-    <input type="radio" name="category" value="Paling Sesuai" [(ngModel)]="selectedCategory" id="ps">
-    <label for="ps">Paling Sesuai</label>
-  </div>
-  <div class="field-radio">
-    <input type="radio" name="category" value="Terbaru" [(ngModel)]="selectedCategory" id="tb">
-    <label for="tb">Terbaru</label>
-  </div>
-  <div class="field-radio">
-    <input type="radio" name="category" value="Harga Tertinggi" [(ngModel)]="selectedCategory" id="ht">
-    <label for="ht">Harga Tertinggi</label>
-  </div>
-  <div class="field-radio">
-    <input type="radio" name="category" value="Harga Terendah" [(ngModel)]="selectedCategory" id="hr">
-    <label for="hr">Harga Terendah</label>
-  </div>
-  <div class="field-radio">
-    <input type="radio" name="category" value="Ulasan" [(ngModel)]="selectedCategory" id="ul">
-    <label for="ul">Ulasan</label>
-  </div>
-</div>
-
-      <div class="col-9 flex justify-content-between flex-wrap  ">
-        <div *ngFor=" let item of [].constructor(10)"
-          class="flex flex-column hover:bg-gray-100 px-3 pb-4 hover:border-round-2xl col-4">
-          <div class="flex flex-column w-full h-full">
-            <p class="text-md font-semibold text-indigo-300">HR Digital</p>
-            <div class="flex flex-column w-full h-full border-round-2xl overflow-hidden">
-              <div class="w-full bg-primary-400 h-full hidden md:flex hover:bg-primary-500 animation-duration-400">
-                <div class="flex flex-column justify-content-between">
-                  <div class=" flex mx-4 mt-2 w-full justify-content-between">
-                    <p class="text-md font-semibold text-200 col-4 p-0">Pelatihan Dasar Java</p>
-                    <img width="80px" height="80px" src="../../../assets/images/java.png" alt="">
-                  </div>
-                  <div class="flex flex-column mx-4 mb-4">
-                    <p class="text-200 font-semibold text-md ">Budi Satrio</p>
-                    <p class="text-200 font-base text-sm">Lead HR PT. Lawencon</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex justify-content-between align-content-center mt-4">
-            <p class="align-self-center text-200 font-semibold text-xl text-indigo-800">Pelatihan Dasar Java</p>
-            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="border-circle" style="width: 42px;"
-              alt="Avatar" />
-          </div>
-          <div class="flex flex-column mt-3">
-            <div class="flex justify-content-between">
-              <p class="text-800 text-md">Google</p>
-              <p class="text-800 text-md">Online</p>
-            </div>
-            <div class=" flex justify-content-between">
-              <p class="text-800 text-md">Jum'at, 12 Maret 2023</p>
-              <p class="text-800 text-md">19.30 - 20.30</p>
-            </div>
-            <div class="flex justify-content-between">
-              <p class="text-800 text-md">Sabtu, 13 Maret 2023</p>
-              <p class="text-800 text-md">20.00</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class=" mx-6 mt-6 flex justify-content-between border-1 border-blue-600 border-round-md mb-4 shadow-1 h-10rem
-    align-items-center justify-content-center hover:shadow-2">
-      <div class=" flex flex-column justify-content-end col-4 ml-8">
-        <p class="text-xl font-semibold">Create your <span class="text-2xl text-blue-600">Course</span></p>
-        <p class="text-blue-600 font-semibold">and upgrade your skill</p>
-      </div>
-      <div class="col-2 mr-8">
-        <button class="p-button-rounded bg-indigo-600 hover:bg-indigo-800 border-transparent h-3rem
-        text-white px-6 py-2 text-md font-base w-full h-full border-round-3xl cursor-pointer" type="button">Create
-          Course</button>
-      </div>
-    </div>
-  </div> -->
-
 <main>
   <div class="w-12 h-full flex relative">
     <div class="w-2 hidden lg:block pt-4 px-4 top-0">
@@ -301,37 +176,44 @@
                   <label>{{cat.categoryName}}</label>
                 </div>
 
-            <div class="choose mt-4" [formGroup]="sortTypeBuilder">
-              <p class="text-xl">Sort</p>
-              <div class="field-radio mt-2">
-                <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()">
-                <label for="tb">Terbaru</label>
-              </div>
-              <div class="field-radio mt-2">
-                <input type="radio" id="ht" name="choose" value="2" formControlName="choose" (change)="sortFilter()">
-                <label for="ht">Harga Tertinggi</label>
-              </div>
-              <div class="choose mt-4" [formGroup]="sortTypeBuilder">
-                <p class="text-xl">Sort</p>
-                <div class="field-radio mt-2">
-                  <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()">
-                  <label for="tb">Terbaru</label>
+                <div class="choose mt-4" [formGroup]="sortTypeBuilder">
+                  <p class="text-xl">Sort</p>
+                  <div class="field-radio mt-2">
+                    <input type="radio" id="tb" name="choose" value="1" formControlName="choose"
+                      (change)="sortFilter()">
+                    <label for="tb">Terbaru</label>
+                  </div>
+                  <div class="field-radio mt-2">
+                    <input type="radio" id="ht" name="choose" value="2" formControlName="choose"
+                      (change)="sortFilter()">
+                    <label for="ht">Harga Tertinggi</label>
+                  </div>
+                  <div class="choose mt-4" [formGroup]="sortTypeBuilder">
+                    <p class="text-xl">Sort</p>
+                    <div class="field-radio mt-2">
+                      <input type="radio" id="tb" name="choose" value="1" formControlName="choose"
+                        (change)="sortFilter()">
+                      <label for="tb">Terbaru</label>
+                    </div>
+                    <div class="field-radio mt-2">
+                      <input type="radio" id="ht" name="choose" value="2" formControlName="choose"
+                        (change)="sortFilter()">
+                      <label for="ht">Harga Tertinggi</label>
+                    </div>
+                    <div class="field-radio mt-2">
+                      <input type="radio" id="hr" name="choose" value="3" formControlName="choose"
+                        (change)="sortFilter()">
+                      <label for="hr">Harga Terendah</label>
+                    </div>
+                  </div>
                 </div>
-                <div class="field-radio mt-2">
-                  <input type="radio" id="ht" name="choose" value="2" formControlName="choose" (change)="sortFilter()">
-                  <label for="ht">Harga Tertinggi</label>
-                </div>
-                <div class="field-radio mt-2">
-                  <input type="radio" id="hr" name="choose" value="3" formControlName="choose" (change)="sortFilter()">
-                  <label for="hr">Harga Terendah</label>
-                </div>
+
               </div>
             </div>
-
+          </div>
+          <div>
           </div>
         </div>
-      </div>
-      <div>
       </div>
     </div>
   </div>

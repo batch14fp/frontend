@@ -79,14 +79,6 @@ export class CourseComponent implements OnInit, OnDestroy {
       { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: e=> this.onLogOut() },
     ];
 
-
-    onLogOut(){
-      localStorage.clear()
-      this.router.navigateByUrl("/")
-    }
-
-
-
   sortTypeBuilder = this.fb.group({
     choose: ['1']
   })
