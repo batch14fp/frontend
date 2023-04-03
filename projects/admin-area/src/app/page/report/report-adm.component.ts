@@ -25,8 +25,8 @@ export class ReportAdminComponent implements OnInit, OnDestroy{
     offset:number = 0
     totalData:number = 0
     query?: string
-    startDate?:string
-    endDate?:string
+    startDate?:any = null
+    endDate?:any = null
     loading: boolean = true
 
     constructor(private fb:FormBuilder,private title:Title, private router:Router, private activityService:ActivityService){
@@ -52,8 +52,8 @@ export class ReportAdminComponent implements OnInit, OnDestroy{
 
 
     onFilterReport(limit?:number, offset?:number){
-        let startDate = undefined
-        let endDate = undefined
+        let startDate = null
+        let endDate = null
 
         if(this.activityFilter.get('startDate')?.value && this.activityFilter.get('endDate')?.value){
             startDate = convertUTCToLocalDateISO(this.activityFilter.get('startDate')?.value)

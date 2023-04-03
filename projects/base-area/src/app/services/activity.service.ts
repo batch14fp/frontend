@@ -117,57 +117,57 @@ else{
 
     getMemberReportIncome(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/report/member/incomes?limit=${limit}&offset=${offset}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/reports/member/incomes?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/report/member/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/reports/member/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/report/member/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<IncomesMemberRes[]>(`${BASE_URL}/reports/member/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
     getAdminReportIncome(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/report/admin/incomes?limit=${limit}&offset=${offset}`)
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/reports/admin/incomes?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/report/admin/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/reports/admin/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/report/admin/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<IncomesAdminRes[]>(`${BASE_URL}/reports/admin/incomes?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
     getReportAllByDateRange(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/report/member/activity?limit=${limit}&offset=${offset}`)
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/reports/member/activity?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/report/member/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/reports/member/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/report/member/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<ActivityMemberRes[]>(`${BASE_URL}/reports/member/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
-    getReportAllByDateRangeAdmin(limit?:number,offset?:number,startDate?:string,endDate?:string, typeCode?:string){
+    getReportAllByDateRangeAdmin(limit?:number,offset?:number,startDate?:any,endDate?:any, typeCode?:any){
         if(!startDate && !endDate  && !typeCode){
-            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/activity?limit=${limit}&offset=${offset}`)
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/reports/admin/activity?limit=${limit}&offset=${offset}`)
         }else if(!typeCode){
-            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/reports/admin/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}`)
         }else{
-            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
+            return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/reports/admin/activity?limit=${limit}&offset=${offset}&startDate=${startDate}&endDate=${endDate}&typeCode=${typeCode}`)
         }
     }
 
     getDownloadReport(id:string,startDate?:string,endDate?:string){
-        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/member/activity/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/reports/member/activity/file?id=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
 
 
     getDownloadIncomesReport(id:string,startDate?:string,endDate?:string){
-        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/member/incomes/file?userId=${id}&startDate=${startDate}&endDate=${endDate}`)
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/reports/member/incomes/file?userId=${id}&startDate=${startDate}&endDate=${endDate}`)
     }
     getDownloadReportAdmin(startDate?:string,endDate?:string){
-        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/activity/file?startDate=${startDate}&endDate=${endDate}`)
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/reports/admin/activity/file?startDate=${startDate}&endDate=${endDate}`)
     }
     getDownloadIncomesReportAdmin(startDate?:string,endDate?:string){
-        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/report/admin/incomes/file?startDate=${startDate}&endDate=${endDate}`)
+        return this.http.get<ActivityAdminRes[]>(`${BASE_URL}/reports/admin/incomes/file?startDate=${startDate}&endDate=${endDate}`)
     }
 
 

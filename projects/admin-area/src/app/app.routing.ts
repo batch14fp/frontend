@@ -36,17 +36,18 @@ export const adminRoutes: Routes = [
                 path: 'category',
                 component: CategoryComponent,
                 canActivate: [AuthRoleGuard],
-                data: [ROLE.SPADM]
+                data: [ROLE.SPADM,ROLE.ADMIN]
             },
             {
                 path: 'position',
                 component: PositionComponent,
                 canActivate: [AuthRoleGuard],
-                data: [ROLE.SPADM]
+                data: [ROLE.SPADM,ROLE.ADMIN]
             },
             {
                 path: 'industry',
                 component: IndustryComponent
+                
             },
             {
                 path: 'socialmedia',
@@ -70,15 +71,21 @@ export const adminRoutes: Routes = [
             },
             {
                 path: 'sales-setting',
-                component: SalesSettingComponent
+                component: SalesSettingComponent,
+                canActivate: [AuthRoleGuard],
+            
             },
             {
                 path: 'admin/report-activity',
-                component: ReportAdminComponent
+                component: ReportAdminComponent,
+                canActivate: [AuthRoleGuard],
+                data: [ROLE.SPADM,ROLE.ADMIN]
             },
             {
                 path: 'admin/report-income',
-                component: ReportInvoiceAdminComponent
+                component: ReportInvoiceAdminComponent,
+                canActivate: [AuthRoleGuard],
+                data: [ROLE.SPADM,ROLE.ADMIN]
             },
             {
                 path: 'approval-payment',

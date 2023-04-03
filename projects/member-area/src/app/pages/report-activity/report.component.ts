@@ -26,15 +26,15 @@ export class ReportComponent implements OnInit, OnDestroy{
     private downloadReport$?:Subscription
     private upcomingEvents$?: Subscription
     upcomingEvents?:ActivityUpcomingAllRes
-
+     
 
     activityMember: ActivityMemberRes[] = []
     limit:number = 1
     offset:number = 0
     totalData:number = 0
     query?: string
-    startDate?:string
-    endDate?:string
+    startDate?:any = null
+    endDate?:any=null
     loading: boolean = true
     userId!:string
     memberStatus!: string
@@ -84,15 +84,14 @@ export class ReportComponent implements OnInit, OnDestroy{
     }
 
     onFilterReport(limit?:number, offset?:number){
-        let startDate = undefined
-        let endDate = undefined
+
 
         if(this.activityFilter.get('startDate')?.value && this.activityFilter.get('endDate')?.value){
-            startDate = convertUTCToLocalDateISO(this.activityFilter.get('startDate')?.value)
-            endDate = convertUTCToLocalDateISO(this.activityFilter.get('endDate')?.value)
+            this.startDate = convertUTCToLocalDateISO(this.activityFilter.get('startDate')?.value)
+            this.endDate = convertUTCToLocalDateISO(this.activityFilter.get('endDate')?.value)
         }
 
-        this.activity$ = this.activityService.getReportAllByDateRange(limit, offset, startDate, endDate).subscribe(res=>{
+        this.activity$ = this.activityService.getReportAllByDateRange(this.limit, this.offset, this.startDate, this.endDate).subscribe(res=>{
             const resultData:any = res
             this.activityMember = resultData.data
             this.loading = false

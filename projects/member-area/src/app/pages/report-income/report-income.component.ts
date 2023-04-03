@@ -31,8 +31,8 @@ export class ReportInvoiceComponent implements OnInit, OnDestroy{
     offset:number = 0
     totalData:number = 0
     query?: string
-    startDate?:string
-    endDate?:string
+    startDate?:any = null
+    endDate?:any= null
     loading: boolean = true
     userId!:string
 
