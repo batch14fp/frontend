@@ -93,7 +93,7 @@
         <ng-container *ngIf="memberStatus === memberReguler">
           <button
             class="bg-red-600 hover:bg-red-700 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
-            style="height: 30px !important;">Upgrade</button>
+            style="height: 30px!important;" routerLink="/subscription">Upgrade</button>
         </ng-container>
         <app-tiered-menu [model]="accountMenu">
           <ng-template #content>
@@ -125,7 +125,16 @@
                 </div>
               </div>
 
-              <div class="flex w-full flex-column bg-white p-3 border-round-xl mt-4">
+              <div class="form-group mt-4" >
+                <label for="paid-status-select">Payment Status </label>
+                <select id="paid-status-select" [(ngModel)]="isPaid" (ngModelChange)="onPaidStatusChange(isPaid === 'true' ? true : isPaid == 'false' ? false : null)">
+                  <option value="">All</option>
+                  <option value="true">Approve</option>
+                  <option value="false">On-Process</option>
+                </select>
+              </div>
+              
+              <div class="flex w-full flex-column bg-white p-3 border-round-xl mt-4" >
                 <div
                   class="flex gap-2 mb-2 justify-content-between border-gray-300  align-content-center border-bottom-2 p-3">
                   <p-table [value]="listTransaction" [lazy]="false" (onLazyLoad)="loadData($event)"
@@ -138,7 +147,7 @@
                         <th>Invoice Code</th>
                         <th>Name event</th>
                         <th>Start Date</th>
-                        <th>Status Trasaction</th>
+                        <th>Status Transaction</th>
                         <th>Payment Expired</th>
                         <th>Total</th>
                       </tr>
@@ -149,6 +158,7 @@
                         <td>{{transaction.invoiceCode}}</td>
                         <td>{{transaction.titleActivity}}</td>
                         <td>{{transaction.startDate | date: 'medium'}}</td>
+                        <td>{{transaction.statusTrans}}</td>
                         <td>{{transaction.paymentExpired | date: 'medium'}}</td>
                         <td>{{transaction.total |currency:'Rp ' : 'symbol' : '1.0-0'}}</td>
                       </tr>

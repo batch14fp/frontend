@@ -18,7 +18,7 @@ export class PostTypeService{
     constructor(private http : HttpClient){}
 
     getAllPostType() : Observable<PostTypeGetRes[]>{
-        return this.http.get<PostTypeGetRes[]>(`${BASE_URL}/admin/post-types`)
+        return this.http.get<PostTypeGetRes[]>(`${BASE_URL}/posts/post-types`)
     }
 
     insertPostType(data : PostTypeReq) : Observable<ResInsert>{

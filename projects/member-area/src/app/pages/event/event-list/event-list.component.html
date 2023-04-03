@@ -93,7 +93,7 @@
         <ng-container *ngIf="memberStatus === memberReguler">
           <button
             class="bg-red-600 hover:bg-red-700 text-white px-2 cursor-pointer h-10 border-round-md border-none align-self-center"
-            style="height: 30px !important;">Upgrade</button>
+            style="height: 30px!important;" routerLink="/subscription">Upgrade</button>
         </ng-container>
         <app-tiered-menu [model]="accountMenu">
           <ng-template #content>
@@ -177,7 +177,7 @@
             <div class="choose mt-4" [formGroup]="sortTypeBuilder">
               <p class="text-xl">Sort</p>
               <div class="field-radio mt-2">
-                <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()" >
+                <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()">
                 <label for="tb">Terbaru</label>
               </div>
               <div class="field-radio mt-2">

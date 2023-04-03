@@ -32,7 +32,7 @@ export class ArticlesService {
     }
 
     getAll(startPage: number, maxPage : number, query?: string) : Observable<ArticleResData[]>{
-        return this.http.get<ArticleResData[]>(`${BASE_URL}/articles/member/all?page=${startPage}&size=${maxPage}`)
+        return this.http.get<ArticleResData[]>(`${BASE_URL}/articles/?page=${startPage}&size=${maxPage}`)
     }
     // 
 

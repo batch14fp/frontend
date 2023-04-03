@@ -73,7 +73,6 @@ export const memberRoutes: Routes = [
     {
         path: 'profile',
         loadChildren: () => import("./pages/profile/profile.module").then(p => p.ProfileModule),
-        // component: NavbarComponent
 
     },
     {

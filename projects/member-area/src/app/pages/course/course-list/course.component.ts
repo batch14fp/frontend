@@ -37,6 +37,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   private course$?: Subscription
 
 
+
   private upcomingEvents$?: Subscription
 
 
@@ -44,6 +45,8 @@ export class CourseComponent implements OnInit, OnDestroy {
   memberStatus!: string
   imageIdProfile = ""
   fullNameLogin = ""
+
+
   memberReguler = MEMBER_STATUS.REGULAR
 
 
@@ -77,6 +80,12 @@ export class CourseComponent implements OnInit, OnDestroy {
     ];
 
 
+    onLogOut(){
+      localStorage.clear()
+      this.router.navigateByUrl("/")
+    }
+
+
 
   sortTypeBuilder = this.fb.group({
     choose: ['1']
@@ -87,10 +96,12 @@ export class CourseComponent implements OnInit, OnDestroy {
   selectedCategory?: string[] = []
 
 
+
   onLogOut() {
     localStorage.clear()
     this.router.navigateByUrl("/")
   }
+
 
 
   fotoName(name: string) {

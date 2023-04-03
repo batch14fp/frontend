@@ -101,6 +101,10 @@ else{
         return this.http.post<VoucherAppliedRes>(`${BASE_URL}/activities/voucher/applied`, data)
 
     }
+
+    
+
+
     getDataActivity() : Observable<CountMemberRes>{
         return this.http.get<CountMemberRes>(`${BASE_URL}/activities/total`)
     }
