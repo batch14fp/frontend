@@ -122,7 +122,6 @@
       </div>
     </div>
   </div> -->
-<!-- <pre>{{allActivity|json}}</pre> -->
 
 <main>
   <div class="w-12 h-full flex relative">
@@ -292,25 +291,16 @@
         <div class="flex w-3 p-5 bg-white">
           <div class="w-10">
             <div class="filter">
-              <p>filter</p>
-              <span class="p-input-icon-right">
-                <i class="pi pi-search"></i>
-                <input type="text" pInputText />
-              </span>
-            </div>
-            <div class="date-search mt-4">
-              <p>Schedule</p>
-              <p-calendar [(ngModel)]="dateSearch" [showIcon]="true" inputId="icon"></p-calendar>
-            </div>
-            <div class="category mt-4">
-              <p class="text-xl">Category</p>
-              <div class="field-checkbox mt-2" *ngFor="let cat of categories">
-                <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="sortFilterCategory()"
-                  value="{{cat.categoryCode}}" inputId="hr">
-                </p-checkbox>
-                <label>{{cat.categoryName}}</label>
-              </div>
-            </div>
+              <h1>Filter</h1>
+              <div class="category mt-4">
+                <p class="text-xl">Category</p>
+                <div class="field-checkbox mt-2" *ngFor="let cat of categories">
+                  <p-checkbox name="group1" [(ngModel)]="categoriesList" (ngModelChange)="sortFilterCategory()"
+                    value="{{cat.categoryCode}}" inputId="hr">
+                  </p-checkbox>
+                  <label>{{cat.categoryName}}</label>
+                </div>
+
             <div class="choose mt-4" [formGroup]="sortTypeBuilder">
               <p class="text-xl">Sort</p>
               <div class="field-radio mt-2">
@@ -321,18 +311,28 @@
                 <input type="radio" id="ht" name="choose" value="2" formControlName="choose" (change)="sortFilter()">
                 <label for="ht">Harga Tertinggi</label>
               </div>
-              <div class="field-radio mt-2">
-                <input type="radio" id="hr" name="choose" value="3" formControlName="choose" (change)="sortFilter()">
-                <label for="hr">Harga Terendah</label>
+              <div class="choose mt-4" [formGroup]="sortTypeBuilder">
+                <p class="text-xl">Sort</p>
+                <div class="field-radio mt-2">
+                  <input type="radio" id="tb" name="choose" value="1" formControlName="choose" (change)="sortFilter()">
+                  <label for="tb">Terbaru</label>
+                </div>
+                <div class="field-radio mt-2">
+                  <input type="radio" id="ht" name="choose" value="2" formControlName="choose" (change)="sortFilter()">
+                  <label for="ht">Harga Tertinggi</label>
+                </div>
+                <div class="field-radio mt-2">
+                  <input type="radio" id="hr" name="choose" value="3" formControlName="choose" (change)="sortFilter()">
+                  <label for="hr">Harga Terendah</label>
+                </div>
               </div>
             </div>
-
 
           </div>
         </div>
       </div>
-    </div>
-    <div>
+      <div>
+      </div>
     </div>
   </div>
 </main>

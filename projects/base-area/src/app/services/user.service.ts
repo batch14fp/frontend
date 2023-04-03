@@ -119,7 +119,7 @@ export class UserService {
   }
 
   getAllUser(startPage: number, maxPage: number, query?: string): Observable<AllUserRes[]> {
-    return this.http.get<AllUserRes[]>(`${BASE_URL}/users/all?page=${startPage}&size=${maxPage}`)
+    return this.http.get<AllUserRes[]>(`${BASE_URL}/admin/users?page=${startPage}&size=${maxPage}`)
   }
 
   getAllIndustryMember(): Observable<IndustryRes[]> {
